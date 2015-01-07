@@ -1,1 +1,1 @@
-__all__ = ['pcCostFuncs', 'pcRegulFuncs']
+__all__ = ['pieces_costFuncs', 'pieces_regulFuncs']
