@@ -3,11 +3,11 @@ from legoML._common import itself, subDict_withNewKeys, func_onDict, dictOfFuncs
 
 
 class Piece:
-    def __init__(self, argKeysFromInKeys_thenFunc_thenOut___listOfList):
+    def __init__(self, *args, **kwargs):
         inKeys = set()
         funcs___dict = {}
         outKeys = set()
-        for eachList in argKeysFromInKeys_thenFunc_thenOut___listOfList:
+        for eachList in args:
             argKeysFromInKeys_thisList___dict, func_thisList, outKey_thisList = eachList
             inKeys.update(argKeysFromInKeys_thisList___dict.values())
             funcs___dict[outKey_thisList] = func_onDict(func_thisList, argKeysFromInKeys_thisList___dict)
