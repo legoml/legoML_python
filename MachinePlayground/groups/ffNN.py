@@ -1,3 +1,5 @@
+from numpy import allclose
+from numpy.random import *
 from MachinePlayground.Classes import *
 from MachinePlayground.funcs.zzzMiscFuncs import *
 
@@ -28,3 +30,25 @@ from MachinePlayground.funcs.zzzMiscFuncs import *
 
 #def process_backwardPass:
 #    return
+
+
+
+def ffNN_gradientCheck():
+
+    maxNumNodesPerLayer = 6
+    maxNumLayers = 6
+    maxNumCases = 9
+
+    m = randint(maxNumCases) + 1
+    nI = randint(maxNumNodesPerLayer) + 1
+    nL = randint(maxNumLayers) + 1
+
+    ffNN = {}
+    ffNN['inputs'] = rand(m, nI)
+
+
+    for l in range(nL):
+        ffNN['weights'][l] = []
+
+    ffNN['weights']
+
