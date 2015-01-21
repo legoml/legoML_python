@@ -75,6 +75,17 @@ def updateDictValues(dict_toUpdate, toKeysOfDictToUpdate_fromKeysOfDictWithValue
     return d
 
 
+def approxGrad(func, arrayA, epsilon = 1e-6):
+    g = zeros(arrayA.shape)
+    for i in range(arrayA.size):
+        a_plus = arrayA.copy()
+        a_plus.flat[i] += epsilon
+        a_minus = arrayA.copy()
+        a_minus.flat[i] -= epsilon
+        g.flat[i] = (func(a_plus) - func(a_minus)) / (2 * epsilon)
+    return g
+
+
 
 # ---------
 

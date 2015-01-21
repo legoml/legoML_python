@@ -1,29 +1,30 @@
-from MachinePlayground.funcs.zzzMiscFuncs import *
 from MachinePlayground.Classes import *
-
-def group_ffNN(*args, **kwargs):
-
+from MachinePlayground.funcs.zzzMiscFuncs import *
 
 
-    return Group()
-
-
-def process_forwardPass(numLayers = 1):
-    i = 0
-    p[0] = Piece([{'X': 'inputs'}, lambda X: identity(X), ('activations', 0)])
-    while i <= numLayers:
-        i += 1
-        f0 = [{'activations', i}, ]
-        f1 =
-        p[i] = Piece(f0, f1, f2)
+#def group_ffNN(*args, **kwargs):
 
 
 
-    return
+#    return Group()
 
 
-def process_computeCost:
-    return
+#def process_forwardPass(numLayers = 1):
+#    i = 0
+#    p[0] = Piece([{'X': 'inputs'}, lambda X: identity(X), ('activations', 0)])
+#    while i <= numLayers:
+#        i += 1
+#        f0 = [{'activations', i}, ]
+#        f1 =
+#        p[i] = Piece(f0, f1, f2)
 
-def process_backwardPass:
-    return
+
+
+#    return
+
+
+#def process_computeCost:
+#    return
+
+#def process_backwardPass:
+#    return

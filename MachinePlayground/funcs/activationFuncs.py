@@ -10,8 +10,7 @@ def linear_dActivations_over_dSignals(*args, **kwargs):
     return 1.
 
 
-def linear_d_over_dSignals_from_d_over_dActivations(d_over_dActivations, dActivations_over_dSignals = None,
-                                                    *args, **kwargs):
+def linear_d_over_dSignals_from_d_over_dActivations(d_over_dActivations, *args, **kwargs):
     return d_over_dActivations
 
 
