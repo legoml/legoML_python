@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea451445-f030-4e50-840c-9c772ec3b99b" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\Classes.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\_common.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\funcs\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\funcs\costFuncs.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\funcs\regulFuncs.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\pieces\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\pieces\pieces_costFuncs.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\pieces\pieces_regulFuncs.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\legoML\pieces\pieces_transformFuncs.py" afterPath="" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\test.py" afterPath="$PROJECT_DIR$/zzzTests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/start.py" afterPath="$PROJECT_DIR$/start.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="ea451445-f030-4e50-840c-9c772ec3b99b" name="Default" comment="" />
     <ignored path="legoML_python.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
