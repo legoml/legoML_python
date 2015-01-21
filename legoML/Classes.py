@@ -54,7 +54,7 @@ class Piece:
         return d
 
 
-class Process:
+class Operation:
     def __init__(self, *args, **kwargs):
         objects = set()
         steps = []
@@ -67,7 +67,7 @@ class Process:
         self.objects = objects
         self.steps = steps
 
-    def runProcess(self, dictObj):
+    def runOperation(self, dictObj):
         d = dictObj.copy()
         for p in self.steps:
             d = p.runPiece(d)
@@ -78,3 +78,7 @@ class Group:
     def __init__(self, groupKeysFromObjectNames___dict, processes, *args, **kwargs):
         self.groupKeysFromObjectNames = groupKeysFromObjectNames___dict
         self.processes = processes
+
+    def installGroup(self, toNewInKeys_fromOldInKeys___dict):
+        d = 0
+        return d

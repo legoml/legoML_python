@@ -3,13 +3,12 @@
 
 
 
-from math import log, sqrt
-from numpy import divide, multiply, power, sum
+from numpy import divide, multiply, power
 
 
 
-def squareError_half(arr1, arr2, avg = False):
-    f = power(arr1 - arr2, 2).sum() / 2
+def squareError_half(hypoArray, targetArray, avg = False, *args, **kwargs):
+    f = power(hypoArray - targetArray, 2).sum() / 2
     if avg:
         numCases = max(arr1.shape[1], arr2.shape[1])
         return f / numCases
@@ -17,7 +16,7 @@ def squareError_half(arr1, arr2, avg = False):
         return f
 
 
-def rootMeanSquareError(arr1, arr2, avg = False):
+def rootMeanSquareError(hypoArray, targetArray, avg = False):
     return sqrt(2 * squareError_half(arr1, arr2, avg = True))
 
 
@@ -45,3 +44,5 @@ def crossEntropy_multiClasses(hypoRowMat, targetRowMat, skewnesses = 1, avg = Fa
         return f / numCases
     else:
         return f
+
+
