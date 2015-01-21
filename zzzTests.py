@@ -71,14 +71,14 @@ from MachinePlayground.funcs import activationFuncs as activ
 
 m = array([[0.1, 0.3, 1], [1.3, 2, 3]])
 
-print(activ.linearActivations(m))
-print(activ.linear_dActivations_over_dSignals(m))
+print(activ.activations(m))
+print(activ.dActivations_over_dSignals(m))
 
-print(activ.logisticActivations(m))
-print(activ.logistic_dActivations_over_dSignals(m))
+print(activ.activations(m, nameOfActivationFunc = 'logistic'))
+print(activ.dActivations_over_dSignals(m, nameOfActivationFunc = 'logistic'))
 
-print(activ.tanhActivations(m))
-print(activ.tanh_dActivations_over_dSignals(m))
+print(activ.activations(m, nameOfActivationFunc = 'tanh'))
+print(activ.dActivations_over_dSignals(m, nameOfActivationFunc = 'tanh'))
 
-print(activ.softmaxActivations(m))
-print(activ.softmax_dActivations_over_dSignals(m))
+print(activ.activations(m, nameOfActivationFunc = 'softmax'))
+print(activ.dActivations_over_dSignals(m, nameOfActivationFunc = 'softmax'))

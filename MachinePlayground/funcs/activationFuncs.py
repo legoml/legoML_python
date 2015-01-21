@@ -1,12 +1,19 @@
 from numpy import atleast_2d, atleast_3d, diag, exp, tanh, zeros
 
 
+
 def linearActivations(signals___array, *args, **kwargs):
     return signals___array
 
 
 def linear_dActivations_over_dSignals(*args, **kwargs):
     return 1.
+
+
+def linear_d_over_dSignals_from_d_over_dActivations(d_over_dActivations, dActivations_over_dSignals = None,
+                                                    *args, **kwargs):
+    return d_over_dActivations
+
 
 
 def logisticActivations(signals___array, *args, **kwargs):
@@ -19,6 +26,11 @@ def logistic_dActivations_over_dSignals(signals___array = None, activations___ar
     return activations___array * (1. - activations___array)
 
 
+def logistic_d_over_dSignals_from_d_over_dActivations(d_over_dActivations, dActivations_over_dSignals, *args, **kwargs):
+    return d_over_dActivations * dActivations_over_dSignals
+
+
+
 def tanhActivations(signals___array, *args, **kwargs):
     return tanh(signals___array)
 
@@ -27,6 +39,11 @@ def tanh_dActivations_over_dSignals(signals___array = None, activations___array 
     if activations___array is None:
         activations___array = tanhActivations(signals___array)
     return 1. - activations___array ** 2
+
+
+def tanh_d_over_dSignals_from_d_over_dActivations(d_over_dActivations, dActivations_over_dSignals, *args, **kwargs):
+    return d_over_dActivations * dActivations_over_dSignals
+
 
 
 def softmaxActivations(signals___matrixCasesInRows, *args, **kwargs):
@@ -48,6 +65,12 @@ def softmax_dActivations_over_dSignals(signals___matrixCasesInRows = None, activ
     return d
 
 
+def softmax_d_over_dSignals_from_d_over_dActivations(d_over_dActivations, dActivations_over_dSignals, *args, **kwargs):
+    return (((d_over_dActivations.reshape(list(d_over_dActivations.shape) + [1])).repeat(
+        dActivations_over_dSignals.shape[2], axis = 3) * dActivations_over_dSignals).sum(1)).transpose(0, 2, 1)
+
+
+
 def activations(signals___array, nameOfActivationFunc = 'linear', *args, **kwargs):
     funcs___dict = {'linear': lambda s: linearActivations(s),
                     'logistic': lambda s: logisticActivations(s),
@@ -58,8 +81,17 @@ def activations(signals___array, nameOfActivationFunc = 'linear', *args, **kwarg
 
 def dActivations_over_dSignals(signals___array = None, activations___array = None, nameOfActivationFunc = 'linear',
                                *args, **kwargs):
-    funcs___dict = {'linear': lambda s, a: linearActivations(s, a),
-                    'logistic': lambda s, a: logisticActivations(s, a),
-                    'tanh': lambda s, a: tanhActivations(s, a),
-                    'softmax': lambda s, a: softmaxActivations(s, a)}
+    funcs___dict = {'linear': lambda s, a: linear_dActivations_over_dSignals(s, a),
+                    'logistic': lambda s, a: logistic_dActivations_over_dSignals(s, a),
+                    'tanh': lambda s, a: tanh_dActivations_over_dSignals(s, a),
+                    'softmax': lambda s, a: softmax_dActivations_over_dSignals(s, a)}
     return funcs___dict[nameOfActivationFunc](signals___array, activations___array)
+
+
+def d_over_dSignals_from_d_over_dActivations(d_over_dActivations, dActivations_over_dSignals,
+                                             nameOfActivationFunc = 'linear', *args, **kwargs):
+    funcs___dict = {'linear': lambda d_dA, dA_dS: linear_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS),
+                    'logistic': lambda d_dA, dA_dS: logistic_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS),
+                    'tanh': lambda d_dA, dA_dS: tanh_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS),
+                    'softmax': lambda d_dA, dA_dS: softmax_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS)}
+    return funcs___dict[nameOfActivationFunc](d_over_dActivations, dActivations_over_dSignals)
