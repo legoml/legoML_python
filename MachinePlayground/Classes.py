@@ -1,4 +1,4 @@
-from legoML._common import func_onDict, dictOfFuncs, renameKeys_funcOnDict, varName_fromVarTuple
+from MachinePlayground._common import func_onDict, dictOfFuncs, renameKeys_funcOnDict, varName_fromVarTuple
 
 
 class Piece:

@@ -1,5 +1,5 @@
-from legoML.funcs.zzzMiscFuncs import *
-from legoML.Classes import *
+from MachinePlayground.funcs.zzzMiscFuncs import *
+from MachinePlayground.Classes import *
 
 def group_ffNN(*args, **kwargs):
 

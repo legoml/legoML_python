@@ -1,9 +1,9 @@
 from importlib import *
 from math import *
 from numpy import *
-from legoML._common import *
-from legoML.Classes import *
-from legoML.funcs import *
+from MachinePlayground._common import *
+from MachinePlayground.Classes import *
+from MachinePlayground.funcs import *
 
 
 f1 = [{'a1': 'i1', 'a2': 'i2'}, lambda a1, a2: a1 + a2, 's12']
@@ -43,7 +43,7 @@ signals
 
 # test BIAS TERMS
 from numpy import *
-from legoML.funcs import biasTerms as bias
+from MachinePlayground.funcs import biasTerms as bias
 
 mat = array([[10, 20, 30], [4, 5, 6], [-7, -8, -9], [10, 11, 12]])
 mat.max(0)
@@ -67,7 +67,7 @@ print(bias.zeroBiasElements(mat, [0, 2]))
 
 # test ACTIVATION FUNCS
 from numpy import *
-from legoML.funcs import activationFuncs as activ
+from MachinePlayground.funcs import activationFuncs as activ
 
 m = array([[0.1, 0.3, 1], [1.3, 2, 3]])
 

@@ -1,4 +1,4 @@
-from legoML.funcs.biasTerms import *
+from MachinePlayground.funcs.biasTerms import *
 
 
 def linearSignals(inputs___matrixCasesInRows, biasesWeights___matrix, inputsAddBiasColumn = True):
