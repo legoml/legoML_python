@@ -1,7 +1,6 @@
 def renameKeys(dictObj, toNewKeys_fromOldKeys___dict):
     d = dictObj.copy()
-    for newKey in toNewKeys_fromOldKeys___dict.keys():
-        oldKey = toNewKeys_fromOldKeys___dict[newKey]
+    for newKey, oldKey in toNewKeys_fromOldKeys___dict.items():
         v = d[oldKey]
         del d[oldKey]
         d[newKey] = v
@@ -10,17 +9,11 @@ def renameKeys(dictObj, toNewKeys_fromOldKeys___dict):
 
 def subDict_withNewKeys(dictObj, toNewKeys_fromOldKeys___dict):
     # extract values from dictionary and assign them new keys
-    d = {}
-    for newKey in toNewKeys_fromOldKeys___dict.keys():
-        d[newKey] = dictObj[toNewKeys_fromOldKeys___dict[newKey]]
-    return d
+    return {newKey: dictObj[toNewKeys_fromOldKeys___dict[newKey]] for newKey in toNewKeys_fromOldKeys___dict}
 
 
 def swapKeysValues(dictObj):
-    d = {}
-    for k in dictObj.keys():
-        d[dictObj[k]] = k
-    return d
+    return {dictObj[k]: k for k in dictObj}
 
 
 def func_onDict(func, toArgKeys_fromDictKeys___dict):
@@ -34,16 +27,7 @@ def dictOfFuncs(funcs___dict, x):
     # computes a dictionary of values, given:
     # (1) a dictionary of functions, each of which can take in:
     # (2) a certain same input X
-    d = {}
-    for k in funcs___dict.keys():
-        d[k] = funcs___dict[k](x)
-    return d
-
-
-def renameKeys_funcOnDict(func, toNewInKeys_fromOldInKeys___dict, toNewOutKeys_fromOldOutKeys___dict, ins___dict):
-    toOldInKeys_fromNewInKeys___dict = swapKeysValues(toNewInKeys_fromOldInKeys___dict)
-    return renameKeys(func(renameKeys(ins___dict, toOldInKeys_fromNewInKeys___dict)),
-                      toNewOutKeys_fromOldOutKeys___dict)
+    return {k: funcs___dict[k](x) for k in funcs___dict}
 
 
 def varName_fromVarTuple(varTuple):

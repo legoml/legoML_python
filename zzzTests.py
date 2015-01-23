@@ -82,3 +82,7 @@ print(activ.dActivations_over_dSignals(m, nameOfActivationFunc = 'tanh'))
 
 print(activ.activations(m, nameOfActivationFunc = 'softmax'))
 print(activ.dActivations_over_dSignals(m, nameOfActivationFunc = 'softmax'))
+
+# test PIECE
+from MachinePlayground.Classes import Piece
+from MachinePlayground.pieces.pieces_zzzCommonFuncs import *

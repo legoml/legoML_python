@@ -1,57 +1,126 @@
-from MachinePlayground._common import func_onDict, dictOfFuncs, renameKeys_funcOnDict, varName_fromVarTuple
+from copy import deepcopy
+from MachinePlayground._common import varName_fromVarTuple
 
 
 class Piece:
-    def __init__(self, *args, **kwargs):
-        inKeys = set()
-        func = lambda: None
-        outKeys = set()
-        if len(args) > 0:
-            funcs___dict = {}
-            for eachList in args:
-                argKeysFromInKeys_inThisList___dict, func_inThisList, outKey_inThisList = eachList
-                inKeys.update(argKeysFromInKeys_inThisList___dict.values())
-                funcs___dict[outKey_inThisList] = func_onDict(func_inThisList, argKeysFromInKeys_inThisList___dict)
-                outKeys.add(outKey_inThisList)
-            func = lambda ins___dict: dictOfFuncs(funcs___dict, ins___dict)
-        self.inKeys = inKeys
-        self.func = func
-        self.outKeys = outKeys
+    def __init__(self, forwards = {}, backwards = {}, *args, **kwargs):
+        self.inKeys = set()
+        self.outKeys = set(forwards.keys())
+        self.forwards = deepcopy(forwards)
+        self.forwardsToFrom = {}
+        self.backwards = deepcopy(backwards)
+        self.backwardsToFrom = {}
+        if len(forwards) > 0:
+            for outKey, func_andToFrom in forwards.items():
+                inKeys_forThisOutKey = func_andToFrom[1].values()
+                self.inKeys.update(inKeys_forThisOutKey)
+                self.forwardsToFrom[outKey] = list(inKeys_forThisOutKey)
+            if len(backwards) > 0:
+                for inKey, func_andToFrom in backwards.items():
+                    self.backwardsToFrom[inKey] = list(func_andToFrom[1].values())
 
-    def installPiece(self, toNewInKeys_fromOldInKeys___dict, toNewOutKeys_fromOldOutKeys___dict):
-        inKeys = self.inKeys.copy()
-        for newKey in toNewInKeys_fromOldInKeys___dict.keys():
-            inKeys.remove(toNewInKeys_fromOldInKeys___dict[newKey])
-            inKeys.add(newKey)
-        outKeys = self.outKeys.copy()
-        for newKey in toNewOutKeys_fromOldOutKeys___dict.keys():
-            outKeys.remove(toNewOutKeys_fromOldOutKeys___dict[newKey])
-            outKeys.add(newKey)
-        p = Piece()
-        p.inKeys = inKeys
-        p.func = lambda ins___dict: renameKeys_funcOnDict(self.func, toNewInKeys_fromOldInKeys___dict,
-                                                          toNewOutKeys_fromOldOutKeys___dict, ins___dict)
-        p.outKeys = outKeys
-        return p
 
-    def runPiece(self, dictObj):
+    def copyPiece(self, fromOldKeys_toNewKeys___dict):
+
+        forwards = {}
+        for outKey, func_andToFrom in self.forwards.items():
+            if outKey in fromOldKeys_toNewKeys___dict:
+                newOutKey = fromOldKeys_toNewKeys___dict[outKey]
+            else:
+                newOutKey = outKey
+            newFunc_andToFrom = deepcopy(func_andToFrom)
+            for argKey, inKey in func_andToFrom[1].items():
+                if inKey in fromOldKeys_toNewKeys___dict:
+                    newFunc_andToFrom[1][argKey] = fromOldKeys_toNewKeys___dict[inKey]
+            forwards[newOutKey] = newFunc_andToFrom
+
+        backwards = {}
+        for inKey, func_andToFrom in self.backwards.items():
+            if inKey in fromOldKeys_toNewKeys___dict:
+                newInKey = fromOldKeys_toNewKeys___dict[inKey]
+            elif (inKey[0] == 'dOverD') and (inKey[1] in fromOldKeys_toNewKeys___dict):
+                newInKey = ('dOverD', fromOldKeys_toNewKeys___dict[inKey[1]])
+            else:
+                newInKey = inKey
+            newFunc_andToFrom = deepcopy(func_andToFrom)
+            for argKey, inOutKey in func_andToFrom[1].items():
+                if inOutKey in fromOldKeys_toNewKeys___dict:
+                    newFunc_andToFrom[1][argKey] = fromOldKeys_toNewKeys___dict[inOutKey]
+                elif (inOutKey[0] == 'dOverD') and (inOutKey[1] in fromOldKeys_toNewKeys___dict):
+                    newFunc_andToFrom[1][argKey] = ('dOverD', fromOldKeys_toNewKeys___dict[inOutKey[1]])
+            backwards[newInKey] = newFunc_andToFrom
+
+        return Piece(forwards, backwards)
+
+
+    def runPiece(self, dictObj, forwardOutKeys = set(), dKey_and_backwardInKeys = None):
+
         d = dictObj.copy()
-        ins___dict = {}
-        for varTuple in self.inKeys:
-            if isinstance(varTuple, tuple):
-                varName, varIndexOrKey = varTuple
-                ins___dict[varTuple] = d[varName][varIndexOrKey]
+
+        if forwardOutKeys is not None:
+            if len(forwardOutKeys) > 0:
+                outKeys = forwardOutKeys
             else:
-                ins___dict[varTuple] = d[varTuple]
-        outs___dict = self.func(ins___dict)
-        for varTuple in self.outKeys:
-            if isinstance(varTuple, tuple):
-                varName, varIndexOrKey = varTuple
-                d[varName] = d[varName].copy()
-                d[varName][varIndexOrKey] = outs___dict[varTuple]
+                outKeys = self.outKeys
+            for outVarTuple in outKeys:
+                func, arguments = deepcopy(self.forwards[outVarTuple])
+                for argKey, inVarTuple in arguments.items():
+                    if isinstance(inVarTuple, tuple):
+                        inVarName, inVarIndexOrKey = inVarTuple
+                        arguments[argKey] = d[inVarName][inVarIndexOrKey]
+                    else:
+                        arguments[argKey] = d[inVarTuple]
+                value = func(arguments)
+                if isinstance(outVarTuple, tuple):
+                    outVarName, outVarIndexOrKey = outVarTuple
+                    d[outVarName] = d[outVarName].copy()
+                    d[outVarName][outVarIndexOrKey] = value
+                else:
+                    d[outVarTuple] = value
+
+        if dKey_and_backwardInKeys is not None:
+            dKey, backwardInKeys = dKey_and_backwardInKeys
+            if len(backwardInKeys) > 0:
+                backwardInKeys = set(map(lambda k: ('dOverD', k), backwardInKeys))
+                backwards = {inKey: self.backwards[inKey] for inKey in backwardInKeys}
             else:
-                d[varTuple] = outs___dict[varTuple]
+                backwards = self.backwards
+            for backwardVarTuple, func_andToFrom in backwards.items():
+                func, arguments = deepcopy(func_andToFrom)
+                for argKey, varTuple in arguments.items():
+                    if varTuple[0] == 'dOverD':
+                        varTuple_forDifferentiation = varTuple[1]
+                        if isinstance(varTuple_forDifferentiation, tuple):
+                            varName, varIndexOrKey = varTuple_forDifferentiation
+                            arguments[argKey] = d[('dOverD', dKey, varName)][varIndexOrKey]
+                        else:
+                            arguments[argKey] = d[('dOverD', dKey, varTuple_forDifferentiation)]
+                    elif isinstance(varTuple, tuple):
+                        varName, varIndexOrKey = varTuple
+                        arguments[argKey] = d[varName][varIndexOrKey]
+                    else:
+                        arguments[argKey] = d[varTuple]
+                value = func(arguments)
+                if backwardVarTuple[0] == 'dOverD':
+                    varTuple_forDifferentiation = backwardVarTuple[1]
+                    if isinstance(varTuple_forDifferentiation, tuple):
+                        varName, varIndexOrKey = varTuple_forDifferentiation
+                        t = ('dOverD', dKey, varName)
+                        d[t] = d[t].copy()
+                        d[t][varIndexOrKey] = value
+                    else:
+                        d[('dOverD', dKey, varTuple_forDifferentiation)] = value
+                elif isinstance(backwardVarTuple, tuple):
+                    varName, varIndexOrKey = backwardVarTuple
+                    d[varName] = d[varName].copy()
+                    d[varName][varIndexOrKey] = value
+                else:
+                    d[backwardVarTuple] = value
+
         return d
+
+
+
 
 
 class Operation:
