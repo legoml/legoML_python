@@ -20,7 +20,7 @@ class Piece:
                     self.backwardsToFrom[inKey] = list(func_andToFrom[1].values())
 
 
-    def copyPiece(self, fromOldKeys_toNewKeys___dict):
+    def install(self, fromOldKeys_toNewKeys___dict):
 
         forwards = {}
         for outKey, func_andToFrom in self.forwards.items():
@@ -143,7 +143,7 @@ class Operation:
         return d
 
 
-class Group:
+class Program:
     def __init__(self, groupKeysFromObjectNames___dict, processes, *args, **kwargs):
         self.groupKeysFromObjectNames = groupKeysFromObjectNames___dict
         self.processes = processes
@@ -151,3 +151,14 @@ class Group:
     def installGroup(self, toNewInKeys_fromOldInKeys___dict):
         d = 0
         return d
+
+
+#class Project:
+#    def __init__(self, *args, **kwargs):
+#        self.vars = dict.fromkeys(args)
+#
+#    def setVar(self, *args):
+#        for key
+#        self.vars
+#
+#    def getVar(self, *args):

@@ -4,6 +4,12 @@ from MachinePlayground.funcs.zzzCommonFuncs import softmax, softmax_dOutputs_ove
     softmax_dOverDInputs_from_dOverDOutputs
 
 
+def piece_equal():
+    forwards = {'outputs___array': [lambda inp: inp, {'a': 'inputs___array'}]}
+    backwards = {('dOverD', 'inputs___array'): [lambda ddOutp: ddOutp,
+                                                {'ddOutp': ('dOverD', 'outputs___array')}]}
+    return Piece(forwards, backwards)
+
 
 def piece_multiplyMatrices_ofInputsAndWeights(addBiasColumnToInputs = True, *args, **kwargs):
 

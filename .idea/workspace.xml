@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea451445-f030-4e50-840c-9c772ec3b99b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MachinePlayground/pieces/pieces_activationFuncs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MachinePlayground/pieces/pieces_zzzCommonFuncs.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\MachinePlayground\funcs\signalFuncs_withInputsAndWeights.py" afterPath="$PROJECT_DIR$/MachinePlayground/funcs/zzzCommonFuncs.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\MachinePlayground\groups\ffNN.py" afterPath="$PROJECT_DIR$/ffNN.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\MachinePlayground\groups\__init__.py" afterPath="$PROJECT_DIR$/MachinePlayground/programs/__init__.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\MachinePlayground\groups\ffNN.py" afterPath="$PROJECT_DIR$/MachinePlayground/programs/ffNN.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/Classes.py" afterPath="$PROJECT_DIR$/MachinePlayground/Classes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/_common.py" afterPath="$PROJECT_DIR$/MachinePlayground/_common.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/funcs/activationFuncs.py" afterPath="$PROJECT_DIR$/MachinePlayground/funcs/activationFuncs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/funcs/biasTerms.py" afterPath="$PROJECT_DIR$/MachinePlayground/funcs/biasTerms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/groups/ffNN.py" afterPath="$PROJECT_DIR$/MachinePlayground/groups/ffNN.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ffNN.py" afterPath="$PROJECT_DIR$/ffNN.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/pieces/pieces_costFuncs.py" afterPath="$PROJECT_DIR$/MachinePlayground/pieces/pieces_costFuncs.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/pieces/pieces_zzzCommonFuncs.py" afterPath="$PROJECT_DIR$/MachinePlayground/pieces/pieces_zzzCommonFuncs.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MachinePlayground/funcs/zzzMiscFuncs.py" afterPath="$PROJECT_DIR$/MachinePlayground/funcs/zzzMiscFuncs.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/zzzTests.py" afterPath="$PROJECT_DIR$/zzzTests.py" />
     </list>
     <ignored path="legoML_python.iws" />
@@ -40,8 +36,8 @@
       <file leaf-file-name="zzzTests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zzzTests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1152" max-vertical-offset="1598">
-              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="87" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="1598">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="71" selection-end-column="39" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -59,12 +55,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Classes.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Classes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MachinePlayground/Classes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.882217" vertical-offset="2131" max-vertical-offset="2686">
-              <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="2873">
+              <caret line="22" column="15" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ffNN.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MachinePlayground/programs/ffNN.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="366" max-vertical-offset="3094">
+              <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pieces_costFuncs.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MachinePlayground/pieces/pieces_costFuncs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6073903" vertical-offset="315" max-vertical-offset="833">
+              <caret line="34" column="58" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="58" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,7 +94,7 @@
       <file leaf-file-name="zzzCommonFuncs.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MachinePlayground/funcs/zzzCommonFuncs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="3026">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3026">
               <caret line="124" column="46" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
               <folding />
             </state>
@@ -82,8 +104,8 @@
       <file leaf-file-name="pieces_zzzCommonFuncs.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MachinePlayground/pieces/pieces_zzzCommonFuncs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="1275">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1377">
+              <caret line="8" column="70" selection-start-line="8" selection-start-column="70" selection-end-line="8" selection-end-column="70" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -100,8 +122,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/000 common/__init__.py" />
-        <option value="$PROJECT_DIR$/000 common/costFuncs/__init__.py" />
         <option value="$PROJECT_DIR$/pieces/costFuncs/squareError.py" />
         <option value="$PROJECT_DIR$/000 common/costFuncs/costFuncs.py" />
         <option value="$PROJECT_DIR$/_common/costFuncs/costFuncs.py" />
@@ -139,7 +159,6 @@
         <option value="$PROJECT_DIR$/MachinePlayground/pieces/__init__.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/funcs/__init__.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/groups/ffNN.py" />
-        <option value="$PROJECT_DIR$/ffNN.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/funcs/signalFuncs_withInputsAndWeights.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/pieces/pieces_000common.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/pieces/pieces_activationFuncs.py" />
@@ -147,10 +166,13 @@
         <option value="$PROJECT_DIR$/MachinePlayground/funcs/biasTerms.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/funcs/zzzMiscFuncs.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/funcs/zzzCommonFuncs.py" />
+        <option value="$PROJECT_DIR$/MachinePlayground/_common.py" />
+        <option value="$PROJECT_DIR$/ffNN.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/pieces/pieces_zzzCommonFuncs.py" />
         <option value="$PROJECT_DIR$/zzzTests.py" />
-        <option value="$PROJECT_DIR$/MachinePlayground/_common.py" />
         <option value="$PROJECT_DIR$/MachinePlayground/Classes.py" />
+        <option value="$PROJECT_DIR$/MachinePlayground/programs/ffNN.py" />
+        <option value="$PROJECT_DIR$/MachinePlayground/pieces/pieces_costFuncs.py" />
       </list>
     </option>
   </component>
@@ -229,7 +251,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pieces" />
+              <option name="myItemId" value="programs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -247,7 +269,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="groups" />
+              <option name="myItemId" value="pieces" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -507,7 +529,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4492288" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46143958" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3285528" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" x="-131" y="378" width="1600" height="252" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -808,13 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MachinePlayground/pieces/pieces_costFuncs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/start.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.038812786" vertical-offset="0" max-vertical-offset="438">
@@ -836,7 +851,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MachinePlayground/groups/__init__.py">
+    <entry file="file://$PROJECT_DIR$/MachinePlayground/programs/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="438">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -847,13 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MachinePlayground/groups/ffNN.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="438">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -885,27 +893,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ffNN.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4044944" vertical-offset="1874" max-vertical-offset="2601">
-          <caret line="147" column="32" selection-start-line="147" selection-start-column="32" selection-end-line="147" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MachinePlayground/funcs/costFuncs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.80224717" vertical-offset="0" max-vertical-offset="918">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/zzzTests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1084" max-vertical-offset="1581">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="87" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -917,29 +908,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MachinePlayground/funcs/zzzCommonFuncs.py">
+    <entry file="file://$PROJECT_DIR$/ffNN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="3026">
-          <caret line="124" column="46" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="446">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MachinePlayground/pieces/pieces_zzzCommonFuncs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
+          <caret line="8" column="70" selection-start-line="8" selection-start-column="70" selection-end-line="8" selection-end-column="70" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/zzzTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="1598">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="71" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MachinePlayground/Classes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.882217" vertical-offset="2131" max-vertical-offset="2686">
-          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="2873">
+          <caret line="22" column="15" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MachinePlayground/programs/ffNN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="366" max-vertical-offset="3094">
+          <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MachinePlayground/funcs/zzzCommonFuncs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3026">
+          <caret line="124" column="46" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MachinePlayground/pieces/pieces_costFuncs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6073903" vertical-offset="315" max-vertical-offset="833">
+          <caret line="34" column="58" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
