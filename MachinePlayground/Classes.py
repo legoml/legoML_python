@@ -4,6 +4,7 @@ from MachinePlayground._common import approxGradients, varName_fromVarTuple
 import itertools
 
 
+
 def isOverD(varTuple):
     return (varTuple[0] == 'dOverD') and (len(varTuple) == 2)
 
@@ -25,9 +26,9 @@ class Piece:
                 inKeys_forThisOutKey = set(func_andToFrom[1].values())
                 self.inKeys.update(inKeys_forThisOutKey)
                 self.forwardsToFrom[outKey] = inKeys_forThisOutKey
-            if len(backwards) > 0:
-                for inKey, func_andToFrom in backwards.items():
-                    self.backwardsToFrom[inKey] = set(func_andToFrom[1].values())
+        if len(backwards) > 0:
+           for inKey, func_andToFrom in backwards.items():
+               self.backwardsToFrom[inKey] = set(func_andToFrom[1].values())
 
 
     def install(self, fromOldKeys_toNewKeys___dict):
@@ -210,42 +211,74 @@ class Piece:
 
 
 
-class Operation:
+def step_withDefaultForwardsAndBackwards(step):
+    if isinstance(step, list):
+        if len(step) == 1:
+            return step + [set(), None]
+        elif len(step) == 2:
+            return step + [None]
+        else:
+            return step
+    else:
+        return [step, set(), None]
+
+
+class Process:
     def __init__(self, *args, **kwargs):
-        objects = set()
+        vars = set()
         steps = []
-        for piece in args:
-            for k in piece.inKeys:
-                objects.add(varName_fromVarTuple(k))
-            for k in piece.outKeys:
-                objects.add(varName_fromVarTuple(k))
-            steps += [piece]
-        self.objects = objects
+        for step in args:
+            s = step_withDefaultForwardsAndBackwards(step)
+            piece = s[0]
+            for inVarTuple in piece.inKeys:
+                vars.add(varName_fromVarTuple(inVarTuple))
+            for outVarTuple in piece.outKeys:
+                vars.add(varName_fromVarTuple(outVarTuple))
+            steps += s
+        self.vars = vars
         self.steps = steps
 
-    def runOperation(self, dictObj):
+    def addSteps(self, *args):
+        for step in args:
+            s = step_withDefaultForwardsAndBackwards(step)
+            piece = s[0]
+            for inVarTuple in piece.inKeys:
+                self.vars.add(varName_fromVarTuple(inVarTuple))
+            for outVarTuple in piece.outKeys:
+                self.vars.add(varName_fromVarTuple(outVarTuple))
+            self.steps += s
+
+    def run(self, dictObj):
         d = dictObj.copy()
-        for p in self.steps:
-            d = p.runPiece(d)
+        for step in self.steps:
+            piece, forwardOutKeys, dKey_and_backwardInKeys = step
+            d = piece.run(forwardOutKeys, dKey_and_backwardInKeys)
         return d
+
 
 
 class Program:
-    def __init__(self, groupKeysFromObjectNames___dict, processes, *args, **kwargs):
-        self.groupKeysFromObjectNames = groupKeysFromObjectNames___dict
-        self.processes = processes
+    def __init__(self, vars___dict, pieces___dict, processes___dict, *args, **kwargs):
+        self.vars = vars___dict
+        self.pieces = pieces___dict
+        self.processes = processes___dict
 
-    def installGroup(self, toNewInKeys_fromOldInKeys___dict):
+    def install(self, toNewKeys_fromOldKeys___dict):
         d = 0
+
         return d
 
+    def run(self, piece_or_process, *args, *kwargs):
+        self.vars = piece_or_process.run(self.vars, *args, **kwargs)
 
-#class Project:
-#    def __init__(self, *args, **kwargs):
-#        self.vars = dict.fromkeys(args)
-#
-#    def setVar(self, *args):
-#        for key
-#        self.vars
-#
-#    def getVar(self, *args):
+
+
+class Project:
+    def __init__(self, *args, **kwargs):
+        self.vars = dict.fromkeys(args)
+
+    def setVar(self, *args):
+        pass
+
+    def getVar(self, *args):
+        pass
