@@ -1,4 +1,4 @@
-from numpy import atleast_2d, atleast_3d, concatenate, delete, diag, exp, ones, tanh, zeros
+from numpy import atleast_2d, atleast_3d, concatenate, delete, diag, exp, ones, squeeze, tanh, zeros
 
 
 
@@ -22,7 +22,6 @@ def addBiasElements(arrayA, numsBiases_toAdd = [0, 1]):
     return a
 
 
-
 def deleteBiasElements(arrayA, numsBiases_toDelete = [1]):
     a = arrayA.copy()
     for d in range(len(numsBiases_toDelete)):
@@ -30,7 +29,6 @@ def deleteBiasElements(arrayA, numsBiases_toDelete = [1]):
         if numBiases_toDelete > 0:
             a = delete(a, range(numBiases_toDelete), axis = d)
     return a
-
 
 
 def zeroBiasElements(arrayA, numsBiases_toZero_upTo3D = [1]):
@@ -129,45 +127,5 @@ def softmax_dOutputs_over_dInputs(inputs___matrixRowsForCases = None, outputs___
 
 
 def softmax_dOverDInputs_from_dOverDOutputs(dOverDOutputs, dOutputs_over_dInputs, *args, **kwargs):
-    return (((dOverDOutputs.reshape(list(dOverDOutputs.shape) + [1])).repeat(
-        dOutputs_over_dInputs.shape[2], axis = 3) * dOutputs_over_dInputs).sum(1)).transpose(0, 2, 1)
-
-
-
-#def activations(signals___array, nameOfActivationFunc = 'linear', *args, **kwargs):
-#    funcs___dict = {'linear': lambda s: linearActivations(s),
-#                    'logistic': lambda s: logisticActivations(s),
-#                    'tanh': lambda s: tanhActivations(s),
-#                    'softmax': lambda s: softmaxActivations(s)}
-#    return funcs___dict[nameOfActivationFunc](signals___array)
-
-
-#def dActivations_over_dSignals(signals___array = None, activations___array = None, nameOfActivationFunc = 'linear',
-#                               *args, **kwargs):
-#    funcs___dict = {'linear': lambda s, a: linear_dActivations_over_dSignals(s, a),
-#                    'logistic': lambda s, a: logistic_dActivations_over_dSignals(s, a),
-#                    'tanh': lambda s, a: tanh_dActivations_over_dSignals(s, a),
-#                    'softmax': lambda s, a: softmax_dActivations_over_dSignals(s, a)}
-#    return funcs___dict[nameOfActivationFunc](signals___array, activations___array)
-
-
-#def d_over_dSignals_from_d_over_dActivations(d_over_dActivations, dActivations_over_dSignals,
-#                                             nameOfActivationFunc = 'linear', *args, **kwargs):
-#    funcs___dict = {'linear': lambda d_dA, dA_dS: linear_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS),
-#                    'logistic': lambda d_dA, dA_dS: logistic_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS),
-#                    'tanh': lambda d_dA, dA_dS: tanh_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS),
-#                    'softmax': lambda d_dA, dA_dS: softmax_d_over_dSignals_from_d_over_dActivations(d_dA, dA_dS)}
-#    return funcs___dict[nameOfActivationFunc](d_over_dActivations, dActivations_over_dSignals)
-
-
-
-
-
-#def embedNominals_inReals(nominalClassIndices___matrixCasesInRows, reals___matrixClassesInRows):
-#    m = reals___matrix[]
-#       f.val = reshape(realFeats_Mat_classesInRows...
-#      (classIndcs_Mat_casesInRows'(:), :)', ...
-#      columns(classIndcs_Mat_casesInRows) ...
-#      * columns(realFeats_Mat_classesInRows), [])';
-#
-#    return m
+    return squeeze(((atleast_3d(dOverDOutputs).repeat(dOutputs_over_dInputs.shape[2], axis = 2)
+             * dOutputs_over_dInputs).sum(1, keepdims = True)).transpose(0, 2, 1), axis = 2)

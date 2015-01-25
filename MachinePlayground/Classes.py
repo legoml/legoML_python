@@ -1,5 +1,15 @@
+from numpy import allclose, ones, ndarray
 from copy import deepcopy
-from MachinePlayground._common import varName_fromVarTuple
+from MachinePlayground._common import approxGradients, varName_fromVarTuple
+import itertools
+
+
+def isOverD(varTuple):
+    return (varTuple[0] == 'dOverD') and (len(varTuple) == 2)
+
+
+def isDOverD(varTuple):
+    return (varTuple[0] == 'dOverD') and (len(varTuple) == 3)
 
 
 class Piece:
@@ -12,12 +22,12 @@ class Piece:
         self.backwardsToFrom = {}
         if len(forwards) > 0:
             for outKey, func_andToFrom in forwards.items():
-                inKeys_forThisOutKey = func_andToFrom[1].values()
+                inKeys_forThisOutKey = set(func_andToFrom[1].values())
                 self.inKeys.update(inKeys_forThisOutKey)
-                self.forwardsToFrom[outKey] = list(inKeys_forThisOutKey)
+                self.forwardsToFrom[outKey] = inKeys_forThisOutKey
             if len(backwards) > 0:
                 for inKey, func_andToFrom in backwards.items():
-                    self.backwardsToFrom[inKey] = list(func_andToFrom[1].values())
+                    self.backwardsToFrom[inKey] = set(func_andToFrom[1].values())
 
 
     def install(self, fromOldKeys_toNewKeys___dict):
@@ -35,25 +45,44 @@ class Piece:
             forwards[newOutKey] = newFunc_andToFrom
 
         backwards = {}
-        for inKey, func_andToFrom in self.backwards.items():
-            if inKey in fromOldKeys_toNewKeys___dict:
-                newInKey = fromOldKeys_toNewKeys___dict[inKey]
-            elif (inKey[0] == 'dOverD') and (inKey[1] in fromOldKeys_toNewKeys___dict):
-                newInKey = ('dOverD', fromOldKeys_toNewKeys___dict[inKey[1]])
+        for backwardInKey, func_andToFrom in self.backwards.items():
+            if isOverD(backwardInKey) and (backwardInKey[1] in fromOldKeys_toNewKeys___dict):
+                newBackwardInKey = ('dOverD', fromOldKeys_toNewKeys___dict[backwardInKey[1]])
+            elif isDOverD(backwardInKey):
+                if backwardInKey[1] in fromOldKeys_toNewKeys___dict:
+                    dKey = fromOldKeys_toNewKeys___dict[backwardInKey[1]]
+                else:
+                    dKey = backwardInKey[1]
+                if backwardInKey[2] in fromOldKeys_toNewKeys___dict:
+                    overDKey = fromOldKeys_toNewKeys___dict[backwardInKey[2]]
+                else:
+                    overDKey = backwardInKey[2]
+                newBackwardInKey = ('dOverD', dKey, overDKey)
             else:
-                newInKey = inKey
+                newBackwardInKey = backwardInKey
             newFunc_andToFrom = deepcopy(func_andToFrom)
-            for argKey, inOutKey in func_andToFrom[1].items():
-                if inOutKey in fromOldKeys_toNewKeys___dict:
-                    newFunc_andToFrom[1][argKey] = fromOldKeys_toNewKeys___dict[inOutKey]
-                elif (inOutKey[0] == 'dOverD') and (inOutKey[1] in fromOldKeys_toNewKeys___dict):
-                    newFunc_andToFrom[1][argKey] = ('dOverD', fromOldKeys_toNewKeys___dict[inOutKey[1]])
-            backwards[newInKey] = newFunc_andToFrom
+            for argKey, backwardInOutKey in func_andToFrom[1].items():
+                if backwardInOutKey in fromOldKeys_toNewKeys___dict:
+                    newFunc_andToFrom[1][argKey] = fromOldKeys_toNewKeys___dict[backwardInOutKey]
+                elif isOverD(backwardInOutKey) and (backwardInOutKey[1] in fromOldKeys_toNewKeys___dict):
+                    newFunc_andToFrom[1][argKey] = ('dOverD',
+                                                    fromOldKeys_toNewKeys___dict[backwardInOutKey[1]])
+                elif isDOverD(backwardInOutKey):
+                    if backwardInOutKey[1] in fromOldKeys_toNewKeys___dict:
+                        dKey = fromOldKeys_toNewKeys___dict[backwardInOutKey[1]]
+                    else:
+                        dKey = backwardInOutKey[1]
+                    if backwardInOutKey[2] in fromOldKeys_toNewKeys___dict:
+                        overDKey = fromOldKeys_toNewKeys___dict[backwardInOutKey[2]]
+                    else:
+                        overDKey = backwardInOutKey[2]
+                    newFunc_andToFrom[1][argKey] = ('dOverD', dKey, overDKey)
+            backwards[newBackwardInKey] = newFunc_andToFrom
 
         return Piece(forwards, backwards)
 
 
-    def runPiece(self, dictObj, forwardOutKeys = set(), dKey_and_backwardInKeys = None):
+    def run(self, dictObj, forwardOutKeys = set(), dKey_and_backwardInKeys = None):
 
         d = dictObj.copy()
 
@@ -66,60 +95,118 @@ class Piece:
                 func, arguments = deepcopy(self.forwards[outVarTuple])
                 for argKey, inVarTuple in arguments.items():
                     if isinstance(inVarTuple, tuple):
-                        inVarName, inVarIndexOrKey = inVarTuple
-                        arguments[argKey] = d[inVarName][inVarIndexOrKey]
+                        inVarName, inVarKey = inVarTuple
+                        arguments[argKey] = d[inVarName][inVarKey]
                     else:
                         arguments[argKey] = d[inVarTuple]
-                value = func(arguments)
+                value = func(**arguments)
                 if isinstance(outVarTuple, tuple):
-                    outVarName, outVarIndexOrKey = outVarTuple
-                    d[outVarName] = d[outVarName].copy()
-                    d[outVarName][outVarIndexOrKey] = value
+                    outVarName, outVarKey = outVarTuple
+                    if outVarName in d:
+                        d[outVarName] = d[outVarName].copy()
+                        d[outVarName][outVarKey] = value
+                    else:
+                        d[outVarName] = {outVarKey: value}
                 else:
                     d[outVarTuple] = value
 
         if dKey_and_backwardInKeys is not None:
             dKey, backwardInKeys = dKey_and_backwardInKeys
             if len(backwardInKeys) > 0:
-                backwardInKeys = set(map(lambda k: ('dOverD', k), backwardInKeys))
-                backwards = {inKey: self.backwards[inKey] for inKey in backwardInKeys}
+                list1 = list(map(lambda backwardInKey: ('dOverD', backwardInKey), backwardInKeys))
+                list2 = list(map(lambda backwardInKey: ('dOverD', dKey, backwardInKey), backwardInKeys))
+                backwardInKeys = set(list1 + list2)
+                backwards = {backwardInKey: self.backwards[backwardInKey]
+                             for backwardInKey in backwardInKeys.intersection(self.backwards)}
             else:
                 backwards = self.backwards
             for backwardVarTuple, func_andToFrom in backwards.items():
                 func, arguments = deepcopy(func_andToFrom)
                 for argKey, varTuple in arguments.items():
-                    if varTuple[0] == 'dOverD':
-                        varTuple_forDifferentiation = varTuple[1]
-                        if isinstance(varTuple_forDifferentiation, tuple):
-                            varName, varIndexOrKey = varTuple_forDifferentiation
-                            arguments[argKey] = d[('dOverD', dKey, varName)][varIndexOrKey]
+                    if isOverD(varTuple):
+                        overD = varTuple[1]
+                        if isinstance(overD, tuple):
+                            varName, varKey = overD
+                            arguments[argKey] = d[('dOverD', dKey, varName)][varKey]
                         else:
-                            arguments[argKey] = d[('dOverD', dKey, varTuple_forDifferentiation)]
+                            arguments[argKey] = d[('dOverD', dKey, overD)]
+                    elif isDOverD(varTuple):
+                        overD = varTuple[2]
+                        if isinstance(overD, tuple):
+                            varName, varKey = overD
+                            arguments[argKey] = d[('dOverD', dKey, varName)][varKey]
+                        else:
+                            arguments[argKey] = d[('dOverD', dKey, overD)]
                     elif isinstance(varTuple, tuple):
-                        varName, varIndexOrKey = varTuple
-                        arguments[argKey] = d[varName][varIndexOrKey]
+                        varName, varKey = varTuple
+                        arguments[argKey] = d[varName][varKey]
                     else:
                         arguments[argKey] = d[varTuple]
-                value = func(arguments)
-                if backwardVarTuple[0] == 'dOverD':
-                    varTuple_forDifferentiation = backwardVarTuple[1]
-                    if isinstance(varTuple_forDifferentiation, tuple):
-                        varName, varIndexOrKey = varTuple_forDifferentiation
-                        t = ('dOverD', dKey, varName)
+                value = func(**arguments)
+                if isOverD(backwardVarTuple):
+                    overD = backwardVarTuple[1]
+                if isDOverD(backwardVarTuple):
+                    overD = backwardVarTuple[2]
+                if isinstance(overD, tuple):
+                    varName, varKey = overD
+                    t = ('dOverD', dKey, varName)
+                    if t in d:
                         d[t] = d[t].copy()
-                        d[t][varIndexOrKey] = value
+                        d[t][varKey] = value
                     else:
-                        d[('dOverD', dKey, varTuple_forDifferentiation)] = value
-                elif isinstance(backwardVarTuple, tuple):
-                    varName, varIndexOrKey = backwardVarTuple
-                    d[varName] = d[varName].copy()
-                    d[varName][varIndexOrKey] = value
+                        d[t] = {varKey: value}
                 else:
-                    d[backwardVarTuple] = value
+                    d[('dOverD', dKey, overD)] = value
 
         return d
 
 
+    def checkGradients(self, ins___dict):
+
+        def sumOut(in___dict, outKey):
+            d = ins___dict.copy()
+            for inKey, inValue in in___dict.items():
+                d[inKey] = inValue
+            out = self.run(d)[outKey]
+            if isinstance(out, ndarray):
+                return out.sum()
+            else:
+                return out
+
+        vars = self.run(ins___dict)
+        dKeys = set()
+        dSumKeys = set()
+        for outKey in self.outKeys:
+            if isinstance(vars[outKey], float):
+                for varTuple in self.backwards:
+                    if isDOverD(varTuple) and (varTuple[1] == outKey):
+                        dKeys.add(outKey)
+            elif isinstance(vars[outKey], ndarray):
+                vars[('dOverD', 'SUM___' + outKey, outKey)] = ones(vars[outKey].shape)
+                dSumKeys.add(outKey)
+
+        backwardInKeys = set()
+        for backwardVarTuple in self.backwards:
+            if isOverD(backwardVarTuple):
+                backwardInKeys.add(backwardVarTuple[1])
+            elif isDOverD(backwardVarTuple):
+                backwardInKeys.add(backwardVarTuple[2])
+
+        for outKey in dKeys:
+            vars = self.run(vars, forwardOutKeys = None, dKey_and_backwardInKeys = (outKey, backwardInKeys))
+        for outKey in dSumKeys:
+            vars = self.run(vars, forwardOutKeys = None, dKey_and_backwardInKeys = ('SUM___' + outKey, backwardInKeys))
+
+        check = True
+        for inKey, outKey in itertools.product(backwardInKeys, dKeys):
+            approxGrad = approxGradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
+            check = check and allclose(approxGrad, vars[('dOverD', outKey, inKey)], rtol = 1.e-3, atol = 1.e-6)
+        for inKey, outKey in itertools.product(backwardInKeys, dSumKeys):
+            approxGrad = approxGradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
+            check = check and allclose(approxGrad, vars[('dOverD', 'SUM___' + outKey, inKey)],
+                                       rtol = 1.e-3, atol = 1.e-6)
+
+        return check
 
 
 

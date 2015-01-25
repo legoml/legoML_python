@@ -1,3 +1,6 @@
+from numpy import zeros
+
+
 def renameKeys(dictObj, toNewKeys_fromOldKeys___dict):
     d = dictObj.copy()
     for newKey, oldKey in toNewKeys_fromOldKeys___dict.items():
@@ -59,7 +62,7 @@ def updateDictValues(dict_toUpdate, toKeysOfDictToUpdate_fromKeysOfDictWithValue
     return d
 
 
-def approxGrad(func, arrayA, epsilon = 1e-6):
+def approxGradients(func, arrayA, epsilon = 1e-6):
     g = zeros(arrayA.shape)
     for i in range(arrayA.size):
         a_plus = arrayA.copy()

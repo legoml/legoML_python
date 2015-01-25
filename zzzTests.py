@@ -84,5 +84,13 @@ print(activ.activations(m, nameOfActivationFunc = 'softmax'))
 print(activ.dActivations_over_dSignals(m, nameOfActivationFunc = 'softmax'))
 
 # test PIECE
-from MachinePlayground.Classes import Piece
-from MachinePlayground.pieces.pieces_zzzCommonFuncs import *
+from MachinePlayground.pieces.zzzTESTS import *
+TEST_piece_equal()
+TEST_piece_multiplyMatrices_ofInputsAndWeights()
+TEST_piece_linear()
+TEST_piece_logistic()
+TEST_piece_tanh()
+TEST_piece_softmax()
+TEST_piece_squareError_half_averageOverCases()
+TEST_piece_crossEntropy_binaryClasses_averageOverCases()
+TEST_piece_crossEntropy_multiClasses_averageOverCases()
