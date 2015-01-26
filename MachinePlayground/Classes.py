@@ -97,9 +97,11 @@ class Piece:
                 for argKey, inVarTuple in arguments.items():
                     if isinstance(inVarTuple, tuple):
                         inVarName, inVarKey = inVarTuple
-                        arguments[argKey] = d[inVarName][inVarKey]
+                        if inVarName in d:
+                            arguments[argKey] = d[inVarName][inVarKey]
                     else:
-                        arguments[argKey] = d[inVarTuple]
+                        if inVarTuple in d:
+                            arguments[argKey] = d[inVarTuple]
                 value = func(**arguments)
                 if isinstance(outVarTuple, tuple):
                     outVarName, outVarKey = outVarTuple
@@ -128,21 +130,27 @@ class Piece:
                         overD = varTuple[1]
                         if isinstance(overD, tuple):
                             varName, varKey = overD
-                            arguments[argKey] = d[('dOverD', dKey, varName)][varKey]
+                            if varName in d:
+                                arguments[argKey] = d[('dOverD', dKey, varName)][varKey]
                         else:
-                            arguments[argKey] = d[('dOverD', dKey, overD)]
+                            if overD in d:
+                                arguments[argKey] = d[('dOverD', dKey, overD)]
                     elif isDOverD(varTuple):
                         overD = varTuple[2]
                         if isinstance(overD, tuple):
                             varName, varKey = overD
-                            arguments[argKey] = d[('dOverD', dKey, varName)][varKey]
+                            if varName in d:
+                                arguments[argKey] = d[('dOverD', dKey, varName)][varKey]
                         else:
-                            arguments[argKey] = d[('dOverD', dKey, overD)]
+                            if overD in d:
+                                arguments[argKey] = d[('dOverD', dKey, overD)]
                     elif isinstance(varTuple, tuple):
                         varName, varKey = varTuple
-                        arguments[argKey] = d[varName][varKey]
+                        if varName in d:
+                            arguments[argKey] = d[varName][varKey]
                     else:
-                        arguments[argKey] = d[varTuple]
+                        if varTuple in d:
+                            arguments[argKey] = d[varTuple]
                 value = func(**arguments)
                 if isOverD(backwardVarTuple):
                     overD = backwardVarTuple[1]
@@ -234,7 +242,7 @@ class Process:
                 vars.add(varName_fromVarTuple(inVarTuple))
             for outVarTuple in piece.outKeys:
                 vars.add(varName_fromVarTuple(outVarTuple))
-            steps += s
+            steps += [s]
         self.vars = vars
         self.steps = steps
 
@@ -246,13 +254,18 @@ class Process:
                 self.vars.add(varName_fromVarTuple(inVarTuple))
             for outVarTuple in piece.outKeys:
                 self.vars.add(varName_fromVarTuple(outVarTuple))
-            self.steps += s
+            self.steps += [s]
 
-    def run(self, dictObj):
+    def run(self, dictObj, *args, **kwargs):
         d = dictObj.copy()
+        #print(self.steps)
         for step in self.steps:
             piece, forwardOutKeys, dKey_and_backwardInKeys = step
-            d = piece.run(forwardOutKeys, dKey_and_backwardInKeys)
+            #print(piece)
+            #print(forwardOutKeys)
+            #print(dKey_and_backwardInKeys)
+            d = piece.run(d, forwardOutKeys, dKey_and_backwardInKeys)
+            # print(d)
         return d
 
 
@@ -270,13 +283,14 @@ class Program:
         self.pieces = pieces___dict
         self.processes = processes___dict
 
-    def install(self, toNewKeys_fromOldKeys___dict):
-        d = 0
-
-        return d
-
-    def run(self, piece_or_process, *args, *kwargs):
-        self.vars = piece_or_process.run(self.vars, *args, **kwargs)
+    def run(self, *args, **kwargs):
+        for process_or_piece in args:
+            if process_or_piece in self.processes:
+                process = self.processes[process_or_piece]
+                self.vars = process.run(self.vars)
+            elif process_or_piece in self.pieces:
+                piece = self.pieces[process_or_piece]
+                self.vars = piece.run(self.vars, **kwargs)
 
 
 

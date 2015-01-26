@@ -48,9 +48,9 @@ def piece_crossEntropy_binaryClasses_averageOverCases():
 def piece_crossEntropy_multiClasses_averageOverCases():
 
     forwards = {'cost_crossEntropy_multiClasses_averageOverCases':
-                    [lambda fromMat, ofMat, skew = array([1]), tiny = exp(-36):
+                    [lambda fromMat, ofMat, skew = atleast_2d(array([1])), tiny = exp(-36):
                         - ((fromMat * log(ofMat + tiny))
-                           / (fromMat.shape[1] / skew.sum(1, keepdims = True) * skew)).sum() / fromMat.shape[0],
+                           / ((fromMat.shape[1] / skew.sum(1, keepdims = True)) * skew)).sum() / fromMat.shape[0],
                      {'fromMat': 'targetOutputs___matrixRowsForCases',
                       'ofMat': 'hypoOutputs___matrixRowsForCases',
                       'skew': 'classSkewnesses'}]}
@@ -58,7 +58,7 @@ def piece_crossEntropy_multiClasses_averageOverCases():
     backwards = {('dOverD', 'cost_crossEntropy_multiClasses_averageOverCases', 'hypoOutputs___matrixRowsForCases'):
                      [lambda fromMat, ofMat, skew = atleast_2d(array([1])):
                         - ((fromMat / ofMat)
-                           / (fromMat.shape[1] / skew.sum(1, keepdims = True) * skew)) / fromMat.shape[0],
+                           / ((fromMat.shape[1] / skew.sum(1, keepdims = True)) * skew)) / fromMat.shape[0],
                       {'fromMat': 'targetOutputs___matrixRowsForCases',
                       'ofMat': 'hypoOutputs___matrixRowsForCases',
                       'skew': 'classSkewnesses'}]}

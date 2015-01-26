@@ -94,3 +94,7 @@ TEST_piece_softmax()
 TEST_piece_squareError_half_averageOverCases()
 TEST_piece_crossEntropy_binaryClasses_averageOverCases()
 TEST_piece_crossEntropy_multiClasses_averageOverCases()
+
+# test FFNN
+from MachinePlayground.programs.zzzTESTS import *
+TEST_ffNN_checkGradients(1000, 1.e-3, 1.e-6)

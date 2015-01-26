@@ -1,3 +1,4 @@
+from numpy import array, atleast_2d
 from numpy.random import *
 from MachinePlayground.Classes import Piece, Process, Program, connectProcesses
 from MachinePlayground.pieces.pieces_zzzCommonFuncs import *
@@ -7,17 +8,35 @@ from MachinePlayground.pieces.pieces_costFuncs import *
 
 def ffNN(numsNodes, activationFuncs, addBiases = [True], *args, **kwargs):
 
-    # VARS
-    vars = ('weightsVector', 'weights', 'signals', 'activations', 'hypoOutputs', 'targetOutputs', 'cost_withoutRegul')
-
     pieces = {}
     processes = {}
     numLayers = len(numsNodes)
     for l in range(len(addBiases) + 1, numLayers - 1):
         addBiases += addBiases[-1]
     weightsShapes___list = []
+    numWeights = 0
     for l in range(numLayers - 1):
-        weightsShapes___list[l] = [numsNodes[l] + addBiases[l], numsNodes[l + 1]]
+        shape = array([numsNodes[l] + addBiases[l], numsNodes[l + 1]])
+        weightsShapes___list += [shape]
+        numWeights += shape.prod()
+
+    # VARS
+    vars = {'weightsVector': array(numWeights * [0]),
+            'weights': {},
+            'inputs': array([]),
+            'signals': {},
+            'activations': {},
+            'hypoOutputs': array([]),
+            'targetOutputs': array([]),
+            'cost_withoutRegul': array([])}
+    if activationFuncs[-1] == 'linear':
+        vars['rootMeanSquareError'] = array([])
+    elif activationFuncs[-1] == 'logistic':
+        vars['percentConfidence'] = array([])
+        vars['positiveClassSkewnesses'] = atleast_2d(array([1]))
+    elif activationFuncs[-1] == 'softmax':
+        vars['percentConfidence'] = array([])
+        vars['classSkewnesses'] = atleast_2d(array([1]))
 
     # PIECES
     pieces['weights_betweenVectorAndDict'] = piece_fromVector_toArrays_inDictListTuple(weightsShapes___list).install(
@@ -57,18 +76,20 @@ def ffNN(numsNodes, activationFuncs, addBiases = [True], *args, **kwargs):
         'logistic': piece_crossEntropy_binaryClasses_averageOverCases().install(
             {'targetOutputs___array': 'targetOutputs',
              'hypoOutputs___array': 'hypoOutputs',
+             'positiveClassSkewnesses': 'positiveClassSkewnesses',
              'cost_crossEntropy_binaryClasses_averageOverCases': 'cost_withoutRegul'}),
         'softmax': piece_crossEntropy_multiClasses_averageOverCases().install(
             {'targetOutputs___matrixRowsForCases': 'targetOutputs',
              'hypoOutputs___matrixRowsForCases': 'hypoOutputs',
+             'classSkewnesses': 'classSkewnesses',
              'cost_crossEntropy_multiClasses_averageOverCases': 'cost_withoutRegul'})}
 
-    pieces['cost_withoutRegul'] = dictOfPieces_forCostFuncs[activationFuncs[numLayers - 1]]
+    pieces['cost_withoutRegul'] = dictOfPieces_forCostFuncs[activationFuncs[numLayers - 2]]
 
     pieces['dCostWithoutRegul_over_dSignalToTopLayer'] = Piece(
         forwards = {},
         backwards = {('dOverD', 'cost_withoutRegul', ('signals', numLayers - 2)):
-                        [lambda t, h: h - t,
+                        [lambda t, h: (h - t) / t.shape[0],
                          {'t': 'targetOutputs',
                           'h': 'hypoOutputs'}]})
 
@@ -83,16 +104,16 @@ def ffNN(numsNodes, activationFuncs, addBiases = [True], *args, **kwargs):
 
     # PROCESS: backwardPass
     processes['backwardPass'] = Process([pieces[('dCostWithoutRegul_over_dSignalToTopLayer')], None,
-                                         ['cost_withoutRegul', ('signals', numLayers - 2)]])
+                                         ['cost_withoutRegul', [('signals', numLayers - 2)]]])
     for l in reversed(range(numLayers - 1)):
         processes['backwardPass'].addSteps(
-            [pieces[('signals', l)], None, ['cost_withoutRegul', ('weights', l)]])
+            [pieces[('signals', l)], None, ['cost_withoutRegul', [('weights', l)]]])
         if l > 0:
             processes['backwardPass'].addSteps(
-                [pieces[('signals', l)], None, ['cost_withoutRegul', ('activations', l)]],
-                [pieces[('activations', l)], None, ['cost_withoutRegul', ('signals', l - 1)]])
+                [pieces[('signals', l)], None, ['cost_withoutRegul', [('activations', l)]]],
+                [pieces[('activations', l)], None, ['cost_withoutRegul', [('signals', l - 1)]]])
     processes['backwardPass'].addSteps(
-        [pieces['weights_betweenVectorAndDict'], None, ['cost_withoutRegul', 'weightsVector']])
+        [pieces['weights_betweenVectorAndDict'], None, ['cost_withoutRegul', ['weightsVector']]])
 
     # PROCESS: cost_and_dCost_over_dWeights_withoutRegul
     processes['cost_and_dCost_over_dWeights_withoutRegul'] = connectProcesses(
