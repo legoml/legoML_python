@@ -1,4 +1,4 @@
-from numpy import atleast_2d, atleast_3d, concatenate, delete, diag, exp, ones, squeeze, tanh, zeros
+from numpy import array, atleast_2d, atleast_3d, concatenate, delete, diag, exp, ndarray, ones, squeeze, tanh, zeros
 
 
 
@@ -43,6 +43,30 @@ def zeroBiasElements(arrayA, numsBiases_toZero_upTo3D = [1]):
             elif d == 2:
                 a[:, :, range(numBiases_toZero)] = 0
     return a
+
+
+def fromArrays_inDictListTuple_toVector(dict_orList_orTuple):
+    v = []
+    for i in range(len(dict_orList_orTuple)):
+        v += dict_orList_orTuple[i].flat
+    return array(v)
+
+
+def fromVector_toArrays_inDictListTuple(vector, shapes___list, type = 'dict'):
+    if type == 'dict':
+        arrays = {}
+    else:
+        arrays = len(shapes___list) * [[]]
+    v = vector.copy()
+    for i, s in enumerate(shapes___list):
+        if not isinstance(s, ndarray):
+            s = array(s)
+        numElements = s.prod()
+        arrays[i] = v[:numElements].reshape(s)
+        v = v[numElements:]
+    if type == 'tuple':
+        arrays = tuple(arrays)
+    return arrays
 
 
 

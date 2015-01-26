@@ -256,6 +256,13 @@ class Process:
         return d
 
 
+def connectProcesses(*args, **kwargs):
+    p = deepcopy(args[0])
+    for process in args[1:]:
+        p.vars.update(process.vars)
+        p.steps += process.steps
+    return p
+
 
 class Program:
     def __init__(self, vars___dict, pieces___dict, processes___dict, *args, **kwargs):

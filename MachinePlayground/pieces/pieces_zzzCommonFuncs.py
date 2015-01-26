@@ -1,6 +1,7 @@
 from numpy import exp, tanh
 from MachinePlayground.Classes import Piece
 from MachinePlayground.funcs.zzzCommonFuncs import addBiasElements, deleteBiasElements,\
+    fromVector_toArrays_inDictListTuple, fromArrays_inDictListTuple_toVector,\
     softmax, softmax_dOutputs_over_dInputs, softmax_dOverDInputs_from_dOverDOutputs
 
 
@@ -12,6 +13,20 @@ def piece_equal():
     backwards = {('dOverD', 'inputs___array'):
                      [lambda ddOutp: ddOutp,
                       {'ddOutp': ('dOverD', 'outputs___array')}]}
+    return Piece(forwards, backwards)
+
+
+
+def piece_fromVector_toArrays_inDictListTuple(shapes___list, type = 'dict'):
+
+    forwards = {'arrays___inDictListTuple':
+                    [lambda v: fromVector_toArrays_inDictListTuple(v, shapes___list, type),
+                     {'v': 'vector'}]}
+
+    backwards = {('dOverD', 'vector'):
+                    [lambda ddA: fromArrays_inDictListTuple_toVector(ddA),
+                     {'ddA': ('dOverD', 'arrays___inDictListTuple')}]}
+
     return Piece(forwards, backwards)
 
 
