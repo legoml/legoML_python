@@ -6,7 +6,7 @@ from MachinePlayground.programs import ffNN
 
 
 
-def TEST_ffNN_checkGradients(numRuns = 1000, rtol = 1.e-6, atol = 1.e-6):
+def TEST_ffNN_checkGradients(numRuns = 1000, rtol = 1.e-3, atol = 1.e-6):
 
     def cost(model, weightsVector):
         p0 = deepcopy(model)
