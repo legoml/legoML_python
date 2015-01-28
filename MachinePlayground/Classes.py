@@ -256,16 +256,12 @@ class Process:
                 self.vars.add(varName_fromVarTuple(outVarTuple))
             self.steps += [s]
 
-    def run(self, dictObj, *args, **kwargs):
+    def run(self, dictObj, numTimes = 1, *args, **kwargs):
         d = dictObj.copy()
-        #print(self.steps)
-        for step in self.steps:
-            piece, forwardOutKeys, dKey_and_backwardInKeys = step
-            #print(piece)
-            #print(forwardOutKeys)
-            #print(dKey_and_backwardInKeys)
-            d = piece.run(d, forwardOutKeys, dKey_and_backwardInKeys)
-            # print(d)
+        for t in range(numTimes):
+            for step in self.steps:
+                piece, forwardOutKeys, dKey_and_backwardInKeys = step
+                d = piece.run(d, forwardOutKeys, dKey_and_backwardInKeys)
         return d
 
 
