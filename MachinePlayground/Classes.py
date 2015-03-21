@@ -293,6 +293,13 @@ class Program:
 class Project:
     def __init__(self, *args, **kwargs):
         self.vars = dict.fromkeys(args)
+        self.pieces = {}
+        self.processes = {}
+        self.programs = {}
+
+    def addVars(self, *args, **kwargs):
+        self.vars.update(dict.fromkeys(args))
+        self.vars.update(kwargs)
 
     def setVar(self, *args):
         pass
