@@ -169,6 +169,9 @@ class Piece:
 
         return d
 
+    def lambda_function(self, ins, outs):
+        pass
+
 
     def checkGradients(self, ins___dict):
 
@@ -272,6 +275,14 @@ def connectProcesses(*args, **kwargs):
         p.steps += process.steps
     return p
 
+class LambdaFunction:
+    def __init__(self, ins, process, outs):
+        self.haha = 1
+
+class io:
+    def __init__(self):
+        self.haha = 1
+
 
 class Program:
     def __init__(self, vars___dict, pieces___dict, processes___dict, *args, **kwargs):
@@ -292,17 +303,26 @@ class Program:
 
 class Project:
     def __init__(self, *args, **kwargs):
-        self.vars = dict.fromkeys(args)
+        self.variables = {}
+        self.parameters = {}
         self.pieces = {}
         self.processes = {}
         self.programs = {}
 
-    def addVars(self, *args, **kwargs):
-        self.vars.update(dict.fromkeys(args))
-        self.vars.update(kwargs)
+    def add_variables(self, *args, **kwargs):
+        self.variables.update(dict.fromkeys(args))
+        self.variables.update(kwargs)
 
-    def setVar(self, *args):
-        pass
+    def delete_variables(self, *args, **kwargs):
+        for arg in args:
+            del self.vars[arg]
+
+    def set_variables(self, *args, **kwargs):
+        for kwarg in kwargs:
+            pass
 
     def getVar(self, *args):
+        pass
+
+    def run(self, steps):
         pass

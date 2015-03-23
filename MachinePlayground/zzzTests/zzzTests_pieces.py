@@ -1,6 +1,6 @@
 from numpy.random import *
-from MachinePlayground.pieces.pieces_zzzCommonFuncs import *
-from MachinePlayground.pieces.pieces_costFuncs import *
+from MachinePlayground.Pieces.PIECES___zzz_common_functions import *
+from MachinePlayground.Pieces.PIECES___cost_functions import *
 
 
 def TEST_piece_equal(numRuns = 1000):

@@ -16,3 +16,9 @@ TEST_piece_crossEntropy_multiClasses_averageOverCases()
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
 TEST_ffNN_checkGradients(300)
+
+# test Project
+import MachinePlayground.Classes as C
+from importlib import reload
+reload(C)
+p = C.Project()

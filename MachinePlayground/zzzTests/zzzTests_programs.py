@@ -2,7 +2,7 @@ from numpy import allclose
 from numpy.random import *
 from copy import deepcopy
 from MachinePlayground._common import *
-from MachinePlayground.programs.program_ffNN import *
+from MachinePlayground.Programs.PROGRAM___ffnn import *
 
 
 
