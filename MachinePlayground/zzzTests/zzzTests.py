@@ -1,5 +1,4 @@
 from numpy import *
-from importlib import reload
 
 # test PIECE
 from MachinePlayground.zzzTests.zzzTests_pieces import *
@@ -21,10 +20,4 @@ TEST___PIECE___l2_weight_regularization()
 
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
-TEST___PROGRAM___ffnn_check_gradients(30)
-
-# test Project
-import MachinePlayground.Classes as C
-
-reload(C)
-p = C.Project()
+TEST___PROGRAM___ffnn_check_gradients(300)

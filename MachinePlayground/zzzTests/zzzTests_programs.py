@@ -1,4 +1,5 @@
 from numpy import allclose
+from numpy.random import rand, randint
 from copy import deepcopy
 from MachinePlayground._common import *
 from MachinePlayground.Programs.PROGRAM___ffnn import *
@@ -7,9 +8,9 @@ from MachinePlayground.Programs.PROGRAM___ffnn import *
 
 def TEST___PROGRAM___ffnn_check_gradients(num_runs = 1000, rtol = 1.e-6, atol = 1.e-6):
 
-    def cost(model, weights_vector):
+    def cost(model, w):
         p0 = deepcopy(model)
-        p0.vars['weights_vector'] = weights_vector
+        p0.vars['weights_vector'] = w
         p0.run('forward_pass')
         p0.run('cost')
         return p0.vars['cost']
@@ -43,8 +44,8 @@ def TEST___PROGRAM___ffnn_check_gradients(num_runs = 1000, rtol = 1.e-6, atol = 
             p.vars['target_outputs'] = 1. * (y == yMax)
         else:
             p.vars['target_outputs'] = rand(m, nums_nodes[-1])
-        weights_vector = rand(*p.vars['weights_vector'].shape)
-        p.vars['weightsVector'] = weights_vector
+        weights_vector = rand(p.vars['weights_vector'].size)
+        p.vars['weights_vector'] = weights_vector
         p.run('cost_and_d_cost_over_d_weights')
         analytic_gradients = p.vars[('DOVERD', 'cost', 'weights_vector')]
         approx_gradients = approxGradients(lambda w: cost(p, w), weights_vector)

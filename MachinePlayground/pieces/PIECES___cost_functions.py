@@ -80,7 +80,7 @@ def PIECE___average_binary_class_cross_entropy():
                      'of_arr': 'predicted_outputs'}]}
 
     backwards = {('DOVERD', 'average_binary_class_cross_entropy', 'predicted_outputs'):
-                    [lambda from_arr, of_arr, pos_skew = array([1]):
+                    [lambda from_arr, of_arr:
                         - ((from_arr / of_arr)
                         - ((1. - from_arr) / (1. - of_arr))) / from_arr.shape[0],
                      {'from_arr': 'target_outputs',

@@ -1,6 +1,4 @@
-from numpy import array, atleast_2d
-from numpy.random import *
-from MachinePlayground.Classes import Piece, Process, Program, connectProcesses
+from MachinePlayground.Classes import Process, Program, connectProcesses
 from MachinePlayground.Pieces.PIECES___zzz_common_functions import *
 from MachinePlayground.Pieces.PIECES___cost_functions import *
 
@@ -63,11 +61,11 @@ def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
              'average_half_square_error': 'cost'}),
          'logistic': PIECE___average_binary_class_cross_entropy().install(
             {'target_outputs': 'target_outputs',
-             'predicted_outputs': 'target_outputs',
+             'predicted_outputs': 'predicted_outputs',
              'average_binary_class_cross_entropy': 'cost'}),
          'softmax': PIECE___average_multi_class_cross_entropy().install(
-            {'targetOutputs___matrixRowsForCases': 'targetOutputs',
-             'hypoOutputs___matrixRowsForCases': 'hypoOutputs',
+            {'target_outputs': 'target_outputs',
+             'predicted_outputs': 'predicted_outputs',
              'average_multi_class_cross_entropy': 'cost'})}
 
     pieces['cost'] = dict_of_pieces_for_cost_functions[activation_functions[num_layers - 2]]
