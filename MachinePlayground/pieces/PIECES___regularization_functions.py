@@ -4,7 +4,7 @@ from MachinePlayground.Classes import Piece
 
 
 def PIECE___l1_weight_regularization():
-    """PIECE___l1_weight_regularization
+    """PIECE___l1_weight_regularization:
 
     WEIGHT_PENALTY = sum of absolute values of items of WEIGHTS multi-dimensional array
     """
@@ -22,7 +22,7 @@ def PIECE___l1_weight_regularization():
 
 
 def PIECE___l2_weight_regularization():
-    """PIECE___l2_weight_regularization
+    """PIECE___l2_weight_regularization:
 
     WEIGHT_PENALTY = 1/2 x sum of squares of items of WEIGHTS multi-dimensional array
     """

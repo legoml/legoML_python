@@ -1,24 +1,30 @@
 from numpy import *
-m = array([[10, 20, 30], [4, 5, 6], [-7, -8, -9], [10, 11, 12]])
+from importlib import reload
 
 # test PIECE
 from MachinePlayground.zzzTests.zzzTests_pieces import *
-TEST_piece_equal()
-TEST_piece_multiplyMatrices_ofInputsAndWeights()
-TEST_piece_linear()
-TEST_piece_logistic()
-TEST_piece_tanh()
-TEST_piece_softmax()
-TEST_piece_squareError_half_averageOverCases()
-TEST_piece_crossEntropy_binaryClasses_averageOverCases()
-TEST_piece_crossEntropy_multiClasses_averageOverCases()
+TEST___PIECE___equal()
+TEST___PIECE___matrix_product_of_inputs_and_weights()
+TEST___PIECE___linear()
+TEST___PIECE___logistic()
+TEST___PIECE___tanh()
+TEST___PIECE___softmax()
+TEST___PIECE___average_half_square_error()
+TEST___PIECE___root_mean_square_error()
+TEST___PIECE___root_mean_square_error_from_average_half_square_error()
+TEST___PIECE___average_binary_class_cross_entropy()
+TEST___PIECE___average_unskewed_binary_class_cross_entropy()
+TEST___PIECE___average_multi_class_cross_entropy()
+TEST___PIECE___average_unskewed_multi_class_cross_entropy()
+TEST___PIECE___l1_weight_regularization()
+TEST___PIECE___l2_weight_regularization()
 
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
-TEST_ffNN_checkGradients(300)
+TEST___PROGRAM___ffnn_check_gradients(30)
 
 # test Project
 import MachinePlayground.Classes as C
-from importlib import reload
+
 reload(C)
 p = C.Project()

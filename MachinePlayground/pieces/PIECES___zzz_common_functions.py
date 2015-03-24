@@ -4,7 +4,7 @@ from MachinePlayground.Classes import Piece
 
 
 def PIECE___equal():
-    """PIECE___equal
+    """PIECE___equal:
 
     OUTPUTS multi-dimensional array = INPUTS multi-dimensional array
     """
@@ -12,15 +12,17 @@ def PIECE___equal():
     forwards = {'outputs':
                     [lambda inp: inp,
                      {'inp': 'inputs'}]}
-    backwards = {('DOVERD', 'input'):
+
+    backwards = {('DOVERD', 'inputs'):
                      [lambda ddoutp: ddoutp,
                       {'ddoutp': ('DOVERD', 'outputs')}]}
+
     return Piece(forwards, backwards)
 
 
 
 def PIECE___from_vector_to_arrays(shapes___list, type = 'dict'):
-    """PIECE___from_vector_to_arrays
+    """PIECE___from_vector_to_arrays:
 
     Converts a vector to dict/list/tuple of multi-dimensional arrays according to a list of shapes
     """
@@ -49,8 +51,7 @@ def PIECE___from_vector_to_arrays(shapes___list, type = 'dict'):
 
     forwards = {'arrays':
                     [lambda v: from_vector_to_arrays(v, shapes___list, type),
-                     {'v': 'vector',
-                      'type': 'type'}]}
+                     {'v': 'vector'}]}
 
     backwards = {('DOVERD', 'vector'):
                     [lambda dda: from_arrays_to_vector(dda),
@@ -61,7 +62,7 @@ def PIECE___from_vector_to_arrays(shapes___list, type = 'dict'):
 
 
 def PIECE___matrix_product_of_inputs_and_weights(add_bias_column_to_inputs = True):
-    """PIECE___multiply_matrices_of_inputs_and_weights
+    """PIECE___matrix_product_of_inputs_and_weights:
 
     OUTPUTS matrix (cases in rows) = matrix product of INPUTS matrix (cases in rows) and WEIGHTS matrix
     """
@@ -104,7 +105,7 @@ def PIECE___matrix_product_of_inputs_and_weights(add_bias_column_to_inputs = Tru
 
 
 def PIECE___linear():
-    """PIECE___linear
+    """PIECE___linear:
 
     OUTPUTS multi-dimensional array = INPUTS multi-dimensional array
     """
@@ -122,7 +123,7 @@ def PIECE___linear():
 
 
 def PIECE___logistic():
-    """PIECE___logistic
+    """PIECE___logistic:
 
     OUTPUTS multi-dimensional array = logistic function of INPUTS multi-dimensional array
     """
@@ -141,7 +142,7 @@ def PIECE___logistic():
 
 
 def PIECE___tanh():
-    """PIECE___tanh
+    """PIECE___tanh:
 
     OUTPUTS multi-dimensional array = hyperbolic tangent function of INPUTS multi-dimensional array
     """
@@ -160,7 +161,7 @@ def PIECE___tanh():
 
 
 def PIECE___softmax():
-    """PIECE___softmax
+    """PIECE___softmax:
 
     OUTPUTS matrix (cases in rows) = softmax function of INPUTS matrix (cases in rows)
     """

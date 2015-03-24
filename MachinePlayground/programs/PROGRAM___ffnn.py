@@ -3,124 +3,106 @@ from numpy.random import *
 from MachinePlayground.Classes import Piece, Process, Program, connectProcesses
 from MachinePlayground.Pieces.PIECES___zzz_common_functions import *
 from MachinePlayground.Pieces.PIECES___cost_functions import *
-from MachinePlayground.Pieces.PIECES___regularization_functions import *
 
 
 
-def program_ffNN(numsNodes, activationFuncs, addBiases = [True], *args, **kwargs):
+def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
 
     pieces = {}
     processes = {}
-    numLayers = len(numsNodes)
-    for l in range(len(addBiases) + 1, numLayers - 1):
-        addBiases += addBiases[-1]
-    weightsShapes___list = []
-    numWeights = 0
-    for l in range(numLayers - 1):
-        shape = array([numsNodes[l] + addBiases[l], numsNodes[l + 1]])
-        weightsShapes___list += [shape]
-        numWeights += shape.prod()
+    num_layers = len(nums_nodes)
+    for l in range(len(add_biases) + 1, num_layers - 1):
+        add_biases += add_biases[-1]
+    weights_shapes___list = []
+    num_weights = 0
+    for l in range(num_layers - 1):
+        shape = array([nums_nodes[l] + add_biases[l], nums_nodes[l + 1]])
+        weights_shapes___list += [shape]
+        num_weights += shape.prod()
 
     # VARS
-    vars = {'weightsVector': array(numWeights * [0]),
+    vars = {'weights_vector': array(num_weights * [0]),
             'weights': {},
             'inputs': array([]),
             'signals': {},
             'activations': {},
-            'hypoOutputs': array([]),
-            'targetOutputs': array([]),
-            'cost_withoutRegul': array([]),
-            'cost_weightPenalty': array([])}
-    if activationFuncs[-1] == 'linear':
-        vars['rootMeanSquareError'] = array([])
-    elif activationFuncs[-1] == 'logistic':
-        vars['percentConfidence'] = array([])
-        vars['positiveClassSkewnesses'] = atleast_2d(array([1]))
-    elif activationFuncs[-1] == 'softmax':
-        vars['percentConfidence'] = array([])
-        vars['classSkewnesses'] = atleast_2d(array(numsNodes[-1] * [1]))
+            'predicted_outputs': array([]),
+            'target_outputs': array([]),
+            'cost': array([])}
 
     # PIECES
-    pieces['weights_betweenVectorAndDict'] = piece_fromVector_toArrays_inDictListTuple(weightsShapes___list).install(
-        {'vector': 'weightsVector',
-         'arrays___inDictListTuple': 'weights'})
+    pieces['weights_from_vector_to_dict'] = PIECE___from_vector_to_arrays(weights_shapes___list).install(
+        {'vector': 'weights_vector',
+         'arrays': 'weights'})
 
-    pieces[('activations', 0)] = piece_equal().install({'inputs___array': 'inputs',
-                                                        'outputs___array': ('activations', 0)})
+    pieces[('activations', 0)] = PIECE___equal().install({'inputs': 'inputs',
+                                                          'outputs': ('activations', 0)})
 
-    dictOfPieces_forActivationFuncs = {
-        'linear': piece_linear().install({'inputs___array': 'signal',
-                                          'outputs___array': 'activation'}),
-        'logistic': piece_logistic().install({'inputs___array': 'signal',
-                                              'outputs___array': 'activation'}),
-        'tanh': piece_tanh().install({'inputs___array': 'signal',
-                                      'outputs___array': 'activation'}),
-        'softmax': piece_softmax().install({'inputs___matrixRowsForCases': 'signal',
-                                            'outputs___matrixRowsForCases': 'activation'})}
+    dict_of_pieces_for_activation_functions = {
+        'linear': PIECE___linear(),
+        'logistic': PIECE___logistic(),
+        'tanh': PIECE___tanh(),
+        'softmax': PIECE___softmax()}
 
-    for l in range(1, numLayers):
-        pieces[('signals', l - 1)] = piece_multiplyMatrices_ofInputsAndWeights(addBiases[l - 1]).install(
-            {'inputs___matrixRowsForCases': ('activations', l - 1),
-             'weights___matrix': ('weights', l - 1),
-             'outputs___matrixRowsForCases': ('signals', l - 1)})
-        pieces[('activations', l)] = dictOfPieces_forActivationFuncs[activationFuncs[l - 1]].install(
-            {'signal': ('signals', l - 1),
-             'activation': ('activations', l)})
+    for l in range(1, num_layers):
+        pieces[('signals', l - 1)] = PIECE___matrix_product_of_inputs_and_weights(add_biases[l - 1]).install(
+            {'inputs': ('activations', l - 1),
+             'weights': ('weights', l - 1),
+             'outputs': ('signals', l - 1)})
+        pieces[('activations', l)] = dict_of_pieces_for_activation_functions[activation_functions[l - 1]].install(
+            {'inputs': ('signals', l - 1),
+             'outputs': ('activations', l)})
 
-    pieces['hypoOutputs'] = piece_equal().install({'inputs___array': ('activations', numLayers - 1),
-                                                   'outputs___array': 'hypoOutputs'})
+    pieces['predicted_outputs'] = PIECE___equal().install({'inputs': ('activations', num_layers - 1),
+                                                           'outputs': 'predicted_outputs'})
 
-    dictOfPieces_forCostFuncs = {
-        'linear': piece_squareError_half_averageOverCases().install(
-            {'targetOutputs___array': 'targetOutputs',
-             'hypoOutputs___array': 'hypoOutputs',
-             'cost_squareError_half_averageOverCases': 'cost_withoutRegul'}),
-        'logistic': piece_crossEntropy_binaryClasses_averageOverCases().install(
-            {'targetOutputs___array': 'targetOutputs',
-             'hypoOutputs___array': 'hypoOutputs',
-             'positiveClassSkewnesses': 'positiveClassSkewnesses',
-             'cost_crossEntropy_binaryClasses_averageOverCases': 'cost_withoutRegul'}),
-        'softmax': piece_crossEntropy_multiClasses_averageOverCases().install(
+    dict_of_pieces_for_cost_functions =\
+        {'linear': PIECE___average_half_square_error().install(
+            {'target_outputs': 'target_outputs',
+             'predicted_outputs': 'predicted_outputs',
+             'average_half_square_error': 'cost'}),
+         'logistic': PIECE___average_binary_class_cross_entropy().install(
+            {'target_outputs': 'target_outputs',
+             'predicted_outputs': 'target_outputs',
+             'average_binary_class_cross_entropy': 'cost'}),
+         'softmax': PIECE___average_multi_class_cross_entropy().install(
             {'targetOutputs___matrixRowsForCases': 'targetOutputs',
              'hypoOutputs___matrixRowsForCases': 'hypoOutputs',
-             'classSkewnesses': 'classSkewnesses',
-             'cost_crossEntropy_multiClasses_averageOverCases': 'cost_withoutRegul'})}
+             'average_multi_class_cross_entropy': 'cost'})}
 
-    pieces['cost_withoutRegul'] = dictOfPieces_forCostFuncs[activationFuncs[numLayers - 2]]
+    pieces['cost'] = dict_of_pieces_for_cost_functions[activation_functions[num_layers - 2]]
 
-    pieces['dCostWithoutRegul_over_dSignalToTopLayer'] = Piece(
+    pieces['d_cost_over_d_signal_to_top_layer'] = Piece(
         forwards = {},
-        backwards = {('dOverD', 'cost_withoutRegul', ('signals', numLayers - 2)):
+        backwards = {('DOVERD', 'cost', ('signals', num_layers - 2)):
                         [lambda t, h: (h - t) / t.shape[0],
-                         {'t': 'targetOutputs',
-                          'h': 'hypoOutputs'}]})
+                         {'t': 'target_outputs',
+                          'h': 'predicted_outputs'}]})
 
-    # PROCESS: forwardPass
-    processes['forwardPass'] = Process(pieces['weights_betweenVectorAndDict'], pieces[('activations', 0)])
-    for l in range(1, numLayers):
-        processes['forwardPass'].addSteps(pieces[('signals', l - 1)], pieces[('activations', l)])
-    processes['forwardPass'].addSteps(pieces[('hypoOutputs')])
+    # PROCESS: forward_pass
+    processes['forward_pass'] = Process(pieces['weights_from_vector_to_dict'], pieces[('activations', 0)])
+    for l in range(1, num_layers):
+        processes['forward_pass'].addSteps(pieces[('signals', l - 1)], pieces[('activations', l)])
+    processes['forward_pass'].addSteps(pieces[('predicted_outputs')])
 
-    # PROCESS: cost_withoutRegul
-    processes['cost_withoutRegul'] = Process(pieces['cost_withoutRegul'])
+    # PROCESS: cost
+    processes['cost'] = Process(pieces['cost'])
 
-    # PROCESS: backwardPass
-    processes['backwardPass'] = Process([pieces[('dCostWithoutRegul_over_dSignalToTopLayer')], None,
-                                         ['cost_withoutRegul', [('signals', numLayers - 2)]]])
-    for l in reversed(range(numLayers - 1)):
-        processes['backwardPass'].addSteps(
-            [pieces[('signals', l)], None, ['cost_withoutRegul', [('weights', l)]]])
+    # PROCESS: backward_pass
+    processes['backward_pass'] = Process([pieces[('d_cost_over_d_signal_to_top_layer')], None,
+                                         ['cost', [('signals', num_layers - 2)]]])
+    for l in reversed(range(num_layers - 1)):
+        processes['backward_pass'].addSteps(
+            [pieces[('signals', l)], None, ['cost', [('weights', l)]]])
         if l > 0:
-            processes['backwardPass'].addSteps(
-                [pieces[('signals', l)], None, ['cost_withoutRegul', [('activations', l)]]],
-                [pieces[('activations', l)], None, ['cost_withoutRegul', [('signals', l - 1)]]])
-    processes['backwardPass'].addSteps(
-        [pieces['weights_betweenVectorAndDict'], None, ['cost_withoutRegul', ['weightsVector']]])
+            processes['backward_pass'].addSteps(
+                [pieces[('signals', l)], None, ['cost', [('activations', l)]]],
+                [pieces[('activations', l)], None, ['cost', [('signals', l - 1)]]])
+    processes['backward_pass'].addSteps(
+        [pieces['weights_from_vector_to_dict'], None, ['cost', ['weights_vector']]])
 
-    # PROCESS: cost_and_dCost_over_dWeights_withoutRegul
-    processes['cost_and_dCost_over_dWeights_withoutRegul'] = connectProcesses(
-        processes['forwardPass'], processes['cost_withoutRegul'], processes['backwardPass'])
-
-    # PROCESS: weight update: gradient
+    # PROCESS: cost_and_d_cost_over_d_weights
+    processes['cost_and_d_cost_over_d_weights'] = connectProcesses(
+        processes['forward_pass'], processes['cost'], processes['backward_pass'])
 
     return Program(vars, pieces, processes)
