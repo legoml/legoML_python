@@ -6,7 +6,7 @@ from MachinePlayground.Functions.FUNCTIONS___zzz_misc import approx_gradients
 
 
 class Piece:
-    def __init__(self, forwards = {}, backwards = {}, *args, **kwargs):
+    def __init__(self, forwards = {}, backwards = {}):
         self.inKeys = set()
         self.outKeys = set(forwards.keys())
         self.forwards = deepcopy(forwards)
@@ -23,56 +23,69 @@ class Piece:
                self.backwardsToFrom[inKey] = set(func_andToFrom[1].values())
 
 
-    def install(self, fromOldKeys_toNewKeys___dict):
+    def install(self, change_keys = {}, change_vars = {}):
 
-        forwards = {}
-        for outKey, func_andToFrom in self.forwards.items():
-            if outKey in fromOldKeys_toNewKeys___dict:
-                newOutKey = fromOldKeys_toNewKeys___dict[outKey]
-            else:
-                newOutKey = outKey
-            newFunc_andToFrom = deepcopy(func_andToFrom)
-            for argKey, inKey in func_andToFrom[1].items():
-                if inKey in fromOldKeys_toNewKeys___dict:
-                    newFunc_andToFrom[1][argKey] = fromOldKeys_toNewKeys___dict[inKey]
-            forwards[newOutKey] = newFunc_andToFrom
+        piece = deepcopy(self)
 
-        backwards = {}
-        for backwardInKey, func_andToFrom in self.backwards.items():
-            if isOverD(backwardInKey) and (backwardInKey[1] in fromOldKeys_toNewKeys___dict):
-                newBackwardInKey = ('DOVERD', fromOldKeys_toNewKeys___dict[backwardInKey[1]])
-            elif isDOverD(backwardInKey):
-                if backwardInKey[1] in fromOldKeys_toNewKeys___dict:
-                    dKey = fromOldKeys_toNewKeys___dict[backwardInKey[1]]
+        if change_keys:
+
+            forwards = {}
+            for outKey, func_andToFrom in piece.forwards.items():
+                if outKey in change_keys:
+                    newOutKey = change_keys[outKey]
                 else:
-                    dKey = backwardInKey[1]
-                if backwardInKey[2] in fromOldKeys_toNewKeys___dict:
-                    overDKey = fromOldKeys_toNewKeys___dict[backwardInKey[2]]
-                else:
-                    overDKey = backwardInKey[2]
-                newBackwardInKey = ('DOVERD', dKey, overDKey)
-            else:
-                newBackwardInKey = backwardInKey
-            newFunc_andToFrom = deepcopy(func_andToFrom)
-            for argKey, backwardInOutKey in func_andToFrom[1].items():
-                if backwardInOutKey in fromOldKeys_toNewKeys___dict:
-                    newFunc_andToFrom[1][argKey] = fromOldKeys_toNewKeys___dict[backwardInOutKey]
-                elif isOverD(backwardInOutKey) and (backwardInOutKey[1] in fromOldKeys_toNewKeys___dict):
-                    newFunc_andToFrom[1][argKey] = ('DOVERD',
-                                                    fromOldKeys_toNewKeys___dict[backwardInOutKey[1]])
-                elif isDOverD(backwardInOutKey):
-                    if backwardInOutKey[1] in fromOldKeys_toNewKeys___dict:
-                        dKey = fromOldKeys_toNewKeys___dict[backwardInOutKey[1]]
-                    else:
-                        dKey = backwardInOutKey[1]
-                    if backwardInOutKey[2] in fromOldKeys_toNewKeys___dict:
-                        overDKey = fromOldKeys_toNewKeys___dict[backwardInOutKey[2]]
-                    else:
-                        overDKey = backwardInOutKey[2]
-                    newFunc_andToFrom[1][argKey] = ('DOVERD', dKey, overDKey)
-            backwards[newBackwardInKey] = newFunc_andToFrom
+                    newOutKey = outKey
+                newFunc_andToFrom = deepcopy(func_andToFrom)
+                for argKey, inKey in func_andToFrom[1].items():
+                    if inKey in change_keys:
+                        newFunc_andToFrom[1][argKey] = change_keys[inKey]
+                forwards[newOutKey] = newFunc_andToFrom
 
-        return Piece(forwards, backwards)
+            backwards = {}
+            for backwardInKey, func_andToFrom in piece.backwards.items():
+                if isOverD(backwardInKey) and (backwardInKey[1] in change_keys):
+                    newBackwardInKey = ('DOVERD', change_keys[backwardInKey[1]])
+                elif isDOverD(backwardInKey):
+                    if backwardInKey[1] in change_keys:
+                       dKey = change_keys[backwardInKey[1]]
+                    else:
+                        dKey = backwardInKey[1]
+                    if backwardInKey[2] in change_keys:
+                        overDKey = change_keys[backwardInKey[2]]
+                    else:
+                        overDKey = backwardInKey[2]
+                    newBackwardInKey = ('DOVERD', dKey, overDKey)
+                else:
+                    newBackwardInKey = backwardInKey
+                newFunc_andToFrom = deepcopy(func_andToFrom)
+                for argKey, backwardInOutKey in func_andToFrom[1].items():
+                    if backwardInOutKey in change_keys:
+                        newFunc_andToFrom[1][argKey] = change_keys[backwardInOutKey]
+                    elif isOverD(backwardInOutKey) and (backwardInOutKey[1] in change_keys):
+                        newFunc_andToFrom[1][argKey] = ('DOVERD',
+                                                        change_keys[backwardInOutKey[1]])
+                    elif isDOverD(backwardInOutKey):
+                        if backwardInOutKey[1] in change_keys:
+                            dKey = change_keys[backwardInOutKey[1]]
+                        else:
+                            dKey = backwardInOutKey[1]
+                        if backwardInOutKey[2] in change_keys:
+                            overDKey = change_keys[backwardInOutKey[2]]
+                        else:
+                            overDKey = backwardInOutKey[2]
+                        newFunc_andToFrom[1][argKey] = ('DOVERD', dKey, overDKey)
+                backwards[newBackwardInKey] = newFunc_andToFrom
+
+            piece = Piece(forwards, backwards)
+
+        if change_vars:
+            change_keys___dict = {}
+            for key in (piece.inKeys).union(piece.outKeys):
+                change_keys___dict[key] = change_var_in_piece_key(key, change_vars)
+            piece = piece.install(change_keys = change_keys___dict)
+
+        return piece
+
 
 
     def run(self, dictObj, forwardOutKeys = set(), dKey_and_backwardInKeys = None):
@@ -216,7 +229,9 @@ class Process:
         vars = set()
         steps = []
         for step in args:
+            #print(step) ###########
             s = step_withDefaultForwardsAndBackwards(step)
+            #print(s) ##############
             piece = s[0]
             for inVarTuple in piece.inKeys:
                 vars.add(varName_fromVarTuple(inVarTuple))
@@ -235,6 +250,32 @@ class Process:
             for outVarTuple in piece.outKeys:
                 self.vars.add(varName_fromVarTuple(outVarTuple))
             self.steps += [s]
+
+    def install(self, change_vars = {}):
+        process = deepcopy(self)
+        if change_vars:
+            steps = []
+            for step in process.steps:
+                old_piece, old_forwardOutKeys, old_dKey_and_backwardInKeys = step
+                new_piece = old_piece.install(change_vars = change_vars)
+                new_forwardOutKeys = set()
+                if old_forwardOutKeys:
+                    for key in old_forwardOutKeys:
+                        new_forwardOutKeys.add(change_var_in_piece_key(key, change_vars))
+                if old_dKey_and_backwardInKeys:
+                    old_dKey, old_backwardInKeys = old_dKey_and_backwardInKeys
+                    new_dKey = change_var_in_piece_key(old_dKey, change_vars)
+                    new_backwardInKeys = set()
+                    for key in old_backwardInKeys:
+                        new_backwardInKeys.add(change_var_in_piece_key(key, change_vars))
+                    new_dKey_and_backwardInKeys = (new_dKey, new_backwardInKeys)
+                else:
+                    new_dKey_and_backwardInKeys = None
+                steps += [new_piece, new_forwardOutKeys, new_dKey_and_backwardInKeys],
+
+            ########print(steps) ##################
+            process = Process(*steps)
+        return process
 
     def run(self, dictObj, numTimes = 1, *args, **kwargs):
         d = dictObj.copy()
@@ -256,27 +297,74 @@ def connect_processes(*args, **kwargs):
 
 
 class Program:
-    def __init__(self, vars___dict, pieces___dict, processes___dict):
-        self.vars = vars___dict
+    def __init__(self, pieces___dict, processes___dict):
+        self.vars = set()
         self.pieces = pieces___dict
         self.processes = processes___dict
+        for piece in pieces___dict.values():
+            for key in (piece.inKeys).union(piece.outKeys):
+                self.vars.add(varName_fromVarTuple(key))
 
-    def install(self, from_old_vars_to_new_vars___dict):
-        vars = self.vars
-        pieces = self.pieces
-        processes = self.processes
+    def install(self, from_old_var_names_to_new_var_names___dict):
+        pieces = {}
+        for piece_name, piece in self.pieces.items():
+            pieces[piece_name] = piece.install(change_vars = from_old_var_names_to_new_var_names___dict)
+        processes = {}
+        for process_name, process in self.processes.items():
+            processes[process_name] = process.install(change_vars = from_old_var_names_to_new_var_names___dict)
+        return Program(pieces, processes)
 
-        #for old_var, new_var in from_old_vars_to_new_vars___dict:
-         #   vars[]
-        return Program(vars, pieces, processes)
-
-    def run(self, *args, **kwargs):
+    def run(self, dict_object, *args, **kwargs):
+        d = dict_object.copy()
         for process_or_piece in args:
             if process_or_piece in self.processes:
                 process = self.processes[process_or_piece]
-                self.vars = process.run(self.vars)
+                d = process.run(d)
             elif process_or_piece in self.pieces:
                 piece = self.pieces[process_or_piece]
+                d = piece.run(d, **kwargs)
+        return d
+
+
+
+class Project:
+    def __init__(self, *args, **kwargs):
+        self.vars = {}
+        self.pieces = {}
+        self.processes = {}
+        self.programs = {}
+
+    def add_variables(self, *args, **kwargs):
+        self.variables.update(dict.fromkeys(args))
+        self.variables.update(kwargs)
+
+    def delete_variables(self, *args, **kwargs):
+        for arg in args:
+            del self.vars[arg]
+
+    def set_variables(self, *args, **kwargs):
+        for kwarg in kwargs:
+            pass
+
+    def getVar(self, *args):
+        pass
+
+    def run(self, *args, **kwargs):
+        for arg in args:
+            if isinstance(arg, tuple) and (arg[0] in self.programs):
+                program = arg[0]
+                process_or_piece_name = arg[1]
+                if process_or_piece_name in self.programs[program].processes:
+                    process = self.programs[program].processes[process_or_piece_name]
+                    self.vars = process.run(self.vars)
+                elif process_or_piece_name in self.programs[program].pieces:
+                    piece = self.programs[program].pieces[process_or_piece_name]
+                    self.vars = piece.run(self.vars, **kwargs)
+            elif arg in self.processes:
+                process = self.processes[arg]
+                self.vars = process.run(self.vars)
+            elif arg in self.pieces:
+                piece = self.pieces[arg]
                 self.vars = piece.run(self.vars, **kwargs)
 
 
@@ -300,13 +388,33 @@ def varName_fromVarTuple(varTuple):
 
 
 
-def rename_dict_keys(dict_object, from_old_keys_to_new_keys___dict):
-    d = dict_object.copy()
-    for oldKey, newKey in from_old_keys_to_new_keys___dict:
-        v = d[oldKey]
-        del d[oldKey]
-        d[newKey] = v
-    return d
+def change_var_in_piece_key(piece_key, from_old_vars_to_new_vars___dict):
+    if isDOverD(piece_key):
+        var_tuple_1 = piece_key[1]
+        if isinstance(var_tuple_1, tuple) & (var_tuple_1[0] in from_old_vars_to_new_vars___dict):
+            var_tuple_1[0] = from_old_vars_to_new_vars___dict[var_tuple_1[0]]
+        elif var_tuple_1 in from_old_vars_to_new_vars___dict:
+            var_tuple_1 = from_old_vars_to_new_vars___dict[var_tuple_1]
+        var_tuple_2 = piece_key[2]
+        if isinstance(var_tuple_2, tuple) & (var_tuple_2[0] in from_old_vars_to_new_vars___dict):
+            var_tuple_2[0] = from_old_vars_to_new_vars___dict[var_tuple_2[0]]
+        elif var_tuple_2 in from_old_vars_to_new_vars___dict:
+            var_tuple_2 = from_old_vars_to_new_vars___dict[var_tuple_2]
+        return ('DOVERD', var_tuple_1, var_tuple_2)
+    elif isDOverD(piece_key):
+        var_tuple = piece_key[1]
+        if isinstance(var_tuple, tuple) & (var_tuple[0] in from_old_vars_to_new_vars___dict):
+            return ('DOVERD', (from_old_vars_to_new_vars___dict[var_tuple[0]], var_tuple[1]))
+        elif var_tuple in from_old_vars_to_new_vars___dict:
+            return ('DOVERD', from_old_vars_to_new_vars___dict[var_tuple])
+    elif isinstance(piece_key, tuple) & (piece_key[0] in from_old_vars_to_new_vars___dict):
+        return (from_old_vars_to_new_vars___dict[piece_key[0]], piece_key[1])
+    elif piece_key in from_old_vars_to_new_vars___dict:
+        return from_old_vars_to_new_vars___dict[piece_key]
+    else:
+        return piece_key
+
+
 
 
 
@@ -320,31 +428,3 @@ def step_withDefaultForwardsAndBackwards(step):
             return step
     else:
         return [step, set(), None]
-
-
-
-class Project:
-    def __init__(self, *args, **kwargs):
-        self.variables = {}
-        self.parameters = {}
-        self.pieces = {}
-        self.processes = {}
-        self.programs = {}
-
-    def add_variables(self, *args, **kwargs):
-        self.variables.update(dict.fromkeys(args))
-        self.variables.update(kwargs)
-
-    def delete_variables(self, *args, **kwargs):
-        for arg in args:
-            del self.vars[arg]
-
-    def set_variables(self, *args, **kwargs):
-        for kwarg in kwargs:
-            pass
-
-    def getVar(self, *args):
-        pass
-
-    def run(self, steps):
-        pass

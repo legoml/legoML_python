@@ -22,5 +22,19 @@ TEST___PIECE___l2_weight_regularization()
 
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
-TEST___PROGRAM___ffnn_check_gradients(300)
+TEST___PROGRAM___ffnn_check_gradients(3)
 TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(300)
+
+#
+from MachinePlayground.Programs.PROGRAMS___ffnn import PROGRAM___ffnn
+prog = PROGRAM___ffnn([4, 3], ['logistic'])
+prog1 = prog.install(
+    {'activations': 'activations1',
+     'cost': 'cost1',
+     'inputs' : 'inputs1',
+     'predicted_outputs': 'predicted_outputs1',
+     'signals': 'signals1',
+     'target_outputs': 'target_outputs1',
+     'weights': 'weights1',
+     'weights_vector': 'weights_vector1'})
+prog1.processes['forward_pass'].steps[0]

@@ -1,6 +1,13 @@
 from numpy import zeros
 
 
+#def rename_dict_keys(dict_object, from_old_keys_to_new_keys___dict):
+#    d = dict_object.copy()
+#    for oldKey, newKey in from_old_keys_to_new_keys___dict:
+#        v = d[oldKey]
+#        del d[oldKey]
+#        d[newKey] = v
+#    return d
 
 #def subDict_withNewKeys(dictObj, toNewKeys_fromOldKeys___dict):
 #    # extract values from dictionary and assign them new keys

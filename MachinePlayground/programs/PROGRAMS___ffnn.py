@@ -8,7 +8,9 @@ def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
 
     pieces = {}
     processes = {}
+
     num_layers = len(nums_nodes)
+
     for l in range(len(add_biases) + 1, num_layers - 1):
         add_biases += add_biases[-1]
     weights_shapes___list = []
@@ -18,23 +20,14 @@ def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
         weights_shapes___list += [shape]
         num_weights += shape.prod()
 
-    # VARS
-    vars = {'weights_vector': array(num_weights * [0]),
-            'weights': {},
-            'inputs': array([]),
-            'signals': {},
-            'activations': {},
-            'predicted_outputs': array([]),
-            'target_outputs': array([]),
-            'cost': array([])}
-
     # PIECES
     pieces['weights_from_vector_to_dict'] = PIECE___from_vector_to_arrays(weights_shapes___list).install(
-        {'vector': 'weights_vector',
-         'arrays': 'weights'})
+        change_keys = {'vector': 'weights_vector',
+                       'arrays': 'weights'})
 
-    pieces[('activations', 0)] = PIECE___equal().install({'inputs': 'inputs',
-                                                          'outputs': ('activations', 0)})
+    pieces[('activations', 0)] = PIECE___equal().install(
+        change_keys = {'inputs': 'inputs',
+                       'outputs': ('activations', 0)})
 
     dict_of_pieces_for_activation_functions =\
         {'linear': PIECE___linear(),
@@ -44,29 +37,30 @@ def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
 
     for l in range(1, num_layers):
         pieces[('signals', l - 1)] = PIECE___matrix_product_of_inputs_and_weights(add_biases[l - 1]).install(
-            {'inputs': ('activations', l - 1),
-             'weights': ('weights', l - 1),
-             'outputs': ('signals', l - 1)})
+            change_keys = {'inputs': ('activations', l - 1),
+                           'weights': ('weights', l - 1),
+                           'outputs': ('signals', l - 1)})
         pieces[('activations', l)] = dict_of_pieces_for_activation_functions[activation_functions[l - 1]].install(
-            {'inputs': ('signals', l - 1),
-             'outputs': ('activations', l)})
+            change_keys = {'inputs': ('signals', l - 1),
+                           'outputs': ('activations', l)})
 
-    pieces['predicted_outputs'] = PIECE___equal().install({'inputs': ('activations', num_layers - 1),
-                                                           'outputs': 'predicted_outputs'})
+    pieces['predicted_outputs'] = PIECE___equal().install(
+        change_keys = {'inputs': ('activations', num_layers - 1),
+                       'outputs': 'predicted_outputs'})
 
     dict_of_pieces_for_cost_functions =\
         {'linear': PIECE___average_half_square_error().install(
-            {'target_outputs': 'target_outputs',
-             'predicted_outputs': 'predicted_outputs',
-             'average_half_square_error': 'cost'}),
+            change_keys = {'target_outputs': 'target_outputs',
+                           'predicted_outputs': 'predicted_outputs',
+                           'average_half_square_error': 'cost'}),
          'logistic': PIECE___average_binary_class_cross_entropy().install(
-            {'target_outputs': 'target_outputs',
-             'predicted_outputs': 'predicted_outputs',
-             'average_binary_class_cross_entropy': 'cost'}),
+             change_keys = {'target_outputs': 'target_outputs',
+                            'predicted_outputs': 'predicted_outputs',
+                            'average_binary_class_cross_entropy': 'cost'}),
          'softmax': PIECE___average_multi_class_cross_entropy().install(
-            {'target_outputs': 'target_outputs',
-             'predicted_outputs': 'predicted_outputs',
-             'average_multi_class_cross_entropy': 'cost'})}
+             change_keys = {'target_outputs': 'target_outputs',
+                            'predicted_outputs': 'predicted_outputs',
+                            'average_multi_class_cross_entropy': 'cost'})}
 
     pieces['cost'] = dict_of_pieces_for_cost_functions[activation_functions[num_layers - 2]]
 
@@ -103,7 +97,7 @@ def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
     processes['cost_and_d_cost_over_d_weights'] = connect_processes(
         processes['forward_pass'], processes['cost'], processes['backward_pass'])
 
-    return Program(vars, pieces, processes)
+    return Program(pieces, processes)
 
 
 
@@ -121,25 +115,14 @@ def PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add
         weights_shapes___list += [shape]
         num_weights += shape.prod()
 
-    # VARS
-    vars = {'weights_vector': array(num_weights * [0]),
-            'weights': {},
-            'inputs': array([]),
-            'signals': {},
-            'activations': {},
-            'predicted_outputs': array([]),
-            'target_outputs': array([]),
-            'positive_class_skewnesses': array([]),
-            'multi_class_skewnesses': array([]),
-            'cost': array([])}
-
     # PIECES
     pieces['weights_from_vector_to_dict'] = PIECE___from_vector_to_arrays(weights_shapes___list).install(
-        {'vector': 'weights_vector',
-         'arrays': 'weights'})
+        change_keys = {'vector': 'weights_vector',
+                       'arrays': 'weights'})
 
-    pieces[('activations', 0)] = PIECE___equal().install({'inputs': 'inputs',
-                                                          'outputs': ('activations', 0)})
+    pieces[('activations', 0)] = PIECE___equal().install(
+        change_keys = {'inputs': 'inputs',
+                       'outputs': ('activations', 0)})
 
     dict_of_pieces_for_activation_functions =\
         {'linear': PIECE___linear(),
@@ -149,27 +132,28 @@ def PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add
 
     for l in range(1, num_layers):
         pieces[('signals', l - 1)] = PIECE___matrix_product_of_inputs_and_weights(add_biases[l - 1]).install(
-            {'inputs': ('activations', l - 1),
-             'weights': ('weights', l - 1),
-             'outputs': ('signals', l - 1)})
+            change_keys = {'inputs': ('activations', l - 1),
+                           'weights': ('weights', l - 1),
+                           'outputs': ('signals', l - 1)})
         pieces[('activations', l)] = dict_of_pieces_for_activation_functions[activation_functions[l - 1]].install(
-            {'inputs': ('signals', l - 1),
-             'outputs': ('activations', l)})
+            change_keys = {'inputs': ('signals', l - 1),
+                           'outputs': ('activations', l)})
 
-    pieces['predicted_outputs'] = PIECE___equal().install({'inputs': ('activations', num_layers - 1),
-                                                           'outputs': 'predicted_outputs'})
+    pieces['predicted_outputs'] = PIECE___equal().install(
+        change_keys = {'inputs': ('activations', num_layers - 1),
+                       'outputs': 'predicted_outputs'})
 
     dict_of_pieces_for_cost_functions =\
         {'logistic': PIECE___average_unskewed_binary_class_cross_entropy().install(
-            {'target_outputs': 'target_outputs',
-             'predicted_outputs': 'predicted_outputs',
-             'positive_class_skewnesses': 'positive_class_skewnesses',
-             'average_binary_class_cross_entropy': 'cost'}),
+            change_keys = {'target_outputs': 'target_outputs',
+                           'predicted_outputs': 'predicted_outputs',
+                           'positive_class_skewnesses': 'positive_class_skewnesses',
+                           'average_binary_class_cross_entropy': 'cost'}),
          'softmax': PIECE___average_unskewed_multi_class_cross_entropy().install(
-            {'target_outputs': 'target_outputs',
-             'predicted_outputs': 'predicted_outputs',
-             'multi_class_skewnesses': 'multi_class_skewnesses',
-             'average_multi_class_cross_entropy': 'cost'})}
+             change_keys= {'target_outputs': 'target_outputs',
+                           'predicted_outputs': 'predicted_outputs',
+                           'multi_class_skewnesses': 'multi_class_skewnesses',
+                           'average_multi_class_cross_entropy': 'cost'})}
 
     pieces['cost'] = dict_of_pieces_for_cost_functions[activation_functions[num_layers - 2]]
 
@@ -206,4 +190,4 @@ def PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add
     processes['cost_and_d_cost_over_d_weights'] = connect_processes(
         processes['forward_pass'], processes['cost'], processes['backward_pass'])
 
-    return Program(vars, pieces, processes)
+    return Program(pieces, processes)
