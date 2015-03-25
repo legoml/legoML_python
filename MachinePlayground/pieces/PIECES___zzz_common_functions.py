@@ -1,4 +1,4 @@
-from numpy import array, atleast_2d, atleast_3d, concatenate, delete, diag, exp, ndarray, ones, squeeze, tanh, zeros
+from numpy import array, concatenate, delete, exp, ndarray, ones, tanh
 from MachinePlayground.Classes import Piece
 
 
@@ -141,6 +141,27 @@ def PIECE___logistic():
 
 
 
+def PIECE___logistic_with_temperature():
+    """PIECE___logistic_with_temperature:
+
+    OUTPUTS multi-dimensional array = logistic function of INPUTS multi-dimensional array divided by temperature T
+    """
+
+    forwards = {'outputs':
+                    [lambda inp, temp: 1. / (1. + exp(- inp / temp)),
+                     {'inp': 'inputs',
+                      'temp': 'temperature'}]}
+
+    backwards = {('DOVERD', 'inputs'):
+                     [lambda ddoutp, outp, temp: ddoutp * outp * (1. - outp) / temp,
+                      {'ddoutp': ('DOVERD', 'outputs'),
+                       'outp': 'outputs',
+                       'temp': 'temperature'}]}
+
+    return Piece(forwards, backwards)
+
+
+
 def PIECE___tanh():
     """PIECE___tanh:
 
@@ -166,25 +187,8 @@ def PIECE___softmax():
     OUTPUTS matrix (cases in rows) = softmax function of INPUTS matrix (cases in rows)
     """
 
-    def softmax(inputs):
-        inp = inputs - inputs.max(1, keepdims = True)
-        exp_matrix = exp(inp)
-        return exp_matrix / exp_matrix.sum(1, keepdims = True)
-
-    def softmax_d_outputs_over_d_inputs(inputs = None, outputs = None):
-        if outputs is None:
-            outputs = softmax(inputs)
-        m, n = outputs.shape
-        d = zeros([m, n, n])
-        for i in range(m):
-            outp = outputs[i]
-            outp_2d = atleast_2d(outp)
-            d[i] = atleast_3d(diag(outp) - (outp_2d.T).dot(outp_2d)).transpose(2, 0, 1)
-        return d
-
-    def softmax_doverd_inputs_from_doverd_outputs(doverd_outputs, d_outputs_over_d_inputs):
-        return squeeze(((atleast_3d(doverd_outputs).repeat(d_outputs_over_d_inputs.shape[2], axis = 2)
-                * d_outputs_over_d_inputs).sum(1, keepdims = True)).transpose(0, 2, 1), axis = 2)
+    from MachinePlayground.Functions.FUNCTIONS___cost_functions import softmax, softmax_d_outputs_over_d_inputs,\
+        softmax_doverd_inputs_from_doverd_outputs
 
     forwards = {'outputs':
                     [lambda inp: softmax(inp),
@@ -196,5 +200,31 @@ def PIECE___softmax():
                                 softmax_d_outputs_over_d_inputs(outputs = outp)),
                       {'ddoutp': ('DOVERD', 'outputs'),
                        'outp': 'outputs'}]}
+
+    return Piece(forwards, backwards)
+
+
+
+def PIECE___softmax_with_temperature():
+    """PIECE___softmax_with_temperature:
+
+    OUTPUTS matrix (cases in rows) = softmax function of INPUTS matrix (cases in rows) divided by temperature T
+    """
+
+    from MachinePlayground.Functions.FUNCTIONS___cost_functions import softmax, softmax_d_outputs_over_d_inputs,\
+        softmax_doverd_inputs_from_doverd_outputs
+
+    forwards = {'outputs':
+                    [lambda inp, temp: softmax(inp),
+                     {'inp': 'inputs',
+                      'temp': 'temperature'}]}
+
+    backwards = {('DOVERD', 'inputs'):
+                     [lambda ddoutp, outp, temp:
+                            softmax_doverd_inputs_from_doverd_outputs(ddoutp,
+                                softmax_d_outputs_over_d_inputs(outputs = outp)) / temp,
+                      {'ddoutp': ('DOVERD', 'outputs'),
+                       'outp': 'outputs',
+                       'temp': 'temperature'}]}
 
     return Piece(forwards, backwards)

@@ -1,16 +1,8 @@
-from numpy import allclose, ones, ndarray
 from copy import deepcopy
-from MachinePlayground._common import approxGradients, varName_fromVarTuple
 import itertools
+from numpy import allclose, ones, ndarray
+from MachinePlayground.Functions.FUNCTIONS___zzz_misc import approx_gradients
 
-
-
-def isOverD(varTuple):
-    return (varTuple[0] == 'DOVERD') and (len(varTuple) == 2)
-
-
-def isDOverD(varTuple):
-    return (varTuple[0] == 'DOVERD') and (len(varTuple) == 3)
 
 
 class Piece:
@@ -169,9 +161,6 @@ class Piece:
 
         return d
 
-    def lambda_function(self, ins, outs):
-        pass
-
 
     def check_gradients(self, ins___dict):
 
@@ -211,27 +200,15 @@ class Piece:
 
         check = True
         for inKey, outKey in itertools.product(backwardInKeys, dKeys):
-            approxGrad = approxGradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
+            approxGrad = approx_gradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
             check = check and allclose(approxGrad, vars[('DOVERD', outKey, inKey)], rtol = 1.e-3, atol = 1.e-6)
         for inKey, outKey in itertools.product(backwardInKeys, dSumKeys):
-            approxGrad = approxGradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
+            approxGrad = approx_gradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
             check = check and allclose(approxGrad, vars[('DOVERD', 'SUM___' + outKey, inKey)],
                                        rtol = 1.e-3, atol = 1.e-6)
 
         return check
 
-
-
-def step_withDefaultForwardsAndBackwards(step):
-    if isinstance(step, list):
-        if len(step) == 1:
-            return step + [set(), None]
-        elif len(step) == 2:
-            return step + [None]
-        else:
-            return step
-    else:
-        return [step, set(), None]
 
 
 class Process:
@@ -268,27 +245,30 @@ class Process:
         return d
 
 
-def connectProcesses(*args, **kwargs):
+
+def connect_processes(*args, **kwargs):
     p = deepcopy(args[0])
     for process in args[1:]:
         p.vars.update(process.vars)
         p.steps += process.steps
     return p
 
-class LambdaFunction:
-    def __init__(self, ins, process, outs):
-        self.haha = 1
-
-class io:
-    def __init__(self):
-        self.haha = 1
 
 
 class Program:
-    def __init__(self, vars___dict, pieces___dict, processes___dict, *args, **kwargs):
+    def __init__(self, vars___dict, pieces___dict, processes___dict):
         self.vars = vars___dict
         self.pieces = pieces___dict
         self.processes = processes___dict
+
+    def install(self, from_old_vars_to_new_vars___dict):
+        vars = self.vars
+        pieces = self.pieces
+        processes = self.processes
+
+        #for old_var, new_var in from_old_vars_to_new_vars___dict:
+         #   vars[]
+        return Program(vars, pieces, processes)
 
     def run(self, *args, **kwargs):
         for process_or_piece in args:
@@ -298,6 +278,48 @@ class Program:
             elif process_or_piece in self.pieces:
                 piece = self.pieces[process_or_piece]
                 self.vars = piece.run(self.vars, **kwargs)
+
+
+
+def isOverD(varTuple):
+    return (varTuple[0] == 'DOVERD') and (len(varTuple) == 2)
+
+
+
+def isDOverD(varTuple):
+    return (varTuple[0] == 'DOVERD') and (len(varTuple) == 3)
+
+
+
+def varName_fromVarTuple(varTuple):
+    # return variable name from tuple consisting of variable name and index/key
+    if isinstance(varTuple, tuple):
+        return varTuple[0]
+    else:
+        return varTuple
+
+
+
+def rename_dict_keys(dict_object, from_old_keys_to_new_keys___dict):
+    d = dict_object.copy()
+    for oldKey, newKey in from_old_keys_to_new_keys___dict:
+        v = d[oldKey]
+        del d[oldKey]
+        d[newKey] = v
+    return d
+
+
+
+def step_withDefaultForwardsAndBackwards(step):
+    if isinstance(step, list):
+        if len(step) == 1:
+            return step + [set(), None]
+        elif len(step) == 2:
+            return step + [None]
+        else:
+            return step
+    else:
+        return [step, set(), None]
 
 
 

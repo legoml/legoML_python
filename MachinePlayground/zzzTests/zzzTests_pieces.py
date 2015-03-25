@@ -79,6 +79,25 @@ def TEST___PIECE___logistic(num_runs = 1000):
 
 
 
+def TEST___PIECE___logistic_with_temperature(num_runs = 1000):
+    max_num_dims = 3
+    max_dim_size = 9
+    f = PIECE___logistic_with_temperature
+    print('\nTEST: ', f.__doc__, sep = '')
+    p = f()
+    num_successes = 0
+    for r in range(num_runs):
+        num_dims = randint(max_num_dims) + 1
+        dim_sizes = []
+        for d in range(num_dims):
+            dim_sizes += [randint(max_dim_size) + 1]
+        inp = rand(*dim_sizes)
+        temp = 3 * rand()
+        num_successes += p.check_gradients({'inputs': inp, 'temperature': temp})
+    print('    %i successes in %i runs (%3.1f%%)\n' %(num_successes, num_runs, 100 * num_successes / num_runs))
+
+
+
 def TEST___PIECE___tanh(num_runs = 1000):
     max_num_dims = 3
     max_dim_size = 9
@@ -109,6 +128,24 @@ def TEST___PIECE___softmax(num_runs = 1000):
         n = randint(max_dim_size) + 1
         inp = rand(m, n)
         num_successes += p.check_gradients({'inputs': inp})
+    print('    %i successes in %i runs (%3.1f%%)\n' %(num_successes, num_runs, 100 * num_successes / num_runs))
+
+
+
+def TEST___PIECE___softmax_with_temperature(num_runs = 1000):
+    max_num_cases = 9
+    max_dim_size = 9
+    f = PIECE___softmax_with_temperature
+    print('\nTEST: ', f.__doc__, sep = '')
+    p = f()
+    num_successes = 0
+    for r in range(num_runs):
+        m = randint(max_num_cases) + 1
+        n = randint(max_dim_size) + 1
+        inp = rand(m, n)
+        temp = 3 * rand()
+        num_successes += p.check_gradients({'inputs': inp,
+                                            'temperature': temp})
     print('    %i successes in %i runs (%3.1f%%)\n' %(num_successes, num_runs, 100 * num_successes / num_runs))
 
 
@@ -237,7 +274,7 @@ def TEST___PIECE___average_unskewed_multi_class_cross_entropy(num_runs = 1000):
         skew = rand(1, n)
         num_successes += p.check_gradients({'target_outputs': from_arr,
                                             'predicted_outputs': of_arr,
-                                            'class_skewnesses': skew})
+                                            'multi_class_skewnesses': skew})
     print('    %i successes in %i runs (%3.1f%%)\n' %(num_successes, num_runs, 100 * num_successes / num_runs))
 
 
