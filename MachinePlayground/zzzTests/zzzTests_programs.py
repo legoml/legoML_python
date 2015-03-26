@@ -1,8 +1,8 @@
 from copy import deepcopy
-from numpy import allclose, array
+from numpy import allclose, array, atleast_2d
 from numpy.random import rand, randint
 from MachinePlayground.Functions.FUNCTIONS___zzz_misc import approx_gradients
-from MachinePlayground.Programs.PROGRAMS___ffnn import PROGRAM___ffnn
+from MachinePlayground.Programs.PROGRAMS___ffnn import PROGRAM___ffnn, PROGRAM___ffnn_unskewed_classification
 from MachinePlayground.Classes import Project
 
 
@@ -95,10 +95,10 @@ def TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(num_runs = 100
 
     def cost(model, w):
         p0 = deepcopy(model)
-        p0.vars['weights_vector'] = w
-        p0.run('forward_pass')
-        p0.run('cost')
-        return p0.vars['cost']
+        p0.vars['w_v'] = w
+        p0.run(('ffnn', 'forward_pass'))
+        p0.run(('ffnn', 'cost'))
+        return p0.vars['c']
 
     max_num_cases = 5
     max_num_layers = 5
@@ -120,22 +120,54 @@ def TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(num_runs = 100
                     functions = ('logistic', 'softmax')
                 activation_functions += [functions[randint(len(functions))]]
                 add_biases += [randint(2)]
-        p = PROGRAM___ffnn(nums_nodes, activation_functions, add_biases)
+        program = PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add_biases)
+        num_layers = len(nums_nodes)
+
+        for l in range(len(add_biases) + 1, num_layers - 1):
+            add_biases += add_biases[-1]
+        num_weights = 0
+        for l in range(num_layers - 1):
+            num_weights += (nums_nodes[l] + add_biases[l]) * nums_nodes[l + 1]
+
+        project = Project()
+        project.vars =\
+            {'w_v': array([]),
+             'w': {},
+             'inp': array([]),
+             'sig': {},
+             'activ': {},
+             'hypo': array([]),
+             'tgt': array([]),
+             'pos_skew': array([]),
+             'multi_skew': array([]),
+             'c': array([])}
+        project.programs['ffnn'] = program.install(
+            {'weights_vector': 'w_v',
+             'weights': 'w',
+             'inputs': 'inp',
+             'signals': 'sig',
+             'activations': 'activ',
+             'predicted_outputs': 'hypo',
+             'target_outputs': 'tgt',
+             'positive_class_skewnewsses': 'pos_skew',
+             'multi_class_skewnesses': 'multi_skew',
+             'cost': 'c'})
+
         m = randint(max_num_cases) + 1
-        p.vars['inputs'] = rand(m, nums_nodes[0])
+        project.vars['inp'] = rand(m, nums_nodes[0])
         if activation_functions[-1] == 'softmax':
             y = rand(m, nums_nodes[-1])
             yMax = y.max(1, keepdims = True)
-            p.vars['target_outputs'] = 1. * (y == yMax)
-            p.vars['multi_class_skewnesses'] = rand(m, nums_nodes[-1])
+            project.vars['tgt'] = 1. * (y == yMax)
+            project.vars['multi_skew'] = atleast_2d(nums_nodes[-1] * array([1.]))
         else:
-            p.vars['target_outputs'] = rand(m, nums_nodes[-1])
-            p.vars['positive_class_skewnesses'] = 2 * rand(m, nums_nodes[-1])
-        weights_vector = rand(p.vars['weights_vector'].size)
-        p.vars['weights_vector'] = weights_vector
-        p.run('cost_and_d_cost_over_d_weights')
-        analytic_gradients = p.vars[('DOVERD', 'cost', 'weights_vector')]
-        numerical_gradients = approx_gradients(lambda w: cost(p, w), weights_vector)
+            project.vars['tgt'] = rand(m, nums_nodes[-1])
+            project.vars['pos_skew'] = 1. ####
+        weights_vector = rand(num_weights)
+        project.vars['w_v'] = weights_vector
+        project.run(('ffnn', 'cost_and_d_cost_over_d_weights'))
+        analytic_gradients = project.vars[('DOVERD', 'c', 'w_v')]
+        numerical_gradients = approx_gradients(lambda w: cost(project, w), weights_vector)
         check = allclose(numerical_gradients, analytic_gradients, rtol = rtol, atol = atol)
         if not check:
             diff = abs(numerical_gradients - analytic_gradients)

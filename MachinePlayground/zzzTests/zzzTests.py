@@ -24,7 +24,7 @@ TEST___PIECE___l2_weight_regularization()
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
 TEST___PROGRAM___ffnn_check_gradients(100)
-TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(300)
+TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(1)
 
 
 ###
