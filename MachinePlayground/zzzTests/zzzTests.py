@@ -24,15 +24,15 @@ TEST___PIECE___l2_weight_regularization()
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
 TEST___PROGRAM___ffnn_check_gradients(100)
-TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(1)
+TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(100)
 
 
 ###
 from numpy import *
 from numpy.random import rand
 from MachinePlayground.Classes import Project
-from MachinePlayground.Programs.PROGRAMS___ffnn import PROGRAM___ffnn
-prog = PROGRAM___ffnn([4, 3], ['logistic'])
+from MachinePlayground.Programs.PROGRAMS___ffnn import PROGRAM___ffnn, PROGRAM___ffnn_unskewed_classification
+prog = PROGRAM___ffnn_unskewed_classification([4, 3], ['logistic'])
 prog1 = prog.install(
     {'activations': 'activations1',
      'cost': 'cost1',
@@ -41,7 +41,8 @@ prog1 = prog.install(
      'signals': 'signals1',
      'target_outputs': 'target_outputs1',
      'weights': 'weights1',
-     'weights_vector': 'weights_vector1'})
+     'weights_vector': 'weights_vector1',
+     'positive_class_skewnesses': 'pos_skew'})
 proj1 = Project()
 proj1.vars =\
             {'weights_vector1': rand(5, 3),
@@ -51,6 +52,7 @@ proj1.vars =\
              'activations1': {},
              'predicted_outputs1': array([]),
              'target_outputs1': rand(10, 3),
+             'pos_skew': ones([10, 3]),
              'cost1': array([])}
 proj1.programs['ffnn'] = prog1
 proj1.run(('ffnn', 'forward_pass'))

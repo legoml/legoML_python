@@ -1,5 +1,5 @@
 from copy import deepcopy
-from numpy import allclose, array, atleast_2d
+from numpy import allclose, array, atleast_2d, ones
 from numpy.random import rand, randint
 from MachinePlayground.Functions.FUNCTIONS___zzz_misc import approx_gradients
 from MachinePlayground.Programs.PROGRAMS___ffnn import PROGRAM___ffnn, PROGRAM___ffnn_unskewed_classification
@@ -149,7 +149,7 @@ def TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(num_runs = 100
              'activations': 'activ',
              'predicted_outputs': 'hypo',
              'target_outputs': 'tgt',
-             'positive_class_skewnewsses': 'pos_skew',
+             'positive_class_skewnesses': 'pos_skew',
              'multi_class_skewnesses': 'multi_skew',
              'cost': 'c'})
 
@@ -159,10 +159,10 @@ def TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(num_runs = 100
             y = rand(m, nums_nodes[-1])
             yMax = y.max(1, keepdims = True)
             project.vars['tgt'] = 1. * (y == yMax)
-            project.vars['multi_skew'] = atleast_2d(nums_nodes[-1] * array([1.]))
+            project.vars['multi_skew'] = ones([m, nums_nodes[-1]])
         else:
             project.vars['tgt'] = rand(m, nums_nodes[-1])
-            project.vars['pos_skew'] = 1. ####
+            project.vars['pos_skew'] = ones([m, nums_nodes[-1]]) ####
         weights_vector = rand(num_weights)
         project.vars['w_v'] = weights_vector
         project.run(('ffnn', 'cost_and_d_cost_over_d_weights'))

@@ -105,6 +105,7 @@ def PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add
 
     pieces = {}
     processes = {}
+
     num_layers = len(nums_nodes)
     for l in range(len(add_biases) + 1, num_layers - 1):
         add_biases += add_biases[-1]
@@ -148,12 +149,12 @@ def PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add
             change_keys = {'target_outputs': 'target_outputs',
                            'predicted_outputs': 'predicted_outputs',
                            'positive_class_skewnesses': 'positive_class_skewnesses',
-                           'average_binary_class_cross_entropy': 'cost'}),
+                           'average_unskewed_binary_class_cross_entropy': 'cost'}),
          'softmax': PIECE___average_unskewed_multi_class_cross_entropy().install(
              change_keys= {'target_outputs': 'target_outputs',
                            'predicted_outputs': 'predicted_outputs',
                            'multi_class_skewnesses': 'multi_class_skewnesses',
-                           'average_multi_class_cross_entropy': 'cost'})}
+                           'average_unskewed_multi_class_cross_entropy': 'cost'})}
 
     pieces['cost'] = dict_of_pieces_for_cost_functions[activation_functions[num_layers - 2]]
 
