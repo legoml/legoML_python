@@ -1,4 +1,5 @@
 from numpy import *
+from numpy.random import rand
 
 # test PIECE
 from MachinePlayground.zzzTests.zzzTests_pieces import *
@@ -22,10 +23,14 @@ TEST___PIECE___l2_weight_regularization()
 
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
-TEST___PROGRAM___ffnn_check_gradients(3)
+TEST___PROGRAM___ffnn_check_gradients(100)
 TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(300)
 
-#
+
+###
+from numpy import *
+from numpy.random import rand
+from MachinePlayground.Classes import Project
 from MachinePlayground.Programs.PROGRAMS___ffnn import PROGRAM___ffnn
 prog = PROGRAM___ffnn([4, 3], ['logistic'])
 prog1 = prog.install(
@@ -37,4 +42,21 @@ prog1 = prog.install(
      'target_outputs': 'target_outputs1',
      'weights': 'weights1',
      'weights_vector': 'weights_vector1'})
-prog1.processes['forward_pass'].steps[0]
+proj1 = Project()
+proj1.vars =\
+            {'weights_vector1': rand(5, 3),
+             'weights1': {},
+             'inputs1': rand(10, 4),
+             'signals1': {},
+             'activations1': {},
+             'predicted_outputs1': array([]),
+             'target_outputs1': rand(10, 3),
+             'cost1': array([])}
+proj1.programs['ffnn'] = prog1
+proj1.run(('ffnn', 'forward_pass'))
+proj1.run(('ffnn', 'cost'))
+proj1.run(('ffnn', 'd_cost_over_d_signal_to_top_layer'))
+proj1.vars
+proj1.programs['ffnn'].processes
+bpiece = proj1.programs['ffnn'].pieces['d_cost_over_d_signal_to_top_layer']
+proj1.run(('ffnn', 'backward_pass'))

@@ -9,6 +9,7 @@ class Piece:
     def __init__(self, forwards = {}, backwards = {}):
         self.inKeys = set()
         self.outKeys = set(forwards.keys())
+        self.backwardKeys = set()
         self.forwards = deepcopy(forwards)
         self.forwardsToFrom = {}
         self.backwards = deepcopy(backwards)
@@ -20,6 +21,7 @@ class Piece:
                 self.forwardsToFrom[outKey] = inKeys_forThisOutKey
         if len(backwards) > 0:
            for inKey, func_andToFrom in backwards.items():
+               self.backwardKeys.update(set((inKey,)).union(set(func_andToFrom[1].values())))
                self.backwardsToFrom[inKey] = set(func_andToFrom[1].values())
 
 
@@ -46,15 +48,19 @@ class Piece:
                 if isOverD(backwardInKey) and (backwardInKey[1] in change_keys):
                     newBackwardInKey = ('DOVERD', change_keys[backwardInKey[1]])
                 elif isDOverD(backwardInKey):
+                    #print(backwardInKey) ######################
                     if backwardInKey[1] in change_keys:
-                       dKey = change_keys[backwardInKey[1]]
+                        #print(backwardInKey[1]) ###########
+                        dKey = change_keys[backwardInKey[1]]
                     else:
                         dKey = backwardInKey[1]
                     if backwardInKey[2] in change_keys:
+                        #print(backwardInKey[2]) ##########
                         overDKey = change_keys[backwardInKey[2]]
                     else:
                         overDKey = backwardInKey[2]
                     newBackwardInKey = ('DOVERD', dKey, overDKey)
+                    #print(newBackwardInKey) ###################
                 else:
                     newBackwardInKey = backwardInKey
                 newFunc_andToFrom = deepcopy(func_andToFrom)
@@ -80,8 +86,21 @@ class Piece:
 
         if change_vars:
             change_keys___dict = {}
-            for key in (piece.inKeys).union(piece.outKeys):
-                change_keys___dict[key] = change_var_in_piece_key(key, change_vars)
+
+            for key in ((piece.inKeys).union(piece.outKeys)).union(piece.backwardKeys):
+                if isDOverD(key):
+                    change_keys___dict[key[1]] = change_var_in_piece_key(key[1], change_vars)
+                    change_keys___dict[key[2]] = change_var_in_piece_key(key[2], change_vars)
+                elif isOverD(key):
+                    change_keys___dict[key[1]] = change_var_in_piece_key(key[1], change_vars)
+                else:
+                    change_keys___dict[key] = change_var_in_piece_key(key, change_vars)
+            #print('change keys here:')
+            #print(change_keys___dict.keys())
+            #print('\n')
+            #for k, v in change_keys___dict.items():
+            #    print(k, v)
+            #print('\n')
             piece = piece.install(change_keys = change_keys___dict)
 
         return piece
@@ -91,7 +110,6 @@ class Piece:
     def run(self, dictObj, forwardOutKeys = set(), dKey_and_backwardInKeys = None):
 
         d = dictObj.copy()
-
         if forwardOutKeys is not None:
             if len(forwardOutKeys) > 0:
                 outKeys = forwardOutKeys
@@ -229,9 +247,7 @@ class Process:
         vars = set()
         steps = []
         for step in args:
-            #print(step) ###########
             s = step_withDefaultForwardsAndBackwards(step)
-            #print(s) ##############
             piece = s[0]
             for inVarTuple in piece.inKeys:
                 vars.add(varName_fromVarTuple(inVarTuple))
@@ -273,7 +289,6 @@ class Process:
                     new_dKey_and_backwardInKeys = None
                 steps += [new_piece, new_forwardOutKeys, new_dKey_and_backwardInKeys],
 
-            ########print(steps) ##################
             process = Process(*steps)
         return process
 
@@ -335,8 +350,8 @@ class Project:
         self.programs = {}
 
     def add_variables(self, *args, **kwargs):
-        self.variables.update(dict.fromkeys(args))
-        self.variables.update(kwargs)
+        self.vars.update(dict.fromkeys(args))
+        self.vars.update(kwargs)
 
     def delete_variables(self, *args, **kwargs):
         for arg in args:
@@ -391,23 +406,23 @@ def varName_fromVarTuple(varTuple):
 def change_var_in_piece_key(piece_key, from_old_vars_to_new_vars___dict):
     if isDOverD(piece_key):
         var_tuple_1 = piece_key[1]
-        if isinstance(var_tuple_1, tuple) & (var_tuple_1[0] in from_old_vars_to_new_vars___dict):
-            var_tuple_1[0] = from_old_vars_to_new_vars___dict[var_tuple_1[0]]
+        if isinstance(var_tuple_1, tuple) and (var_tuple_1[0] in from_old_vars_to_new_vars___dict):
+            var_tuple_1 = (from_old_vars_to_new_vars___dict[var_tuple_1[0]], var_tuple_1[1])
         elif var_tuple_1 in from_old_vars_to_new_vars___dict:
             var_tuple_1 = from_old_vars_to_new_vars___dict[var_tuple_1]
         var_tuple_2 = piece_key[2]
-        if isinstance(var_tuple_2, tuple) & (var_tuple_2[0] in from_old_vars_to_new_vars___dict):
-            var_tuple_2[0] = from_old_vars_to_new_vars___dict[var_tuple_2[0]]
+        if isinstance(var_tuple_2, tuple) and (var_tuple_2[0] in from_old_vars_to_new_vars___dict):
+            var_tuple_2 = (from_old_vars_to_new_vars___dict[var_tuple_2[0]], var_tuple_2[1])
         elif var_tuple_2 in from_old_vars_to_new_vars___dict:
             var_tuple_2 = from_old_vars_to_new_vars___dict[var_tuple_2]
         return ('DOVERD', var_tuple_1, var_tuple_2)
-    elif isDOverD(piece_key):
+    elif isOverD(piece_key):
         var_tuple = piece_key[1]
-        if isinstance(var_tuple, tuple) & (var_tuple[0] in from_old_vars_to_new_vars___dict):
+        if isinstance(var_tuple, tuple) and (var_tuple[0] in from_old_vars_to_new_vars___dict):
             return ('DOVERD', (from_old_vars_to_new_vars___dict[var_tuple[0]], var_tuple[1]))
         elif var_tuple in from_old_vars_to_new_vars___dict:
             return ('DOVERD', from_old_vars_to_new_vars___dict[var_tuple])
-    elif isinstance(piece_key, tuple) & (piece_key[0] in from_old_vars_to_new_vars___dict):
+    elif isinstance(piece_key, tuple) and (piece_key[0] in from_old_vars_to_new_vars___dict):
         return (from_old_vars_to_new_vars___dict[piece_key[0]], piece_key[1])
     elif piece_key in from_old_vars_to_new_vars___dict:
         return from_old_vars_to_new_vars___dict[piece_key]
