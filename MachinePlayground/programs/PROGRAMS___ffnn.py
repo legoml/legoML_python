@@ -74,8 +74,8 @@ def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
     # PROCESS: forward_pass
     processes['forward_pass'] = Process(pieces['weights_from_vector_to_dict'], pieces[('activations', 0)])
     for l in range(1, num_layers):
-        processes['forward_pass'].addSteps(pieces[('signals', l - 1)], pieces[('activations', l)])
-    processes['forward_pass'].addSteps(pieces[('predicted_outputs')])
+        processes['forward_pass'].add_steps(pieces[('signals', l - 1)], pieces[('activations', l)])
+    processes['forward_pass'].add_steps(pieces[('predicted_outputs')])
 
     # PROCESS: cost
     processes['cost'] = Process(pieces['cost'])
@@ -84,13 +84,13 @@ def PROGRAM___ffnn(nums_nodes, activation_functions, add_biases = [True]):
     processes['backward_pass'] = Process([pieces[('d_cost_over_d_signal_to_top_layer')], None,
                                          ['cost', [('signals', num_layers - 2)]]])
     for l in reversed(range(num_layers - 1)):
-        processes['backward_pass'].addSteps(
+        processes['backward_pass'].add_steps(
             [pieces[('signals', l)], None, ['cost', [('weights', l)]]])
         if l > 0:
-            processes['backward_pass'].addSteps(
+            processes['backward_pass'].add_steps(
                 [pieces[('signals', l)], None, ['cost', [('activations', l)]]],
                 [pieces[('activations', l)], None, ['cost', [('signals', l - 1)]]])
-    processes['backward_pass'].addSteps(
+    processes['backward_pass'].add_steps(
         [pieces['weights_from_vector_to_dict'], None, ['cost', ['weights_vector']]])
 
     # PROCESS: cost_and_d_cost_over_d_weights
@@ -168,8 +168,8 @@ def PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add
     # PROCESS: forward_pass
     processes['forward_pass'] = Process(pieces['weights_from_vector_to_dict'], pieces[('activations', 0)])
     for l in range(1, num_layers):
-        processes['forward_pass'].addSteps(pieces[('signals', l - 1)], pieces[('activations', l)])
-    processes['forward_pass'].addSteps(pieces[('predicted_outputs')])
+        processes['forward_pass'].add_steps(pieces[('signals', l - 1)], pieces[('activations', l)])
+    processes['forward_pass'].add_steps(pieces[('predicted_outputs')])
 
     # PROCESS: cost
     processes['cost'] = Process(pieces['cost'])
@@ -178,13 +178,13 @@ def PROGRAM___ffnn_unskewed_classification(nums_nodes, activation_functions, add
     processes['backward_pass'] = Process([pieces[('d_cost_over_d_signal_to_top_layer')], None,
                                          ['cost', [('signals', num_layers - 2)]]])
     for l in reversed(range(num_layers - 1)):
-        processes['backward_pass'].addSteps(
+        processes['backward_pass'].add_steps(
             [pieces[('signals', l)], None, ['cost', [('weights', l)]]])
         if l > 0:
-            processes['backward_pass'].addSteps(
+            processes['backward_pass'].add_steps(
                 [pieces[('signals', l)], None, ['cost', [('activations', l)]]],
                 [pieces[('activations', l)], None, ['cost', [('signals', l - 1)]]])
-    processes['backward_pass'].addSteps(
+    processes['backward_pass'].add_steps(
         [pieces['weights_from_vector_to_dict'], None, ['cost', ['weights_vector']]])
 
     # PROCESS: cost_and_d_cost_over_d_weights

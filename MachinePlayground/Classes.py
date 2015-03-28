@@ -4,445 +4,397 @@ from numpy import allclose, ones, ndarray
 from MachinePlayground.Functions.FUNCTIONS___zzz_misc import approx_gradients
 
 
-
 class Piece:
-    def __init__(self, forwards = {}, backwards = {}):
-        self.inKeys = set()
-        self.outKeys = set(forwards.keys())
-        self.backwardKeys = set()
-        self.forwards = deepcopy(forwards)
-        self.forwardsToFrom = {}
-        self.backwards = deepcopy(backwards)
-        self.backwardsToFrom = {}
-        if len(forwards) > 0:
-            for outKey, func_andToFrom in forwards.items():
-                inKeys_forThisOutKey = set(func_andToFrom[1].values())
-                self.inKeys.update(inKeys_forThisOutKey)
-                self.forwardsToFrom[outKey] = inKeys_forThisOutKey
-        if len(backwards) > 0:
-           for inKey, func_andToFrom in backwards.items():
-               self.backwardKeys.update(set((inKey,)).union(set(func_andToFrom[1].values())))
-               self.backwardsToFrom[inKey] = set(func_andToFrom[1].values())
+    def __init__(self, forwards={}, backwards={}):
+        forwards = deepcopy(forwards)   # just to be careful #
+        backwards = deepcopy(backwards)   # just to be careful #
+        self.forwards = forwards
+        self.forward_from_keys = set()
+        self.forward_to_keys = set(forwards)
+        self.forwards_to_from = {}
+        self.backwards = backwards
+        self.backward_from_keys = set()
+        self.backward_to_keys = set(backwards)
+        self.backwards_to_from = {}
+        if forwards:
+            for forward_to_key, lambda_and_arg_keys_and_forward_from_keys in forwards.items():
+                forward_from_keys = set(lambda_and_arg_keys_and_forward_from_keys[1].values())
+                self.forward_from_keys.update(forward_from_keys)
+                self.forwards_to_from[forward_to_key] = forward_from_keys
+        if backwards:
+            for backward_to_key, lambda_and_arg_keys_and_backward_from_keys in backwards.items():
+                backward_from_keys = set(lambda_and_arg_keys_and_backward_from_keys[1].values())
+                self.backward_from_keys.update(backward_from_keys)
+                self.backwards_to_from[backward_to_key] = backward_from_keys
 
+    def install(self, change_keys={}, change_vars={}):
+        forwards = {}
+        for forward_to_key, forward_lambda_and_arg_keys_and_from_keys in self.forwards.items():
+            new_forward_to_key = change_piece_key_or_var_in_piece_key(forward_to_key, change_keys, change_vars)
+            forward_lambda, forward_arg_keys_and_from_keys =\
+                deepcopy(forward_lambda_and_arg_keys_and_from_keys)   # just to be careful #
+            for forward_arg_key, forward_from_key in forward_arg_keys_and_from_keys.items():
+                forward_arg_keys_and_from_keys[forward_arg_key] =\
+                    change_piece_key_or_var_in_piece_key(forward_from_key, change_keys, change_vars)
+            forwards[new_forward_to_key] = [forward_lambda, forward_arg_keys_and_from_keys]
+        backwards = {}
+        for backward_to_key, backward_lambda_and_arg_keys_and_from_keys in self.backwards.items():
+            new_backward_to_key = change_piece_key_or_var_in_piece_key(backward_to_key, change_keys, change_vars)
+            backward_lambda, backward_arg_keys_and_from_keys =\
+                deepcopy(backward_lambda_and_arg_keys_and_from_keys)   # just to be careful #
+            for backward_arg_key, backward_from_key in backward_arg_keys_and_from_keys.items():
+                backward_arg_keys_and_from_keys[backward_arg_key] =\
+                    change_piece_key_or_var_in_piece_key(backward_from_key, change_keys, change_vars)
+            backwards[new_backward_to_key] = [backward_lambda, backward_arg_keys_and_from_keys]
+        return Piece(forwards, backwards)
 
-    def install(self, change_keys = {}, change_vars = {}):
-
-        piece = deepcopy(self)
-
-        if change_keys:
-
-            forwards = {}
-            for outKey, func_andToFrom in piece.forwards.items():
-                if outKey in change_keys:
-                    newOutKey = change_keys[outKey]
-                else:
-                    newOutKey = outKey
-                newFunc_andToFrom = deepcopy(func_andToFrom)
-                for argKey, inKey in func_andToFrom[1].items():
-                    if inKey in change_keys:
-                        newFunc_andToFrom[1][argKey] = change_keys[inKey]
-                forwards[newOutKey] = newFunc_andToFrom
-
-            backwards = {}
-            for backwardInKey, func_andToFrom in piece.backwards.items():
-                if isOverD(backwardInKey) and (backwardInKey[1] in change_keys):
-                    newBackwardInKey = ('DOVERD', change_keys[backwardInKey[1]])
-                elif isDOverD(backwardInKey):
-                    #print(backwardInKey) ######################
-                    if backwardInKey[1] in change_keys:
-                        #print(backwardInKey[1]) ###########
-                        dKey = change_keys[backwardInKey[1]]
-                    else:
-                        dKey = backwardInKey[1]
-                    if backwardInKey[2] in change_keys:
-                        #print(backwardInKey[2]) ##########
-                        overDKey = change_keys[backwardInKey[2]]
-                    else:
-                        overDKey = backwardInKey[2]
-                    newBackwardInKey = ('DOVERD', dKey, overDKey)
-                    #print(newBackwardInKey) ###################
-                else:
-                    newBackwardInKey = backwardInKey
-                newFunc_andToFrom = deepcopy(func_andToFrom)
-                for argKey, backwardInOutKey in func_andToFrom[1].items():
-                    if backwardInOutKey in change_keys:
-                        newFunc_andToFrom[1][argKey] = change_keys[backwardInOutKey]
-                    elif isOverD(backwardInOutKey) and (backwardInOutKey[1] in change_keys):
-                        newFunc_andToFrom[1][argKey] = ('DOVERD',
-                                                        change_keys[backwardInOutKey[1]])
-                    elif isDOverD(backwardInOutKey):
-                        if backwardInOutKey[1] in change_keys:
-                            dKey = change_keys[backwardInOutKey[1]]
-                        else:
-                            dKey = backwardInOutKey[1]
-                        if backwardInOutKey[2] in change_keys:
-                            overDKey = change_keys[backwardInOutKey[2]]
-                        else:
-                            overDKey = backwardInOutKey[2]
-                        newFunc_andToFrom[1][argKey] = ('DOVERD', dKey, overDKey)
-                backwards[newBackwardInKey] = newFunc_andToFrom
-
-            piece = Piece(forwards, backwards)
-
-        if change_vars:
-            change_keys___dict = {}
-
-            for key in ((piece.inKeys).union(piece.outKeys)).union(piece.backwardKeys):
-                if isDOverD(key):
-                    change_keys___dict[key[1]] = change_var_in_piece_key(key[1], change_vars)
-                    change_keys___dict[key[2]] = change_var_in_piece_key(key[2], change_vars)
-                elif isOverD(key):
-                    change_keys___dict[key[1]] = change_var_in_piece_key(key[1], change_vars)
-                else:
-                    change_keys___dict[key] = change_var_in_piece_key(key, change_vars)
-            #print('change keys here:')
-            #print(change_keys___dict.keys())
-            #print('\n')
-            #for k, v in change_keys___dict.items():
-            #    print(k, v)
-            #print('\n')
-            piece = piece.install(change_keys = change_keys___dict)
-
-        return piece
-
-
-
-    def run(self, dictObj, forwardOutKeys = set(), dKey_and_backwardInKeys = None):
-
-        d = dictObj.copy()
-        if forwardOutKeys is not None:
-            if len(forwardOutKeys) > 0:
-                outKeys = forwardOutKeys
+    def run(self, dict_object, forwards='all', backwards=None):
+        dict_object = deepcopy(dict_object)   # just to be careful #
+        forwards = deepcopy(forwards)   # just to be careful #
+        backwards = deepcopy(backwards)   # just to be careful #
+        if forwards:
+            if forwards == 'all':
+                forward_to_keys = self.forward_to_keys
             else:
-                outKeys = self.outKeys
-            for outVarTuple in outKeys:
-                func, arguments = deepcopy(self.forwards[outVarTuple])
-                for argKey, inVarTuple in arguments.items():
-                    if isinstance(inVarTuple, tuple):
-                        inVarName, inVarKey = inVarTuple
-                        if inVarName in d:
-                            arguments[argKey] = d[inVarName][inVarKey]
+                forward_to_keys = forwards.intersection(self.forward_to_keys)
+            for forward_to_key in forward_to_keys:
+                forward_lambda, forward_arg_keys_and_from_keys = self.forwards[forward_to_key]
+                forward_args = {}
+                for forward_arg_key, forward_from_key in forward_arg_keys_and_from_keys.items():
+                    if isinstance(forward_from_key, tuple):
+                        var, index = forward_from_key
+                        if var in dict_object:
+                            forward_args[forward_arg_key] = dict_object[var][index]
+                    elif forward_from_key in dict_object:
+                        forward_args[forward_arg_key] = dict_object[forward_from_key]
+                value = forward_lambda(**forward_args)
+                if isinstance(forward_to_key, tuple):
+                    var, index = forward_to_key
+                    if var in dict_object:
+                        dict_object[var][index] = value
                     else:
-                        if inVarTuple in d:
-                            arguments[argKey] = d[inVarTuple]
-                value = func(**arguments)
-                if isinstance(outVarTuple, tuple):
-                    outVarName, outVarKey = outVarTuple
-                    if outVarName in d:
-                        d[outVarName] = d[outVarName].copy()
-                        d[outVarName][outVarKey] = value
-                    else:
-                        d[outVarName] = {outVarKey: value}
+                        dict_object[var] = {index: value}
                 else:
-                    d[outVarTuple] = value
-
-        if dKey_and_backwardInKeys is not None:
-            dKey, backwardInKeys = dKey_and_backwardInKeys
-            if len(backwardInKeys) > 0:
-                list1 = list(map(lambda backwardInKey: ('DOVERD', backwardInKey), backwardInKeys))
-                list2 = list(map(lambda backwardInKey: ('DOVERD', dKey, backwardInKey), backwardInKeys))
-                backwardInKeys = set(list1 + list2)
-                backwards = {backwardInKey: self.backwards[backwardInKey]
-                             for backwardInKey in backwardInKeys.intersection(self.backwards)}
+                    dict_object[forward_to_key] = value
+        if backwards:
+            d_key, backward_to_keys = backwards
+            if backward_to_keys:
+                list1 = list(map(lambda k: ('DOVERD', k), backward_to_keys))
+                list2 = list(map(lambda k: ('DOVERD', d_key, k), backward_to_keys))
+                backward_to_keys = set(list1 + list2).intersection(self.backward_to_keys)
             else:
-                backwards = self.backwards
-            for backwardVarTuple, func_andToFrom in backwards.items():
-                func, arguments = deepcopy(func_andToFrom)
-                for argKey, varTuple in arguments.items():
-                    if isOverD(varTuple):
-                        overD = varTuple[1]
-                        if isinstance(overD, tuple):
-                            varName, varKey = overD
-                            if varName in d:
-                                arguments[argKey] = d[('DOVERD', dKey, varName)][varKey]
-                        else:
-                            if overD in d:
-                                arguments[argKey] = d[('DOVERD', dKey, overD)]
-                    elif isDOverD(varTuple):
-                        overD = varTuple[2]
-                        if isinstance(overD, tuple):
-                            varName, varKey = overD
-                            if varName in d:
-                                arguments[argKey] = d[('DOVERD', dKey, varName)][varKey]
-                        else:
-                            if overD in d:
-                                arguments[argKey] = d[('DOVERD', dKey, overD)]
-                    elif isinstance(varTuple, tuple):
-                        varName, varKey = varTuple
-                        if varName in d:
-                            arguments[argKey] = d[varName][varKey]
+                backward_to_keys = self.backward_to_keys
+            for backward_to_key in backward_to_keys:
+                backward_lambda, backward_arg_keys_and_from_keys = self.backwards[backward_to_key]
+                backward_args = {}
+                for backward_arg_key, backward_from_key in backward_arg_keys_and_from_keys.items():
+                    if is_doverd(backward_from_key):
+                        over_d_key = backward_from_key[2]
+                        if isinstance(over_d_key, tuple):
+                            var, index = over_d_key
+                            if var in dict_object:
+                                backward_args[backward_arg_key] = dict_object[('DOVERD', d_key, var)][index]
+                        elif over_d_key in dict_object:
+                            backward_args[backward_arg_key] = dict_object[('DOVERD', d_key, over_d_key)]
+                    elif is_overd(backward_from_key):
+                        over_d_key = backward_from_key[1]
+                        if isinstance(over_d_key, tuple):
+                            var, index = over_d_key
+                            if var in dict_object:
+                                backward_args[backward_arg_key] = dict_object[('DOVERD', d_key, var)][index]
+                        elif over_d_key in dict_object:
+                            backward_args[backward_arg_key] = dict_object[('DOVERD', d_key, over_d_key)]
+                    elif isinstance(backward_from_key, tuple):
+                        var, index = backward_from_key
+                        if var in dict_object:
+                            backward_args[backward_arg_key] = dict_object[var][index]
+                    elif backward_from_key in dict_object:
+                        backward_args[backward_arg_key] = dict_object[backward_from_key]
+                value = backward_lambda(**backward_args)
+                if is_doverd(backward_to_key):
+                    over_d_key = backward_to_key[2]
+                elif is_overd(backward_to_key):
+                    over_d_key = backward_to_key[1]
+                if isinstance(over_d_key, tuple):
+                    var, index = over_d_key
+                    t = ('DOVERD', d_key, var)
+                    if t in dict_object:
+                        dict_object[t][index] = value
                     else:
-                        if varTuple in d:
-                            arguments[argKey] = d[varTuple]
-                value = func(**arguments)
-                if isOverD(backwardVarTuple):
-                    overD = backwardVarTuple[1]
-                if isDOverD(backwardVarTuple):
-                    overD = backwardVarTuple[2]
-                if isinstance(overD, tuple):
-                    varName, varKey = overD
-                    t = ('DOVERD', dKey, varName)
-                    if t in d:
-                        d[t] = d[t].copy()
-                        d[t][varKey] = value
-                    else:
-                        d[t] = {varKey: value}
+                        dict_object[t] = {index: value}
                 else:
-                    d[('DOVERD', dKey, overD)] = value
+                    dict_object[('DOVERD', d_key, over_d_key)] = value
 
-        return d
-
+        return dict_object
 
     def check_gradients(self, ins___dict):
 
-        def sumOut(in___dict, outKey):
-            d = ins___dict.copy()
-            for inKey, inValue in in___dict.items():
-                d[inKey] = inValue
-            out = self.run(d)[outKey]
+        def sum_out(in___dict, to_key):
+            d = deepcopy(ins___dict)   # just to be careful #
+            for in_key, in_value in in___dict.items():
+                d[in_key] = in_value
+            out = self.run(d)[to_key]
             if isinstance(out, ndarray):
                 return out.sum()
             else:
                 return out
 
-        vars = self.run(ins___dict)
-        dKeys = set()
-        dSumKeys = set()
-        for outKey in self.outKeys:
-            if isinstance(vars[outKey], float):
-                for varTuple in self.backwards:
-                    if isDOverD(varTuple) and (varTuple[1] == outKey):
-                        dKeys.add(outKey)
-            elif isinstance(vars[outKey], ndarray):
-                vars[('DOVERD', 'SUM___' + outKey, outKey)] = ones(vars[outKey].shape)
-                dSumKeys.add(outKey)
+        outs = self.run(ins___dict)
+        d_keys = set()
+        d_sum_keys = set()
+        for d_key in self.forward_to_keys:
+            if isinstance(outs[d_key], float):
+                for backward_to_key in self.backward_to_keys:
+                    if is_doverd(backward_to_key) and (backward_to_key[1] == d_key):
+                        d_keys.add(d_key)
+            elif isinstance(outs[d_key], ndarray):
+                outs[('DOVERD', 'SUM___' + d_key, d_key)] = ones(outs[d_key].shape)
+                d_sum_keys.add(d_key)
 
-        backwardInKeys = set()
-        for backwardVarTuple in self.backwards:
-            if isOverD(backwardVarTuple):
-                backwardInKeys.add(backwardVarTuple[1])
-            elif isDOverD(backwardVarTuple):
-                backwardInKeys.add(backwardVarTuple[2])
+        over_d_keys = set()
+        for backward_to_key in self.backward_to_keys:
+            if is_doverd(backward_to_key):
+                over_d_keys.add(backward_to_key[2])
+            elif is_overd(backward_to_key):
+                over_d_keys.add(backward_to_key[1])
 
-        for outKey in dKeys:
-            vars = self.run(vars, forwardOutKeys = None, dKey_and_backwardInKeys = (outKey, backwardInKeys))
-        for outKey in dSumKeys:
-            vars = self.run(vars, forwardOutKeys = None, dKey_and_backwardInKeys = ('SUM___' + outKey, backwardInKeys))
+        for d_key in d_keys:
+            outs = self.run(outs, forwards=None, backwards=[d_key, over_d_keys])
+        for d_sum_key in d_sum_keys:
+            outs = self.run(outs, forwards=None, backwards=['SUM___' + d_sum_key, over_d_keys])
 
         check = True
-        for inKey, outKey in itertools.product(backwardInKeys, dKeys):
-            approxGrad = approx_gradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
-            check = check and allclose(approxGrad, vars[('DOVERD', outKey, inKey)], rtol = 1.e-3, atol = 1.e-6)
-        for inKey, outKey in itertools.product(backwardInKeys, dSumKeys):
-            approxGrad = approx_gradients(lambda v: sumOut({inKey: v}, outKey), ins___dict[inKey])
-            check = check and allclose(approxGrad, vars[('DOVERD', 'SUM___' + outKey, inKey)],
-                                       rtol = 1.e-3, atol = 1.e-6)
+        for over_d_key, d_key in itertools.product(over_d_keys, d_keys):
+            numerical_gradients = approx_gradients(lambda v: sum_out({over_d_key: v}, d_key),
+                                                   ins___dict[over_d_key])
+            check = check and allclose(numerical_gradients,
+                                       outs[('DOVERD', d_key, over_d_key)],
+                                       rtol=1.e-3, atol=1.e-6)
+        for over_d_key, d_sum_key in itertools.product(over_d_keys, d_sum_keys):
+            numerical_gradients = approx_gradients(lambda v: sum_out({over_d_key: v}, d_sum_key),
+                                                   ins___dict[over_d_key])
+            check = check and allclose(numerical_gradients,
+                                       outs[('DOVERD', 'SUM___' + d_sum_key, over_d_key)],
+                                       rtol=1.e-3, atol=1.e-6)
 
         return check
 
 
-
 class Process:
-    def __init__(self, *args, **kwargs):
-        vars = set()
-        steps = []
-        for step in args:
-            s = step_withDefaultForwardsAndBackwards(step)
+    def __init__(self, *steps):
+        self.vars = set()
+        self.steps = []
+        for step in steps:
+            s = process_step_with_complete_specifications(step)
             piece = s[0]
-            for inVarTuple in piece.inKeys:
-                vars.add(varName_fromVarTuple(inVarTuple))
-            for outVarTuple in piece.outKeys:
-                vars.add(varName_fromVarTuple(outVarTuple))
-            steps += [s]
-        self.vars = vars
-        self.steps = steps
-
-    def addSteps(self, *args):
-        for step in args:
-            s = step_withDefaultForwardsAndBackwards(step)
-            piece = s[0]
-            for inVarTuple in piece.inKeys:
-                self.vars.add(varName_fromVarTuple(inVarTuple))
-            for outVarTuple in piece.outKeys:
-                self.vars.add(varName_fromVarTuple(outVarTuple))
+            for forward_key in piece.forward_from_keys.union(piece.forward_to_keys):
+                self.vars.add(var_from_forward_piece_key(forward_key))
             self.steps += [s]
 
-    def install(self, change_vars = {}):
-        process = deepcopy(self)
-        if change_vars:
+    def add_steps(self, *steps):
+        for step in steps:
+            s = process_step_with_complete_specifications(step)
+            piece = s[0]
+            for forward_key in piece.forward_from_keys.union(piece.forward_to_keys):
+                self.vars.add(var_from_forward_piece_key(forward_key))
+            self.steps += [s]
+
+    def install(self, change_vars={}):
+        process = deepcopy(self)   # just to be careful #
+        from_old_vars_to_new_vars___dict = deepcopy(change_vars)   # just to be careful #
+        for old_var, new_var in change_vars.items():
+            if old_var == new_var:
+                del from_old_vars_to_new_vars___dict[old_var]
+        if from_old_vars_to_new_vars___dict:
             steps = []
             for step in process.steps:
-                old_piece, old_forwardOutKeys, old_dKey_and_backwardInKeys = step
-                new_piece = old_piece.install(change_vars = change_vars)
-                new_forwardOutKeys = set()
-                if old_forwardOutKeys:
-                    for key in old_forwardOutKeys:
-                        new_forwardOutKeys.add(change_var_in_piece_key(key, change_vars))
-                if old_dKey_and_backwardInKeys:
-                    old_dKey, old_backwardInKeys = old_dKey_and_backwardInKeys
-                    new_dKey = change_var_in_piece_key(old_dKey, change_vars)
-                    new_backwardInKeys = set()
-                    for key in old_backwardInKeys:
-                        new_backwardInKeys.add(change_var_in_piece_key(key, change_vars))
-                    new_dKey_and_backwardInKeys = (new_dKey, new_backwardInKeys)
+                old_piece, old_forward_to_keys, old_d_key_and_over_d_keys = step
+                new_piece = old_piece.install(from_old_vars_to_new_vars___dict=from_old_vars_to_new_vars___dict)
+                if old_forward_to_keys == 'all':
+                    new_forward_to_keys = 'all'
+                elif old_forward_to_keys:
+                    new_forward_to_keys = set()
+                    for old_forward_to_key in old_forward_to_keys:
+                        new_forward_to_keys.add(change_var_in_piece_key(old_forward_to_key, from_old_vars_to_new_vars___dict))
                 else:
-                    new_dKey_and_backwardInKeys = None
-                steps += [new_piece, new_forwardOutKeys, new_dKey_and_backwardInKeys],
-
+                    new_forward_to_keys = None
+                if old_d_key_and_over_d_keys:
+                    old_d_key, old_over_d_keys = old_d_key_and_over_d_keys
+                    new_d_key = change_var_in_piece_key(old_d_key, from_old_vars_to_new_vars___dict)
+                    new_over_d_keys = set()
+                    for old_over_d_key in old_over_d_keys:
+                        new_over_d_keys.add(change_var_in_piece_key(old_over_d_key, from_old_vars_to_new_vars___dict))
+                    new_d_key_and_over_d_keys = [new_d_key, new_over_d_keys]
+                else:
+                    new_d_key_and_over_d_keys = None
+                steps += [new_piece, new_forward_to_keys, new_d_key_and_over_d_keys],
             process = Process(*steps)
         return process
 
-    def run(self, dictObj, numTimes = 1, *args, **kwargs):
-        d = dictObj.copy()
-        for t in range(numTimes):
+    def run(self, dict_object, num_times=1):
+        dict_object = deepcopy(dict_object)   # just to be careful #
+        for t in range(num_times):
             for step in self.steps:
-                piece, forwardOutKeys, dKey_and_backwardInKeys = step
-                d = piece.run(d, forwardOutKeys, dKey_and_backwardInKeys)
-        return d
+                piece, forward_to_keys, d_key_and_over_d_keys = step
+                dict_object = piece.run(dict_object, forward_to_keys, d_key_and_over_d_keys)
+        return dict_object
 
 
-
-def connect_processes(*args, **kwargs):
-    p = deepcopy(args[0])
-    for process in args[1:]:
-        p.vars.update(process.vars)
-        p.steps += process.steps
-    return p
-
+def connect_processes(*processes):
+    process = deepcopy(processes[0])   # just to be careful #
+    for p in processes[1:]:
+        process.vars.update(p.vars)
+        process.steps += p.steps
+    return process
 
 
 class Program:
-    def __init__(self, pieces___dict, processes___dict):
+    def __init__(self, pieces={}, processes={}):
         self.vars = set()
-        self.pieces = pieces___dict
-        self.processes = processes___dict
-        for piece in pieces___dict.values():
-            for key in (piece.inKeys).union(piece.outKeys):
-                self.vars.add(varName_fromVarTuple(key))
+        self.pieces = pieces
+        self.processes = processes
+        for piece in pieces.values():
+            for piece_key in piece.forward_from_keys.union(piece.forward_to_keys):
+                self.vars.add(var_from_forward_piece_key(piece_key))
 
-    def install(self, from_old_var_names_to_new_var_names___dict):
+    def install(self, from_old_vars_to_new_vars___dict):
         pieces = {}
         for piece_name, piece in self.pieces.items():
-            pieces[piece_name] = piece.install(change_vars = from_old_var_names_to_new_var_names___dict)
+            pieces[piece_name] = piece.install(from_old_vars_to_new_vars___dict= from_old_vars_to_new_vars___dict)
         processes = {}
         for process_name, process in self.processes.items():
-            processes[process_name] = process.install(change_vars = from_old_var_names_to_new_var_names___dict)
+            processes[process_name] = process.install(from_old_vars_to_new_vars___dict= from_old_vars_to_new_vars___dict)
         return Program(pieces, processes)
 
-    def run(self, dict_object, *args, **kwargs):
-        d = dict_object.copy()
-        for process_or_piece in args:
-            if process_or_piece in self.processes:
-                process = self.processes[process_or_piece]
-                d = process.run(d)
-            elif process_or_piece in self.pieces:
-                piece = self.pieces[process_or_piece]
-                d = piece.run(d, **kwargs)
-        return d
-
-    def save(self, file_path):
-        pass
-
+    def run(self, dict_object, *process_names_or_piece_names, **kwargs):
+        dict_object = deepcopy(dict_object)   # just to be careful #
+        for process_name_or_piece_name in process_names_or_piece_names:
+            if process_name_or_piece_name in self.processes:
+                process = self.processes[process_name_or_piece_name]
+                dict_object = process.run(dict_object, **kwargs)
+            elif process_name_or_piece_name in self.pieces:
+                piece = self.pieces[process_name_or_piece_name]
+                dict_object = piece.run(dict_object, **kwargs)
+        return dict_object
 
 
 class Project:
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         self.vars = {}
         self.pieces = {}
         self.processes = {}
         self.programs = {}
 
-    def add_variables(self, *args, **kwargs):
-        self.vars.update(dict.fromkeys(args))
-        self.vars.update(kwargs)
-
-    def delete_variables(self, *args, **kwargs):
-        for arg in args:
-            del self.vars[arg]
-
-    def set_variables(self, *args, **kwargs):
-        for kwarg in kwargs:
-            pass
-
-    def getVar(self, *args):
-        pass
-
-    def run(self, *args, **kwargs):
-        for arg in args:
-            if isinstance(arg, tuple) and (arg[0] in self.programs):
-                program = arg[0]
-                process_or_piece_name = arg[1]
-                if process_or_piece_name in self.programs[program].processes:
-                    process = self.programs[program].processes[process_or_piece_name]
-                    self.vars = process.run(self.vars)
-                elif process_or_piece_name in self.programs[program].pieces:
-                    piece = self.programs[program].pieces[process_or_piece_name]
+    def run(self, *process_names_or_piece_names, **kwargs):
+        for process_name_or_piece_name in process_names_or_piece_names:
+            if isinstance(process_name_or_piece_name, tuple) and (process_name_or_piece_name[0] in self.programs):
+                program_name = process_name_or_piece_name[0]
+                process_or_piece_name = process_name_or_piece_name[1]
+                if process_or_piece_name in self.programs[program_name].processes:
+                    process = self.programs[program_name].processes[process_or_piece_name]
+                    self.vars = process.run(self.vars, **kwargs)
+                elif process_or_piece_name in self.programs[program_name].pieces:
+                    piece = self.programs[program_name].pieces[process_or_piece_name]
                     self.vars = piece.run(self.vars, **kwargs)
-            elif arg in self.processes:
-                process = self.processes[arg]
-                self.vars = process.run(self.vars)
-            elif arg in self.pieces:
-                piece = self.pieces[arg]
+            elif process_name_or_piece_name in self.processes:
+                process = self.processes[process_name_or_piece_name]
+                self.vars = process.run(self.vars, **kwargs)
+            elif process_name_or_piece_name in self.pieces:
+                piece = self.pieces[process_name_or_piece_name]
                 self.vars = piece.run(self.vars, **kwargs)
 
 
-
-def isOverD(varTuple):
-    return (varTuple[0] == 'DOVERD') and (len(varTuple) == 2)
-
+def is_doverd(piece_key):
+    return isinstance(piece_key, tuple) and (piece_key[0] == 'DOVERD') and (len(piece_key) == 3)
 
 
-def isDOverD(varTuple):
-    return (varTuple[0] == 'DOVERD') and (len(varTuple) == 3)
+def is_overd(piece_key):
+    return isinstance(piece_key, tuple) and (piece_key[0] == 'DOVERD') and (len(piece_key) == 2)
 
 
-
-def varName_fromVarTuple(varTuple):
-    # return variable name from tuple consisting of variable name and index/key
-    if isinstance(varTuple, tuple):
-        return varTuple[0]
+def var_from_forward_piece_key(forward_piece_key):
+    forward_piece_key = deepcopy(forward_piece_key)   # just to be careful #
+    if isinstance(forward_piece_key, tuple):
+        return forward_piece_key[0]
     else:
-        return varTuple
+        return forward_piece_key
 
 
-
-def change_var_in_piece_key(piece_key, from_old_vars_to_new_vars___dict):
-    if isDOverD(piece_key):
-        var_tuple_1 = piece_key[1]
-        if isinstance(var_tuple_1, tuple) and (var_tuple_1[0] in from_old_vars_to_new_vars___dict):
-            var_tuple_1 = (from_old_vars_to_new_vars___dict[var_tuple_1[0]], var_tuple_1[1])
-        elif var_tuple_1 in from_old_vars_to_new_vars___dict:
-            var_tuple_1 = from_old_vars_to_new_vars___dict[var_tuple_1]
-        var_tuple_2 = piece_key[2]
-        if isinstance(var_tuple_2, tuple) and (var_tuple_2[0] in from_old_vars_to_new_vars___dict):
-            var_tuple_2 = (from_old_vars_to_new_vars___dict[var_tuple_2[0]], var_tuple_2[1])
-        elif var_tuple_2 in from_old_vars_to_new_vars___dict:
-            var_tuple_2 = from_old_vars_to_new_vars___dict[var_tuple_2]
-        return ('DOVERD', var_tuple_1, var_tuple_2)
-    elif isOverD(piece_key):
-        var_tuple = piece_key[1]
-        if isinstance(var_tuple, tuple) and (var_tuple[0] in from_old_vars_to_new_vars___dict):
-            return ('DOVERD', (from_old_vars_to_new_vars___dict[var_tuple[0]], var_tuple[1]))
-        elif var_tuple in from_old_vars_to_new_vars___dict:
-            return ('DOVERD', from_old_vars_to_new_vars___dict[var_tuple])
-    elif isinstance(piece_key, tuple) and (piece_key[0] in from_old_vars_to_new_vars___dict):
-        return (from_old_vars_to_new_vars___dict[piece_key[0]], piece_key[1])
-    elif piece_key in from_old_vars_to_new_vars___dict:
-        return from_old_vars_to_new_vars___dict[piece_key]
+def change_piece_key(piece_key, from_old_keys_to_new_keys___dict):
+    piece_key = deepcopy(piece_key)   # just to be careful #
+    change_keys = deepcopy(from_old_keys_to_new_keys___dict)   # just to be careful #
+    for old_key, new_key in from_old_keys_to_new_keys___dict.items():
+        if old_key == new_key:
+            del change_keys[old_key]
+    if change_keys:
+        if is_doverd(piece_key):
+            d_key, over_d_key = piece_key[1:3]
+            if d_key in change_keys:
+                d_key = change_keys[d_key]
+            if over_d_key in change_keys:
+                over_d_key = change_keys[over_d_key]
+            return 'DOVERD', d_key, over_d_key
+        elif is_overd(piece_key) and (piece_key[1] in change_keys):
+            return 'DOVERD', change_keys[piece_key[1]]
+        elif piece_key in change_keys:
+            return change_keys[piece_key]
+        else:
+            return piece_key
     else:
         return piece_key
 
 
+def change_var_in_piece_key(piece_key, from_old_vars_to_new_vars___dict):
+    piece_key = deepcopy(piece_key)   # just to be careful #
+    change_vars = deepcopy(from_old_vars_to_new_vars___dict)   # just to be careful #
+    for old_var, new_var in from_old_vars_to_new_vars___dict.items():
+        if old_var == new_var:
+            del change_vars[old_var]
+    if change_vars:
+        if is_doverd(piece_key):
+            d_key, over_d_key = piece_key[1:3]
+            if isinstance(d_key, tuple) and (d_key[0] in change_vars):
+                d_key = (change_vars[d_key[0]], d_key[1])
+            elif d_key in change_vars:
+                d_key = change_vars[d_key]
+            if isinstance(over_d_key, tuple) and (over_d_key[0] in change_vars):
+                over_d_key = (change_vars[over_d_key[0]], over_d_key[1])
+            elif over_d_key in change_vars:
+                over_d_key = change_vars[over_d_key]
+            return 'DOVERD', d_key, over_d_key
+        elif is_overd(piece_key):
+            key = piece_key[1]
+            if isinstance(key, tuple) and (key[0] in change_vars):
+                return 'DOVERD', (change_vars[key[0]], key[1])
+            elif key in change_vars:
+                return 'DOVERD', change_vars[key]
+        elif isinstance(piece_key, tuple) and (piece_key[0] in change_vars):
+            return change_vars[piece_key[0]], piece_key[1]
+        elif piece_key in change_vars:
+            return change_vars[piece_key]
+        else:
+            return piece_key
+    else:
+        return piece_key
 
 
+def change_piece_key_or_var_in_piece_key(piece_key, change_keys={}, change_vars={}):
+    piece_key = deepcopy(piece_key)   # just to be careful #
+    if change_keys:
+        piece_key = change_piece_key(piece_key, change_keys)
+    if change_vars:
+        piece_key = change_var_in_piece_key(piece_key, change_vars)
+    return piece_key
 
-def step_withDefaultForwardsAndBackwards(step):
+
+def process_step_with_complete_specifications(step):
+    step = deepcopy(step)   # just to be careful #
     if isinstance(step, list):
         if len(step) == 1:
-            return step + [set(), None]
+            return step + ['all', None]
         elif len(step) == 2:
             return step + [None]
         else:
             return step
     else:
-        return [step, set(), None]
+        return [step, 'all', None]

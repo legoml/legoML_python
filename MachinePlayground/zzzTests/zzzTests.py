@@ -1,6 +1,7 @@
 from numpy import *
 from numpy.random import rand
 
+
 # test PIECE
 from MachinePlayground.zzzTests.zzzTests_pieces import *
 TEST___PIECE___equal()
@@ -62,3 +63,9 @@ proj1.vars
 proj1.programs['ffnn'].processes
 bpiece = proj1.programs['ffnn'].pieces['d_cost_over_d_signal_to_top_layer']
 proj1.run(('ffnn', 'backward_pass'))
+
+
+from copy import deepcopy
+def test_func(x):
+    del x[1]
+    return x
