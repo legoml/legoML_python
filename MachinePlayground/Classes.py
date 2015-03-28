@@ -159,9 +159,9 @@ class Piece:
                 over_d_keys.add(backward_to_key[1])
 
         for d_key in d_keys:
-            outs = self.run(outs, forwards=None, backwards=[d_key, over_d_keys])
+            outs = self.run(outs, forwards='', backwards=[d_key, over_d_keys])
         for d_sum_key in d_sum_keys:
-            outs = self.run(outs, forwards=None, backwards=['SUM___' + d_sum_key, over_d_keys])
+            outs = self.run(outs, forwards='', backwards=['SUM___' + d_sum_key, over_d_keys])
 
         check = True
         for over_d_key, d_key in itertools.product(over_d_keys, d_keys):
