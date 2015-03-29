@@ -22,6 +22,7 @@ TEST___PIECE___average_unskewed_multi_class_cross_entropy()
 TEST___PIECE___l1_weight_regularization()
 TEST___PIECE___l2_weight_regularization()
 
+
 # test FFNN
 from MachinePlayground.zzzTests.zzzTests_programs import *
 TEST___PROGRAM___ffnn_check_gradients(100)

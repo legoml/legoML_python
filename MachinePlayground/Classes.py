@@ -209,7 +209,7 @@ class Process:
             steps = []
             for step in process.steps:
                 old_piece, old_forward_to_keys, old_d_key_and_over_d_keys = step
-                new_piece = old_piece.install(from_old_vars_to_new_vars___dict=from_old_vars_to_new_vars___dict)
+                new_piece = old_piece.install(change_vars=from_old_vars_to_new_vars___dict)
                 if old_forward_to_keys == 'all':
                     new_forward_to_keys = 'all'
                 elif old_forward_to_keys:
@@ -261,10 +261,10 @@ class Program:
     def install(self, from_old_vars_to_new_vars___dict):
         pieces = {}
         for piece_name, piece in self.pieces.items():
-            pieces[piece_name] = piece.install(from_old_vars_to_new_vars___dict=from_old_vars_to_new_vars___dict)
+            pieces[piece_name] = piece.install(change_vars=from_old_vars_to_new_vars___dict)
         processes = {}
         for process_name, process in self.processes.items():
-            processes[process_name] = process.install(from_old_vars_to_new_vars___dict=from_old_vars_to_new_vars___dict)
+            processes[process_name] = process.install(change_vars=from_old_vars_to_new_vars___dict)
         return Program(pieces, processes)
 
     def run(self, dict_object, *process_names_or_piece_names, **kwargs):
