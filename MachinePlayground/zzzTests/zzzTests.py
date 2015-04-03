@@ -66,7 +66,20 @@ bpiece = proj1.programs['ffnn'].pieces['d_cost_over_d_signal_to_top_layer']
 proj1.run(('ffnn', 'backward_pass'))
 
 
-from copy import deepcopy
-def test_func(x):
-    del x[1]
-    return x
+# TEST factor_product
+# (examples from Coursera: "Probabilistic Graphical Models" (Daphne Koller)
+from MachinePlayground.UserDefinedClasses.CLASSES___probability import Factor
+from MachinePlayground.Functions.FUNCTIONS___probability import factor_product
+f1 = Factor({(('a', 1), ('b', 1)): 0.5,
+            (('a', 1), ('b', 2)): 0.8,
+            (('a', 2), ('b', 1)): 0.1,
+            (('a', 3), ('b', 1)): 0.3,
+            (('a', 3), ('b', 2)): 0.9})
+
+f2 = Factor({(('b', 1), ('c', 1)): 0.5,
+            (('b', 1), ('c', 2)): 0.7,
+            (('b', 2), ('c', 1)): 0.1,
+            (('b', 2), ('c', 2)): 0.2})
+
+f = factor_product(f1, f2)
+
