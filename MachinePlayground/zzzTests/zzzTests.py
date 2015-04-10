@@ -68,6 +68,21 @@ proj1.run(('ffnn', 'backward_pass'))
 
 # TEST factor_product
 # (examples from Coursera: "Probabilistic Graphical Models" (Daphne Koller)
+# expected result:
+# (('a', 1), ('b', 1), ('c', 1)): 0.25
+# (('a', 1), ('b', 1), ('c', 2)): 0.35
+# (('a', 1), ('b', 2), ('c', 1)): 0.08
+# (('a', 1), ('b', 2), ('c', 2)): 0.16
+# (('a', 2), ('b', 1), ('c', 1)): 0.05
+# (('a', 2), ('b', 1), ('c', 2)): 0.07
+# (('a', 2), ('b', 2), ('c', 1)): 0
+# (('a', 2), ('b', 2), ('c', 2)): 0
+# (('a', 3), ('b', 1), ('c', 1)): 0.15
+# (('a', 3), ('b', 1), ('c', 2)): 0.21
+# (('a', 3), ('b', 1), ('c', 2)): 0.21
+# (('a', 3), ('b', 2), ('c', 1)): 0.09
+# (('a', 3), ('b', 2), ('c', 2)): 0.18
+
 from MachinePlayground.UserDefinedClasses.CLASSES___probability import Factor
 from MachinePlayground.Functions.FUNCTIONS___probability import factor_product
 f1 = Factor({(('a', 1), ('b', 1)): 0.5,
@@ -82,4 +97,28 @@ f2 = Factor({(('b', 1), ('c', 1)): 0.5,
             (('b', 2), ('c', 2)): 0.2})
 
 f = factor_product(f1, f2)
+f = f1.product(f2)
+g = f.margin(('b',))
 
+
+# ROBOTICS & AI HOMEWORK
+f_C = Factor({(('C', 'a'),): 0.3,
+              (('C', 'n'),): 0.5,
+              (('C', 'l'),): 0.2})
+f_T1_on_C = Factor({(('C', 'a'), ('T1', 0)): 0.3,
+                    (('C', 'a'), ('T1', 1)): 0.7,
+                    (('C', 'n'), ('T1', 0)): 0.5,
+                    (('C', 'n'), ('T1', 1)): 0.5,
+                    (('C', 'l'), ('T1', 0)): 0.8,
+                    (('C', 'l'), ('T1', 1)): 0.2})
+f_T2_on_C = Factor({(('C', 'a'), ('T2', 0)): 0.2,
+                    (('C', 'a'), ('T2', 1)): 0.8,
+                    (('C', 'n'), ('T2', 0)): 0.6,
+                    (('C', 'n'), ('T2', 1)): 0.4,
+                    (('C', 'l'), ('T2', 0)): 0.9,
+                    (('C', 'l'), ('T2', 1)): 0.1})
+f_T1 = (f_C.product(f_T1_on_C)).margin(('C'),)
+f_T2 = (f_C.product(f_T2_on_C)).margin(('C'),)
+f_T1_T2 = (f_C.product(f_T1_on_C, f_T2_on_C)).margin(('C'),)
+f_T1_f_T2 = f_T1.product(f_T2)
+f_T1_T2_on_C_equal_n = ((f_C.product(f_T1_on_C, f_T2_on_C)).condition({'C': 'n'})).normalize()
