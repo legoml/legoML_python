@@ -1,5 +1,6 @@
 from copy import deepcopy
 import itertools
+from frozen_dict import FrozenDict
 
 
 class Factor: 
