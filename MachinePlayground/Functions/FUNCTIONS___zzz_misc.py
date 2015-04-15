@@ -1,13 +1,35 @@
 from numpy import zeros
+from copy import deepcopy
 
 
-#def rename_dict_keys(dict_object, from_old_keys_to_new_keys___dict):
-#    d = dict_object.copy()
-#    for oldKey, newKey in from_old_keys_to_new_keys___dict:
-#        v = d[oldKey]
-#        del d[oldKey]
-#        d[newKey] = v
-#    return d
+def as_strings(iterable_object):
+    strings = []
+    for i in iterable_object:
+        strings += [str(i)]
+    return strings
+
+
+def sympy_args(sympy_expression):
+    args = set()
+    try:
+        args = set(as_strings(sympy_expression.args))
+    except:
+        pass
+    return args
+
+
+def sympy_subs(sympy_expression, args_and_values___dict={}, **kw_args_and_values___dict):
+    if args_and_values___dict:
+        args_and_values___dict = deepcopy(args_and_values___dict)   # just to be careful #
+        args_and_values___dict.update(kw_args_and_values___dict)
+    else:
+        args_and_values___dict = kw_args_and_values___dict
+    try:
+        sympy_expression = sympy_expression.subs(args_and_values___dict)
+    except:
+        pass
+    return sympy_expression
+
 
 #def subDict_withNewKeys(dictObj, toNewKeys_fromOldKeys___dict):
 #    # extract values from dictionary and assign them new keys
