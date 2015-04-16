@@ -1,59 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea451445-f030-4e50-840c-9c772ec3b99b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mbalearnstocode_py/setup.py" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\setup.py" afterPath="" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\.name" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/.name" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\MachinePlayground.iml" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/MachinePlayground.iml" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\encodings.xml" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/encodings.xml" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\misc.xml" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/misc.xml" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\modules.xml" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/modules.xml" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\scopes\scope_settings.xml" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/scopes/scope_settings.xml" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\vcs.xml" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/vcs.xml" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\.idea\workspace.xml" afterPath="$PROJECT_DIR$/mbalearnstocode_py/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\CORE\Classes.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/CORE/Classes.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\CORE\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/CORE/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Functions\FUNCTIONS___cost_functions.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Functions/FUNCTIONS___cost_functions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Functions\FUNCTIONS___probability.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Functions/FUNCTIONS___probability.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Functions\FUNCTIONS___zzz_misc.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Functions/FUNCTIONS___zzz_misc.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Functions\FUNCTIONS___zzz_spark.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Functions/FUNCTIONS___zzz_spark.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Functions\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Functions/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Pieces\PIECES___cost_functions.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Pieces/PIECES___cost_functions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Pieces\PIECES___io.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Pieces/PIECES___io.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Pieces\PIECES___probability.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Pieces/PIECES___probability.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Pieces\PIECES___regularization_functions.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Pieces/PIECES___regularization_functions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Pieces\PIECES___zzz_common_functions.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Pieces/PIECES___zzz_common_functions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Pieces\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Pieces/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Programs\PROGRAMS___ffnn.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Programs/PROGRAMS___ffnn.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Programs\PROGRAMS___optimization.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Programs/PROGRAMS___optimization.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Programs\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Programs/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\Projects\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/Projects/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\UserDefinedClasses\CLASSES___DiscreteFunctions.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/UserDefinedClasses/CLASSES___DiscreteFunctions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\UserDefinedClasses\CLASSES___HiddenMarkovModels.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/UserDefinedClasses/CLASSES___HiddenMarkovModels.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\UserDefinedClasses\CLASSES___ProbabilisticFactors.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/UserDefinedClasses/CLASSES___ProbabilisticFactors.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\UserDefinedClasses\CLASSES___statements.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/UserDefinedClasses/CLASSES___statements.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\UserDefinedClasses\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/UserDefinedClasses/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\KOLLER_2012___ProbGraphModels\factors.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/KOLLER_2012___ProbGraphModels/factors.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q1\probset1_q1.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q1/probset1_q1.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q2\probset1_q2.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q2/probset1_q2.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\probset1_q4.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/probset1_q4.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\test.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/test.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\DataSet.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/DataSet.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\RunViterbi.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\TrainHMM.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/TrainHMM.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\randomwalk.test.txt" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\randomwalk.train.txt" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\WALTER_2015___RoboAI\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/WALTER_2015___RoboAI/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\__init__.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\zzzTests.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/zzzTests.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\zzzTests_pieces.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/zzzTests_pieces.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode1\zzzDemos_Tests\zzzTests_programs.py" afterPath="$PROJECT_DIR$/mbalearnstocode_py/zzzDemos_Tests/zzzTests_programs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="ea451445-f030-4e50-840c-9c772ec3b99b" name="Default" comment="" />
     <ignored path="legoML_python.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
