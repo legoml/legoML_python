@@ -1,4 +1,4 @@
-from mbalearnstocode1.Functions.FUNCTIONS___probability import *
+from mbalearnstocode_py.Functions.FUNCTIONS___probability import *
 
 
 def PIECE___root_mean_square_error():

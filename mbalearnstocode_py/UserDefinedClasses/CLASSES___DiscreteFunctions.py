@@ -1,5 +1,5 @@
 from copy import copy as shallow_copy, deepcopy
-from mbalearnstocode1.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_args, sympy_subs
+from mbalearnstocode_py.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_args, sympy_subs
 
 
 class DiscreteFiniteDomainFunction:

@@ -1,6 +1,6 @@
 from numpy import exp, log, sqrt
 
-from mbalearnstocode1.CORE.Classes import Piece
+from mbalearnstocode_py.CORE.Classes import Piece
 
 
 def PIECE___average_half_square_error():

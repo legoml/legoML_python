@@ -3,9 +3,9 @@ from copy import deepcopy
 from numpy import allclose, array, ones
 from numpy.random import rand, randint
 
-from mbalearnstocode1.Functions.FUNCTIONS___zzz_misc import approx_gradients
-from mbalearnstocode1.Programs.PROGRAMS___ffnn import PROGRAM___ffnn, PROGRAM___ffnn_unskewed_classification
-from mbalearnstocode1.CORE.Classes import Project
+from mbalearnstocode_py.Functions.FUNCTIONS___zzz_misc import approx_gradients
+from mbalearnstocode_py.Programs.PROGRAMS___ffnn import PROGRAM___ffnn, PROGRAM___ffnn_unskewed_classification
+from mbalearnstocode_py.CORE.Classes import Project
 
 
 def TEST___PROGRAM___ffnn_check_gradients(num_runs = 1000, rtol = 1.e-6, atol = 1.e-6):

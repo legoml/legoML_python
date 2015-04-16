@@ -1,6 +1,6 @@
 from numpy import array, concatenate, delete, exp, ndarray, ones, tanh
 
-from mbalearnstocode1.CORE.Classes import Piece
+from mbalearnstocode_py.CORE.Classes import Piece
 
 
 def PIECE___equal():
@@ -187,7 +187,7 @@ def PIECE___softmax():
     OUTPUTS matrix (cases in rows) = softmax function of INPUTS matrix (cases in rows)
     """
 
-    from mbalearnstocode1.Functions.FUNCTIONS___cost_functions import softmax, softmax_d_outputs_over_d_inputs,\
+    from mbalearnstocode_py.Functions.FUNCTIONS___cost_functions import softmax, softmax_d_outputs_over_d_inputs,\
         softmax_doverd_inputs_from_doverd_outputs
 
     forwards = {'outputs':
@@ -211,7 +211,7 @@ def PIECE___softmax_with_temperature():
     OUTPUTS matrix (cases in rows) = softmax function of INPUTS matrix (cases in rows) divided by temperature T
     """
 
-    from mbalearnstocode1.Functions.FUNCTIONS___cost_functions import softmax, softmax_d_outputs_over_d_inputs,\
+    from mbalearnstocode_py.Functions.FUNCTIONS___cost_functions import softmax, softmax_d_outputs_over_d_inputs,\
         softmax_doverd_inputs_from_doverd_outputs
 
     forwards = {'outputs':
