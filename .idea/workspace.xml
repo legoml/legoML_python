@@ -1,106 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea451445-f030-4e50-840c-9c772ec3b99b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/UserDefinedClasses/CLASSES___DiscreteFunctions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/UserDefinedClasses/CLASSES___HiddenMarkovModels.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/UserDefinedClasses/CLASSES___ProbabilisticFactors.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/UserDefinedClasses/CLASSES___statements.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/CORE/Classes.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/DataSet.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___cost_functions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___probability.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___zzz_misc.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___zzz_spark.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/MachinePlayground.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___cost_functions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___io.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___probability.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___regularization_functions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___zzz_common_functions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Programs/PROGRAMS___ffnn.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Programs/PROGRAMS___optimization.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/TrainHMM.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/CORE/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Programs/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Projects/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/UserDefinedClasses/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/KOLLER_2012___ProbGraphModels/factors.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q1/probset1_q1.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q2/probset1_q2.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/probset1_q4.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/test.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/zzzTests.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/zzzTests_pieces.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/zzzDemos_Tests/zzzTests_programs.py" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\.name" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\MachinePlayground.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\scopes\scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\.idea\workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\CORE\Classes.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\CORE\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Functions\FUNCTIONS___cost_functions.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Functions\FUNCTIONS___probability.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Functions\FUNCTIONS___zzz_misc.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Functions\FUNCTIONS___zzz_spark.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Functions\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Pieces\PIECES___cost_functions.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Pieces\PIECES___io.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Pieces\PIECES___probability.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Pieces\PIECES___regularization_functions.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Pieces\PIECES___zzz_common_functions.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Pieces\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Programs\PROGRAMS___ffnn.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Programs\PROGRAMS___optimization.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Programs\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\Projects\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\UserDefinedClasses\CLASSES___DiscreteFunctions.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\UserDefinedClasses\CLASSES___HiddenMarkovModels.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\UserDefinedClasses\CLASSES___ProbabilisticFactors.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\UserDefinedClasses\CLASSES___statements.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\UserDefinedClasses\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\KOLLER_2012___ProbGraphModels\factors.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q1\probset1_q1.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q2\probset1_q2.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\probset1_q4.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\test.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\DataSet.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\RunViterbi.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\TrainHMM.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\randomwalk.test.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\randomwalk.train.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\WALTER_2015___RoboAI\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\zzzTests.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\zzzTests_pieces.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode\legoML_python\mbalearnstocode_py\zzzDemos_Tests\zzzTests_programs.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="ea451445-f030-4e50-840c-9c772ec3b99b" name="Default" comment="" />
     <ignored path="legoML_python.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -150,7 +51,7 @@
       <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19456366" vertical-offset="0" max-vertical-offset="699">
+            <state vertical-scroll-proportion="0.28997868" vertical-offset="0" max-vertical-offset="469">
               <caret line="8" column="78" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="78" />
               <folding />
             </state>
@@ -502,7 +403,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="1" width="1598" height="858" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48374513" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -513,7 +414,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3480055" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31636864" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31636864" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969153" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32885906" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -922,7 +823,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19456366" vertical-offset="0" max-vertical-offset="699">
+        <state vertical-scroll-proportion="0.28997868" vertical-offset="0" max-vertical-offset="469">
           <caret line="8" column="78" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="78" />
           <folding />
         </state>
