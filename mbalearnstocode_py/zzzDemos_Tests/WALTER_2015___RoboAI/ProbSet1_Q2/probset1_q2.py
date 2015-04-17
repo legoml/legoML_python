@@ -1,8 +1,8 @@
 # ROBOTICS and AI HOMEWORK 01, QUESTION 02
 
 from frozen_dict import FrozenDict as fdict
-from mbalearnstocode_py.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
-from mbalearnstocode_py.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
+from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
+from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
 
 
 alpha = 0.6
