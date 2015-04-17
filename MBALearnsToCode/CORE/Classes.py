@@ -1,7 +1,7 @@
 from copy import deepcopy
 import itertools
 from numpy import allclose, ones, ndarray
-from MBALearnsToCode_Py.Functions.FUNCTIONS___zzz_misc import approx_gradients
+from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import approx_gradients
 
 
 class Piece:

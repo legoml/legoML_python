@@ -1,4 +1,4 @@
-from MBALearnsToCode_Py.CORE.Classes import Piece
+from MBALearnsToCode.CORE.Classes import Piece
 
 def PIECE___read_csv():
     import csv

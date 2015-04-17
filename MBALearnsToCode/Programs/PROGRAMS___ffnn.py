@@ -1,6 +1,6 @@
-from MBALearnsToCode_Py.CORE.Classes import Process, Program, connect_processes
-from MBALearnsToCode_Py.Pieces.PIECES___zzz_common_functions import *
-from MBALearnsToCode_Py.Pieces.PIECES___cost_functions import *
+from MBALearnsToCode.CORE.Classes import Process, Program, connect_processes
+from MBALearnsToCode.Pieces.PIECES___zzz_common_functions import *
+from MBALearnsToCode.Pieces.PIECES___cost_functions import *
 
 
 

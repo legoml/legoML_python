@@ -1,8 +1,8 @@
 # ROBOTICS & AI: ASSIGNMENT 01, QUESTION 04
 
-from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
+from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
 from frozen_dict import FrozenDict as fdict
-from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
+from MBALearnsToCode.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
 
 
 # Number of Time Periods

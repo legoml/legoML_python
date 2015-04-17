@@ -4,8 +4,8 @@ import itertools
 from sympy import Symbol
 from sympy.integrals import integrate
 from frozen_dict import FrozenDict
-from MBALearnsToCode_Py.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_args
-from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction
+from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_args
+from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction
 
 
 class Factor:

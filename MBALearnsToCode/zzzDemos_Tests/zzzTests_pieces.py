@@ -1,7 +1,7 @@
 from numpy.random import *
-from MBALearnsToCode_Py.Pieces.PIECES___zzz_common_functions import *
-from MBALearnsToCode_Py.Pieces.PIECES___cost_functions import *
-from MBALearnsToCode_Py.Pieces.PIECES___regularization_functions import *
+from MBALearnsToCode.Pieces.PIECES___zzz_common_functions import *
+from MBALearnsToCode.Pieces.PIECES___cost_functions import *
+from MBALearnsToCode.Pieces.PIECES___regularization_functions import *
 
 
 

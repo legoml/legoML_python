@@ -2,8 +2,8 @@
 # (examples from Coursera: "Probabilistic Graphical Models" (Daphne Koller)
 
 from frozen_dict import FrozenDict as fdict
-from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
-from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
+from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
+from MBALearnsToCode.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
 
 
 f1 = Factor(DFDF({fdict(a=1, b=1): 0.5,

@@ -1,6 +1,6 @@
 import sys
 from DataSet import *
-from MBALearnsToCode_Py.UserDefinedClasses.CLASSES___HiddenMarkovModels import HMM, Viterbi
+from MBALearnsToCode.UserDefinedClasses.CLASSES___HiddenMarkovModels import HMM, Viterbi
 
 
 # This defines a simple class for running your Viterbi code. As with

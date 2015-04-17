@@ -3,7 +3,7 @@ from numpy.random import rand
 
 
 # test PIECE
-from MBALearnsToCode_Py.zzzDemos_Tests.zzzTests_pieces import *
+from MBALearnsToCode.zzzDemos_Tests.zzzTests_pieces import *
 TEST___PIECE___equal()
 TEST___PIECE___matrix_product_of_inputs_and_weights()
 TEST___PIECE___linear()
@@ -24,6 +24,6 @@ TEST___PIECE___l2_weight_regularization()
 
 
 # test FFNN
-from MBALearnsToCode_Py.zzzDemos_Tests.zzzTests_programs import *
+from MBALearnsToCode.zzzDemos_Tests.zzzTests_programs import *
 TEST___PROGRAM___ffnn_check_gradients(100)
 TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(100)
