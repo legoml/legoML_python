@@ -33,8 +33,8 @@ MBALearnsToCode/zzzDemos_Tests/zzzTests_programs.py
 MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/__init__.py
 MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/__init__.py
 MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/probset1_q4.py
-MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/test.py
 MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/DataSet.py
 MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py
 MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/TrainHMM.py
 MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/__init__.py
+MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/test.py

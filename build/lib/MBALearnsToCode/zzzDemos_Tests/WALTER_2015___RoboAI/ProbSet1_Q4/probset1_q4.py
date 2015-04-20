@@ -22,20 +22,20 @@ print('\n')
 for t in range(T):
     print('Prob(X_%i | X_%i) =' % (t + 1, t))
     prob[(('X', t + 1), '|', ('X', t))] = Factor(DFDF({fdict({('X', t): 0, ('X', t + 1): 0}): 0.6,
-                                                        fdict({('X', t): 0, ('X', t + 1): 1}): 0.4,
-                                                        fdict({('X', t): 1, ('X', t + 1): 0}): 0.3,
-                                                        fdict({('X', t): 1, ('X', t + 1): 1}): 0.7}),
-                                                  conditions={('X', t): None})
+                                                       fdict({('X', t): 0, ('X', t + 1): 1}): 0.4,
+                                                       fdict({('X', t): 1, ('X', t + 1): 0}): 0.3,
+                                                       fdict({('X', t): 1, ('X', t + 1): 1}): 0.7}),
+                                                 conditions={('X', t): None})
     prob[(('X', t + 1), '|', ('X', t))].print()
     print('\n')
 
 for t in range(T + 1):
     print('Prob(Z_%i | X%i) =' % (t, t))
     prob[(('Z', t), '|', ('X', t))] = Factor(DFDF({fdict({('X', t): 0, ('Z', t): 0}): 0.8,
-                                                    fdict({('X', t): 0, ('Z', t): 1}): 0.2,
-                                                    fdict({('X', t): 1, ('Z', t): 0}): 0.2,
-                                                    fdict({('X', t): 1, ('Z', t): 1}): 0.8}),
-                                              conditions={('X', t): None})
+                                                   fdict({('X', t): 0, ('Z', t): 1}): 0.2,
+                                                   fdict({('X', t): 1, ('Z', t): 0}): 0.2,
+                                                   fdict({('X', t): 1, ('Z', t): 1}): 0.8}),
+                                             conditions={('X', t): None})
     prob[(('Z', t), '|', ('X', t))].print()
     print('\n')
     

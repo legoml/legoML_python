@@ -27,3 +27,7 @@ class DiscreteFiniteDomainFunction:
             if s <= sympy_args(function_value):
                 d[args_and_values___frozen_dict] = sympy_subs(function_value, args_and_values___dict)
         return DiscreteFiniteDomainFunction(d)
+
+
+def is_discrete_finite_domain_function(function):
+    return hasattr(function, 'discrete_finite_mappings')

@@ -1,12 +1,12 @@
-import csv
-import numpy as np
+import pandas
+from numpy import *
 
 
 class DataSet(object):
-    def __init__(self, filename):
+    def __init__(self, file_name):
         # The following are some variables that may be necessary or
         # useful. You may find that you need/want to add other variables.
-        self.filename = filename
+        self.file_name = file_name
         self.numStates = 16
         self.numOutputs = 4
 
@@ -44,18 +44,15 @@ class DataSet(object):
                 self.xyToInt[i,j] = idx
                 idx+=1
 
-        
-
 
     # This function reads in the file and populates the training state
     # and output sequences
-    def readFile(self):
+    def read_file(self):
+        data_frame = pandas.io.parsers.read_csv(self.file_name)
 
         allStateSeq = []
         allObsSeq = []
 
 
         # Your code goes here
-        print "Please add code"
-        
-                
+        return data_frame

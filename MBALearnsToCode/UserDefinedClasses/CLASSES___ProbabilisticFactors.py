@@ -5,7 +5,8 @@ from sympy import Symbol
 from sympy.integrals import integrate
 from frozen_dict import FrozenDict
 from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_args
-from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction
+from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction,\
+    is_discrete_finite_domain_function
 
 
 class Factor:
@@ -146,10 +147,6 @@ class Factor:
                 scope.add(arg)
             function = product_of_2_functions(function, factor_to_multiply.function)
         return Factor(function, conditions)
-
-
-def is_discrete_finite_domain_function(function):
-    return hasattr(function, 'discrete_finite_mappings')
 
 
 def product_of_discrete_finite_domain_function_and_sympy_function(discrete_finite_domain_function, sympy_function):
