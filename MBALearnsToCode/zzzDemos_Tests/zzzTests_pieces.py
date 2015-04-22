@@ -1,8 +1,8 @@
+from __future__ import print_function
 from numpy.random import *
 from MBALearnsToCode.Pieces.PIECES___zzz_common_functions import *
 from MBALearnsToCode.Pieces.PIECES___cost_functions import *
 from MBALearnsToCode.Pieces.PIECES___regularization_functions import *
-
 
 
 def TEST___PIECE___equal(num_runs = 1000):

@@ -17,6 +17,10 @@ def pair_rdd_sum(pair_rdd):
     return parallel(pair_rdd).reduceByKey(lambda x, y: x + y)
 
 
+def pair_rdd_pooled_sum(pair_rdd):
+    return parallel(pair_rdd).map(lambda pair: pair[1]).reduce(lambda x, y: x + y)
+
+
 def rdd_mean(rdd, count=None):
     if count is None:
         sum_and_count = parallel(rdd).map(lambda x: (x, 1))\
@@ -35,6 +39,15 @@ def pair_rdd_mean(pair_rdd, count_by_key=None):
         count_by_key = parallel(count_by_key)
         sums_and_counts = sum_by_key.cogroup(count_by_key)
     return sums_and_counts.mapValues(lambda sum_and_count: sum_and_count[0] / sum_and_count[1])
+
+
+def pair_rdd_pooled_mean(pair_rdd, count=None):
+    if count is None:
+        t = parallel(pair_rdd).map(lambda pair: (pair[1], 1))\
+            .reduce(lambda tuple1, tuple2: tuple(i + j for i, j in zip(tuple1, tuple2)))
+        return t[0] / t[1]
+    else:
+        return pair_rdd_pooled_sum(pair_rdd) / count
 
 
 def rdd_variance(rdd, count=None, mean=None):
@@ -65,6 +78,18 @@ def pair_rdd_variance(pair_rdd, count_by_key=None, mean_by_key=None):
                                 count=vector_and_count_and_mean[1], mean=vector_and_count_and_mean[2]))
 
 
+def pair_rdd_pooled_variance(pair_rdd, count=None, mean=None):
+    pair_rdd = parallel(pair_rdd)
+    if count is None:
+        count = pair_rdd.count()
+    if count < 2:
+        return 0.0
+    else:
+        if mean is None:
+            mean = pair_rdd_pooled_mean(pair_rdd, count=count)
+        return pair_rdd.map(lambda pair: (pair[1] - mean) ** 2).reduce(lambda x, y: x + y) / (count - 1)
+
+
 def rdd_standard_deviation(rdd, count=None, mean=None):
     return sqrt(rdd_variance(rdd, count=count, mean=mean))
 
@@ -72,6 +97,10 @@ def rdd_standard_deviation(rdd, count=None, mean=None):
 def pair_rdd_standard_deviation(pair_rdd, count_by_key=None, mean_by_key=None):
     return pair_rdd_variance(pair_rdd, count_by_key=count_by_key, mean_by_key=mean_by_key)\
         .mapValues(lambda variance: sqrt(variance))
+
+
+def pair_rdd_pooled_standard_deviation(pair_rdd, count=None, mean=None):
+    return sqrt(pair_rdd_pooled_variance(pair_rdd, count=count, mean=mean))
 
 
 def rdd_normalize_subtract_mean_divide_standard_deviation(rdd, count=None, mean=None, standard_deviation=None):
