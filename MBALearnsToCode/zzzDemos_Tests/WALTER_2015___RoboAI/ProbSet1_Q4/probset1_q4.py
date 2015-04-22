@@ -82,4 +82,4 @@ for t in range(4):
 print('\nVITERBI ALGORITHM:\n')
 
 print('Most Likely Joint Distribution with actual z values up to z_%i:' % T)
-pprint(hmm.map_estimate(all_z))
+pprint(hmm.map_state_sequences(all_z))

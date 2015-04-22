@@ -141,20 +141,29 @@ class HMM(object):
                     .normalize()
             return d
 
-    def map_estimate(self, observations___dict):
-        T = len(observations___dict)
-        t = 0
-        v = self.state_prior_factor()\
-            .multiply(self.observation_factor(t))\
-            .subs({(self.observation_var_name, t): observations___dict[t]})\
-            .max()
-        for t in range(1, T):
-            v = v.multiply(self.state_transition_factor(t))\
-                .multiply(self.observation_factor(t))\
-                .subs({(self.observation_var_name, t): observations___dict[t]})\
-                .max()
+    def map_joint_distributions(self, observations___list, recursive=False):
+        T = len(observations___list) - 1
+        if T == 0:
+            f = self.state_prior_factor()\
+                .multiply(self.observation_factor(0)
+                          .subs({(self.observation_var_name, 0): observations___list[0]}))
+            if recursive:
+                return f
+            else:
+                return f.max()
+        else:
+            last_observation = observations___list.pop(T)
+            f = (self.state_transition_factor(T)
+                 .multiply(self.observation_factor(T)
+                           .subs({(self.observation_var_name, T): last_observation}))).max()
+            return (self.map_joint_distributions(observations___list, True)
+                    .multiply(f)).max()
+
+    def map_state_sequences(self, observations___list):
+        T = len(observations___list)
+        m = self.map_joint_distributions(observations___list)
         s = set()
-        for args_and_values___frozen_dict in v.function.discrete_finite_mappings:
+        for args_and_values___frozen_dict in m.function.discrete_finite_mappings:
             l = []
             for t in range(T):
                 l += [args_and_values___frozen_dict[(self.state_var_name, t)]]

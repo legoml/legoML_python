@@ -29,7 +29,7 @@ if __name__ == '__main__':
     for i in range(num_test_sequences_to_process):
         print('Estimating Most Likely State Sequence for Test Sample #%i' %i)
         testing_data_sequences[i]['most_likely_xy_sequence'] =\
-            tuple(hmm.map_estimate(list(testing_data_sequences[i]['ob'])))[0]
+            tuple(hmm.map_state_sequences(list(testing_data_sequences[i]['ob'])))[0]
 
     output_file = 'testing_data_sequences_with_MAP.PICKLE'
     print('Outputing to:', output_file)
