@@ -1,8 +1,3 @@
-from __future__ import print_function
-from numpy import *
-from numpy.random import rand
-
-
 # test PIECE
 from MBALearnsToCode.zzzDemos_Tests.zzzTests_pieces import *
 TEST___PIECE___equal()

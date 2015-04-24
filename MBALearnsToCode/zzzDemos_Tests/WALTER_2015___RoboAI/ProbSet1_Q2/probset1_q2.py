@@ -28,7 +28,7 @@ f_S1_on_S0_equal_1 = f_S0_S1.condition(None, dict(S0=1))
 f_S3_on_S4_equal_0 = f_S3_S4.condition(None, dict(S4=0))
 f_S1_on_S0_equal_1_and_S4_equal_0 = (f_S1_on_S0_equal_1.multiply(f_S1_S2, f_S2_S3, f_S3_on_S4_equal_0)
                                      .eliminate((('S2', 'sum', (0, 1)), ('S3', 'sum', (0, 1))))).normalize()
-f_S1_on_S0_equal_1_and_S4_equal_0.print()
+f_S1_on_S0_equal_1_and_S4_equal_0.pprint()
 
 l0 = lambda a: 0.09 * a ** 2 + 0.02 * a * (1 - a) + 0.09 * (1 - a)
 l1 = lambda a: 0.09 * a ** 2 + 1.62 * a + 0.09 * (1 - a)

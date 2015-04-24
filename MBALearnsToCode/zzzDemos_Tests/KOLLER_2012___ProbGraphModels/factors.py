@@ -16,7 +16,7 @@ f2 = Factor(DFDF({fdict(b=1, c=1): 0.5,
                   fdict(b=2, c=1): 0.1,
                   fdict(b=2, c=2): 0.2}))
 f = f1.multiply(f2)
-f.print()
+f.pprint()
 # expected result:
 # (('a', 1), ('b', 1), ('c', 1)): 0.25
 # (('a', 1), ('b', 1), ('c', 2)): 0.35
@@ -33,4 +33,4 @@ f.print()
 # (('a', 3), ('b', 2), ('c', 2)): 0.18
 
 g = f.eliminate((('b', 'sum', (1, 2)),))
-g.print()
+g.pprint()

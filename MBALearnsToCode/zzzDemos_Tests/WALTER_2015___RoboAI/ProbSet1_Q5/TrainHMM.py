@@ -50,13 +50,13 @@ if __name__ == '__main__':
     state_prior_prob, state_transition_prob, observation_prob = train_hmm(data_sequences)
 
     print('Estimated State Prior Probabilities:')
-    state_prior_prob.print()
+    state_prior_prob.print_factor()
     print('\n')
 
     print('Estimated State Transition Probabilities:')
-    state_transition_prob.print()
+    state_transition_prob.print_factor()
     print('\n')
 
     print('Estimated Observation Probabilities:')
-    observation_prob.print()
+    observation_prob.print_factor()
     print('\n')

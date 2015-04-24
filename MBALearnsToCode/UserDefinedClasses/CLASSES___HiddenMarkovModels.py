@@ -166,6 +166,6 @@ class HMM(object):
         for args_and_values___frozen_dict in m.function.discrete_finite_mappings:
             l = []
             for t in range(T):
-                l += [args_and_values___frozen_dict[(self.state_var_name, t)]]
+                l += [args_and_values___frozen_dict[str((self.state_var_name, t))]]
             s.add(tuple(l))
         return s

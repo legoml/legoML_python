@@ -4,7 +4,7 @@ import itertools
 from sympy import Symbol
 from sympy.integrals import integrate
 from frozen_dict import FrozenDict
-from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_args
+from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_string_args
 from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction
 
 
@@ -23,7 +23,7 @@ class Factor:
                 self.condition_instances[args_and_values___frozen_dict] = condition_instance
             self.scope = sympy_function_or_discrete_finite_domain_function.args - set(conditions)
         else:
-            self.scope = sympy_args(sympy_function_or_discrete_finite_domain_function) - set(conditions)
+            self.scope = sympy_string_args(sympy_function_or_discrete_finite_domain_function) - set(conditions)
         self.function = sympy_function_or_discrete_finite_domain_function.copy()
 
     def print(self):

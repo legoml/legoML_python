@@ -1,4 +1,5 @@
-from numpy import sqrt
+from __future__ import division
+from numpy import atleast_2d, sqrt, isnan
 
 
 def parallel(obj):
@@ -6,7 +7,34 @@ def parallel(obj):
     if isinstance(obj, pyspark.rdd.RDD):
         return obj
     else:
-        return sc.parallelize(obj)
+        if isinstance(obj, dict):
+            return sc.parallelize(obj.items())
+        else:
+            return sc.parallelize(obj)
+
+
+def row_vector_self_inner_product(v):
+    v = atleast_2d(v)
+    return v.dot(v.T)
+
+
+def row_vector_self_outer_product(v):
+    v = atleast_2d(v)
+    return v.T.dot(v)
+
+
+def fill_nan_with_0(arr):
+    a = arr.copy()
+    a[isnan(a)] = 0
+    return a
+
+
+def rdd_fill_nan_with_0(rdd):
+    return parallel(rdd).map(lambda arr: fill_nan_with_0(arr))
+
+
+def pair_rdd_fill_nan_with_0(pair_rdd):
+    return parallel(pair_rdd).mapValues(lambda arr: fill_nan_with_0(arr))
 
 
 def rdd_sum(rdd):
@@ -15,10 +43,6 @@ def rdd_sum(rdd):
 
 def pair_rdd_sum(pair_rdd):
     return parallel(pair_rdd).reduceByKey(lambda x, y: x + y)
-
-
-def pair_rdd_pooled_sum(pair_rdd):
-    return parallel(pair_rdd).map(lambda pair: pair[1]).reduce(lambda x, y: x + y)
 
 
 def rdd_mean(rdd, count=None):
@@ -41,15 +65,6 @@ def pair_rdd_mean(pair_rdd, count_by_key=None):
     return sums_and_counts.mapValues(lambda sum_and_count: sum_and_count[0] / sum_and_count[1])
 
 
-def pair_rdd_pooled_mean(pair_rdd, count=None):
-    if count is None:
-        t = parallel(pair_rdd).map(lambda pair: (pair[1], 1))\
-            .reduce(lambda tuple1, tuple2: tuple(i + j for i, j in zip(tuple1, tuple2)))
-        return t[0] / t[1]
-    else:
-        return pair_rdd_pooled_sum(pair_rdd) / count
-
-
 def rdd_variance(rdd, count=None, mean=None):
     rdd = parallel(rdd)
     if count is None:
@@ -59,9 +74,10 @@ def rdd_variance(rdd, count=None, mean=None):
     else:
         if mean is None:
             mean = rdd_mean(rdd, count=count)
-        return rdd.map(lambda x: (x - mean) ** 2).reduce(lambda x, y: x + y) / (count - 1)
+        return rdd.map(lambda x: (x - mean) ** 2).reduce(lambda x, y: x + y) / count
 
 
+# To Verify
 def pair_rdd_variance(pair_rdd, count_by_key=None, mean_by_key=None):
     pair_rdd = parallel(pair_rdd)
     if count_by_key is None:
@@ -78,18 +94,6 @@ def pair_rdd_variance(pair_rdd, count_by_key=None, mean_by_key=None):
                                 count=vector_and_count_and_mean[1], mean=vector_and_count_and_mean[2]))
 
 
-def pair_rdd_pooled_variance(pair_rdd, count=None, mean=None):
-    pair_rdd = parallel(pair_rdd)
-    if count is None:
-        count = pair_rdd.count()
-    if count < 2:
-        return 0.0
-    else:
-        if mean is None:
-            mean = pair_rdd_pooled_mean(pair_rdd, count=count)
-        return pair_rdd.map(lambda pair: (pair[1] - mean) ** 2).reduce(lambda x, y: x + y) / (count - 1)
-
-
 def rdd_standard_deviation(rdd, count=None, mean=None):
     return sqrt(rdd_variance(rdd, count=count, mean=mean))
 
@@ -97,10 +101,6 @@ def rdd_standard_deviation(rdd, count=None, mean=None):
 def pair_rdd_standard_deviation(pair_rdd, count_by_key=None, mean_by_key=None):
     return pair_rdd_variance(pair_rdd, count_by_key=count_by_key, mean_by_key=mean_by_key)\
         .mapValues(lambda variance: sqrt(variance))
-
-
-def pair_rdd_pooled_standard_deviation(pair_rdd, count=None, mean=None):
-    return sqrt(pair_rdd_pooled_variance(pair_rdd, count=count, mean=mean))
 
 
 def rdd_normalize_subtract_mean_divide_standard_deviation(rdd, count=None, mean=None, standard_deviation=None):
@@ -111,9 +111,10 @@ def rdd_normalize_subtract_mean_divide_standard_deviation(rdd, count=None, mean=
         mean = rdd_mean(rdd, count=count)
     if standard_deviation is None:
         standard_deviation = rdd_standard_deviation(rdd, count=count, mean=mean)
-    return rdd.map(lambda x: (x - mean) / standard_deviation)
+    return rdd.map(lambda x: fill_nan_with_0((x - mean) / standard_deviation))
 
 
+# To Verify
 def pair_rdd_normalize_subtract_mean_divide_standard_deviation(pair_rdd, count_by_key=None, mean_by_key=None,
                                                                standard_deviation_by_key=None):
     pair_rdd = parallel(pair_rdd)
@@ -137,3 +138,8 @@ def pair_rdd_normalize_subtract_mean_divide_standard_deviation(pair_rdd, count_b
                        count=vector_and_count_and_mean_and_standard_deviation[1],
                        mean=vector_and_count_and_mean_and_standard_deviation[2],
                        standard_deviation=vector_and_count_and_mean_and_standard_deviation[3]))
+
+
+def rdd_matrix_self_inner_product(rdd_matrix):
+    return parallel(rdd_matrix).map(lambda row: row_vector_self_outer_product(row))\
+        .reduce(lambda x, y: x + y)

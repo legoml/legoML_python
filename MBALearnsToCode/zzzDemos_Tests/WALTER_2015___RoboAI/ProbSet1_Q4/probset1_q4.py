@@ -29,17 +29,17 @@ hmm = HMM(('X', 'next_X'), 'Z', (0, 1), state_prior, state_transition_likelihood
 print('\nPROBLEM SETUPS:\n')
 
 print('Prob(X_0) =')
-hmm.state_prior_factor().print()
+hmm.state_prior_factor().pprint()
 print('\n')
 
 for t in range(1, T + 1):
     print('Prob(X_%i | X_%i) =' % (t, t - 1))
-    hmm.state_transition_factor(t).print()
+    hmm.state_transition_factor(t).pprint()
     print('\n')
 
 for t in range(T + 1):
     print('Prob(Z_%i | X_%i) =' % (t, t))
-    hmm.observation_factor(t).print()
+    hmm.observation_factor(t).pprint()
     print('\n')
     
 
@@ -56,7 +56,7 @@ forward = hmm.forward_factor(range(T + 1), all_z)
 
 for t in range(T + 1):
     print('Prob(X_%i, z up to z_%i) =' % (t, t))
-    forward[t].print()
+    forward[t].pprint()
     print('\n')
 
 
@@ -65,7 +65,7 @@ backward = hmm.backward_factor(range(T + 1), all_z)
 
 for t in reversed(range(T + 1)):   # Recursively compute Backward factors
     print('Prob(z_%i to %i | X_%i) =' % (t + 1, T, t))
-    backward[t].print()
+    backward[t].pprint()
     print('\n')
 
 
@@ -74,7 +74,7 @@ print('Probability of each X conditional on all z values:\n')
 infer_state = hmm.infer_state(range(T + 1), all_z)
 for t in range(4):
     print('Prob(X_%i | all z) =' % t)
-    infer_state[t].print()
+    infer_state[t].pprint()
     print('\n')
 
 

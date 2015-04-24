@@ -16,7 +16,7 @@ prob = {}
 print('Prob(X_0) =')
 prob[('X', 0)] = Factor(DFDF({fdict({('X', 0): 0}): 0.5,
                               fdict({('X', 0): 1}): 0.5}))
-prob[('X', 0)].print()
+prob[('X', 0)].print_factor()
 print('\n')
 
 for t in range(T):
@@ -26,7 +26,7 @@ for t in range(T):
                                                        fdict({('X', t): 1, ('X', t + 1): 0}): 0.3,
                                                        fdict({('X', t): 1, ('X', t + 1): 1}): 0.7}),
                                                  conditions={('X', t): None})
-    prob[(('X', t + 1), '|', ('X', t))].print()
+    prob[(('X', t + 1), '|', ('X', t))].print_factor()
     print('\n')
 
 for t in range(T + 1):
@@ -36,7 +36,7 @@ for t in range(T + 1):
                                                    fdict({('X', t): 1, ('Z', t): 0}): 0.2,
                                                    fdict({('X', t): 1, ('Z', t): 1}): 0.8}),
                                              conditions={('X', t): None})
-    prob[(('Z', t), '|', ('X', t))].print()
+    prob[(('Z', t), '|', ('X', t))].print_factor()
     print('\n')
     
 
@@ -55,7 +55,7 @@ t = 0
 print('Prob(X_%i, z_%i) =' % (t, t))
 forward[t] = prob[('X', t)].multiply(
     prob[(('Z', t), '|', ('X', t))].subs({('Z', t): all_z[('Z', t)]}))
-forward[t].print()
+forward[t].print_factor()
 print('\n')
 
 for t in range(1, T + 1):   # Recursively compute Forward factors
@@ -64,7 +64,7 @@ for t in range(1, T + 1):   # Recursively compute Forward factors
         .multiply(prob[(('X', t), '|', ('X', t - 1))])\
         .eliminate(((('X', t - 1), 'sum', (0, 1)),))\
         .multiply(prob[(('Z', t), '|', ('X', t))].subs({('Z', t): all_z[('Z', t)]}))
-    forward[t].print()
+    forward[t].print_factor()
     print('\n')
 
 
@@ -75,7 +75,7 @@ print('Prob( | X_%i) = ' % T)
 backward[T] = Factor(DFDF({fdict({('X', T): 0}): 1,
                            fdict({('X', T): 1}): 1}),
                      conditions={('X', T): None})
-backward[T].print()
+backward[T].print_factor()
 print('\n')
 
 for t in reversed(range(T)):   # Recursively compute Backward factors
@@ -84,14 +84,14 @@ for t in reversed(range(T)):   # Recursively compute Backward factors
         .multiply(prob[(('Z', t + 1), '|', ('X', t + 1))].subs({('Z', t + 1): all_z[('Z', t + 1)]}))\
         .multiply(backward[t + 1])\
         .eliminate(((('X', t + 1), 'sum', (0, 1)),))
-    backward[t].print()
+    backward[t].print_factor()
     print('\n')
 
 
 print('Probability of all z values:\n')
 print('Prob(all z values) =')
 prob['all Z'] = forward[T].eliminate(((('X', T), 'sum', (0, 1)),))
-prob['all Z'].print()
+prob['all Z'].print_factor()
 print('\n')
 
 
@@ -99,7 +99,7 @@ print('Probability of each X conditional on all z values:\n')
 for t in range(4):
     prob[(('X', t), '|', 'all z')] = forward[t].multiply(backward[t]).condition(None, all_z).normalize()
     print('Prob(X_%i | all z) =' % t)
-    prob[(('X', t), '|', 'all z')].print()
+    prob[(('X', t), '|', 'all z')].print_factor()
     print('\n')
 
 
@@ -110,7 +110,7 @@ viterbi = {}
 
 print('Most Likely Joint Distribution at t = 0 with actual z_0:')
 viterbi[0] = forward[0].max()
-viterbi[0].print()
+viterbi[0].print_factor()
 print('\n')
 
 for t in range(1, 4):
@@ -118,5 +118,5 @@ for t in range(1, 4):
     viterbi[t] = (viterbi[t - 1]\
         .multiply(prob[(('X', t), '|', ('X', t - 1))])\
         .multiply(prob[(('Z', t), '|', ('X', t))].subs({('Z', t): all_z[('Z', t)]}))).max()
-    viterbi[t].print()
+    viterbi[t].print_factor()
     print('\n')

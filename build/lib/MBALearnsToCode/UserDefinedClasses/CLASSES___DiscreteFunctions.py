@@ -1,5 +1,5 @@
 from copy import copy as shallow_copy, deepcopy
-from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_args, sympy_subs
+from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, sympy_string_args, sympy_subs
 
 
 class DiscreteFiniteDomainFunction:
@@ -9,7 +9,7 @@ class DiscreteFiniteDomainFunction:
         self.args = set()
         for args_and_values___frozen_dict, function_value in args_values_and_function_values___dict.items():
             self.args.update(args_and_values___frozen_dict.keys())
-            self.args.update(sympy_args(function_value))
+            self.args.update(sympy_string_args(function_value))
         self.discrete_finite_mappings = args_values_and_function_values___dict
 
     def copy(self):
@@ -24,6 +24,6 @@ class DiscreteFiniteDomainFunction:
             s = set()
             for arg, value in s1:
                 s.update(str(arg))
-            if s <= sympy_args(function_value):
+            if s <= sympy_string_args(function_value):
                 d[args_and_values___frozen_dict] = sympy_subs(function_value, args_and_values___dict)
         return DiscreteFiniteDomainFunction(d)
