@@ -11,7 +11,7 @@ from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import dict_with_string_keys
 
 
 class Factor():
-    def __init__(self, sympy_function_or_discrete_finite_domain_function, conditions={}):
+    def __init__(self, sympy_function_or_discrete_finite_domain_function, conditions={}, scope=set()):
         self.conditions = dict_with_string_keys(conditions)
         if is_discrete_finite_domain_function(sympy_function_or_discrete_finite_domain_function):
             self.condition_instances = {}
@@ -24,7 +24,7 @@ class Factor():
                 self.condition_instances[string_args_and_values___frozen_dict] = condition_instance
             self.scope = sympy_function_or_discrete_finite_domain_function.args - set(self.conditions)
         else:
-            self.scope = sympy_string_args(sympy_function_or_discrete_finite_domain_function) - set(self.conditions)
+            self.scope = scope - set(self.conditions)
         self.function = sympy_function_or_discrete_finite_domain_function.copy()
 
     def copy(self):
@@ -84,6 +84,7 @@ class Factor():
 
     def eliminate(self, args_and_sum_and_values_or_integrate_and_range___tuple_or_list):
         function = self.function.copy()
+        scope = deepcopy(self.scope)
         for arg, sum_or_integrate, values_or_bounds in args_and_sum_and_values_or_integrate_and_range___tuple_or_list:
             string_arg = str(arg)
             if sum_or_integrate == 'sum':
@@ -111,11 +112,12 @@ class Factor():
                     d = function.discrete_finite_mappings
                     for string_args_and_values___frozen_dict, factor_value in d.items():
                         d[string_args_and_values___frozen_dict] = integrate(factor_value,
-                                                                            (string_arg, lower_bound, upper_bound))
+                                                                            (string_arg, lower_bound, upper_bound),
+                                                                            manual=True)
                     function = DiscreteFiniteDomainFunction(d)
                 else:
-                    function = integrate(function, (string_arg, lower_bound, upper_bound))
-        return Factor(function, deepcopy(self.conditions))
+                    function = integrate(function, (string_arg, lower_bound, upper_bound), manual=True)
+        return Factor(function, deepcopy(self.conditions), )
 
     def condition(self, eliminated_args_and_sum_and_values_or_integrate_and_range___tuple_or_list=None,
                   condition_args_and_values={}, **kw_condition_args_and_values):

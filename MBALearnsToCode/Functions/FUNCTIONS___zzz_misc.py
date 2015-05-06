@@ -85,3 +85,12 @@ def sympy_subs(sympy_expression, args_and_values___dict={}, **kw_args_and_values
     except:
         pass
     return sympy_expression
+
+
+def rename_dict_keys(dict_object, to_new_keys_from_old_keys___dict):
+    d = deepcopy(dict_object)   # just to be careful #
+    for new_key, old_key in to_new_keys_from_old_keys___dict.items():
+        value = d[old_key]
+        del d[old_key]
+        d[new_key] = value
+    return d
