@@ -2,7 +2,7 @@ import sys
 import pickle
 from MBALearnsToCode.zzzDemos_Tests.WALTER_2015___RoboAI.ProbSet1_Q5.DataSet import DataSet
 from MBALearnsToCode.zzzDemos_Tests.WALTER_2015___RoboAI.ProbSet1_Q5.TrainHMM import train_hmm
-from MBALearnsToCode.UserDefinedClasses.CLASSES___HiddenMarkovModels import HMM
+from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM
 
 
 if __name__ == '__main__':

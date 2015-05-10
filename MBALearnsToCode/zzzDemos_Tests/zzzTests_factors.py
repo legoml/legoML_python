@@ -1,13 +1,14 @@
-from numpy import array, squeeze
-from sympy import Symbol, symbols, oo, pi, exp
-from sympy.matrices import MatrixSymbol, BlockMatrix, block_collapse, eye, Matrix
-from sympy.matrices.expressions.blockmatrix import bc_matadd
+from numpy import array
+from sympy import symbols, oo, pi, exp
+from sympy.matrices import MatrixSymbol, BlockMatrix
 from sympy.integrals import integrate
 from frozen_dict import FrozenDict as fdict
+
 from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
 from MBALearnsToCode.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
-from MBALearnsToCode.Functions.FUNCTIONS___matrices import\
+from MBALearnsToCode.zzzDemos_Tests.FUNCTIONS___matrices import\
     sympy_matrix_determinant_expansion, sympy_matrix_inverse_expansion
+
 
 x, y, m, mx, my, s, sx, sy, sxy = symbols('x y m mx my s sx sy sxy')
 
@@ -60,8 +61,6 @@ from
 
 
 d
-import theano
-
 
 import os
 import sys

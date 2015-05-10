@@ -1,4 +1,4 @@
-from MBALearnsToCode.CORE.Classes import Process, Program, connect_processes
+from MBALearnsToCode.UserDefinedClasses.CLASSES___Lego import Process, Program, connect_processes
 from MBALearnsToCode.Pieces.PIECES___zzz_common_functions import *
 from MBALearnsToCode.Pieces.PIECES___cost_functions import *
 

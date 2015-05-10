@@ -1,7 +1,6 @@
 import sys
 from frozen_dict import FrozenDict as fdict
-from MBALearnsToCode.UserDefinedClasses.CLASSES___DiscreteFunctions import DiscreteFiniteDomainFunction as DFDF
-from MBALearnsToCode.UserDefinedClasses.CLASSES___ProbabilisticFactors import Factor
+from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import discrete_finite_mass_function as dfmf
 from MBALearnsToCode.zzzDemos_Tests.WALTER_2015___RoboAI.ProbSet1_Q5.DataSet import DataSet
 
 

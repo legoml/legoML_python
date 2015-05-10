@@ -42,3 +42,5 @@ d = nx + ny
 sqerr = - (X - M).transpose() * S.inverse() * (X - M) / 2
 
 dense = ((2 * pi) ** (-d / 2)) * (det(S) ** (-1 / 2)) * exp(det(- (X - M).transpose() * S.inverse() * (X - M) / 2))
+
+import lshash

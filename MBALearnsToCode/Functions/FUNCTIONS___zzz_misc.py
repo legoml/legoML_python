@@ -1,6 +1,8 @@
 from numpy import zeros
 from copy import deepcopy
+from sympy.matrices import MatrixSymbol
 from frozen_dict import FrozenDict
+from MBALearnsToCode.Functions.FUNCTIONS___sympy import is_non_atomic_sympy_expression
 
 
 def as_tuple(x):
@@ -94,3 +96,40 @@ def rename_dict_keys(dict_object, to_new_keys_from_old_keys___dict):
         del d[old_key]
         d[new_key] = value
     return d
+
+
+def merge_dicts(dict_1, dict_2):
+    d = deepcopy(dict_1)
+    for key, value in dict_2.items():
+        if (key not in dict_1) or (value is not None):
+            d[key] = value
+    return d
+
+
+def shift_time_subscripts(obj, t, *matrix_symbols_to_shift):
+    if isinstance(obj, FrozenDict):
+        return FrozenDict({shift_time_subscripts(key, t): shift_time_subscripts(value, t)
+                           for key, value in obj.items()})
+    elif isinstance(obj, tuple):
+        if len(obj) == 2 and isinstance(obj[1], int):
+            tup = (shift_time_subscripts(obj[0], t), obj[1] + t)
+            return tup
+        else:
+            return tuple(shift_time_subscripts(item, t) for item in obj)
+    elif isinstance(obj, list):
+        return [shift_time_subscripts(item, t) for item in obj]
+    elif isinstance(obj, set):
+        return {shift_time_subscripts(item, t) for item in obj}
+    elif isinstance(obj, dict):
+        return {shift_time_subscripts(key, t): shift_time_subscripts(value, t) for key, value in obj.items()}
+    elif isinstance(obj, MatrixSymbol):
+        args = obj.args
+        if isinstance(args[0], tuple):
+            return MatrixSymbol(shift_time_subscripts(args[0], t), args[1], args[2])
+        else:
+            return obj
+    elif is_non_atomic_sympy_expression(obj):
+        return obj.xreplace({matrix_symbol: shift_time_subscripts(matrix_symbol, t)
+                             for matrix_symbol in matrix_symbols_to_shift})
+    else:
+        return obj

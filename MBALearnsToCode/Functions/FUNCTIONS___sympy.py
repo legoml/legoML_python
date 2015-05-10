@@ -1,54 +1,74 @@
-def sympy_xreplace_doit_explicit(sympy_expression, xreplace_dict={}):
-    sympy_expression = sympy_expression.copy()
-    if isinstance(sympy_expression, dict):
-        sympy_expression = {k: sympy_xreplace_doit_explicit(v, xreplace_dict) for k, v in sympy_expression.items()}
+from copy import copy, deepcopy
+from sympy import Atom
+from frozen_dict import FrozenDict
+
+
+def is_non_atomic_sympy_expression(obj):
+    return hasattr(obj, 'doit') and not isinstance(obj, Atom)
+
+
+def sympy_xreplace(obj, xreplace_dict={}):
+    if isinstance(obj, tuple):
+        return tuple(sympy_xreplace(item, xreplace_dict) for item in obj)
+    elif isinstance(obj, list):
+        return [sympy_xreplace(item, xreplace_dict) for item in obj]
+    elif isinstance(obj, set):
+        return set(sympy_xreplace(item, xreplace_dict) for item in obj)
+    elif isinstance(obj, frozenset):
+        return frozenset(sympy_xreplace(item, xreplace_dict) for item in obj)
+    elif isinstance(obj, dict):
+        return {sympy_xreplace(key, xreplace_dict): sympy_xreplace(value, xreplace_dict)
+                for key, value in obj.items()}
+    elif isinstance(obj, FrozenDict):
+        return FrozenDict({sympy_xreplace(key, xreplace_dict): sympy_xreplace(value, xreplace_dict)
+                           for key, value in obj.items()})
+    elif hasattr(obj, 'xreplace'):
+        return obj.xreplace(xreplace_dict)
+    else:
+        return deepcopy(obj)
+
+
+def sympy_xreplace_doit_explicit(obj, xreplace_dict={}):
+    obj = copy(obj)
+    if isinstance(obj, dict):
+        obj = {key: sympy_xreplace_doit_explicit(value, xreplace_dict) for key, value in obj.items()}
     else:
         # xreplace into all nodes of the expression tree first
         if xreplace_dict:
-            sympy_expression = sympy_expression.xreplace(xreplace_dict)
+            obj = obj.xreplace(xreplace_dict)
         # traverse the tree to compute
-        if hasattr(sympy_expression, 'args') and sympy_expression.args:
+        if is_non_atomic_sympy_expression(obj):
             args = []
-            for arg in sympy_expression.args:
+            for arg in obj.args:
                 # compute each argument
                 args += [sympy_xreplace_doit_explicit(arg)]
             # reconstruct function
-            sympy_expression = sympy_expression.func(*args)
+            obj = obj.func(*args)
             # try to do it if expression is complete
             try:
-                sympy_expression = sympy_expression.doit()
+                obj = obj.doit()
             except:
                 pass
             # try to make it explicit if possible
             try:
-                sympy_expression = sympy_expression.as_explicit()
+                obj = obj.as_explicit()
             except:
                 pass
-    return sympy_expression
+    return obj
 
 
-def sympy_xreplace_doit_explicit_evalf(sympy_expression, xreplace_dict={}):
-    sympy_expression = sympy_xreplace_doit_explicit(sympy_expression, xreplace_dict)
+def sympy_xreplace_doit_explicit_evalf(obj, xreplace_dict={}):
+    obj = sympy_xreplace_doit_explicit(obj, xreplace_dict)
     # try evaluating out to get numerical value
-    if isinstance(sympy_expression, dict):
-        for k, v in sympy_expression.items():
+    if isinstance(obj, dict):
+        for key, value in obj.items():
             try:
-                sympy_expression[k] = v.evalf()
+                obj[key] = value.evalf()
             except:
                 pass
     else:
         try:
-            sympy_expression = sympy_expression.evalf()
+            obj = obj.evalf()
         except:
             pass
-    return sympy_expression
-
-
-def is_sympy_expression(sympy_expression):
-    if hasattr(sympy_expression, 'doit'):
-        if sympy_expression.args:
-            return True
-        else:
-            return False
-    else:
-        return False
+    return obj

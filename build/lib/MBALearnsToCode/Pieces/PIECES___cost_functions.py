@@ -1,6 +1,6 @@
 from numpy import exp, log, sqrt
 
-from MBALearnsToCode.CORE.Classes import Piece
+from MBALearnsToCode.UserDefinedClasses.CLASSES___Lego import Piece
 
 
 def PIECE___average_half_square_error():

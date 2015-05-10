@@ -1,6 +1,6 @@
 from numpy import sign
 
-from MBALearnsToCode.CORE.Classes import Piece
+from MBALearnsToCode.UserDefinedClasses.CLASSES___Lego import Piece
 
 
 def PIECE___l1_weight_regularization():

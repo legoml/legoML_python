@@ -5,7 +5,7 @@ from numpy.random import rand, randint
 
 from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import approx_gradients
 from MBALearnsToCode.Programs.PROGRAMS___ffnn import PROGRAM___ffnn, PROGRAM___ffnn_unskewed_classification
-from MBALearnsToCode.CORE.Classes import Project
+from MBALearnsToCode.UserDefinedClasses.CLASSES___Lego import Project
 
 
 def TEST___PROGRAM___ffnn_check_gradients(num_runs = 1000, rtol = 1.e-6, atol = 1.e-6):
