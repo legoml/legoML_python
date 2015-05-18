@@ -2,122 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3a9c646-e4e4-4995-86e9-82b08b569ff7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/DataSet.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/EKF.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/FUNCTIONS___matrices.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/Spark/SPARK___init.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/TrainHMM.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/U.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/XYT.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/Z.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/LAFFERTY_2015___MLLSDA/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Lego/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/ProbDensityFuncs/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/LAFFERTY_2015___MLLSDA/assn2_digits_pca.ipynb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/factors.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/probset1_q1.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/probset1_q2.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/probset1_q4.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/testing_data_sequences_with_MAP.PICKLE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/ProbDensityFuncs/zzzTests_gaussian_pdf.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/ProbDensityFuncs/zzzTests_one_probability.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Lego/zzzTests_pieces.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Lego/zzzTests_pieces_and_programs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Lego/zzzTests_programs.py" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\dictionaries\TheVinh.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\dictionaries\vluong.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\legoML_python (MBALearnsToCode's conflicted copy 2015-03-24).iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\legoml_py.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\misc (MBALearnsToCode's conflicted copy 2015-03-24).xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\scopes\scope_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\workspace (MBALearnsToCode's conflicted copy 2015-02-02).xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\workspace (MBALearnsToCode's conflicted copy 2015-03-24).xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\.idea\workspace (MBALearnsToCode's conflicted copy 2015-04-24).xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\CLASSES___DiscreteFunctions.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\CLASSES___ProbabilisticFactors.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\FUNCTIONS___matrices.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\KOLLER_2012___ProbGraphModels\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\KOLLER_2012___ProbGraphModels\factors.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\LAFFERTY_2015___MLLSDA\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\LAFFERTY_2015___MLLSDA\assn2_digits_pca.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\Lego\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\Lego\zzzTests_pieces.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\Lego\zzzTests_pieces_and_programs.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\Lego\zzzTests_programs.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\ProbDensityFuncs\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\ProbDensityFuncs\zzzTests_gaussian_pdf.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\ProbDensityFuncs\zzzTests_one_probability.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q1\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q1\probset1_q1.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q2\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q2\probset1_q2.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\probset1_q4.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\DataSet.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\RunViterbi.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\TrainHMM.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\randomwalk.test.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\randomwalk.train.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\testing_data_sequences_with_MAP.PICKLE" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet2_Q3\EKF.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet2_Q3\RunEKF.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet2_Q3\U.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet2_Q3\XYT.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet2_Q3\Z.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet2_Q3\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\r_python.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\zzzTests_spark.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\zzzTests_sympy.py" afterPath="" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Functions\FUNCTIONS___cost_functions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___CostFunctions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Functions\FUNCTIONS___zzz_misc.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___zzzMISC.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Pieces\PIECES___cost_functions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___CostFunctions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Pieces\PIECES___regularization_functions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___Regularization.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Pieces\PIECES___zzz_common_functions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___CommonFunctions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Projects\__init__.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Spark\SparkFunctions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Spark/SPARK___Functions.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\zzzDemos_Tests\FUNCTIONS___probability_density_functions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/LegoProjects/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/UserDefinedClasses/CLASSES___DiscreteFunctions.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/UserDefinedClasses/CLASSES___DiscreteFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___Lego.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___Lego.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/UserDefinedClasses/CLASSES___ProbabilisticFactors.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/UserDefinedClasses/CLASSES___ProbabilisticFactors.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/CORE/Classes.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/CORE/Classes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___sympy.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___sympy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___cost_functions.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___cost_functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___io.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Pieces/PIECES___io.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___io.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___io.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___regularization_functions.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___regularization_functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___zzz_common_functions.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Pieces/PIECES___zzz_common_functions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Programs/PROGRAMS___ffnn.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Programs/PROGRAMS___ffnn.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Programs/PROGRAMS___ffnn.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/Programs/PROGRAMS___ffnn.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/__init__.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/probset1_q4.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q4/probset1_q4.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/test.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests_pieces.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests_pieces.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests_programs.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests_programs.py" />
     </list>
     <ignored path="legoML_python.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -137,7 +22,18 @@
     <favorites_list name="legoML_python" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8504399">
+              <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -156,6 +52,7 @@
         <option value="$PROJECT_DIR$/../MBALearnsToCode/legoML_python/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/search/util.py" />
         <option value="$PROJECT_DIR$/../MBALearnsToCode/legoML_python/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/search/searchAgents.py" />
         <option value="$PROJECT_DIR$/../MBALearnsToCode/legoML_python/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/search/search.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -209,20 +106,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MBALearnsToCode_Python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MBALearnsToCode_Python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MBALearnsToCode" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -237,11 +120,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Cloud\Dropbox\MBALearnsToCode_Python" />
       <recent name="$PROJECT_DIR$/MBALearnsToCode/WORK" />
       <recent name="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/Soccer" />
       <recent name="$PROJECT_DIR$/MBALearnsToCode/WORK/TADDY_2015___BigData/AXATelematics" />
       <recent name="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLAR_MCCULLOUGH_2015___ML" />
-      <recent name="$PROJECT_DIR$/MBALearnsToCode/WORK/TADDY_2015___BigData" />
     </key>
   </component>
   <component name="RunManager">
@@ -382,19 +265,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24904943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24904943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32751676" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28091106" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -421,6 +305,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___sympy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -488,6 +380,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8504399">
+          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
