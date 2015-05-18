@@ -128,6 +128,7 @@ class HiddenMarkovModel:
     def map_joint_distributions(self, observations___list, recursive=False):
         observations___list = deepcopy(observations___list)
         T = len(observations___list) - 1
+        print(T)
         if T == 0:
             f = self.state_prior_pdf\
                 .multiply(self.observation_pdf(0)

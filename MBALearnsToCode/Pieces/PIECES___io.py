@@ -1,4 +1,4 @@
-from MBALearnsToCode.UserDefinedClasses.CLASSES___Lego import Piece
+from MBALearnsToCode import Piece
 
 def PIECE___read_csv():
     import csv

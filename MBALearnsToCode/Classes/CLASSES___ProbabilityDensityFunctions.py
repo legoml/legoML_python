@@ -1,18 +1,19 @@
 from __future__ import print_function
 from copy import deepcopy
 import itertools
+from scipy.stats import uniform, multivariate_normal
 from sympy import exp, log, pi, sympify
 from sympy.matrices import BlockMatrix, det
 from pprint import pprint
 from frozen_dict import FrozenDict
-from MBALearnsToCode.Functions.FUNCTIONS___sympy import is_non_atomic_sympy_expression, sympy_xreplace,\
-    sympy_xreplace_doit_explicit_evalf
-from MBALearnsToCode.Functions.FUNCTIONS___zzz_misc import combine_dict_and_kwargs, merge_dicts, shift_time_subscripts
+from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_xreplace,\
+    sympy_xreplace_doit_explicit, sympy_xreplace_doit_explicit_evalf
+from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import combine_dict_and_kwargs, merge_dicts, shift_time_subscripts
 
 
 class ProbabilityDensityFunction:
     def __init__(self, family, var_symbols, parameters, density_lambda, normalization_lambda, max_lambda,
-                 marginalization_lambda, conditioning_lambda, conditions={}, scope={}):
+                 marginalization_lambda, conditioning_lambda, sampling_lambda, conditions={}, scope={}):
         self.family = family
         self.vars = var_symbols
         self.conditions = conditions
@@ -26,11 +27,12 @@ class ProbabilityDensityFunction:
         self.max_lambda = max_lambda
         self.marginalization_lambda = marginalization_lambda
         self.conditioning_lambda = conditioning_lambda
+        self.sampling_lambda = sampling_lambda
 
     def copy(self):
         return ProbabilityDensityFunction(self.family, deepcopy(self.vars), self.parameters.copy(),
                                           self.density_lambda, self.normalization_lambda, self.max_lambda,
-                                          self.marginalization_lambda, self.conditioning_lambda,
+                                          self.marginalization_lambda, self.conditioning_lambda, self.sampling_lambda,
                                           deepcopy(self.conditions), deepcopy(self.scope))
 
     def at(self, var_and_parameter_point_values___dict, **kw_var_and_parameter_point_values___dict):
@@ -95,6 +97,9 @@ class ProbabilityDensityFunction:
     def condition(self, conditions={}):
         return self.conditioning_lambda(self, conditions)
 
+    def sample(self, num_samples=1):
+        return self.sampling_lambda(self, num_samples)
+
     def multiply(self, *probability_density_functions_to_multiply):
         pdf = self.copy()
         for pdf_to_multiply in probability_density_functions_to_multiply:
@@ -156,13 +161,43 @@ def product_of_2_probability_density_functions(pdf_1, pdf_2):
         return product_of_discrete_finite_probability_mass_function_and_continuous_probability_density_function(
             pdf_2, pdf_1)
     elif families == ('One', 'Gaussian'):
-        return 0
+        return product_of_one_probability_density_function_and_gaussian_probability_density_function(
+            pdf_1, pdf_2)
     elif families == ('Gaussian', 'One'):
-        return 0
+        return product_of_one_probability_density_function_and_gaussian_probability_density_function(
+            pdf_2, pdf_1)
     elif families == ('Gaussian', 'Gaussian'):
         return product_of_2_gaussian_probability_density_functions(pdf_1, pdf_2)
     else:
         return None
+
+
+def one_density_function(var_symbols={}, conditions={}):
+    return ProbabilityDensityFunction('One', deepcopy(var_symbols), {}, one, one, one, one, one,
+                                      lambda *args, **kwargs: None, deepcopy(conditions), scope={})
+
+
+def one(*args, **kwargs):
+    return sympify(0.)
+
+
+def discrete_finite_mass_function(var_symbols, parameters, conditions={}, scope={}):
+    non_none_scope = {var: value for var, value in scope.items() if value is not None}
+    mappings = {var_values___frozen_dict: function_value
+                for var_values___frozen_dict, function_value in parameters['mappings'].items()
+                if set(var_values___frozen_dict.items()) >= set(non_none_scope.items())}
+    condition_instances = {}
+    for var_values___frozen_dict in mappings:
+        condition_instance = {}
+        for var in (set(var_values___frozen_dict) & set(conditions)):
+            condition_instance[var] = var_values___frozen_dict[var]
+        condition_instance = FrozenDict(condition_instance)
+        condition_instances[var_values___frozen_dict] = condition_instance
+    return ProbabilityDensityFunction('DiscreteFinite', deepcopy(var_symbols),
+                                      dict(mappings=mappings, condition_instances=condition_instances),
+                                      discrete_finite_mass, discrete_finite_normalization, discrete_finite_max,
+                                      discrete_finite_marginalization, discrete_finite_conditioning,
+                                      lambda *args, **kwargs: None, deepcopy(conditions), deepcopy(non_none_scope))
 
 
 def discrete_finite_mass(var_values___dict, parameters):
@@ -177,12 +212,13 @@ def discrete_finite_mass(var_values___dict, parameters):
         spare_var_values = dict(s0 - set(var_values___frozen_dict.items()))
         s = set(spare_var_values.keys())
         if not(s) or (s and not(s & set(var_values___frozen_dict))):
-            d[var_values___frozen_dict] = sympy_xreplace_doit_explicit_evalf(function_value, var_values___dict)
+            d[var_values___frozen_dict] = sympy_xreplace_doit_explicit(function_value, var_values___dict)
     return d
 
 
 def discrete_finite_normalization(discrete_finite_pmf):
     pmf = discrete_finite_pmf.copy()
+    pmf.parameters['mappings'] = pmf.parameters['mappings'].copy()
     mappings = pmf.parameters['mappings']
     condition_instances = pmf.parameters['condition_instances']
     condition_sums = {}
@@ -252,23 +288,34 @@ def discrete_finite_conditioning(discrete_finite_pmf, conditions={}):
                                          new_conditions, scope)
 
 
-def discrete_finite_mass_function(var_symbols, parameters, conditions={}, scope={}):
-    non_none_scope = {var: value for var, value in scope.items() if value is not None}
-    mappings = {var_values___frozen_dict: function_value
-                for var_values___frozen_dict, function_value in parameters['mappings'].items()
-                if set(var_values___frozen_dict.items()) >= set(non_none_scope.items())}
-    condition_instances = {}
-    for var_values___frozen_dict in mappings:
-        condition_instance = {}
-        for var in (set(var_values___frozen_dict) & set(conditions)):
-            condition_instance[var] = var_values___frozen_dict[var]
-        condition_instance = FrozenDict(condition_instance)
-        condition_instances[var_values___frozen_dict] = condition_instance
-    return ProbabilityDensityFunction('DiscreteFinite', deepcopy(var_symbols),
-                                      dict(mappings=mappings, condition_instances=condition_instances),
-                                      discrete_finite_mass, discrete_finite_normalization, discrete_finite_max,
-                                      discrete_finite_marginalization, discrete_finite_conditioning,
-                                      deepcopy(conditions), deepcopy(non_none_scope))
+def uniform_density_function(var_symbols, parameters, conditions={}, scope={}):
+    return ProbabilityDensityFunction('Uniform', deepcopy(var_symbols), deepcopy(parameters),
+                                      uniform_density, uniform_normalization, lambda *args, **kwargs: None,
+                                      uniform_marginalization, uniform_conditioning, uniform_sampling,
+                                      deepcopy(conditions), deepcopy(scope))
+
+
+def uniform_density(var_symbols, parameters):
+    d = 1.
+
+    return d
+
+
+def uniform_normalization():
+    return 0
+
+
+def uniform_marginalization():
+    return 0
+
+
+def uniform_conditioning():
+
+    return
+
+
+def uniform_sampling():
+    return 0
 
 
 def one_mass_function(var_symbols, parameters={}, conditions={}):
@@ -276,26 +323,24 @@ def one_mass_function(var_symbols, parameters={}, conditions={}):
     return discrete_finite_mass_function(var_symbols, dict(mappings=mappings), conditions, scope={})
 
 
-def one(*args, **kwargs):
-    return sympify(0.)
-
-
-def one_density_function(var_symbols={}, conditions={}):
-    return ProbabilityDensityFunction('One', deepcopy(var_symbols), {}, one, one, one, one, one,
-                                      deepcopy(conditions), scope={})
+def gaussian_density_function(var_symbols, parameters, conditions={}, scope={}):
+    return ProbabilityDensityFunction('Gaussian', deepcopy(var_symbols), deepcopy(parameters),
+                                      gaussian_density, lambda *args, **kwargs: None, gaussian_max,
+                                      gaussian_marginalization, gaussian_conditioning, gaussian_sampling,
+                                      deepcopy(conditions), deepcopy(scope))
 
 
 def gaussian_density(vars_row_vectors___dict, parameters___dict):
     var_names = tuple(vars_row_vectors___dict)
     num_vars = len(var_names)
-    x = num_vars * [None]
-    m = num_vars * [None]
+    x = []
+    m = []
     S = [num_vars * [None] for _ in range(num_vars)]   # careful not to create same mutable object
     d = 0
     for i in range(num_vars):
-        x[i] = vars_row_vectors___dict[var_names[i]]
+        x += [vars_row_vectors___dict[var_names[i]]]
         d += vars_row_vectors___dict[var_names[i]].shape[1]
-        m[i] = parameters___dict[('mean', var_names[i])]
+        m += [parameters___dict[('mean', var_names[i])]]
         for j in range(i):
             if ('cov', var_names[i], var_names[j]) in parameters___dict:
                 S[i][j] = parameters___dict[('cov', var_names[i], var_names[j])]
@@ -325,10 +370,14 @@ def gaussian_marginalization(gaussian_pdf, marginalized_vars):
     for var in marginalized_vars:
         del var_symbols[var]
         del var_scope[var]
-        for key in gaussian_pdf.parameters:
+        p = deepcopy(parameters)
+        for key in p:
             if var in key:
                 del parameters[key]
-    return gaussian_density_function(var_symbols, parameters, deepcopy(gaussian_pdf.conditions), var_scope)
+    if var_scope:
+        return gaussian_density_function(var_symbols, parameters, deepcopy(gaussian_pdf.conditions), var_scope)
+    else:
+        return one_density_function(var_symbols, deepcopy(gaussian_pdf.conditions))
 
 
 def gaussian_conditioning(gaussian_pdf, conditions={}):
@@ -345,15 +394,15 @@ def gaussian_conditioning(gaussian_pdf, conditions={}):
     num_condition_vars = len(condition_var_names)
     scope_var_names = list(set(gaussian_pdf.scope) - set(conditions))
     num_scope_vars = len(scope_var_names)
-    x_c = num_condition_vars * [None]
-    m_c = num_condition_vars * [None]
-    m_s = num_scope_vars * [None]
+    x_c = []
+    m_c = []
+    m_s = []
     S_c = [num_condition_vars * [None] for _ in range(num_condition_vars)]   # careful not to create same mutable object
     S_s = [num_scope_vars * [None] for _ in range(num_scope_vars)]   # careful not to create same mutable object
     S_cs = [num_scope_vars * [None] for _ in range(num_condition_vars)]   # careful not to create same mutable object
     for i in range(num_condition_vars):
-        x_c[i] = gaussian_pdf.vars[condition_var_names[i]]
-        m_c[i] = gaussian_pdf.parameters[('mean', condition_var_names[i])]
+        x_c += [gaussian_pdf.vars[condition_var_names[i]]]
+        m_c += [gaussian_pdf.parameters[('mean', condition_var_names[i])]]
         for j in range(i):
             if ('cov', condition_var_names[i], condition_var_names[j]) in gaussian_pdf.parameters:
                 S_c[i][j] = gaussian_pdf.parameters[('cov', condition_var_names[i], condition_var_names[j])]
@@ -363,7 +412,7 @@ def gaussian_conditioning(gaussian_pdf, conditions={}):
                 S_c[i][j] = S_c[j][i].T
         S_c[i][i] = gaussian_pdf.parameters[('cov', condition_var_names[i])]
     for i in range(num_scope_vars):
-        m_s[i] = gaussian_pdf.parameters[('mean', scope_var_names[i])]
+        m_s += [gaussian_pdf.parameters[('mean', scope_var_names[i])]]
         for j in range(i):
             if ('cov', scope_var_names[i], scope_var_names[j]) in gaussian_pdf.parameters:
                 S_s[i][j] = gaussian_pdf.parameters[('cov', scope_var_names[i], scope_var_names[j])]
@@ -405,10 +454,41 @@ def gaussian_conditioning(gaussian_pdf, conditions={}):
                                      new_conditions, scope)
 
 
-def gaussian_density_function(var_symbols, parameters, conditions={}, scope={}):
-    return ProbabilityDensityFunction('Gaussian', deepcopy(var_symbols), deepcopy(parameters),
-                                      gaussian_density, lambda: None, gaussian_max, gaussian_marginalization,
-                                      gaussian_conditioning, deepcopy(conditions), deepcopy(scope))
+def gaussian_sampling(gaussian_pdf, num_samples):
+    scope_vars
+    for scope
+
+    scope_vars = tuple(gaussian_pdf.scope)
+
+    num_scope_vars = len(scope_vars)
+    m = []
+    S = [num_scope_vars * [None] for _ in range(num_scope_vars)]   # careful not to create same mutable object
+    for i in range(num_scope_vars):
+        m += [gaussian_pdf.parameters[('mean', scope_vars[i])]]
+        for j in range(i):
+            if ('cov', scope_vars[i], scope_vars[j]) in gaussian_pdf.parameters:
+                S[i][j] = gaussian_pdf.parameters[('cov', scope_vars[i], scope_vars[j])]
+                S[j][i] = S[i][j].T
+            else:
+                S[j][i] = gaussian_pdf.parameters[('cov', scope_vars[j], scope_vars[i])]
+                S[i][j] = S[j][i].T
+        S[i][i] = gaussian_pdf.parameters[('cov', scope_vars[i])]
+    m = BlockMatrix([m]).as_explicit().tolist()[0]
+    S = BlockMatrix(S).as_explicit().tolist()
+    X = multivariate_normal(m, S)
+    samples = X.rvs(num_samples)
+    densities = X.pdf(samples)
+    mappings = {}
+    for i in range(num_samples):
+        fdict = {}
+        k = 0
+        for j in range(num_scope_vars):
+            scope_var = scope_vars[j]
+            l = k + gaussian_pdf.vars[scope_var].shape[1]
+            fdict[scope_var] = samples[i, k:l]
+        mappings[FrozenDict(fdict)] = densities[i]
+    return discrete_finite_mass_function(deepcopy(gaussian_pdf.vars), dict(mappings=mappings),
+                                         deepcopy(gaussian_pdf.conditions))
 
 
 def product_of_2_discrete_finite_probability_mass_functions(pmf_1, pmf_2):
@@ -450,7 +530,7 @@ def product_of_one_probability_density_function_and_gaussian_probability_density
     for var in (set(conditions) & set(scope)):
         del conditions[var]
     var_symbols = merge_dicts(gaussian_pdf.vars, one_pdf.vars)
-    return gaussian_density_function(var_symbols, gaussian_pdf.parameters, conditions, scope)
+    return gaussian_density_function(var_symbols, deepcopy(gaussian_pdf.parameters), conditions, scope)
 
 
 def product_of_2_gaussian_probability_density_functions(gaussian_pdf_1, gaussian_pdf_2):

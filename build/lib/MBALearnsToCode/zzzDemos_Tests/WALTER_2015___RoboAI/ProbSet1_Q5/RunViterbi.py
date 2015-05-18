@@ -1,6 +1,6 @@
 import sys
-from DataSet import *
-from MBALearnsToCode.UserDefinedClasses.CLASSES___HiddenMarkovModels import HMM, Viterbi
+from build.lib.MBALearnsToCode.zzzDemos_Tests.WALTER_2015___RoboAI.ProbSet1_Q5.DataSet import *
+from MBALearnsToCode import HMM, Viterbi
 
 
 # This defines a simple class for running your Viterbi code. As with
