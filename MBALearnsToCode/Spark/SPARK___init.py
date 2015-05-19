@@ -2,14 +2,12 @@ import os
 import sys
 
 
-def spark_context(spark_home):
+def import_pyspark(spark_home='C:/Programs/spark-1.3.1'):
     os.environ['SPARK_HOME'] = spark_home
     sys.path.append(spark_home + '/python')
     try:
-        from pyspark import SparkContext
-        from pyspark import SparkConf
-        print ("Successfully imported Spark Modules")
-        return SparkContext()
+        import pyspark
+        return pyspark
     except ImportError as e:
-        print ("Can not import Spark Modules", e)
+        print ("Cannot Import PySpark", e)
         sys.exit(1)
