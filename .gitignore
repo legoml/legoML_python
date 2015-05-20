@@ -35,3 +35,7 @@ Thumbs.db
 # R files
 # _______
 *.Rhistory
+
+# Workspace files
+# _______________
+workspace.xml

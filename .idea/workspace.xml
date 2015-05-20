@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3a9c646-e4e4-4995-86e9-82b08b569ff7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Data_and_Features.py" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\Kaggle\AXATelematics\DataPreprocessing.py" afterPath="" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\10.txt" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Features.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\11.txt" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Visualization.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\8.txt" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/zzz.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Spark/SPARK___init.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Spark/SPARK___init.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="legoML_python.iws" />
@@ -29,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Data_and_Features.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Data_and_Features.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Data_and_Features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="45" selection-start-line="76" selection-start-column="45" selection-end-line="76" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.3079646">
+              <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -51,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Visualization.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Visualization.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Visualization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30088496">
+            <state vertical-scroll-proportion="0.0">
               <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
@@ -104,7 +99,6 @@
         <option value="$PROJECT_DIR$/../MBALearnsToCode/legoML_python/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/search/util.py" />
         <option value="$PROJECT_DIR$/../MBALearnsToCode/legoML_python/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/search/searchAgents.py" />
         <option value="$PROJECT_DIR$/../MBALearnsToCode/legoML_python/MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/search/search.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Spark/SPARK___init.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Features.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/DataPreprocessing.py" />
@@ -112,6 +106,7 @@
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/zzz.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Visualization.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/Mid-Term/MidTerm.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -147,7 +142,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -314,6 +308,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -470,7 +465,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24904943" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -912,19 +907,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.083333336">
-          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Data_and_Features.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/Mid-Term/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="45" selection-start-line="76" selection-start-column="45" selection-end-line="76" selection-end-column="45" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/Mid-Term/MidTerm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -939,36 +950,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Features.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.92147803">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/Mid-Term/__init__.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Data_and_Features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/Mid-Term/MidTerm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Visualization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30088496">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.3079646">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
