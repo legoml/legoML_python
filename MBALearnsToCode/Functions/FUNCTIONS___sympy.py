@@ -1,10 +1,28 @@
 from copy import copy, deepcopy
-from sympy import Atom
+from numpy import allclose, array
+from sympy import Atom, Integer, Float
 from frozen_dict import FrozenDict
 
 
 def is_non_atomic_sympy_expression(obj):
     return hasattr(obj, 'doit') and not isinstance(obj, Atom)
+
+
+def sympy_to_float(sympy_number_or_matrix):
+    if isinstance(sympy_number_or_matrix, (int, float, Integer, Float)):
+        return float(sympy_number_or_matrix)
+    else:
+        return array(sympy_number_or_matrix.tolist(), dtype=float)
+
+
+def sympy_allclose(*sympy_matrices, **kwargs):
+    if len(sympy_matrices) == 2:
+        return allclose(sympy_to_float(sympy_matrices[0]), sympy_to_float(sympy_matrices[1]), **kwargs)
+    else:
+        for i in range(1, len(sympy_matrices)):
+            if not sympy_allclose(sympy_matrices[0], sympy_matrices[i], **kwargs):
+                return False
+        return True
 
 
 def sympy_xreplace(obj, xreplace_dict={}):

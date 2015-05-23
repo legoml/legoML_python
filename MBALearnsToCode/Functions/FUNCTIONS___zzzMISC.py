@@ -2,7 +2,7 @@ from numpy import zeros
 from copy import deepcopy
 from sympy.matrices import MatrixSymbol
 from frozen_dict import FrozenDict
-from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression
+from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_allclose
 
 
 def as_tuple(x):
@@ -104,6 +104,22 @@ def merge_dicts(dict_1, dict_2):
         if (key not in dict_1) or (value is not None):
             d[key] = value
     return d
+
+
+def dicts_all_close(*dicts, **kwargs):
+    if len(dicts) == 2:
+        if set(dicts[0]) == set(dicts[1]):
+            for key in dicts[0]:
+                if not sympy_allclose(dicts[0][key], dicts[1][key], **kwargs):
+                    return False
+            return True
+        else:
+            return False
+    else:
+        for i in range(1, len(dicts)):
+            if not dicts_all_close(dicts[0], dicts[i]):
+                return False
+        return True
 
 
 def shift_time_subscripts(obj, t, *matrix_symbols_to_shift):

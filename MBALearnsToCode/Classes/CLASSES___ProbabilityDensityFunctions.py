@@ -8,7 +8,8 @@ from pprint import pprint
 from frozen_dict import FrozenDict
 from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_xreplace,\
     sympy_xreplace_doit_explicit, sympy_xreplace_doit_explicit_evalf
-from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import combine_dict_and_kwargs, merge_dicts, shift_time_subscripts
+from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import combine_dict_and_kwargs, merge_dicts, dicts_all_close,\
+    shift_time_subscripts
 
 
 class ProbabilityDensityFunction:
@@ -42,17 +43,20 @@ class ProbabilityDensityFunction:
         for var in s:
             var_and_parameter_point_values___dict[self.vars[var]] = var_and_parameter_point_values___dict[var]
         pdf = self.copy()
-        pdf.conditions = sympy_xreplace(pdf.conditions, var_and_parameter_point_values___dict)
         for var, value in var_and_parameter_point_values___dict.items():
+            if var in pdf.conditions:
+                pdf.conditions.update({var: value})
             if var in pdf.scope:
                 pdf.scope.update({var: value})
+        pdf.conditions = sympy_xreplace(pdf.conditions, var_and_parameter_point_values___dict)
+        pdf.scope = sympy_xreplace(pdf.scope, var_and_parameter_point_values___dict)
         if pdf.family == 'DiscreteFinite':
             mappings = {}
             for var_values___frozen_dict, function_value in pdf.parameters['mappings'].items():
-                other_items___dict = dict(set(var_values___frozen_dict.items()) -
+                other_items___dict = FrozenDict(set(var_values___frozen_dict.items()) -
                                           set(var_and_parameter_point_values___dict.items()))
                 if not (set(other_items___dict) & set(var_and_parameter_point_values___dict)):
-                    mappings[var_values___frozen_dict] =\
+                    mappings[other_items___dict] =\
                         sympy_xreplace(function_value, var_and_parameter_point_values___dict)
             return discrete_finite_mass_function(pdf.vars, dict(mappings=mappings), pdf.conditions, pdf.scope)
         else:
@@ -455,40 +459,40 @@ def gaussian_conditioning(gaussian_pdf, conditions={}):
 
 
 def gaussian_sampling(gaussian_pdf, num_samples):
-    scope_vars
-    for scope
-
-    scope_vars = tuple(gaussian_pdf.scope)
-
-    num_scope_vars = len(scope_vars)
-    m = []
-    S = [num_scope_vars * [None] for _ in range(num_scope_vars)]   # careful not to create same mutable object
-    for i in range(num_scope_vars):
-        m += [gaussian_pdf.parameters[('mean', scope_vars[i])]]
-        for j in range(i):
-            if ('cov', scope_vars[i], scope_vars[j]) in gaussian_pdf.parameters:
-                S[i][j] = gaussian_pdf.parameters[('cov', scope_vars[i], scope_vars[j])]
-                S[j][i] = S[i][j].T
-            else:
-                S[j][i] = gaussian_pdf.parameters[('cov', scope_vars[j], scope_vars[i])]
-                S[i][j] = S[j][i].T
-        S[i][i] = gaussian_pdf.parameters[('cov', scope_vars[i])]
-    m = BlockMatrix([m]).as_explicit().tolist()[0]
-    S = BlockMatrix(S).as_explicit().tolist()
-    X = multivariate_normal(m, S)
-    samples = X.rvs(num_samples)
-    densities = X.pdf(samples)
-    mappings = {}
-    for i in range(num_samples):
-        fdict = {}
-        k = 0
-        for j in range(num_scope_vars):
-            scope_var = scope_vars[j]
-            l = k + gaussian_pdf.vars[scope_var].shape[1]
-            fdict[scope_var] = samples[i, k:l]
-        mappings[FrozenDict(fdict)] = densities[i]
-    return discrete_finite_mass_function(deepcopy(gaussian_pdf.vars), dict(mappings=mappings),
-                                         deepcopy(gaussian_pdf.conditions))
+#    scope_vars
+#    for scope
+#
+#    scope_vars = tuple(gaussian_pdf.scope)
+#
+#    num_scope_vars = len(scope_vars)
+#    m = []
+#    S = [num_scope_vars * [None] for _ in range(num_scope_vars)]   # careful not to create same mutable object
+#    for i in range(num_scope_vars):
+#        m += [gaussian_pdf.parameters[('mean', scope_vars[i])]]
+#        for j in range(i):
+#            if ('cov', scope_vars[i], scope_vars[j]) in gaussian_pdf.parameters:
+#                S[i][j] = gaussian_pdf.parameters[('cov', scope_vars[i], scope_vars[j])]
+#                S[j][i] = S[i][j].T
+#            else:
+#                S[j][i] = gaussian_pdf.parameters[('cov', scope_vars[j], scope_vars[i])]
+#                S[i][j] = S[j][i].T
+#        S[i][i] = gaussian_pdf.parameters[('cov', scope_vars[i])]
+#    m = BlockMatrix([m]).as_explicit().tolist()[0]
+#    S = BlockMatrix(S).as_explicit().tolist()
+#    X = multivariate_normal(m, S)
+#    samples = X.rvs(num_samples)
+#    densities = X.pdf(samples)
+#    mappings = {}
+#    for i in range(num_samples):
+#        fdict = {}
+#        k = 0
+#        for j in range(num_scope_vars):
+#            scope_var = scope_vars[j]
+#            l = k + gaussian_pdf.vars[scope_var].shape[1]
+#            fdict[scope_var] = samples[i, k:l]
+#        mappings[FrozenDict(fdict)] = densities[i]
+    return 0 #discrete_finite_mass_function(deepcopy(gaussian_pdf.vars), dict(mappings=mappings),
+#                                         deepcopy(gaussian_pdf.conditions))
 
 
 def product_of_2_discrete_finite_probability_mass_functions(pmf_1, pmf_2):
@@ -541,3 +545,17 @@ def product_of_2_gaussian_probability_density_functions(gaussian_pdf_1, gaussian
     var_symbols = merge_dicts(gaussian_pdf_1.vars, gaussian_pdf_2.vars)
     parameters = {}
     return gaussian_density_function(var_symbols, parameters, conditions, scope)
+
+
+def discrete_finite_mass_functions_all_close(*pmfs, **kwargs):
+    if len(pmfs) == 2:
+        pmf_0, pmf_1 = pmfs
+        return (set(pmf_0.vars.items()) == set(pmf_1.vars.items())) &\
+            (set(pmf_0.conditions.items()) == set(pmf_1.conditions.items())) &\
+            (set(pmf_0.scope.items()) == set(pmf_1.scope.items())) &\
+            dicts_all_close(pmf_0.parameters['mappings'], pmf_1.parameters['mappings'], **kwargs)
+    else:
+        for i in range(1, len(pmfs)):
+            if not discrete_finite_mass_functions_all_close(pmfs[0], pmfs[i], **kwargs):
+                return False
+        return True
