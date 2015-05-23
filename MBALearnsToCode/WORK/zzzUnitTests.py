@@ -10,4 +10,13 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q1.ProbSet1_Q1 import\
     UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q1
 unit_tests['WALTER_2015___RoboAI___ProbSet1_Q1'] = UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q1()
 
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q2.ProbSet1_Q2 import\
+    UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q2
+unit_tests['WALTER_2015___RoboAI___ProbSet1_Q2'] = UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q2(0.99) &\
+    UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q2(0.6)
+
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q4.ProbSet1_Q4 import\
+    UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q4
+unit_tests['WALTER_2015___RoboAI___ProbSet1_Q4'] = UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q4()
+
 pprint(unit_tests)

@@ -53,10 +53,10 @@ class ProbabilityDensityFunction:
         if pdf.family == 'DiscreteFinite':
             mappings = {}
             for var_values___frozen_dict, function_value in pdf.parameters['mappings'].items():
-                other_items___dict = FrozenDict(set(var_values___frozen_dict.items()) -
+                other_items___dict = dict(set(var_values___frozen_dict.items()) -
                                           set(var_and_parameter_point_values___dict.items()))
                 if not (set(other_items___dict) & set(var_and_parameter_point_values___dict)):
-                    mappings[other_items___dict] =\
+                    mappings[FrozenDict(set(var_values___frozen_dict.items()) - set(pdf.conditions.items()))] =\
                         sympy_xreplace(function_value, var_and_parameter_point_values___dict)
             return discrete_finite_mass_function(pdf.vars, dict(mappings=mappings), pdf.conditions, pdf.scope)
         else:
