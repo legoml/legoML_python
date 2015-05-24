@@ -67,34 +67,35 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
                                              scope=dict(D=1))
     p_D_equal_1_on_B_equal_1___check = dfmf_allclose(p_D_equal_1_on_B_equal_1, p_D_equal_1_on_B_equal_1___answer)
 
-    p_C =  p_A.multiply(p_B, p_C_on_A_B).marginalize(('A', 'B'))
+    p_C = p_A.multiply(p_B, p_C_on_A_B).marginalize(('A', 'B'))
     p_C.pprint()
-    p_D_equal_1 = p_C.multiply(p_D_on_C.at(dict(D=1))).marginalize('C',)
+    p_C___answer = dfmf(dict.fromkeys(('C')),
+                        dict(mappings={fdict(C=0): -log(.9 * .5 * .7 + .2 * .5 * .3 + .3 * .5 * .7 + .1 * .5 * .3),
+                                       fdict(C=1): -log(.1 * .5 * .7 + .8 * .5 * .3 + .7 * .5 * .7 + .9 * .5 * .3)}))
+    p_C___check = dfmf_allclose(p_C, p_C___answer)
+
+    p_D_equal_1 = p_C.multiply(p_D_on_C.at(dict(D=1))).marginalize(('C',))
     p_D_equal_1.pprint()
     p_D_equal_1___answer = dfmf(dict.fromkeys(('D')),
-                                dict(mappings={fdict(D=1): -log(.523)}),
+                                dict(mappings={fdict(D=1): -log(.4 * (.9 * .5 * .7 + .2 * .5 * .3 +
+                                                                      .3 * .5 * .7 + .1 * .5 * .3) +
+                                                                .6 * (.1 * .5 * .7 + .8 * .5 * .3 +
+                                                                      .7 * .5 * .7 + .9 * .5 * .3))}),
                                 scope=dict(D=1))
     p_D_equal_1___check = dfmf_allclose(p_D_equal_1, p_D_equal_1___answer)
 
-   # p_B_equal_1_on_D_equal_1 =
-    #p_T1_T2_on_C_equal_n_and_D_equal_1 = (p_T1_on_C_equal_n.multiply(p_T2_on_C_equal_n,
-    #                                                                 p_on_T1_T2_and_D_equal_1)).normalize()
-    #p_T1_on_C_equal_n = p_T1_on_C.at(dict(C='n'))
-    #p_T1_on_C_equal_n.pprint()
-    #p_T2_on_C_equal_n = p_T2_on_C.at(dict(C='n'))
-    #p_on_T1_T2_and_D_equal_1 = p_D_on_T1_T2.condition(dict(D=1))
-
-    #p_T1_T2_on_C_equal_n_and_D_equal_1.pprint()
-
-    #p_T1_T2_on_C_equal_n_and_D_equal_1___alternative =\
-    #    (p_C.multiply(p_T1_on_C, p_T2_on_C, p_D_on_T1_T2).condition(dict(C='n', D=1))).normalize()
-    #p_T1_T2_on_C_equal_n_and_D_equal_1___alternative.pprint()
-
-
-    #                                                   conditions=dict(C='n', D=1))
-    #p_T1_T2_on_C_equal_n_and_D_equal_1___answer.pprint()
-    #
-    #print('Prob(T1, T2 | C = n, D = 1) check:', p_T1_T2_on_C_equal_n_and_D_equal_1___check)
+    p_A_C_on_B = p_A.multiply(p_C_on_A_B)
+    p_C_on_B = p_A_C_on_B.marginalize(('A',))
+    p_B_C_D = p_B.multiply(p_C_on_B, p_D_on_C)
+    p_B_D = p_B_C_D.marginalize(('C',))
+    p_B_equal_1_on_D_equal_1 = p_B_D.condition(dict(D=1)).normalize().at(dict(B=1))
+    p_B_equal_1_on_D_equal_1.pprint()
+    p_B_equal_1_on_D_equal_1___answer = dfmf(dict.fromkeys(('B', 'D')),
+                                             dict(mappings={fdict(B=1): -log(.337)}),
+                                             conditions=dict(D=1),
+                                             scope=dict(B=1))
+    p_B_equal_1_on_D_equal_1___check = dfmf_allclose(p_B_equal_1_on_D_equal_1, p_B_equal_1_on_D_equal_1___answer,
+                                                     atol=1e-3)
 
     return p_C_equal_1_on_A_equal_1___check & p_A___check & p_C_on_B_equal_1___check &\
-        p_D_equal_1_on_B_equal_1___check
+        p_D_equal_1_on_B_equal_1___check & p_C___check & p_D_equal_1___check & p_B_equal_1_on_D_equal_1___check

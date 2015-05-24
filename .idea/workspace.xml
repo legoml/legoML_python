@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3a9c646-e4e4-4995-86e9-82b08b569ff7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/MidTerm_Q1.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/TheVinh.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\Mid-Term\MidTerm_Q1.py" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\workspace (MBALearnsToCode's conflicted copy 2015-05-23).xml" afterPath="" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\99.txt" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\KOLLER_2012___ProbGraphModels\factors.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\Mid-Term\__init__.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/__init__.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\ProbSet1_Q1\probset1_q1.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/ProbSet1_Q1.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\ProbSet1_Q2\probset1_q2.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/ProbSet1_Q2.py" />
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\ProbSet1_Q4\probset1_q4.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/ProbSet1_Q4.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py" />
     </list>
     <ignored path="legoML_python.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,21 +23,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="zzzUnitTests.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="zzzUnitTests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6082949">
-              <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MidTerm_Q2.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MidTerm_Q2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="40" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.33410138">
+              <caret line="86" column="41" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -62,14 +45,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CLASSES___HiddenMarkovModels.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py">
+      <file leaf-file-name="CLASSES___KalmanFilters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="196" column="67" selection-start-line="196" selection-start-column="67" selection-end-line="196" selection-end-column="67" />
+              <caret line="254" column="46" selection-start-line="254" selection-start-column="46" selection-end-line="254" selection-end-column="46" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -116,11 +97,11 @@
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm/MidTerm_Q1.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm/MidTerm_Q2.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/ProbSet1_Q1.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/MidTerm_Q1.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py" />
       </list>
     </option>
   </component>
@@ -633,13 +614,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/Visualization.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/zzz.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -937,36 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="196" column="67" selection-start-line="196" selection-start-column="67" selection-end-line="196" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="40" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/ProbSet1_Q1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.389401">
@@ -1001,11 +945,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13824885">
+          <caret line="131" column="94" selection-start-line="131" selection-start-column="94" selection-end-line="131" selection-end-column="94" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="254" column="46" selection-start-line="254" selection-start-column="46" selection-end-line="254" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6082949">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33410138">
+          <caret line="86" column="41" selection-start-line="86" selection-start-column="41" selection-end-line="86" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
