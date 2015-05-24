@@ -301,7 +301,6 @@ def uniform_density_function(var_symbols, parameters, conditions={}, scope={}):
 
 def uniform_density(var_symbols, parameters):
     d = 1.
-
     return d
 
 
@@ -314,16 +313,15 @@ def uniform_marginalization():
 
 
 def uniform_conditioning():
-
-    return
+    return 0
 
 
 def uniform_sampling():
     return 0
 
 
-def one_mass_function(var_symbols, parameters={}, conditions={}):
-    mappings = {item: sympify(0.) for item in parameters}
+def one_mass_function(var_symbols, frozen_dicts___set=set(), conditions={}):
+    mappings = {item: sympify(0.) for item in frozen_dicts___set}
     return discrete_finite_mass_function(var_symbols, dict(mappings=mappings), conditions, scope={})
 
 

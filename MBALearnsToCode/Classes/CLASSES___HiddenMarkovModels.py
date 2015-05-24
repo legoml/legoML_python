@@ -58,17 +58,15 @@ class HiddenMarkovModel:
         if isinstance(t___list, int):
             t = t___list
             if t == T:
-                observation_var_symbol = {(self.observation_var, t):
-                                          self.observation_pdf(t).vars[(self.observation_var, t)]}
+                state_var_symbol = {(self.state_var, t): self.observation_pdf(t).vars[(self.state_var, t)]}
                 if self.observation_pdf_template.family == 'DiscreteFinite':
                     var_values___frozen_dicts = self.observation_pdf(t).parameters['mappings'].keys()
-                    observation_var_domain =\
-                        set(FrozenDict({(self.observation_var, t): var_values___frozen_dict[(self.observation_var, t)]})
+                    state_var_domain =\
+                        set(FrozenDict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
                             for var_values___frozen_dict in var_values___frozen_dicts)
-                    return one_mass_function(observation_var_symbol, observation_var_domain,
-                                             {(self.observation_var, t): None})
+                    return one_mass_function(state_var_symbol, state_var_domain, {(self.state_var, t): None})
                 else:
-                    return one_density_function(observation_var_symbol, {(self.observation_var, t): None})
+                    return one_density_function(state_var_symbol, {(self.observation_var, t): None})
             else:
                 b = self.transition_pdf(t + 1)\
                     .multiply(self.observation_pdf(t + 1))
@@ -80,17 +78,15 @@ class HiddenMarkovModel:
         elif isinstance(t___list, (list, range, tuple)):
             d = {}
             t = T
-            observation_var_symbol = {(self.observation_var, t):
-                                      self.observation_pdf(t).vars[(self.observation_var, t)]}
+            state_var_symbol = {(self.state_var, t): self.observation_pdf(t).vars[(self.state_var, t)]}
             if self.observation_pdf_template.family == 'DiscreteFinite':
                 var_values___frozen_dicts = self.observation_pdf(t).parameters['mappings'].keys()
-                observation_var_domain =\
-                    set(FrozenDict({(self.observation_var, t): var_values___frozen_dict[(self.observation_var, t)]})
+                state_var_domain =\
+                    set(FrozenDict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
                         for var_values___frozen_dict in var_values___frozen_dicts)
-                b = {t: one_mass_function(observation_var_symbol, observation_var_domain,
-                                             {(self.observation_var, t): None})}
+                b = {t: one_mass_function(state_var_symbol, state_var_domain, {(self.state_var, t): None})}
             else:
-                b = {t: one_density_function(observation_var_symbol, {(self.observation_var, t): None})}
+                b = {t: one_density_function(state_var_symbol, {(self.observation_var, t): None})}
             if t in t___list:
                 d[t] = b[t]
             for t in reversed(range(min(t___list), T)):
@@ -128,7 +124,6 @@ class HiddenMarkovModel:
     def map_joint_distributions(self, observations___list, recursive=False):
         observations___list = deepcopy(observations___list)
         T = len(observations___list) - 1
-        print(T)
         if T == 0:
             f = self.state_prior_pdf\
                 .multiply(self.observation_pdf(0)
