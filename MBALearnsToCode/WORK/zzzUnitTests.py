@@ -27,4 +27,8 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q2.MidTerm_Q2 import\
     UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2
 unit_tests['WALTER_2015___RoboAI___MidTerm_Q2'] = UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2()
 
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q3.MidTerm_Q3 import\
+    UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3
+unit_tests['WALTER_2015___RoboAI___MidTerm_Q3'] = UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3()
+
 pprint(unit_tests)

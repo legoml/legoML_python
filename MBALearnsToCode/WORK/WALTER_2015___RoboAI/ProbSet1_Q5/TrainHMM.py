@@ -2,7 +2,7 @@ import sys
 from sympy import log
 from frozen_dict import FrozenDict as fdict
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import discrete_finite_mass_function as dfmf
-from MBALearnsToCode import DataSet
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5 import DataSet
 
 
 def train_hmm(training_data_sequences):

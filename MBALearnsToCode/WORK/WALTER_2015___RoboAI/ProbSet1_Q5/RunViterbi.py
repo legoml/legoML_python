@@ -1,14 +1,13 @@
+from __future__ import print_function
 import sys
 import pickle
-from MBALearnsToCode import DataSet
-from MBALearnsToCode import train_hmm
-from MBALearnsToCode.Classes import HiddenMarkovModel as HMM
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5.DataSet import DataSet
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5.TrainHMM import train_hmm
+from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM
 
 
-training_data_file_name =\
-    './MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt'
-testing_data_file_name =\
-    './MBALearnsToCode/zzzDemos_Tests/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt'
+training_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt'
+testing_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt'
 training_data_sequences = DataSet(training_data_file_name).data_sequences
 print('Estimating HMM Probabilities from Training Samples...')
 state_prior, transition_template, observation_template = train_hmm(training_data_sequences)
