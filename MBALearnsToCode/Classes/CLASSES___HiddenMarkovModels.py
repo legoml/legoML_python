@@ -121,27 +121,26 @@ class HiddenMarkovModel:
                     .normalize()
             return d
 
-    def map_joint_distributions(self, observations___list, recursive=False):
+    def max_a_posteriori_joint_distributions(self, observations___list, leave_last_state_unoptimized=False):
         observations___list = deepcopy(observations___list)
         T = len(observations___list) - 1
-        if T == 0:
+        if T:
+            last_observation = observations___list.pop(T)
+            f = self.max_a_posteriori_joint_distributions(observations___list, True)\
+                .multiply((self.transition_pdf(T)
+                           .multiply(self.observation_pdf(T)
+                                     .at({(self.observation_var, T): last_observation}))).max())
+        else:
             f = self.state_prior_pdf\
                 .multiply(self.observation_pdf(0)
                           .at({(self.observation_var, 0): observations___list[0]}))
-            if recursive:
-                return f
-            else:
-                return f.max()
+        if leave_last_state_unoptimized:
+            return f.max(leave_unoptimized=((self.state_var, T),))
         else:
-            last_observation = observations___list.pop(T)
-            f = (self.transition_pdf(T)
-                 .multiply(self.observation_pdf(T)
-                           .at({(self.observation_var, T): last_observation}))).max()
-            return (self.map_joint_distributions(observations___list, True)
-                    .multiply(f)).max()
+            return f.max()
 
-    def map_state_sequences(self, observations___list):
-        m = self.map_joint_distributions(observations___list)
+    def max_a_posteriori_state_sequence(self, observations___list):
+        m = self.max_a_posteriori_joint_distributions(observations___list)
         if m.family == 'DiscreteFinite':
             d = set(m.parameters['mappings']).pop()
         else:

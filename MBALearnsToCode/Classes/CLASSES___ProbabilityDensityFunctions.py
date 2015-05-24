@@ -92,8 +92,8 @@ class ProbabilityDensityFunction:
     def normalize(self):
         return self.normalization_lambda(self)
 
-    def max(self):
-        return self.max_lambda(self)
+    def max(self, **kwargs):
+        return self.max_lambda(self, **kwargs)
 
     def marginalize(self, marginalized_vars):
         return self.marginalization_lambda(self, marginalized_vars)
@@ -195,8 +195,7 @@ def discrete_finite_mass_function(var_symbols, parameters, conditions={}, scope=
         condition_instance = {}
         for var in (set(var_values___frozen_dict) & set(conditions)):
             condition_instance[var] = var_values___frozen_dict[var]
-        condition_instance = FrozenDict(condition_instance)
-        condition_instances[var_values___frozen_dict] = condition_instance
+        condition_instances[var_values___frozen_dict] = FrozenDict(condition_instance)
     return ProbabilityDensityFunction('DiscreteFinite', deepcopy(var_symbols),
                                       dict(mappings=mappings, condition_instances=condition_instances),
                                       discrete_finite_mass, discrete_finite_normalization, discrete_finite_max,
@@ -238,20 +237,28 @@ def discrete_finite_normalization(discrete_finite_pmf):
     return pmf
 
 
-def discrete_finite_max(discrete_finite_pmf):
+def discrete_finite_max(discrete_finite_pmf, leave_unoptimized=None):
     mappings = discrete_finite_pmf.parameters['mappings']
-    condition_instances = discrete_finite_pmf.parameters['condition_instances']
-    condition_minus_log_mins = {}
+    if leave_unoptimized:
+        comparison_bases = {}
+        conditioned_and_unoptimized_vars = set(discrete_finite_pmf.conditions) | set(leave_unoptimized)
+        for var_values___frozen_dict in mappings:
+            comparison_basis = {}
+            for var in (set(var_values___frozen_dict) & conditioned_and_unoptimized_vars):
+                comparison_basis[var] = var_values___frozen_dict[var]
+            comparison_bases[var_values___frozen_dict] = FrozenDict(comparison_basis)
+    else:
+        comparison_bases = discrete_finite_pmf.parameters['condition_instances']
+    minus_log_mins = {}
     for var_values___frozen_dict, function_value in mappings.items():
-        condition_instance = condition_instances[var_values___frozen_dict]
-        if condition_instance in condition_minus_log_mins:
-            condition_minus_log_mins[condition_instance] = min(condition_minus_log_mins[condition_instance],
-                                                               function_value)
+        comparison_basis = comparison_bases[var_values___frozen_dict]
+        if comparison_basis in minus_log_mins:
+            minus_log_mins[comparison_basis] = min(minus_log_mins[comparison_basis], function_value)
         else:
-            condition_minus_log_mins[condition_instance] = function_value
+            minus_log_mins[comparison_basis] = function_value
     max_mappings = {}
     for var_values___frozen_dict, function_value in mappings.items():
-        if function_value <= condition_minus_log_mins[condition_instances[var_values___frozen_dict]]:
+        if function_value <= minus_log_mins[comparison_bases[var_values___frozen_dict]]:
             max_mappings[var_values___frozen_dict] = function_value
     return discrete_finite_mass_function(deepcopy(discrete_finite_pmf.vars), dict(mappings=max_mappings),
                                          deepcopy(discrete_finite_pmf.conditions), deepcopy(discrete_finite_pmf.scope))

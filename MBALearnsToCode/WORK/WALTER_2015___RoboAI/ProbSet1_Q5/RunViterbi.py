@@ -18,7 +18,7 @@ transition_template.pprint()
 observation_template.pprint()
 hmm = HMM('xy', 'ob', state_prior, transition_template, observation_template)
 testing_data_sequences = DataSet(testing_data_file_name).data_sequences
-s = hmm.map_state_sequences(list(testing_data_sequences[0]['ob']))
+s = hmm.max_a_posteriori_state_sequence(list(testing_data_sequences[0]['ob']))
 
 
 if __name__ == '__main__':
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     for i in range(num_test_sequences_to_process):
         print('Estimating Most Likely State Sequence for Test Sample #%i' %i)
         testing_data_sequences[i]['most_likely_xy_sequence'] =\
-            hmm.map_state_sequences(list(testing_data_sequences[i]['ob']))
+            hmm.max_a_posteriori_state_sequence(list(testing_data_sequences[i]['ob']))
 
     output_file = 'testing_data_sequences_with_MAP.PICKLE'
     print('Outputing to:', output_file)

@@ -19,4 +19,12 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q4.ProbSet1_Q4 import\
     UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q4
 unit_tests['WALTER_2015___RoboAI___ProbSet1_Q4'] = UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q4()
 
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q1.MidTerm_Q1 import\
+    UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q1
+unit_tests['WALTER_2015___RoboAI___MidTerm_Q1'] = UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q1()
+
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q2.MidTerm_Q2 import\
+    UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2
+unit_tests['WALTER_2015___RoboAI___MidTerm_Q2'] = UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2()
+
 pprint(unit_tests)
