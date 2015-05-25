@@ -1,20 +1,14 @@
-from matplotlib import use
-use('Qt4Agg')
-from numpy import array, pi, radians, loadtxt, eye, concatenate, size, sqrt, degrees, unwrap, atleast_2d
+from numpy import array, cos, diag, sin, pi, radians, loadtxt, eye, concatenate, size, sqrt, degrees, unwrap, atleast_2d
 import matplotlib.pyplot as plt
-from MBALearnsToCode import EKF
+from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
 import sys
 
 
-# This defines a simple class for running your EKF code. As with
-# all the code, feel free to modify it as you see fit, or to write
-# your own outright.
-
-
-class RunEKF():
-
+class RunEKF:
     def __init__(self):
-        self.R = array([[2.0, 0.0, 0.0],[0.0, 2.0, 0.0],[0.0, 0.0, radians(2)]])*5E-5   #1E-4
+        self.R = array([[2.0, 0.0, 0.0],
+                        [0.0, 2.0, 0.0],
+                        [0.0, 0.0, radians(2)]])*5E-5   #1E-4
         self.Q = array([[1.0, 0.0],[0.0, radians(1)]])*5E-7   #1E-6
         self.U = [] # Array that stores the control data where rows increase with time
         self.Z = [] # Array that stores the measurement data where rows increase with time
@@ -30,16 +24,29 @@ class RunEKF():
         self.U = loadtxt(filenameU, comments='#', delimiter=',').astype(float)
         self.Z = loadtxt(filenameZ, comments='#', delimiter=',').astype(float)
         self.XYT = loadtxt(filenameXYT, comments='#', delimiter=',').astype(float)
-        return
 
     # Iterate from t=1 to t=T performing the two filtering steps
     def run(self):
-
         mu0 = array([[-4.0], [4.0], [pi/2]])# FILL ME IN: initial mean
         Sigma0 = eye(3) #[]# FILL ME IN: initial covariance
         self.VAR = array([[Sigma0[0, 0], Sigma0[1, 1], Sigma0[2, 2]]])
         self.MU = mu0.T # Array in which to append mu_t as a row vector after each iteration
-        self.ekf = EKF(mu0, Sigma0, self.R, self.Q)
+
+        transition_means_lambda = lambda m, u: m + array([[u[0, 0] * cos(m[2, 0])],
+                                                          [u[0, 0] * sin(m[2, 0])],
+                                                          [u[1, 0]]])
+        transition_means_jacobi_lambda = lambda m, u: array([[1, 0, - u[0, 0] * sin(m[2, 0])],
+                                                             [0, 1, u[0, 0] * cos(m[2, 0])],
+                                                             [0, 0, 1]])
+        transition_covariances_lambda = lambda u: self.R
+        observation_means_lambda = lambda m: array([[m[0, 0] ** 2 + m[1, 0] ** 2],
+                                                    [m[2, 0]]])
+        observation_means_jacobi_lambda = lambda m: array([[2 * m[0, 0], 2 * m[1, 0], 0],
+                                                           [0, 0, 1]])
+        observation_covariances_lambda = lambda z: self.Q
+        self.ekf = EKF(mu0, Sigma0,
+                       transition_means_lambda, transition_means_jacobi_lambda, transition_covariances_lambda,
+                       observation_means_lambda, observation_means_jacobi_lambda, observation_covariances_lambda)
 
         # For each t in [1,T]
         #    1) Call self.ekf.prediction(u_t)
@@ -47,16 +54,15 @@ class RunEKF():
         #    3) Add self.ekf.getMean() to self.MU
         T = self.U.shape[0]
         for t in range(T):
-            self.ekf = self.ekf.prediction(atleast_2d(self.U[t, :]).T)
-            self.ekf = self.ekf.update(atleast_2d(self.Z[t, :]).T)
-            self.MU = concatenate((self.MU, self.ekf.getMean().T))
-            self.VAR = concatenate((self.VAR, self.ekf.getVariances()))
+            self.ekf.predict(atleast_2d(self.U[t, :]).T)
+            self.ekf.update(atleast_2d(self.Z[t, :]).T)
+            self.MU = concatenate((self.MU, self.ekf.means.T))
+            self.VAR = concatenate((self.VAR, atleast_2d(diag(self.ekf.covariances))))
 
         print('Final Mean State Estimate:')
-        print(self.ekf.mu)
+        print(self.ekf.means)
         print('Final Covariance State Estimate:')
-        print(self.ekf.Sigma)
- 
+        print(self.ekf.covariances)
 
     # Plot the resulting estimate for the robot's trajectory
     def plot(self):

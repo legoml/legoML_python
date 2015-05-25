@@ -2,8 +2,8 @@ from __future__ import print_function
 from numpy import allclose, array
 from numpy.random import random
 from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import approx_gradients
-from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.RoboSoccer import distance, distance_gradients,\
-    angle, angle_gradients
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.RoboSoccer import euclidean_distance, euclidean_distance_gradients,\
+    relative_angle, relative_angle_gradients
 
 
 def UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients(num_times=1000):
@@ -11,11 +11,11 @@ def UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients(num_times=
     num_angle_successes = 0
     for t in range(num_times):
         vector = random(4)
-        distance_gradients___analytic = array(distance_gradients(*vector))
-        distance_gradients___approx = approx_gradients(lambda v: distance(*v), vector)
+        distance_gradients___analytic = array(euclidean_distance_gradients(*vector))
+        distance_gradients___approx = approx_gradients(lambda v: euclidean_distance(*v), vector)
         num_distance_successes += allclose(distance_gradients___approx, distance_gradients___analytic)
-        angle_gradients___analytic = array(angle_gradients(*vector))
-        angle_gradients___approx = approx_gradients(lambda v: angle(*v), vector)
+        angle_gradients___analytic = array(relative_angle_gradients(*vector))
+        angle_gradients___approx = approx_gradients(lambda v: relative_angle(*v), vector)
         num_angle_successes += allclose(angle_gradients___approx, angle_gradients___analytic)
     print(distance_gradients___analytic)
     print(distance_gradients___approx)

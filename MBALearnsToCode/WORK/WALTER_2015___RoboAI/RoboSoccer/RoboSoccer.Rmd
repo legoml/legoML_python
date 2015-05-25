@@ -1,0 +1,6 @@
+---
+title: 'English-style RoboSoccer'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.5in
+---

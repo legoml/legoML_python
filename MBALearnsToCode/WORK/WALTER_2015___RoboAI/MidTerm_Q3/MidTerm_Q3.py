@@ -7,15 +7,9 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3():
 
     means = array([[0.]])
     covariances = array([[0.]])
-    transition_means_lambda = lambda mu, control: mu + control
-    transition_means_jacobi_lambda = lambda mu, control: array([[1.]])
-    transition_covariances_lambda = lambda control: array([[0.1 ** 2]])
-    observation_means_lambda = lambda state: state
-    observation_means_jacobi_lambda = lambda state: array([[1.]])
-    observation_covariances_lambda = lambda observation: array([[0.5 ** 2]])
     ekf = EKF(means, covariances,
-              transition_means_lambda, transition_means_jacobi_lambda, transition_covariances_lambda,
-              observation_means_lambda, observation_means_jacobi_lambda, observation_covariances_lambda)
+              lambda mu, control: mu + control, lambda mu, control: array([[1.]]), lambda control: array([[0.1 ** 2]]),
+              lambda state: state, lambda state: array([[1.]]), lambda observation: array([[0.5 ** 2]]))
 
     ekf.predict(1.)
     print('Predict 1:', ekf.means, ekf.covariances, ekf.standard_deviations())
