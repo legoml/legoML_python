@@ -7,15 +7,15 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3():
 
     means = array([[0.]])
     covariances = array([[0.]])
-    transition_covariances = array([[0.1 ** 2]])
-    observation_covariances = array([[0.5 ** 2]])
-    state_means_transition_lambda = lambda mu, control: mu + control
-    state_means_transition_jacobi_lambda = lambda mu, control: array([[1.]])
-    observation_means_lambda = lambda mu: mu
-    observation_means_jacobi_lambda = lambda mu: array([[1.]])
-    ekf = EKF(means, covariances, transition_covariances, observation_covariances,
-              state_means_transition_lambda, state_means_transition_jacobi_lambda,
-              observation_means_lambda, observation_means_jacobi_lambda)
+    transition_means_lambda = lambda mu, control: mu + control
+    transition_means_jacobi_lambda = lambda mu, control: array([[1.]])
+    transition_covariances_lambda = lambda control: array([[0.1 ** 2]])
+    observation_means_lambda = lambda state: state
+    observation_means_jacobi_lambda = lambda state: array([[1.]])
+    observation_covariances_lambda = lambda observation: array([[0.5 ** 2]])
+    ekf = EKF(means, covariances,
+              transition_means_lambda, transition_means_jacobi_lambda, transition_covariances_lambda,
+              observation_means_lambda, observation_means_jacobi_lambda, observation_covariances_lambda)
 
     ekf.predict(1.)
     print('Predict 1:', ekf.means, ekf.covariances, ekf.standard_deviations())
