@@ -1,3 +1,4 @@
+from __future__ import print_function
 from numpy import array, cos, diag, sin, pi, radians, loadtxt, eye, concatenate, size, sqrt, degrees, unwrap, atleast_2d
 import matplotlib.pyplot as plt
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
@@ -98,9 +99,15 @@ class RunEKF:
         axarr[2].set_ylabel('Error (degrees)')
         axarr[2].set_xlabel('Time')
         
-        plt.show()   
-        
-        return
+        plt.show()
+
+
+def UNIT_TEST___WALTER_2015___RoboAI___ProbSet2_Q3(control_data_file_path, measurement_data_file_path,
+                                                   ground_truth_data_file_path):
+    ekf = RunEKF()
+    ekf.readData(control_data_file_path, measurement_data_file_path, ground_truth_data_file_path)
+    ekf.run()
+    ekf.plot()
 
 
 if __name__ == '__main__':

@@ -6,18 +6,19 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5.TrainHMM import train
 from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM
 
 
-training_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt'
-testing_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt'
-training_data_sequences = DataSet(training_data_file_name).data_sequences
-print('Estimating HMM Probabilities from Training Samples...')
-state_prior, transition_template, observation_template = train_hmm(training_data_sequences)
-print('Estimating HMM Probabilities from Training Samples... done!')
-state_prior.pprint()
-transition_template.pprint()
-observation_template.pprint()
-hmm = HMM('xy', 'ob', state_prior, transition_template, observation_template)
-testing_data_sequences = DataSet(testing_data_file_name).data_sequences
-s = hmm.max_a_posteriori_state_sequence(list(testing_data_sequences[0]['ob']))
+def UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q5():
+    training_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt'
+    testing_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt'
+    training_data_sequences = DataSet(training_data_file_name).data_sequences
+    print('Estimating HMM Probabilities from Training Samples...')
+    state_prior, transition_template, observation_template = train_hmm(training_data_sequences)
+    print('Estimating HMM Probabilities from Training Samples... done!')
+    state_prior.pprint()
+    transition_template.pprint()
+    observation_template.pprint()
+    hmm = HMM('xy', 'ob', state_prior, transition_template, observation_template)
+    testing_data_sequences = DataSet(testing_data_file_name).data_sequences
+    s = hmm.max_a_posteriori_state_sequence(list(testing_data_sequences[0]['ob']))
 
 
 if __name__ == '__main__':
