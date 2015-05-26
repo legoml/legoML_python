@@ -1,5 +1,4 @@
-from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.RoboSoccer import Field, Game
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.RoboSoccer import Game
 
-f = Field()
-g = Game(Field, {}, {})
-p = g.plot()
+g = Game(1)
+g.players_run_randomly(100)

@@ -1,11 +1,14 @@
 from __future__ import print_function, division
 from copy import copy
-from numpy import arctan2, array, cos, eye, hstack, sin, vstack, zeros
-from numpy.random import normal
+from itertools import chain
+from numpy import arctan2, array, cos, eye, hstack, pi, sin, vstack, zeros
+from numpy.random import normal, uniform
 from pandas import DataFrame
-from matplotlib.pyplot import figure, imshow, plot, scatter, subplots
+from matplotlib.pyplot import subplots
 from matplotlib.patches import Ellipse
+from matplotlib.animation import FuncAnimation
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.ConfidenceEllipses import confidence_ellipse_parameters
 
 
 def euclidean_distance(x0, y0, x1, y1):
@@ -41,7 +44,7 @@ class Marking:
 
 
 class Field:
-    def __init__(self, length=105, width=68, goal_width=7.32):
+    def __init__(self, length=105., width=68., goal_width=7.32):
         self.length = length
         self.width = width
         self.markings = {Marking('SouthWest', - length / 2, - width / 2),
@@ -65,7 +68,7 @@ class Field:
 
 
 class Ball:
-    def __init__(self, x, y, velocity=0, angle=0):
+    def __init__(self, x=0., y=0., velocity=0., angle=0.):
         self.x = x
         self.y = y
         self.x_just_now = x
@@ -86,7 +89,7 @@ class Ball:
 
 
 class Player:
-    def __init__(self, x, y, velocity=0, angle=0, motion_sigma=0, distance_sigma=0, team='West'):
+    def __init__(self, x=0., y=0., velocity=0., angle=0., motion_sigma=0., distance_sigma=0., team='West'):
 
         def transition_means(all_xy___vector, velocity_and_angle):
             new_xy_means___vector = all_xy___vector.copy()
@@ -102,7 +105,7 @@ class Player:
             n = all_xy___vector.size
             observation_means___vector = zeros((n, 1))
             self_x, self_y = all_xy___vector[0:2, 0]
-            for i in range(1, n / 2):
+            for i in range(1, int(n / 2)):
                 k = 2 * i
                 marking_x, marking_y = all_xy___vector[k:(k + 2), 0]
                 observation_means___vector[k, 0] = euclidean_distance(self_x, self_y, marking_x, marking_y)
@@ -113,7 +116,7 @@ class Player:
             n = all_xy___vector.size
             observation_means_jacobi___matrix = zeros((n, n))
             self_x, self_y = all_xy___vector[0:2, 0]
-            for i in range(1, n / 2):
+            for i in range(1, int(n / 2)):
                 k = 2 * i
                 marking_x, marking_y = all_xy___vector[k:(k + 2), 0]
                 observation_means_jacobi___matrix[k, (0, 1, k, k + 1)] =\
@@ -125,7 +128,7 @@ class Player:
         def observation_covariances(observations___vector):
             n = observations___vector.size
             observation_covariances___matrix = zeros((n, n))
-            for i in range(1, n / 2):
+            for i in range(1, int(n / 2)):
                 k = 2 * i
                 observation_covariances___matrix[k, k] = (observations___vector[k] * self.distance_sigma) ** 2
             return observation_covariances___matrix
@@ -198,6 +201,9 @@ class Player:
             if marking.id not in self.SLAM:
                 self.augment_map(marking)
 
+    def orient_randomly(self):
+        self.angle = uniform(-pi, pi)
+
     def orient_toward_ball(self, ball):
         self.angle = arctan2(ball.y - self.y, ball.x - self.x)
 
@@ -212,19 +218,106 @@ class Player:
 
 
 class Game:
-    def __init__(self, field, players, ball):
-        self.field = field
-        self.players = players
-        self.ball = ball
+    def __init__(self, num_players_per_team=11, velocity=5, motion_sigma=1e-2, distance_sigma=1e-2):
+        self.field = Field()
+        length = self.field.length
+        width = self.field.width
+        self.num_players_per_team = num_players_per_team
+        self.players = []
+        west_x = num_players_per_team * [None]
+        west_y = num_players_per_team * [None]
+        east_x = num_players_per_team * [None]
+        east_y = num_players_per_team * [None]
+        for i in range(num_players_per_team):
+            self.players += [Player(uniform(- length / 2, 0), uniform(- width / 2, width / 2),
+                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, 'West'),
+                             Player(uniform(0, length / 2), uniform(- width / 2, width / 2),
+                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, 'East')]
+            k = 2 * i
+            west_x[i] = self.players[k].x
+            west_y[i] = self.players[k].y
+            east_x[i] = self.players[k + 1].x
+            east_y[i] = self.players[k + 1].y
+        self.ball = Ball()
         self.time = 0
 
-    def plot(self):
-        return scatter(self.field.markings_xy.x, self.field.markings_xy.y, color='black', s=9)
+        self.figure, self.axes = subplots()
+        self.boundary_plot = None
+        self.markings_plot = None
+        self.ball_plot = None
+        self.west_team_plot = None
+        self.east_team_plot = None
+        self.SLAM_confidence_plots = {}
+        self.animation = FuncAnimation(self.figure, self.update_ball_and_player_plots, interval=50,
+                                       init_func=self.plot_init, blit=True)
+
+    def plot_init(self):
+        length = self.field.length
+        width = self.field.width
+        self.boundary_plot, = self.axes.plot(
+            (- length / 2, length / 2, length / 2, - length / 2, - length / 2),
+            (- width / 2, - width / 2, width / 2, width / 2, - width / 2), color='gray', linewidth=1)
+        self.markings_plot = self.axes.scatter(
+            self.field.markings_xy.x, self.field.markings_xy.y, color='black', s=24)
+        west_x = self.num_players_per_team * [None]
+        west_y = self.num_players_per_team * [None]
+        east_x = self.num_players_per_team * [None]
+        east_y = self.num_players_per_team * [None]
+        for i in range(self.num_players_per_team):
+            k = 2 * i
+            west_x[i] = self.players[k].x
+            west_y[i] = self.players[k].y
+            east_x[i] = self.players[k + 1].x
+            east_y[i] = self.players[k + 1].y
+        self.ball_plot = self.axes.scatter(self.ball.x, self.ball.y, s=36, color='magenta', marker='o', animated=True)
+        self.west_team_plot = self.axes.scatter(west_x, west_y, s=48, c='blue', marker='o', label='West', animated=True)
+        self.east_team_plot = self.axes.scatter(east_x, east_y, s=48, c='red', marker='o', label='East', animated=True)
+        return self.boundary_plot, self.markings_plot, self.ball_plot, self.west_team_plot, self.east_team_plot
+
+    def update_ball_and_player_plots(self, t):
+        self.players_run_randomly()
+        west_xy = zeros((2, self.num_players_per_team))
+        east_xy = zeros((2, self.num_players_per_team))
+        for i in range(self.num_players_per_team):
+            k = 2 * i
+            west_xy[0, i] = self.players[k].x
+            west_xy[1, i] = self.players[k].y
+            east_xy[0, i] = self.players[k + 1].x
+            east_xy[1, i] = self.players[k + 1].y
+        self.ball_plot.set_offsets(array([[self.ball.x], [self.ball.y]]))
+        self.west_team_plot.set_offsets(west_xy)
+        self.east_team_plot.set_offsets(east_xy)
+        for obj, index in self.players[0].SLAM.items():
+            k = 2 * index
+            xy = self.players[0].EKF.means[k:(k + 2), 0]
+            width, height, angle =\
+                    confidence_ellipse_parameters(self.players[0].EKF.covariances[k:(k + 2), k:(k + 2)])
+            if obj in self.SLAM_confidence_plots:
+                self.SLAM_confidence_plots[obj].center = xy
+                self.SLAM_confidence_plots[obj].width = width
+                self.SLAM_confidence_plots[obj].height = height
+                self.SLAM_confidence_plots[obj].angle = angle
+                pass
+            else:
+                self.SLAM_confidence_plots[obj] = self.axes.add_artist(Ellipse(xy, width, height, angle, animated=True))
+        return [self.ball_plot, self.west_team_plot, self.east_team_plot] + list(self.SLAM_confidence_plots.values())
 
     def out_of_play(self):
-        self.ball.x > self.field.length
+        return (self.ball.x < -self.field.length / 2) | (self.ball.x > self.field.length / 2) |\
+            (self.ball.y < -self.field.width / 2) | (self.ball.y > self.field.width / 2)
 
     def goal_scored(self):
         return True
+
+    def players_run_randomly(self):
+        self.time += 1
+        for i in range(0, 2 * self.num_players_per_team):
+            self.players[i].orient_randomly()
+            self.players[i].run()
+            self.players[i].observe(self.field.markings)
+
+    def play(self):
+        while not self.out_of_play():
+            pass
 
 
