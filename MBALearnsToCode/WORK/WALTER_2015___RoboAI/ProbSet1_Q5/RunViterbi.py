@@ -7,8 +7,9 @@ from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovMod
 
 
 def UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q5():
-    training_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.train.txt'
-    testing_data_file_name = './MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/randomwalk.test.txt'
+    folder_path = '../MBALearnsToCode_Data/WALTER_2015___RoboAI/1.5 (HMM Random Walk)/'
+    training_data_file_name = folder_path + 'randomwalk.train.txt'
+    testing_data_file_name = folder_path + 'randomwalk.test.txt'
     training_data_sequences = DataSet(training_data_file_name).data_sequences
     print('Estimating HMM Probabilities from Training Samples...')
     state_prior, transition_template, observation_template = train_hmm(training_data_sequences)
