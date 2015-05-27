@@ -27,10 +27,10 @@ def UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q2(alpha=Symbol('alpha')):
                                  fdict(S3=1, S4=0): -log(.1),
                                  fdict(S3=1, S4=1): -log(.9)}))
 
-    p_S1_on_S0_equal_1 = p_S0_S1.condition(dict(S0=1))
-    p_S3_on_S4_equal_0 = p_S3_S4.condition(dict(S4=0))
-    p_S1_on_S0_equal_1_and_S4_equal_0 = (p_S1_on_S0_equal_1.multiply(p_S1_S2, p_S2_S3, p_S3_on_S4_equal_0)
-                                         .marginalize(('S2', 'S3'))).normalize()
+    p_S1_on_S0_equal_1 = p_S0_S1.condition(S0=1)
+    p_S3_on_S4_equal_0 = p_S3_S4.condition(S4=0)
+    p_S1_on_S0_equal_1_and_S4_equal_0 = (p_S1_on_S0_equal_1 * p_S1_S2 * p_S2_S3 * p_S3_on_S4_equal_0)\
+                                         .marginalize('S2', 'S3').normalize()
     p_S1_on_S0_equal_1_and_S4_equal_0.pprint()
 
     lambda_0 = lambda a: .09 * (2 * a ** 2 - 2 * a + 1) + .02 * a * (1. - a)

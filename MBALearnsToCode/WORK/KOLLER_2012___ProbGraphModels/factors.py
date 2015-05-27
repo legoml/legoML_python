@@ -20,7 +20,7 @@ def UNIT_TEST___KOLLER_2012___ProbGraphModels___Factors():
                               fdict(b=1, c=2): -log(.7),
                               fdict(b=2, c=1): -log(.1),
                               fdict(b=2, c=2): -log(.2)}))
-    f = f_1.multiply(f_2)
+    f = f_1 * f_2
     f.pprint()
     f___answer = dfmf(dict.fromkeys(('a', 'b', 'c')),
                       dict(mappings={fdict(a=1, b=1, c=1): -log(.25),
@@ -38,7 +38,7 @@ def UNIT_TEST___KOLLER_2012___ProbGraphModels___Factors():
     f___check = dfmf_allclose(f, f___answer)
     print('Factor Multiplication check:', f___check)
 
-    m = f.marginalize(('b',))
+    m = f.marginalize('b')
     m.pprint()
     m___answer = dfmf(dict.fromkeys(('a', 'c')),
                       dict(mappings={fdict(a=1, c=1): -log(.33),

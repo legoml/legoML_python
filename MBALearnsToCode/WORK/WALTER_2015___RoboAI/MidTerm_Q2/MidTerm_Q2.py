@@ -36,7 +36,7 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
                                   fdict(C=1, D=1): -log(.6)}),
                    conditions=dict(C=None))
 
-    p_C_equal_1_on_A_equal_1 = (p_B.multiply(p_C_on_A_B.at(dict(A=1, C=1)))).marginalize(('B',))
+    p_C_equal_1_on_A_equal_1 = (p_B * p_C_on_A_B.at(A=1, C=1)).marginalize('B')
     p_C_equal_1_on_A_equal_1.pprint()
     p_C_equal_1_on_A_equal_1___answer = pmf(dict.fromkeys(('A', 'C')),
                                             dict(mappings={fdict(C=1): -log(.76)}),
@@ -44,14 +44,14 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
                                             scope=dict(C=1))
     p_C_equal_1_on_A_equal_1___check = pmf_allclose(p_C_equal_1_on_A_equal_1, p_C_equal_1_on_A_equal_1___answer)
 
-    p_A = (p_E.multiply(p_A_on_E)).marginalize(('E',))
+    p_A = (p_E * p_A_on_E).marginalize('E')
     p_A.pprint()
     p_A___answer = pmf(dict.fromkeys(('A',)),
                        dict(mappings={fdict(A=0): -log(.5),
                                       fdict(A=1): -log(.5)}))
     p_A___check = pmf_allclose(p_A, p_A___answer)
 
-    p_C_on_B_equal_1 = (p_A.multiply(p_C_on_A_B.at(dict(B=1)))).marginalize(('A',))
+    p_C_on_B_equal_1 = (p_A * p_C_on_A_B.at(B=1)).marginalize('A')
     p_C_on_B_equal_1.pprint()
     p_C_on_B_equal_1___answer = pmf(dict.fromkeys(('B', 'C')),
                                     dict(mappings={fdict(C=0): -log(.15),
@@ -59,7 +59,7 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
                                     conditions=dict(B=1))
     p_C_on_B_equal_1___check = pmf_allclose(p_C_on_B_equal_1, p_C_on_B_equal_1___answer)
 
-    p_D_equal_1_on_B_equal_1 = (p_C_on_B_equal_1.multiply(p_D_on_C.at(dict(D=1)))).marginalize(('C',))
+    p_D_equal_1_on_B_equal_1 = (p_C_on_B_equal_1 * p_D_on_C.at(D=1)).marginalize('C')
     p_D_equal_1_on_B_equal_1.pprint()
     p_D_equal_1_on_B_equal_1___answer = pmf(dict.fromkeys(('B', 'D')),
                                             dict(mappings={fdict(D=1): -log(.57)}),
@@ -67,16 +67,16 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
                                             scope=dict(D=1))
     p_D_equal_1_on_B_equal_1___check = pmf_allclose(p_D_equal_1_on_B_equal_1, p_D_equal_1_on_B_equal_1___answer)
 
-    p_C = p_A.multiply(p_B, p_C_on_A_B).marginalize(('A', 'B'))
+    p_C = (p_A * p_B * p_C_on_A_B).marginalize('A', 'B')
     p_C.pprint()
     p_C___answer = pmf(dict.fromkeys(('C')),
                        dict(mappings={fdict(C=0): -log(.9 * .5 * .7 + .2 * .5 * .3 + .3 * .5 * .7 + .1 * .5 * .3),
                                       fdict(C=1): -log(.1 * .5 * .7 + .8 * .5 * .3 + .7 * .5 * .7 + .9 * .5 * .3)}))
     p_C___check = pmf_allclose(p_C, p_C___answer)
 
-    p_D_equal_1 = p_C.multiply(p_D_on_C.at(dict(D=1))).marginalize(('C',))
+    p_D_equal_1 = (p_C * p_D_on_C.at(D=1)).marginalize('C')
     p_D_equal_1.pprint()
-    p_D_equal_1___answer = pmf(dict.fromkeys(('D')),
+    p_D_equal_1___answer = pmf(dict.fromkeys(('D',)),
                                dict(mappings={fdict(D=1): -log(.4 * (.9 * .5 * .7 + .2 * .5 * .3 +
                                                                      .3 * .5 * .7 + .1 * .5 * .3) +
                                                                .6 * (.1 * .5 * .7 + .8 * .5 * .3 +
@@ -84,11 +84,11 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
                                scope=dict(D=1))
     p_D_equal_1___check = pmf_allclose(p_D_equal_1, p_D_equal_1___answer)
 
-    p_A_C_on_B = p_A.multiply(p_C_on_A_B)
-    p_C_on_B = p_A_C_on_B.marginalize(('A',))
-    p_B_C_D = p_B.multiply(p_C_on_B, p_D_on_C)
-    p_B_D = p_B_C_D.marginalize(('C',))
-    p_B_equal_1_on_D_equal_1 = p_B_D.condition(dict(D=1)).normalize().at(dict(B=1))
+    p_A_C_on_B = p_A * p_C_on_A_B
+    p_C_on_B = p_A_C_on_B.marginalize('A')
+    p_B_C_D = p_B * p_C_on_B * p_D_on_C
+    p_B_D = p_B_C_D.marginalize('C')
+    p_B_equal_1_on_D_equal_1 = p_B_D.condition(D=1).normalize().at(B=1)
     p_B_equal_1_on_D_equal_1.pprint()
     p_B_equal_1_on_D_equal_1___answer = pmf(dict.fromkeys(('B', 'D')),
                                             dict(mappings={fdict(B=1): -log(.337)}),

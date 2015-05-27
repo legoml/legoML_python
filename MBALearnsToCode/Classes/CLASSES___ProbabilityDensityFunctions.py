@@ -1,10 +1,10 @@
 from __future__ import print_function
 from copy import deepcopy
 import itertools
+from pprint import pprint
 from scipy.stats import uniform, multivariate_normal
 from sympy import exp, log, pi, sympify
 from sympy.matrices import BlockMatrix, det
-from pprint import pprint
 from frozen_dict import FrozenDict
 from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_xreplace,\
     sympy_xreplace_doit_explicit, sympy_xreplace_doit_explicit_evalf
@@ -31,48 +31,50 @@ class ProbabilityDensityFunction:
         self.sampling_lambda = sampling_lambda
 
     def copy(self):
-        return ProbabilityDensityFunction(self.family, deepcopy(self.vars), self.parameters.copy(),
+        return ProbabilityDensityFunction(self.family, self.vars.copy(), self.parameters.copy(),
                                           self.density_lambda, self.normalization_lambda, self.max_lambda,
                                           self.marginalization_lambda, self.conditioning_lambda, self.sampling_lambda,
                                           deepcopy(self.conditions), deepcopy(self.scope))
 
-    def at(self, var_and_parameter_point_values___dict, **kw_var_and_parameter_point_values___dict):
-        var_and_parameter_point_values___dict = combine_dict_and_kwargs(var_and_parameter_point_values___dict,
-                                                                        kw_var_and_parameter_point_values___dict)
-        s = set(self.vars) & set(var_and_parameter_point_values___dict)
-        for var in s:
-            var_and_parameter_point_values___dict[self.vars[var]] = var_and_parameter_point_values___dict[var]
+    def is_discrete_finite(self):
+        return self.family == 'DiscreteFinite'
+
+    def at(self, var_and_parameter_values___dict={}, **kw_var_and_parameter_values___dict):
+        var_and_parameter_values___dict = combine_dict_and_kwargs(var_and_parameter_values___dict,
+                                                                  kw_var_and_parameter_values___dict)
+        for var in (set(self.vars) & set(var_and_parameter_values___dict)):
+            var_and_parameter_values___dict[self.vars[var]] = var_and_parameter_values___dict[var]
         pdf = self.copy()
-        for var, value in var_and_parameter_point_values___dict.items():
+        for var, value in var_and_parameter_values___dict.items():
             if var in pdf.conditions:
                 pdf.conditions.update({var: value})
             if var in pdf.scope:
                 pdf.scope.update({var: value})
-        pdf.conditions = sympy_xreplace(pdf.conditions, var_and_parameter_point_values___dict)
-        pdf.scope = sympy_xreplace(pdf.scope, var_and_parameter_point_values___dict)
-        if pdf.family == 'DiscreteFinite':
+        pdf.conditions = sympy_xreplace(pdf.conditions, var_and_parameter_values___dict)
+        pdf.scope = sympy_xreplace(pdf.scope, var_and_parameter_values___dict)
+        if pdf.is_discrete_finite():
             mappings = {}
-            for var_values___frozen_dict, function_value in pdf.parameters['mappings'].items():
+            for var_values___frozen_dict, mapping_value in pdf.parameters['mappings'].items():
                 other_items___dict = dict(set(var_values___frozen_dict.items()) -
-                                          set(var_and_parameter_point_values___dict.items()))
-                if not (set(other_items___dict) & set(var_and_parameter_point_values___dict)):
+                                          set(var_and_parameter_values___dict.items()))
+                if not (set(other_items___dict) & set(var_and_parameter_values___dict)):
                     mappings[FrozenDict(set(var_values___frozen_dict.items()) - set(pdf.conditions.items()))] =\
-                        sympy_xreplace(function_value, var_and_parameter_point_values___dict)
+                        sympy_xreplace(mapping_value, var_and_parameter_values___dict)
             return discrete_finite_mass_function(pdf.vars, dict(mappings=mappings), pdf.conditions, pdf.scope)
         else:
-            pdf.parameters = sympy_xreplace(pdf.parameters, var_and_parameter_point_values___dict)
+            pdf.parameters = sympy_xreplace(pdf.parameters, var_and_parameter_values___dict)
             return pdf
 
-    def __call__(self, vars_and_parameters_values___dict={}, return_probability=True):
+    def __call__(self, var_and_parameter_values___dict={}, return_probability=True):
         scope_vars = deepcopy(self.vars)
         for var in self.vars:
             if var not in self.scope:
                 del scope_vars[var]
             elif self.scope[var] is not None:
                 scope_vars[var] = self.scope[var]
-        if vars_and_parameters_values___dict:
+        if var_and_parameter_values___dict:
             symbols_and_values___dict = {}
-            for var_or_parameter, value in vars_and_parameters_values___dict.items():
+            for var_or_parameter, value in var_and_parameter_values___dict.items():
                 if var_or_parameter in self.vars:
                     symbols_and_values___dict[self.vars[var_or_parameter]] = value
                 elif var_or_parameter in self.parameters:
@@ -95,30 +97,37 @@ class ProbabilityDensityFunction:
     def max(self, **kwargs):
         return self.max_lambda(self, **kwargs)
 
-    def marginalize(self, marginalized_vars):
-        return self.marginalization_lambda(self, marginalized_vars)
+    def marginalize(self, *marginalized_vars):
+        return self.marginalization_lambda(self, *marginalized_vars)
 
-    def condition(self, conditions={}):
+    def condition(self, conditions={}, **kw_conditions):
+        conditions = combine_dict_and_kwargs(conditions, kw_conditions)
         return self.conditioning_lambda(self, conditions)
 
     def sample(self, num_samples=1):
         return self.sampling_lambda(self, num_samples)
 
+    def __mul__(self, probability_density_function_to_multiply):
+        return product_of_2_probability_density_functions(self, probability_density_function_to_multiply)
+
+    def __rmul__(self, probability_density_function_to_multiply):
+        return product_of_2_probability_density_functions(probability_density_function_to_multiply, self)
+
     def multiply(self, *probability_density_functions_to_multiply):
         pdf = self.copy()
         for pdf_to_multiply in probability_density_functions_to_multiply:
-            pdf = product_of_2_probability_density_functions(pdf, pdf_to_multiply)
+            pdf = pdf.__mul__(pdf_to_multiply)
         return pdf
 
     def pprint(self):
-        discrete = self.family == 'DiscreteFinite'
+        discrete = self.is_discrete_finite()
         print('\n')
         if discrete:
-            print('PROBABILITY MASS FUNCTION')
-            print('_________________________')
+            print('MASS FUNCTION')
+            print('_____________')
         else:
-            print('PROBABILITY DENSITY FUNCTION')
-            print('____________________________')
+            print('DENSITY FUNCTION')
+            print('________________')
             print('FAMILY:', self.family)
         print("VARIABLES' SYMBOLS:")
         pprint(self.vars)
@@ -129,13 +138,13 @@ class ProbabilityDensityFunction:
         if not discrete:
             print('PARAMETERS:')
             pprint(self.parameters)
-            print('PROBABILITY DENSITY:')
+            print('DENSITY:')
         else:
-            print('PROBABILITY MASS:')
+            print('MASS:')
         d = self()
         pprint(d)
         if discrete:
-            print('   sum (for checking):', sum(d.values()))
+            print('   sum =', sum(d.values()))
         print('\n')
 
     def shift_time_subscripts(self, t):
@@ -172,13 +181,11 @@ def product_of_2_probability_density_functions(pdf_1, pdf_2):
             pdf_2, pdf_1)
     elif families == ('Gaussian', 'Gaussian'):
         return product_of_2_gaussian_probability_density_functions(pdf_1, pdf_2)
-    else:
-        return None
 
 
 def one_density_function(var_symbols={}, conditions={}):
-    return ProbabilityDensityFunction('One', deepcopy(var_symbols), {}, one, one, one, one, one,
-                                      lambda *args, **kwargs: None, deepcopy(conditions), scope={})
+    return ProbabilityDensityFunction('One', var_symbols.copy(), {}, one, one, one, one, one,
+                                      lambda *args, **kwargs: None, deepcopy(conditions))
 
 
 def one(*args, **kwargs):
@@ -187,8 +194,8 @@ def one(*args, **kwargs):
 
 def discrete_finite_mass_function(var_symbols, parameters, conditions={}, scope={}):
     non_none_scope = {var: value for var, value in scope.items() if value is not None}
-    mappings = {var_values___frozen_dict: function_value
-                for var_values___frozen_dict, function_value in parameters['mappings'].items()
+    mappings = {var_values___frozen_dict: mapping_value
+                for var_values___frozen_dict, mapping_value in parameters['mappings'].items()
                 if set(var_values___frozen_dict.items()) >= set(non_none_scope.items())}
     condition_instances = {}
     for var_values___frozen_dict in mappings:
@@ -196,7 +203,7 @@ def discrete_finite_mass_function(var_symbols, parameters, conditions={}, scope=
         for var in (set(var_values___frozen_dict) & set(conditions)):
             condition_instance[var] = var_values___frozen_dict[var]
         condition_instances[var_values___frozen_dict] = FrozenDict(condition_instance)
-    return ProbabilityDensityFunction('DiscreteFinite', deepcopy(var_symbols),
+    return ProbabilityDensityFunction('DiscreteFinite', var_symbols.copy(),
                                       dict(mappings=mappings, condition_instances=condition_instances),
                                       discrete_finite_mass, discrete_finite_normalization, discrete_finite_max,
                                       discrete_finite_marginalization, discrete_finite_conditioning,
@@ -204,18 +211,18 @@ def discrete_finite_mass_function(var_symbols, parameters, conditions={}, scope=
 
 
 def discrete_finite_mass(var_values___dict, parameters):
-    var_point_values___dict = deepcopy(var_values___dict)
+    v = deepcopy(var_values___dict)
     for var, value in var_values___dict.items():
         if (value is None) or is_non_atomic_sympy_expression(value):
-            del var_point_values___dict[var]
-    s0 = set(var_point_values___dict.items())
+            del v[var]
+    s0 = set(v.items())
     d = {}
     mappings = parameters['mappings']
-    for var_values___frozen_dict, function_value in mappings.items():
+    for var_values___frozen_dict, mapping_value in mappings.items():
         spare_var_values = dict(s0 - set(var_values___frozen_dict.items()))
         s = set(spare_var_values.keys())
         if not(s) or (s and not(s & set(var_values___frozen_dict))):
-            d[var_values___frozen_dict] = sympy_xreplace_doit_explicit(function_value, var_values___dict)
+            d[var_values___frozen_dict] = sympy_xreplace_doit_explicit(mapping_value, var_values___dict)
     return d
 
 
@@ -250,53 +257,53 @@ def discrete_finite_max(discrete_finite_pmf, leave_unoptimized=None):
     else:
         comparison_bases = discrete_finite_pmf.parameters['condition_instances']
     minus_log_mins = {}
-    for var_values___frozen_dict, function_value in mappings.items():
+    for var_values___frozen_dict, mapping_value in mappings.items():
         comparison_basis = comparison_bases[var_values___frozen_dict]
         if comparison_basis in minus_log_mins:
-            minus_log_mins[comparison_basis] = min(minus_log_mins[comparison_basis], function_value)
+            minus_log_mins[comparison_basis] = min(minus_log_mins[comparison_basis], mapping_value)
         else:
-            minus_log_mins[comparison_basis] = function_value
+            minus_log_mins[comparison_basis] = mapping_value
     max_mappings = {}
-    for var_values___frozen_dict, function_value in mappings.items():
-        if function_value <= minus_log_mins[comparison_bases[var_values___frozen_dict]]:
-            max_mappings[var_values___frozen_dict] = function_value
-    return discrete_finite_mass_function(deepcopy(discrete_finite_pmf.vars), dict(mappings=max_mappings),
+    for var_values___frozen_dict, mapping_value in mappings.items():
+        if mapping_value <= minus_log_mins[comparison_bases[var_values___frozen_dict]]:
+            max_mappings[var_values___frozen_dict] = mapping_value
+    return discrete_finite_mass_function(discrete_finite_pmf.vars.copy(), dict(mappings=max_mappings),
                                          deepcopy(discrete_finite_pmf.conditions), deepcopy(discrete_finite_pmf.scope))
 
 
-def discrete_finite_marginalization(discrete_finite_pmf, marginalized_vars):
-    var_symbols = deepcopy(discrete_finite_pmf.vars)
+def discrete_finite_marginalization(discrete_finite_pmf, *marginalized_vars):
+    var_symbols = discrete_finite_pmf.vars.copy()
     mappings = discrete_finite_pmf.parameters['mappings'].copy()
     for marginalized_var in marginalized_vars:
         del var_symbols[marginalized_var]
         d = {}
-        for var_values___frozen_dict, function_value in mappings.items():
+        for var_values___frozen_dict, mapping_value in mappings.items():
             marginalized_var_value = var_values___frozen_dict[marginalized_var]
             fdict = FrozenDict(set(var_values___frozen_dict.items()) - {(marginalized_var, marginalized_var_value)})
             if fdict in d:
-                d[fdict] += exp(-function_value)
+                d[fdict] += exp(-mapping_value)
             else:
-                d[fdict] = exp(-function_value)
+                d[fdict] = exp(-mapping_value)
         mappings = {k: -log(v) for k, v in d.items()}
     return discrete_finite_mass_function(var_symbols, dict(mappings=mappings),
                                          deepcopy(discrete_finite_pmf.conditions), deepcopy(discrete_finite_pmf.scope))
 
 
-def discrete_finite_conditioning(discrete_finite_pmf, conditions={}):
+def discrete_finite_conditioning(discrete_finite_pmf, conditions={}, **kw_conditions):
+    conditions = combine_dict_and_kwargs(conditions, kw_conditions)
     mappings = discrete_finite_pmf.parameters['mappings'].copy()
     d = {}
     s0 = set(conditions.items())
-    for var_values___frozen_dict, function_value in mappings.items():
+    for var_values___frozen_dict, mapping_value in mappings.items():
         s = set(var_values___frozen_dict.items())
         if s >= s0:
-            d[FrozenDict(s - s0)] = function_value
+            d[FrozenDict(s - s0)] = mapping_value
     new_conditions = deepcopy(discrete_finite_pmf.conditions)
     new_conditions.update(conditions)
     scope = deepcopy(discrete_finite_pmf.scope)
     for var in conditions:
         del scope[var]
-    return discrete_finite_mass_function(deepcopy(discrete_finite_pmf.vars), dict(mappings=d),
-                                         new_conditions, scope)
+    return discrete_finite_mass_function(discrete_finite_pmf.vars.copy(), dict(mappings=d), new_conditions, scope)
 
 
 def uniform_density_function(var_symbols, parameters, conditions={}, scope={}):
@@ -333,22 +340,22 @@ def one_mass_function(var_symbols, frozen_dicts___set=set(), conditions={}):
 
 
 def gaussian_density_function(var_symbols, parameters, conditions={}, scope={}):
-    return ProbabilityDensityFunction('Gaussian', deepcopy(var_symbols), deepcopy(parameters),
+    return ProbabilityDensityFunction('Gaussian', var_symbols.copy(), deepcopy(parameters),
                                       gaussian_density, lambda *args, **kwargs: None, gaussian_max,
                                       gaussian_marginalization, gaussian_conditioning, gaussian_sampling,
                                       deepcopy(conditions), deepcopy(scope))
 
 
-def gaussian_density(vars_row_vectors___dict, parameters___dict):
-    var_names = tuple(vars_row_vectors___dict)
+def gaussian_density(var_row_vectors___dict, parameters___dict):
+    var_names = tuple(var_row_vectors___dict)
     num_vars = len(var_names)
     x = []
     m = []
     S = [num_vars * [None] for _ in range(num_vars)]   # careful not to create same mutable object
     d = 0
     for i in range(num_vars):
-        x += [vars_row_vectors___dict[var_names[i]]]
-        d += vars_row_vectors___dict[var_names[i]].shape[1]
+        x += [var_row_vectors___dict[var_names[i]]]
+        d += var_row_vectors___dict[var_names[i]].shape[1]
         m += [parameters___dict[('mean', var_names[i])]]
         for j in range(i):
             if ('cov', var_names[i], var_names[j]) in parameters___dict:
@@ -372,16 +379,16 @@ def gaussian_max(gaussian_pdf):
     return pdf
 
 
-def gaussian_marginalization(gaussian_pdf, marginalized_vars):
-    var_symbols = deepcopy(gaussian_pdf.vars)
+def gaussian_marginalization(gaussian_pdf, *marginalized_vars):
+    var_symbols = gaussian_pdf.vars.copy()
     var_scope = deepcopy(gaussian_pdf.scope)
     parameters = deepcopy(gaussian_pdf.parameters)
-    for var in marginalized_vars:
-        del var_symbols[var]
-        del var_scope[var]
+    for marginalized_var in marginalized_vars:
+        del var_symbols[marginalized_var]
+        del var_scope[marginalized_var]
         p = deepcopy(parameters)
         for key in p:
-            if var in key:
+            if marginalized_var in key:
                 del parameters[key]
     if var_scope:
         return gaussian_density_function(var_symbols, parameters, deepcopy(gaussian_pdf.conditions), var_scope)
@@ -389,7 +396,8 @@ def gaussian_marginalization(gaussian_pdf, marginalized_vars):
         return one_density_function(var_symbols, deepcopy(gaussian_pdf.conditions))
 
 
-def gaussian_conditioning(gaussian_pdf, conditions={}):
+def gaussian_conditioning(gaussian_pdf, conditions={}, **kw_conditions):
+    conditions = combine_dict_and_kwargs(conditions, kw_conditions)
     new_conditions = deepcopy(gaussian_pdf.conditions)
     new_conditions.update(conditions)
     scope = deepcopy(gaussian_pdf.scope)
@@ -510,14 +518,14 @@ def product_of_2_discrete_finite_probability_mass_functions(pmf_1, pmf_2):
     mappings_2 = pmf_2.parameters['mappings'].copy()
     mappings = {}
     for item_1, item_2 in itertools.product(mappings_1.items(), mappings_2.items()):
-        var_values_1___frozen_dict, function_value_1 = item_1
-        var_values_2___frozen_dict, function_value_2 = item_2
+        var_values_1___frozen_dict, mapping_value_1 = item_1
+        var_values_2___frozen_dict, mapping_value_2 = item_2
         same_vars_same_values = True
         for var in (set(var_values_1___frozen_dict) & set(var_values_2___frozen_dict)):
             same_vars_same_values &= (var_values_1___frozen_dict[var] == var_values_2___frozen_dict[var])
         if same_vars_same_values:
             mappings[FrozenDict(set(var_values_1___frozen_dict.items()) | set(var_values_2___frozen_dict.items()))] =\
-                function_value_1 + function_value_2
+                mapping_value_1 + mapping_value_2
     return discrete_finite_mass_function(var_symbols, dict(mappings=mappings), conditions, scope)
 
 
@@ -528,8 +536,8 @@ def product_of_discrete_finite_probability_mass_function_and_continuous_probabil
         del conditions[var]
     var_symbols = merge_dicts(pmf.vars, pdf.vars)
     mappings = {}
-    for var_values___frozen_dict, function_value in pmf.parameters['mappings'].items():
-        mappings[var_values___frozen_dict] = function_value + pdf.density_lambda(pdf.vars)
+    for var_values___frozen_dict, mapping_value in pmf.parameters['mappings'].items():
+        mappings[var_values___frozen_dict] = mapping_value + pdf.density_lambda(pdf.vars)
     return discrete_finite_mass_function(var_symbols, dict(mappings=mappings), conditions, scope)
 
 
