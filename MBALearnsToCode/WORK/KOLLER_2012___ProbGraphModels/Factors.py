@@ -7,7 +7,7 @@ from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import\
 
 def UNIT_TEST___KOLLER_2012___ProbGraphModels___Factors():
 
-    f_1 = dfmf(dict.fromkeys(('a', 'b')),
+    f = dfmf(dict.fromkeys(('a', 'b')),
                dict(mappings={fdict(a=1, b=1): -log(.5),
                               fdict(a=1, b=2): -log(.8),
                               fdict(a=2, b=1): -log(.1),
@@ -15,12 +15,12 @@ def UNIT_TEST___KOLLER_2012___ProbGraphModels___Factors():
                               fdict(a=3, b=1): -log(.3),
                               fdict(a=3, b=2): -log(.9)}))
 
-    f_2 = dfmf(dict.fromkeys(('b', 'c')),
+    f_1 = dfmf(dict.fromkeys(('b', 'c')),
                dict(mappings={fdict(b=1, c=1): -log(.5),
                               fdict(b=1, c=2): -log(.7),
                               fdict(b=2, c=1): -log(.1),
                               fdict(b=2, c=2): -log(.2)}))
-    f = f_1 * f_2
+    f *= f_1
     f.pprint()
     f___answer = dfmf(dict.fromkeys(('a', 'b', 'c')),
                       dict(mappings={fdict(a=1, b=1, c=1): -log(.25),

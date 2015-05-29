@@ -39,6 +39,15 @@ class ProbabilityDensityFunction:
     def is_discrete_finite(self):
         return self.family == 'DiscreteFinite'
 
+    def is_one(self):
+        return self.family == 'One'
+
+    def is_uniform(self):
+        return self.family == 'Uniform'
+
+    def is_gaussian(self):
+        return self.family == 'Gaussian'
+
     def at(self, var_and_parameter_values___dict={}, **kw_var_and_parameter_values___dict):
         var_and_parameter_values___dict = combine_dict_and_kwargs(var_and_parameter_values___dict,
                                                                   kw_var_and_parameter_values___dict)
@@ -167,10 +176,10 @@ def product_of_2_probability_density_functions(pdf_1, pdf_2):
     families = (pdf_1.family, pdf_2.family)
     if families == ('DiscreteFinite', 'DiscreteFinite'):
         return product_of_2_discrete_finite_probability_mass_functions(pdf_1, pdf_2)
-    elif pdf_1.family == 'DiscreteFinite':
+    elif pdf_1.is_discrete_finite():
         return product_of_discrete_finite_probability_mass_function_and_continuous_probability_density_function(
             pdf_1, pdf_2)
-    elif pdf_2.family == 'DiscreteFinite':
+    elif pdf_2.is_discrete_finite():
         return product_of_discrete_finite_probability_mass_function_and_continuous_probability_density_function(
             pdf_2, pdf_1)
     elif families == ('One', 'Gaussian'):

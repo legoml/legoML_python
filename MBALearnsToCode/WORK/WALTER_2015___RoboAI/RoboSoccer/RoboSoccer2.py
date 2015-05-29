@@ -1,14 +1,12 @@
 from __future__ import print_function, division
 from copy import deepcopy
 from pprint import pprint
-from time import sleep
-from numpy import abs, arctan2, array, atleast_2d, cos, eye, hstack, nan, pi, sin, vstack, zeros
+from numpy import arctan2, array, cos, eye, hstack, pi, sin, vstack, zeros
 from numpy.random import normal, uniform
 from pandas import DataFrame
-from matplotlib.pyplot import figure, subplot, imshow
-from matplotlib.gridspec import GridSpec
+from time import sleep
+from matplotlib.pyplot import draw, subplots, show
 from matplotlib.patches import Ellipse
-from matplotlib.animation import FuncAnimation
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
 from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.ConfidenceEllipses import confidence_ellipse_parameters
 
@@ -94,15 +92,13 @@ class Ball:
 
 
 class Player:
-    def __init__(self, x=0., y=0., velocity=0., angle=0., motion_sigma=0., distance_sigma=0., angle_sigma=0.,
-                 team='West'):
+    def __init__(self, x=0., y=0., velocity=0., angle=0., motion_sigma=0., distance_sigma=0., team='West'):
         self.x = x
         self.y = y
         self.velocity = velocity
         self.angle = angle
         self.motion_sigma = motion_sigma
         self.distance_sigma = distance_sigma
-        self.angle_sigma = angle_sigma
         self.team = team
         if team == 'West':
             self.target_goal = ('GoalPostSE', 'GoalPostNE')
@@ -114,18 +110,15 @@ class Player:
                        lambda xy, v_and_a: self.transition_means(xy, v_and_a),
                        lambda xy, v_and_a: self.transition_means_jacobi(xy, v_and_a),
                        lambda v_and_a: self.transition_covariances(v_and_a),
-                       lambda xy, marking_indices=tuple():
-                           self.observation_means(xy, marking_indices=marking_indices),
-                       lambda xy, marking_indices=tuple():
-                           self.observation_means_jacobi(xy, marking_indices=marking_indices),
-                       lambda d_and_a, marking_indices=tuple():
-                           self.observation_covariances(d_and_a, marking_indices=marking_indices))
+                       lambda xy: self.observation_means(xy),
+                       lambda xy: self.observation_means_jacobi(xy),
+                       lambda d_and_a: self.observation_covariances(d_and_a))
 
     def transition_means(self, all_xy___vector, velocity_and_angle):
         conditional_xy_means___vector = deepcopy(all_xy___vector)
         v, a = velocity_and_angle
-        conditional_xy_means___vector[0, 0] += v * cos(a)
-        conditional_xy_means___vector[1, 0] += v * sin(a)
+        conditional_xy_means___vector[0] += v * cos(a)
+        conditional_xy_means___vector[1] += v * sin(a)
         return conditional_xy_means___vector
 
     def transition_means_jacobi(self, all_xy___vector, velocity_and_angle):
@@ -139,67 +132,52 @@ class Player:
         conditional_xy_covariances___matrix[1, 1] = variance
         return conditional_xy_covariances___matrix
 
-    def observation_means(self, all_xy___vector, marking_indices=tuple()):
-        n_markings = len(marking_indices)
-        conditional_observation_means___vector = zeros((2 * n_markings, 1))
+    def observation_means(self, all_xy___vector):
+        n = all_xy___vector.size
+        conditional_observation_means___vector = zeros((n, 1))
         self_x, self_y = all_xy___vector[0:2, 0]
-        for i in range(n_markings):
-            k = 2 * i
-            k_marking = 2 * marking_indices[i]
-            marking_x, marking_y = all_xy___vector[k_marking:(k_marking + 2), 0]
+        for k in range(2, n, 2):
+            marking_x, marking_y = all_xy___vector[k:(k + 2), 0]
             conditional_observation_means___vector[k, 0] = euclidean_distance(self_x, self_y, marking_x, marking_y)
             conditional_observation_means___vector[k + 1, 0] = relative_angle(self_x, self_y, marking_x, marking_y)
         return conditional_observation_means___vector
 
-    def observation_means_jacobi(self, all_xy___vector, marking_indices=tuple()):
-        n_markings = len(marking_indices)
-        conditional_observation_means_jacobi___matrix = zeros((2 * n_markings, all_xy___vector.size))
+    def observation_means_jacobi(self, all_xy___vector):
+        n = all_xy___vector.size
+        conditional_observation_means_jacobi___matrix = zeros((n, n))
         self_x, self_y = all_xy___vector[0:2, 0]
-        for i in range(n_markings):
-            k = 2 * i
-            k_marking = 2 * marking_indices[i]
-            marking_x, marking_y = all_xy___vector[k_marking:(k_marking + 2), 0]
-            conditional_observation_means_jacobi___matrix[k, (0, 1, k_marking, k_marking + 1)] =\
+        for k in range(2, n, 2):
+            marking_x, marking_y = all_xy___vector[k:(k + 2), 0]
+            conditional_observation_means_jacobi___matrix[k, (0, 1, k, k + 1)] =\
                 euclidean_distance_gradients(self_x, self_y, marking_x, marking_y)
-            conditional_observation_means_jacobi___matrix[k + 1, (0, 1, k_marking, k_marking + 1)] =\
+            conditional_observation_means_jacobi___matrix[k + 1, (0, 1, k, k + 1)] =\
                 relative_angle_gradients(self_x, self_y, marking_x, marking_y)
         return conditional_observation_means_jacobi___matrix
 
-    def observation_covariances(self, observations___vector, marking_indices=tuple()):
-        n_markings = len(marking_indices)
-        conditional_observation_covariances___matrix = zeros((2 * n_markings, 2 * n_markings))
-        for i in range(n_markings):
-            k = 2 * i
+    def observation_covariances(self, observations___vector):
+        n = observations___vector.size
+        conditional_observation_covariances___matrix = zeros((n, n))
+        for k in range(2, n, 2):
             conditional_observation_covariances___matrix[k, k] = self.distance_sigma ** 2
-            conditional_observation_covariances___matrix[k + 1, k + 1] = self.angle_sigma ** 2
         return conditional_observation_covariances___matrix
 
     def run(self):
-        self.x += self.velocity * (cos(self.angle) + normal(scale=self.motion_sigma / 2))  # to avoid over-confidence
-        self.y += self.velocity * (sin(self.angle) + normal(scale=self.motion_sigma / 2))  # to avoid over-confidence
+        self.x += self.velocity * (cos(self.angle) + normal(scale=self.motion_sigma))
+        self.y += self.velocity * (sin(self.angle) + normal(scale=self.motion_sigma))
         self.EKF.predict((self.velocity, self.angle))
 
     def augment_map(self, marking):
+        print('augmenting', marking.id)
         mapping_jacobi = zeros((2, 2 * (self.num_mapped_markings + 1)))
         mapping_jacobi[0, 0] = 1.
         mapping_jacobi[1, 1] = 1.
 
         self.num_mapped_markings += 1
         self.SLAM[marking.id] = self.num_mapped_markings
-        observed_distance = euclidean_distance(self.x, self.y, marking.x, marking.y) +\
-            normal(scale=self.distance_sigma / 2)  # to avoid over-confidence
-        distance_minus_1sd = observed_distance - self.distance_sigma
-        distance_plus_1sd = observed_distance + self.distance_sigma
-        observed_angle = relative_angle(self.x, self.y, marking.x, marking.y) +\
-            normal(scale=self.angle_sigma / 2)  # to avoid over-confidence
+        observed_distance = euclidean_distance(self.x, self.y, marking.x, marking.y) + normal(scale=self.distance_sigma)
+        observed_angle = relative_angle(self.x, self.y, marking.x, marking.y)
         c = cos(observed_angle)
         s = sin(observed_angle)
-        angle_minus_1sd = observed_angle - self.angle_sigma
-        c_minus = cos(angle_minus_1sd)
-        s_minus = sin(angle_minus_1sd)
-        angle_plus_1sd = observed_angle + self.angle_sigma
-        c_plus = cos(angle_plus_1sd)
-        s_plus = sin(angle_plus_1sd)
 
         self_x_mean = self.EKF.means[0, 0]
         self_y_mean = self.EKF.means[1, 0]
@@ -209,38 +187,8 @@ class Player:
                                  new_marking_x_mean,
                                  new_marking_y_mean))
 
-        x_minus_distance_1sd_minus_angle_1sd = self_x_mean + c_minus * distance_minus_1sd
-        y_minus_distance_1sd_minus_angle_1sd = self_y_mean + s_minus * distance_minus_1sd
-        x_minus_distance_1sd_same_angle = self_x_mean + c * distance_minus_1sd
-        y_minus_distance_1sd_same_angle = self_y_mean + s * distance_minus_1sd
-        x_minus_distance_1sd_plus_angle_1sd = self_x_mean + c_plus * distance_minus_1sd
-        y_minus_distance_1sd_plus_angle_1sd = self_y_mean + s_plus * distance_minus_1sd
-
-        x_same_distance_minus_angle_1sd = self_x_mean + c_minus * observed_distance
-        y_same_distance_minus_angle_1sd = self_y_mean + s_minus * observed_distance
-        x_same_distance_plus_angle_1sd = self_x_mean + c_plus * observed_distance
-        y_same_distance_plus_angle_1sd = self_y_mean + s_plus * observed_distance
-
-        x_plus_distance_1sd_minus_angle_1sd = self_x_mean + c_minus * distance_plus_1sd
-        y_plus_distance_1sd_minus_angle_1sd = self_y_mean + s_minus * distance_plus_1sd
-        x_plus_distance_1sd_same_angle = self_x_mean + c * distance_plus_1sd
-        y_plus_distance_1sd_same_angle = self_y_mean + s * distance_plus_1sd
-        x_plus_distance_1sd_plus_angle_1sd = self_x_mean + c_plus * distance_plus_1sd
-        y_plus_distance_1sd_plus_angle_1sd = self_y_mean + s_plus * distance_plus_1sd
-
-        x_1sd = array((x_minus_distance_1sd_minus_angle_1sd, x_minus_distance_1sd_same_angle,
-                       x_minus_distance_1sd_plus_angle_1sd, x_same_distance_minus_angle_1sd,
-                       x_same_distance_plus_angle_1sd, x_plus_distance_1sd_minus_angle_1sd,
-                       x_plus_distance_1sd_same_angle, x_plus_distance_1sd_plus_angle_1sd))
-        y_1sd = array((y_minus_distance_1sd_minus_angle_1sd, y_minus_distance_1sd_same_angle,
-                       y_minus_distance_1sd_plus_angle_1sd, y_same_distance_minus_angle_1sd,
-                       y_same_distance_plus_angle_1sd, y_plus_distance_1sd_minus_angle_1sd,
-                       y_plus_distance_1sd_same_angle, y_plus_distance_1sd_plus_angle_1sd))
-
-        new_marking_x_own_standard_deviation = max(abs(x_1sd - new_marking_x_mean))
-        new_marking_x_own_variance = new_marking_x_own_standard_deviation ** 2
-        new_marking_y_own_standard_deviation = max(abs(y_1sd - new_marking_y_mean))
-        new_marking_y_own_variance = new_marking_y_own_standard_deviation ** 2
+        new_marking_x_own_variance = (c * self.distance_sigma) ** 2
+        new_marking_y_own_variance = (s * self.distance_sigma) ** 2
         new_marking_xy_own_covariance = c * s * (self.distance_sigma ** 2)
         new_marking_xy_covariance_matrix = mapping_jacobi.dot(self.EKF.covariances).dot(mapping_jacobi.T) +\
             array([[new_marking_x_own_variance, new_marking_xy_own_covariance],
@@ -252,35 +200,28 @@ class Player:
             vstack((hstack((self.EKF.covariances, new_marking_xy_covariance_with_known_xy.T)),
                     hstack((new_marking_xy_covariance_with_known_xy, new_marking_xy_covariance_matrix))))
 
-    def observe(self, markings, min_distance_over_distance_sigma_ratio=3.):
-        observations___vector = array([[]]).T
-        marking_indices = []
+    def observe(self, markings):
+        observations___vector = self.EKF.observation_means_lambda(self.EKF.means)
         for marking in markings:
             if marking.id in self.SLAM:
-                observed_distance = euclidean_distance(self.x, self.y, marking.x, marking.y) +\
-                    normal(scale=self.distance_sigma / 2)  # to avoid over-confidence
-                if observed_distance >= min_distance_over_distance_sigma_ratio * self.distance_sigma:
-                    observed_angle = relative_angle(self.x, self.y, marking.x, marking.y) +\
-                        normal(scale=self.angle_sigma / 2)   # to avoid over-confidence
-                    observations___vector = vstack((observations___vector,
-                                                    observed_distance,
-                                                    observed_angle))
-                    marking_indices += [self.SLAM[marking.id]]
-        if marking_indices:
-            self.EKF.update(observations___vector, marking_indices=marking_indices)
+                k = 2 * self.SLAM[marking.id]
+                observations___vector[k] = euclidean_distance(self.x, self.y, marking.x, marking.y) +\
+                    normal(scale=self.distance_sigma)
+                observations___vector[k + 1] = relative_angle(self.x, self.y, marking.x, marking.y)
+        self.EKF.update(observations___vector)
         for marking in markings:
             if marking.id not in self.SLAM:
                 self.augment_map(marking)
 
-    def observe_marking_in_front(self, field, min_distance_over_distance_sigma_ratio=3.):
+    def observe_marking_in_front(self, field):
         min_angle = pi
         marking_in_front = None
         for marking in field.markings:
             a = abs(angular_difference(self.angle, relative_angle(self.x, self.y, marking.x, marking.y)))
-            d = euclidean_distance(self.x, self.y, marking.x, marking.y)
-            if (a < min_angle) and (d >= min_distance_over_distance_sigma_ratio * self.distance_sigma):
+            if a < min_angle:
                 min_angle = a
                 marking_in_front = marking
+        print('observe: ', marking_in_front.id)
         self.observe((marking_in_front,))
 
     def orient_randomly(self):
@@ -300,8 +241,7 @@ class Player:
 
 
 class Game:
-    def __init__(self, num_players_per_team=11, velocity=6., motion_sigma=0.1, distance_sigma=1.,
-                 angle_sigma=3 * pi / 180):
+    def __init__(self, num_players_per_team=11, velocity=1.8, motion_sigma=0.3, distance_sigma=1.):
         self.field = Field()
         length = self.field.length
         width = self.field.width
@@ -309,16 +249,13 @@ class Game:
         self.players = []
         for i in range(num_players_per_team):
             self.players += [Player(uniform(- length / 2, 0), uniform(- width / 2, width / 2),
-                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, angle_sigma, 'West'),
+                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, 'West'),
                              Player(uniform(0, length / 2), uniform(- width / 2, width / 2),
-                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, angle_sigma, 'East')]
+                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, 'East')]
         self.ball = Ball()
         self.time = 0
 
-        self.figure = figure()
-        gs = GridSpec(1, 2, width_ratios=[5, 1])
-        self.game_plot = subplot(gs[0])
-        self.SLAM_plot = subplot(gs[1])
+        self.figure, self.game_plot = subplots()
         self.boundary_plot = None
         self.markings_plot = None
         self.ball_plot = None
@@ -327,17 +264,8 @@ class Game:
         self.markings_being_observed = None
         self.SLAM_confidence_plots = {}
         self.SLAM_arrow_plots = {}
-        self.cov_plot = None
-        self.beliefs = self.field.markings_xy
-        self.beliefs['bias_x'] = float(nan)
-        self.beliefs['bias_y'] = float(nan)
-        self.beliefs['sd_x'] = float(nan)
-        self.beliefs['sd_y'] = float(nan)
-        self.beliefs.ix['self'] = float(nan)
-        self.animation = FuncAnimation(self.figure, self.play, interval=500,
-                                       init_func=self.init_plot, blit=True)
 
-    def init_plot(self):
+    def plot_init(self):
         length = self.field.length
         width = self.field.width
         self.boundary_plot, = self.game_plot.plot(
@@ -356,17 +284,14 @@ class Game:
             east_x += [self.players[k + 1].x]
             east_y += [self.players[k + 1].y]
         self.ball_plot = self.game_plot\
-            .scatter(self.ball.x, self.ball.y, s=36, color='magenta', marker='o', animated=True)
+            .scatter(self.ball.x, self.ball.y, s=36, color='magenta', marker='o') #, animated=True
         self.west_team_plot = self.game_plot\
-            .scatter(west_x, west_y, s=48, c='blue', marker='o', label='West', animated=True)
+            .scatter(west_x, west_y, s=48, c='blue', marker='o', label='West')  #, animated=True
         self.east_team_plot = self.game_plot\
-            .scatter(east_x, east_y, s=48, c='red', marker='o', label='East', animated=True)
-        self.SLAM_plot
-        self.cov_plot = imshow(self.players[0].EKF.covariances, interpolation='none', animated=True)
-        return self.boundary_plot, self.markings_plot, self.ball_plot, self.west_team_plot, self.east_team_plot,\
-            self.cov_plot
+            .scatter(east_x, east_y, s=48, c='red', marker='o', label='East')   #, animated=True
+        show()
 
-    def play(self, t):
+    def update_ball_and_player_plots(self):
         self.players_run_randomly()
         west_xy = zeros((2, self.num_players_per_team))
         east_xy = zeros((2, self.num_players_per_team))
@@ -379,7 +304,6 @@ class Game:
         self.ball_plot.set_offsets(array([[self.ball.x], [self.ball.y]]))
         self.west_team_plot.set_offsets(west_xy)
         self.east_team_plot.set_offsets(east_xy)
-
         for obj, i in self.players[0].SLAM.items():
             k = 2 * i
             if i:
@@ -406,10 +330,9 @@ class Game:
                             alpha=0.6, animated=True))
         #self.game_plot.relim()
         #self.game_plot.autoscale_view(True, True, True)
-        self.cov_plot.set_data(self.players[0].EKF.covariances)
-        self.record_beliefs()
-        return [self.ball_plot, self.west_team_plot, self.east_team_plot, self.cov_plot] +\
-            list(self.SLAM_confidence_plots.values()) + list(self.SLAM_arrow_plots.values())
+        self.figure.canvas.draw()
+        #self.figure.canvas.flush_events()
+        sleep(1e-6)
 
     def out_of_play(self):
         return (self.ball.x < -self.field.length / 2) | (self.ball.x > self.field.length / 2) |\
@@ -422,23 +345,22 @@ class Game:
         self.time += 1
         for i in range(0, 2 * self.num_players_per_team):
             self.players[i].orient_randomly()
+            #self.players[i].orient_toward_ball(self.ball)
             self.players[i].run()
             self.players[i].observe_marking_in_front(self.field)
+            #self.players[i].observe(self.field.markings)
+        pprint(self.players[0].SLAM)
+        pprint(self.players[0].EKF.covariances)
 
-    def record_beliefs(self):
-        x = self.players[0].x
-        y = self.players[0].y
-        means = self.players[0].EKF.means
-        standard_deviations = atleast_2d(self.players[0].EKF.standard_deviations()).T
-        for obj, i in self.players[0].SLAM.items():
-            k = 2 * i
-            if not i:
-                self.beliefs.ix[obj].x = x
-                self.beliefs.ix[obj].y = y
-            self.beliefs.ix[obj].bias_x = means[k, 0] - self.beliefs.ix[obj].x
-            self.beliefs.ix[obj].bias_y = means[k + 1, 0] - self.beliefs.ix[obj].y
-            self.beliefs.ix[obj].sd_x = standard_deviations[k, 0]
-            self.beliefs.ix[obj].sd_y = standard_deviations[k + 1, 0]
-        print("\nTYPICAL PLAYER'S BELIEFS:")
-        pprint(self.beliefs)
-        print('\n')
+    def play(self):
+        self.plot_init()
+        while not self.out_of_play():
+            self.time += 1
+            for i in range(0, 2 * self.num_players_per_team):
+                self.players[i].orient_randomly()
+                self.players[i].run()
+                self.players[i].observe_marking_in_front(self.field)
+            #self.update_ball_and_player_plots()
+            pprint(self.players[0].SLAM)
+            pprint(self.players[0].EKF.covariances)
+

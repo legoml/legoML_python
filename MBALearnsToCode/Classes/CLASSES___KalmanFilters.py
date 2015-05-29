@@ -1,5 +1,5 @@
 from numpy import diag, sqrt
-from numpy.linalg import pinv
+from numpy.linalg import inv
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import gaussian_density_function as gauss_pdf
 
 
@@ -24,9 +24,9 @@ class ExtendedKalmanFilter:
         F = self.transition_means_jacobi_lambda(self.means, control_data)
         self.covariances = F.dot(self.covariances).dot(F.T) + self.transition_covariances_lambda(control_data)
 
-    def update(self, observation_data):
-        H = self.observation_means_jacobi_lambda(self.means)
-        K = self.covariances.dot(H.T).dot(pinv(H.dot(self.covariances).dot(H.T) +
-                                               self.observation_covariances_lambda(observation_data)))
-        self.means += K.dot(observation_data - self.observation_means_lambda(self.means))
+    def update(self, observation_data, **kwargs):
+        H = self.observation_means_jacobi_lambda(self.means, **kwargs)
+        K = self.covariances.dot(H.T).dot(inv(H.dot(self.covariances).dot(H.T) +
+                                              self.observation_covariances_lambda(observation_data, **kwargs)))
+        self.means += K.dot(observation_data - self.observation_means_lambda(self.means, **kwargs))
         self.covariances -= K.dot(H).dot(self.covariances)

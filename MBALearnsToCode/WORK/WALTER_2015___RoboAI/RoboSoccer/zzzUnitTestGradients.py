@@ -10,7 +10,7 @@ def UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients(num_times=
     num_distance_successes = 0
     num_angle_successes = 0
     for t in range(num_times):
-        vector = random(4)
+        vector = 1000 * random(4)
         distance_gradients___analytic = array(euclidean_distance_gradients(*vector))
         distance_gradients___approx = approx_gradients(lambda v: euclidean_distance(*v), vector)
         num_distance_successes += allclose(distance_gradients___approx, distance_gradients___analytic)
