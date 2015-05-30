@@ -13,8 +13,8 @@ def TEST___PROGRAM___ffnn_check_gradients(num_runs = 1000, rtol = 1.e-6, atol = 
     def cost(model, w):
         p0 = deepcopy(model)
         p0.vars['w_v'] = w
-        p0.run(('ffnn', 'forward_pass'))
-        p0.run(('ffnn', 'cost'))
+        p0.play(('ffnn', 'forward_pass'))
+        p0.play(('ffnn', 'cost'))
         return p0.vars['c']
 
     max_num_cases = 5
@@ -76,7 +76,7 @@ def TEST___PROGRAM___ffnn_check_gradients(num_runs = 1000, rtol = 1.e-6, atol = 
             project.vars['tgt'] = rand(m, nums_nodes[-1])
         weights_vector = rand(num_weights)
         project.vars['w_v'] = weights_vector
-        project.run(('ffnn', 'cost_and_d_cost_over_d_weights'))
+        project.play(('ffnn', 'cost_and_d_cost_over_d_weights'))
         analytic_gradients = project.vars[('DOVERD', 'c', 'w_v')]
         numerical_gradients = approx_gradients(lambda w: cost(project, w), weights_vector)
         check = allclose(numerical_gradients, analytic_gradients, rtol = rtol, atol = atol)
@@ -97,8 +97,8 @@ def TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(num_runs = 100
     def cost(model, w):
         p0 = deepcopy(model)
         p0.vars['w_v'] = w
-        p0.run(('ffnn', 'forward_pass'))
-        p0.run(('ffnn', 'cost'))
+        p0.play(('ffnn', 'forward_pass'))
+        p0.play(('ffnn', 'cost'))
         return p0.vars['c']
 
     max_num_cases = 5
@@ -166,7 +166,7 @@ def TEST___PROGRAM___ffnn_unskewed_classification_check_gradients(num_runs = 100
             project.vars['pos_skew'] = ones([m, nums_nodes[-1]]) ####
         weights_vector = rand(num_weights)
         project.vars['w_v'] = weights_vector
-        project.run(('ffnn', 'cost_and_d_cost_over_d_weights'))
+        project.play(('ffnn', 'cost_and_d_cost_over_d_weights'))
         analytic_gradients = project.vars[('DOVERD', 'c', 'w_v')]
         numerical_gradients = approx_gradients(lambda w: cost(project, w), weights_vector)
         check = allclose(numerical_gradients, analytic_gradients, rtol = rtol, atol = atol)

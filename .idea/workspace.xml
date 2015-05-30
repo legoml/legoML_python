@@ -2,14 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3a9c646-e4e4-4995-86e9-82b08b569ff7" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\18.txt" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/ConfidenceEllipses.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/Play.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTestGradients.py" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\19.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\79.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\RoboSoccer\ConfidenceEllipses.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\RoboSoccer\zzz.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\RoboSoccer\zzzUnitTestGradients.py" afterPath="" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\RoboSoccer\RoboSoccer2.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/RoboSoccer2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___Lego.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___Lego.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/CORE/Classes.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/CORE/Classes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzz.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzz.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzzUnitTestGradients.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzzUnitTestGradients.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/Lego/zzzTests_programs.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Lego/zzzTests_programs.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests_programs.py" afterPath="$PROJECT_DIR$/build/lib/MBALearnsToCode/zzzDemos_Tests/zzzTests_programs.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
     </list>
     <ignored path="legoML_python.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,13 +38,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RoboSoccer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RoboSoccer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.2257283">
-              <caret line="443" column="19" selection-start-line="443" selection-start-column="19" selection-end-line="443" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="87" selection-start-line="12" selection-start-column="87" selection-end-line="12" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zzzUnitTests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="37" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Play.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/Play.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="35" />
               <folding>
-                <element signature="e#0#47#0" expanded="true" />
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -50,16 +78,6 @@
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zzz.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzz.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="11" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -99,7 +117,6 @@
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/TrainHMM.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilisticRobotics.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/EKF.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/ConfidenceEllipses.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___GraphSearches.txt" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___GraphSearches.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py" />
@@ -111,13 +128,15 @@
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/ProbSet1_Q2.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer2.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzzUnitTestGradients.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzz.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/Play.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzzUnitTestGradients.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/ConfidenceEllipses.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer.py" />
       </list>
     </option>
@@ -173,6 +192,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -667,7 +687,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -675,16 +694,16 @@
     <property name="FullScreen" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/MBALearnsToCode/WORK" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Cloud/Dropbox/MBALearnsToCode_Python/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzzUnitTestDerivatives.py" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK" />
       <recent name="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\RoboSoccer" />
       <recent name="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\Classes" />
       <recent name="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\Kaggle\AXATelematics" />
       <recent name="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\MidTerm_Q3" />
-      <recent name="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\MidTerm_Q2" />
     </key>
   </component>
   <component name="RunManager">
@@ -826,9 +845,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22116603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22116603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -837,7 +856,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261745" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24968314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2792297" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4362416" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -886,13 +905,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Kaggle/AXATelematics/zzz.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1145,13 +1157,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13709678">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6020833">
@@ -1163,13 +1168,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.8166666">
           <caret line="138" column="13" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/ConfidenceEllipses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.95625">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1201,24 +1199,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer2.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4364641">
-          <caret line="333" column="9" selection-start-line="333" selection-start-column="9" selection-end-line="333" selection-end-column="9" />
+        <state vertical-scroll-proportion="-0.34438777">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="48" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzzUnitTestGradients.py">
+    <entry file="file://C:/Programs/Anaconda2/Lib/site-packages/matplotlib/patches.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20528455">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.08252427">
+          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTestGradients.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/RoboSoccer2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4368932">
+          <caret line="333" column="9" selection-start-line="333" selection-start-column="9" selection-end-line="333" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/ConfidenceEllipses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="54" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="18" />
+          <caret line="37" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1233,20 +1257,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzz.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="11" />
+          <caret line="12" column="87" selection-start-line="12" selection-start-column="87" selection-end-line="12" selection-end-column="87" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/Play.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2257283">
-          <caret line="443" column="19" selection-start-line="443" selection-start-column="19" selection-end-line="443" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="35" />
           <folding>
-            <element signature="e#0#47#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -43,7 +43,7 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q3.MidTerm_Q3 import\
     UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3
 unit_tests['WALTER_2015___RoboAI___MidTerm_Q3'] = UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3()
 
-from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer. zzzUnitTestGradients import\
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.RoboSoccer import\
     UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients
 unit_tests['WALTER_2015___RoboAI___RoboSoccer___FunctionGradients'] =\
     UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients()

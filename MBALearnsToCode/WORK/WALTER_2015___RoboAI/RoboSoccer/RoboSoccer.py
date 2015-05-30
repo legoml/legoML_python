@@ -1,16 +1,17 @@
 from __future__ import print_function, division
 from copy import deepcopy
 from pprint import pprint
-from time import sleep
-from numpy import abs, arctan2, array, atleast_2d, cos, eye, hstack, nan, pi, sin, vstack, zeros
-from numpy.random import normal, uniform
+from numpy import abs, allclose, arctan2, array, atleast_2d, cos,  degrees, eye, hstack, inf, nan, pi, sin, sqrt,\
+    vstack, zeros
+from numpy.linalg import eigh
+from numpy.random import normal, uniform, random
 from pandas import DataFrame
 from matplotlib.pyplot import figure, subplot, imshow
 from matplotlib.gridspec import GridSpec
 from matplotlib.patches import Ellipse
 from matplotlib.animation import FuncAnimation
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
-from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.ConfidenceEllipses import confidence_ellipse_parameters
+from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import approx_gradients
 
 
 def euclidean_distance(x0, y0, x1, y1):
@@ -72,7 +73,7 @@ class Field:
 
 
 class Ball:
-    def __init__(self, x=0., y=0., velocity=0., angle=0., slow_down=.9):
+    def __init__(self, x=0., y=0., velocity=0., angle=0., slow_down=.8):
         self.x = x
         self.y = y
         self.x_just_now = x
@@ -292,16 +293,13 @@ class Player:
     def distance_to_ball(self, ball):
         return ((ball.x - self.x) ** 2 + (ball.y - self.y) ** 2) ** 0.5
 
-    def have_ball(self, ball, proximity=.1):
-        return self.distance_to_ball(ball) <= proximity
-
     def know_goal(self):
         return bool(set(self.target_goal) & set(self.SLAM))
 
 
 class Game:
-    def __init__(self, num_players_per_team=11, velocity=6., motion_sigma=0.1, distance_sigma=1.,
-                 angle_sigma=3 * pi / 180):
+    def __init__(self, num_players_per_team=11, velocity=6., motion_sigma=0.3, distance_sigma=1.,
+                 angle_sigma=3 * pi / 180, ball_kick_velocity=3., ball_slow_down=0.8):
         self.field = Field()
         length = self.field.length
         width = self.field.width
@@ -312,7 +310,11 @@ class Game:
                                     velocity, uniform(-pi, pi), motion_sigma, distance_sigma, angle_sigma, 'West'),
                              Player(uniform(0, length / 2), uniform(- width / 2, width / 2),
                                     velocity, uniform(-pi, pi), motion_sigma, distance_sigma, angle_sigma, 'East')]
-        self.ball = Ball()
+
+        self.ball_kick_velocity = ball_kick_velocity
+        self.ball_slow_down = ball_slow_down
+        self.ball = Ball(slow_down=ball_slow_down)
+
         self.time = 0
 
         self.figure = figure()
@@ -367,7 +369,7 @@ class Game:
             self.cov_plot
 
     def play(self, t):
-        self.players_run_randomly()
+        self.play_per_second()
         west_xy = zeros((2, self.num_players_per_team))
         east_xy = zeros((2, self.num_players_per_team))
         for i in range(self.num_players_per_team):
@@ -418,12 +420,37 @@ class Game:
     def goal_scored(self):
         return True
 
-    def players_run_randomly(self):
+    def play_per_second(self):
         self.time += 1
+        self.ball.roll()
+        player_having_ball_and_knowing_goal = None
+        min_distance_to_ball = inf
         for i in range(0, 2 * self.num_players_per_team):
-            self.players[i].orient_randomly()
+            self.players[i].orient_toward_ball(self.ball)
             self.players[i].run()
             self.players[i].observe_marking_in_front(self.field)
+            d = self.players[i].distance_to_ball(self.ball)
+            if d < min(min_distance_to_ball, self.players[i].velocity) and self.players[i].know_goal():
+                player_having_ball_and_knowing_goal = i
+                min_distance_to_ball = d
+
+        if player_having_ball_and_knowing_goal:
+            player = self.players[player_having_ball_and_knowing_goal]
+            estimated_goal_x = 0.
+            estimated_goal_y = 0.
+            known_goal_posts = set(player.target_goal) & set(player.SLAM)
+            num_known_goal_posts = len(known_goal_posts)
+            for goal_post in known_goal_posts:
+                k = 2 * player.SLAM[goal_post]
+                estimated_goal_x += player.EKF.means[k, 0]
+                estimated_goal_y += player.EKF.means[k + 1, 0]
+            estimated_goal_x /= num_known_goal_posts
+            estimated_goal_y /= num_known_goal_posts
+            estimated_goal_angle = relative_angle(self.ball.x, self.ball.y, estimated_goal_x, estimated_goal_y)
+            self.ball.kicked(self.ball_kick_velocity, estimated_goal_angle)
+
+        if self.out_of_play():
+            self.ball = Ball(slow_down=self.ball_slow_down)
 
     def record_beliefs(self):
         x = self.players[0].x
@@ -442,3 +469,54 @@ class Game:
         print("\nTYPICAL PLAYER'S BELIEFS:")
         pprint(self.beliefs)
         print('\n')
+
+
+def confidence_ellipse_parameters(cov, nstd=2):
+    """
+    Plots an `nstd` sigma error ellipse based on the specified covariance
+    matrix (`cov`). Additional keyword arguments are passed on to the
+    ellipse patch artist.
+    Parameters
+    ----------
+        cov : The 2x2 covariance matrix to base the ellipse on
+        pos : The location of the center of the ellipse. Expects a 2-element
+            sequence of [x0, y0].
+        nstd : The radius of the ellipse in numbers of standard deviations.
+            Defaults to 2 standard deviations.
+        ax : The axis that the ellipse will be plotted on. Defaults to the
+            current axis.
+        Additional keyword arguments are pass on to the ellipse patch.
+    Returns
+    -------
+        A matplotlib ellipse artist
+    """
+    def eigsorted(cov):
+        vals, vecs = eigh(cov)
+        order = vals.argsort()[::-1]
+        return vals[order], vecs[:,order]
+
+    vals, vecs = eigsorted(cov)
+    angle = degrees(arctan2(*vecs[:,0][::-1]))
+
+    # Width and height are "full" widths, not radius
+    width, height = 2 * nstd * sqrt(vals)
+
+    return width, height, angle
+
+
+def UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients(num_times=1000):
+    num_distance_successes = 0
+    num_angle_successes = 0
+    for t in range(num_times):
+        vector = 1000 * random(4)
+        distance_gradients___analytic = array(euclidean_distance_gradients(*vector))
+        distance_gradients___approx = approx_gradients(lambda v: euclidean_distance(*v), vector)
+        num_distance_successes += allclose(distance_gradients___approx, distance_gradients___analytic)
+        angle_gradients___analytic = array(relative_angle_gradients(*vector))
+        angle_gradients___approx = approx_gradients(lambda v: relative_angle(*v), vector)
+        num_angle_successes += allclose(angle_gradients___approx, angle_gradients___analytic)
+    print(distance_gradients___analytic)
+    print(distance_gradients___approx)
+    print(angle_gradients___analytic)
+    print(angle_gradients___approx)
+    return 100 * num_angle_successes / num_times, 100 * num_angle_successes / num_times

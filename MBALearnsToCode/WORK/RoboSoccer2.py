@@ -1,14 +1,16 @@
 from __future__ import print_function, division
 from copy import deepcopy
 from pprint import pprint
+from time import sleep
+
 from numpy import arctan2, array, cos, eye, hstack, pi, sin, vstack, zeros
 from numpy.random import normal, uniform
 from pandas import DataFrame
-from time import sleep
-from matplotlib.pyplot import draw, subplots, show
+from matplotlib.pyplot import subplots, show
 from matplotlib.patches import Ellipse
+
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
-from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.ConfidenceEllipses import confidence_ellipse_parameters
+from MBALearnsToCode.WORK.ConfidenceEllipses import confidence_ellipse_parameters
 
 
 def euclidean_distance(x0, y0, x1, y1):
@@ -346,7 +348,7 @@ class Game:
         for i in range(0, 2 * self.num_players_per_team):
             self.players[i].orient_randomly()
             #self.players[i].orient_toward_ball(self.ball)
-            self.players[i].run()
+            self.players[i].play()
             self.players[i].observe_marking_in_front(self.field)
             #self.players[i].observe(self.field.markings)
         pprint(self.players[0].SLAM)
@@ -358,7 +360,7 @@ class Game:
             self.time += 1
             for i in range(0, 2 * self.num_players_per_team):
                 self.players[i].orient_randomly()
-                self.players[i].run()
+                self.players[i].play()
                 self.players[i].observe_marking_in_front(self.field)
             #self.update_ball_and_player_plots()
             pprint(self.players[0].SLAM)

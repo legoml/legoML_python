@@ -237,7 +237,7 @@ class Process:
         for t in range(num_times):
             for step in self.steps:
                 piece, forward_to_keys, d_key_and_over_d_keys = step
-                dict_object = piece.run(dict_object, forward_to_keys, d_key_and_over_d_keys)
+                dict_object = piece.play(dict_object, forward_to_keys, d_key_and_over_d_keys)
         return dict_object
 
 
@@ -272,10 +272,10 @@ class Program:
         for process_name_or_piece_name in process_names_or_piece_names:
             if process_name_or_piece_name in self.processes:
                 process = self.processes[process_name_or_piece_name]
-                dict_object = process.run(dict_object, **kwargs)
+                dict_object = process.play(dict_object, **kwargs)
             elif process_name_or_piece_name in self.pieces:
                 piece = self.pieces[process_name_or_piece_name]
-                dict_object = piece.run(dict_object, **kwargs)
+                dict_object = piece.play(dict_object, **kwargs)
         return dict_object
 
 
@@ -293,16 +293,16 @@ class Project:
                 process_or_piece_name = process_name_or_piece_name[1]
                 if process_or_piece_name in self.programs[program_name].processes:
                     process = self.programs[program_name].processes[process_or_piece_name]
-                    self.vars = process.run(self.vars, **kwargs)
+                    self.vars = process.play(self.vars, **kwargs)
                 elif process_or_piece_name in self.programs[program_name].pieces:
                     piece = self.programs[program_name].pieces[process_or_piece_name]
-                    self.vars = piece.run(self.vars, **kwargs)
+                    self.vars = piece.play(self.vars, **kwargs)
             elif process_name_or_piece_name in self.processes:
                 process = self.processes[process_name_or_piece_name]
-                self.vars = process.run(self.vars, **kwargs)
+                self.vars = process.play(self.vars, **kwargs)
             elif process_name_or_piece_name in self.pieces:
                 piece = self.pieces[process_name_or_piece_name]
-                self.vars = piece.run(self.vars, **kwargs)
+                self.vars = piece.play(self.vars, **kwargs)
 
 
 def is_doverd(piece_key):
