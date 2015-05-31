@@ -1,5 +1,6 @@
 from __future__ import print_function
-from numpy import array, cos, diag, sin, pi, radians, loadtxt, eye, concatenate, size, sqrt, degrees, unwrap, atleast_2d
+from numpy import allclose, array, cos, diag, sin, pi, radians, loadtxt, eye, concatenate, size, sqrt, degrees, unwrap,\
+    atleast_2d, zeros
 import matplotlib.pyplot as plt
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
 import sys
@@ -9,8 +10,8 @@ class RunEKF:
     def __init__(self):
         self.R = array([[2.0, 0.0, 0.0],
                         [0.0, 2.0, 0.0],
-                        [0.0, 0.0, radians(2)]])*5E-5   #1E-4
-        self.Q = array([[1.0, 0.0],[0.0, radians(1)]])*5E-7   #1E-6
+                        [0.0, 0.0, radians(2)]])*1e-6   #1E-4
+        self.Q = array([[1.0, 0.0],[0.0, radians(1)]])*1E-8   #1E-6
         self.U = [] # Array that stores the control data where rows increase with time
         self.Z = [] # Array that stores the measurement data where rows increase with time
         self.XYT = [] # Array that stores the ground truth pose where rows increase with time
@@ -28,10 +29,10 @@ class RunEKF:
 
     # Iterate from t=1 to t=T performing the two filtering steps
     def run(self):
-        mu0 = array([[-4.0], [4.0], [pi/2]])# FILL ME IN: initial mean
-        Sigma0 = eye(3) #[]# FILL ME IN: initial covariance
+        mu0 = array([[-4.0], [-4.0], [pi/2]])
+        Sigma0 = zeros((3, 3))
         self.VAR = array([[Sigma0[0, 0], Sigma0[1, 1], Sigma0[2, 2]]])
-        self.MU = mu0.T # Array in which to append mu_t as a row vector after each iteration
+        self.MU = mu0.T
 
         transition_means_lambda = lambda m, u: m + array([[u[0, 0] * cos(m[2, 0])],
                                                           [u[0, 0] * sin(m[2, 0])],
@@ -103,11 +104,15 @@ class RunEKF:
 
 
 def UNIT_TEST___WALTER_2015___RoboAI___ProbSet2_Q3(control_data_file_path, measurement_data_file_path,
-                                                   ground_truth_data_file_path):
+                                                   ground_truth_data_file_path, means_answer_file_path,
+                                                   standard_deviations_answer_file_path):
     ekf = RunEKF()
     ekf.readData(control_data_file_path, measurement_data_file_path, ground_truth_data_file_path)
     ekf.run()
     ekf.plot()
+    means___answer = loadtxt(means_answer_file_path, delimiter=',')
+    standard_deviations___answer = loadtxt(standard_deviations_answer_file_path, delimiter=',')
+    return allclose(ekf.MU, means___answer) & allclose(sqrt(ekf.VAR), standard_deviations___answer)
 
 
 if __name__ == '__main__':

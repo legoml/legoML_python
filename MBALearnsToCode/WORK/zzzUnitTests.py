@@ -28,8 +28,11 @@ folder_path = '../MBALearnsToCode_Data/WALTER_2015___RoboAI/2.3 (EKF)/'
 control_data_file_path = folder_path + 'U.txt'
 measurement_data_file_path = folder_path + 'Z.txt'
 ground_truth_file_path = folder_path + 'XYT.txt'
+means_answer_file_path = folder_path + 'means.csv'
+standard_deviations_answer_file_path = folder_path + 'stdevs.csv'
 unit_tests['WALTER_2015___RoboAI___ProbSet2_Q3'] = UNIT_TEST___WALTER_2015___RoboAI___ProbSet2_Q3(
-    control_data_file_path, measurement_data_file_path, ground_truth_file_path)
+    control_data_file_path, measurement_data_file_path, ground_truth_file_path, means_answer_file_path,
+    standard_deviations_answer_file_path)
 
 from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q1.MidTerm_Q1 import\
     UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q1
