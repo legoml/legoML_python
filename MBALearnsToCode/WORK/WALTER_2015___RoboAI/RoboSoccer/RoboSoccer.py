@@ -1,8 +1,8 @@
 from __future__ import print_function, division
 from copy import deepcopy
 from pprint import pprint
-from numpy import abs, allclose, arctan2, array, atleast_2d, cos,  degrees, eye, hstack, inf, nan, pi, sin, sqrt,\
-    vstack, zeros
+from numpy import abs, allclose, arctan2, array, atleast_2d, ceil, cos, degrees, eye, floor, hstack, inf, nan, pi, sin,\
+    sqrt, vstack, zeros
 from numpy.linalg import eigh
 from numpy.random import normal, uniform, random
 from pandas import DataFrame
@@ -15,10 +15,18 @@ from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import approx_gradients
 
 
 def euclidean_distance(x0, y0, x1, y1):
+    """EUCLIDEAN DISTANCE
+
+    Euclidean distance between (x0, y0) and (x1, y1)
+    """
     return ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
 
 
 def euclidean_distance_gradients(x0, y0, x1, y1):
+    """EUCLIDEAN DISTANCE GRADIENTS
+
+    Gradients of Euclidean distance between (x0, y0) and (x1, y1) w.r.t. x0, y0, x1 and y1
+    """
     dx = x1 - x0
     dy = y1 - y0
     d = (dx ** 2 + dy ** 2) ** 0.5
@@ -26,10 +34,19 @@ def euclidean_distance_gradients(x0, y0, x1, y1):
 
 
 def relative_angle(x0, y0, x1, y1):
+    """RELATIVE ANGLE
+
+    Angle from positive x-axis ("true East") to the ray from (x0, y0) to (x1, y1)
+    """
     return arctan2(y1 - y0, x1 - x0)
 
 
 def relative_angle_gradients(x0, y0, x1, y1):
+    """RELATIVE ANGLE GRADIENTS
+
+    Gradients of the angle from positive x-axis ("true East") to the ray from (x0, y0) to (x1, y1),
+    w.r.t. x0, y0, x1 and y1
+    """
     dx = x1 - x0
     dy = y1 - y0
     d_squared = dx ** 2 + dy ** 2
@@ -37,11 +54,19 @@ def relative_angle_gradients(x0, y0, x1, y1):
 
 
 def angular_difference(from_angle, to_angle):
+    """ANGULAR DIFFERENCE
+
+    Angle between two rays at angle FROM_ANGLE and angle TO_ANGLE
+    """
     a = to_angle - from_angle
     return arctan2(sin(a), cos(a))
 
 
 class Marking:
+    """MARKING class
+
+    Data structure for fixed markings on soccer field
+    """
     def __init__(self, name, x, y):
         self.id = name
         self.x = x
@@ -95,12 +120,13 @@ class Ball:
 
 
 class Player:
-    def __init__(self, x=0., y=0., velocity=0., angle=0., motion_sigma=0., distance_sigma=0., angle_sigma=0.,
-                 team='West'):
+    def __init__(self, x=0., y=0., velocity=0., angle=0., acceleration_sigma=0., motion_sigma=0., distance_sigma=0.,
+                 angle_sigma=0., inconsistency_threshold=9., team='West'):
         self.x = x
         self.y = y
         self.velocity = velocity
         self.angle = angle
+        self.acceleration_sigma = acceleration_sigma
         self.motion_sigma = motion_sigma
         self.distance_sigma = distance_sigma
         self.angle_sigma = angle_sigma
@@ -121,45 +147,47 @@ class Player:
                            self.observation_means_jacobi(xy, marking_indices=marking_indices),
                        lambda d_and_a, marking_indices=tuple():
                            self.observation_covariances(d_and_a, marking_indices=marking_indices))
+        self.inconsistency_threshold = inconsistency_threshold
+        self.lost = False
 
-    def transition_means(self, all_xy___vector, velocity_and_angle):
-        conditional_xy_means___vector = deepcopy(all_xy___vector)
+    def transition_means(self, current_xy___vector, velocity_and_angle):
+        conditional_next_xy_means___vector = deepcopy(current_xy___vector)
         v, a = velocity_and_angle
-        conditional_xy_means___vector[0, 0] += v * cos(a)
-        conditional_xy_means___vector[1, 0] += v * sin(a)
-        return conditional_xy_means___vector
+        conditional_next_xy_means___vector[0, 0] += v * cos(a)
+        conditional_next_xy_means___vector[1, 0] += v * sin(a)
+        return conditional_next_xy_means___vector
 
     def transition_means_jacobi(self, all_xy___vector, velocity_and_angle):
         return eye(2 * (self.num_mapped_markings + 1))
 
     def transition_covariances(self, velocity_and_angle):
         n = 2 * (self.num_mapped_markings + 1)
-        conditional_xy_covariances___matrix = zeros((n, n))
+        conditional_next_xy_covariances___matrix = zeros((n, n))
         variance = (velocity_and_angle[0] * self.motion_sigma) ** 2
-        conditional_xy_covariances___matrix[0, 0] = variance
-        conditional_xy_covariances___matrix[1, 1] = variance
-        return conditional_xy_covariances___matrix
+        conditional_next_xy_covariances___matrix[0, 0] = variance
+        conditional_next_xy_covariances___matrix[1, 1] = variance
+        return conditional_next_xy_covariances___matrix
 
-    def observation_means(self, all_xy___vector, marking_indices=tuple()):
+    def observation_means(self, xy___vector, marking_indices=tuple()):
         n_markings = len(marking_indices)
         conditional_observation_means___vector = zeros((2 * n_markings, 1))
-        self_x, self_y = all_xy___vector[0:2, 0]
+        self_x, self_y = xy___vector[0:2, 0]
         for i in range(n_markings):
             k = 2 * i
             k_marking = 2 * marking_indices[i]
-            marking_x, marking_y = all_xy___vector[k_marking:(k_marking + 2), 0]
+            marking_x, marking_y = xy___vector[k_marking:(k_marking + 2), 0]
             conditional_observation_means___vector[k, 0] = euclidean_distance(self_x, self_y, marking_x, marking_y)
             conditional_observation_means___vector[k + 1, 0] = relative_angle(self_x, self_y, marking_x, marking_y)
         return conditional_observation_means___vector
 
-    def observation_means_jacobi(self, all_xy___vector, marking_indices=tuple()):
+    def observation_means_jacobi(self, xy___vector, marking_indices=tuple()):
         n_markings = len(marking_indices)
-        conditional_observation_means_jacobi___matrix = zeros((2 * n_markings, all_xy___vector.size))
-        self_x, self_y = all_xy___vector[0:2, 0]
+        conditional_observation_means_jacobi___matrix = zeros((2 * n_markings, xy___vector.size))
+        self_x, self_y = xy___vector[0:2, 0]
         for i in range(n_markings):
             k = 2 * i
             k_marking = 2 * marking_indices[i]
-            marking_x, marking_y = all_xy___vector[k_marking:(k_marking + 2), 0]
+            marking_x, marking_y = xy___vector[k_marking:(k_marking + 2), 0]
             conditional_observation_means_jacobi___matrix[k, (0, 1, k_marking, k_marking + 1)] =\
                 euclidean_distance_gradients(self_x, self_y, marking_x, marking_y)
             conditional_observation_means_jacobi___matrix[k + 1, (0, 1, k_marking, k_marking + 1)] =\
@@ -175,22 +203,30 @@ class Player:
             conditional_observation_covariances___matrix[k + 1, k + 1] = self.angle_sigma ** 2
         return conditional_observation_covariances___matrix
 
+    def accelerate(self, acceleration):
+        v = self.velocity + acceleration
+        if v > 0:
+            self.velocity = v
+
     def run(self):
         self.x += self.velocity * (cos(self.angle) + normal(scale=self.motion_sigma / 2))  # to avoid over-confidence
         self.y += self.velocity * (sin(self.angle) + normal(scale=self.motion_sigma / 2))  # to avoid over-confidence
         self.EKF.predict((self.velocity, self.angle))
 
     def augment_map(self, marking):
+
         mapping_jacobi = zeros((2, 2 * (self.num_mapped_markings + 1)))
         mapping_jacobi[0, 0] = 1.
         mapping_jacobi[1, 1] = 1.
 
         self.num_mapped_markings += 1
         self.SLAM[marking.id] = self.num_mapped_markings
+
         observed_distance = euclidean_distance(self.x, self.y, marking.x, marking.y) +\
             normal(scale=self.distance_sigma / 2)  # to avoid over-confidence
         distance_minus_1sd = observed_distance - self.distance_sigma
         distance_plus_1sd = observed_distance + self.distance_sigma
+
         observed_angle = relative_angle(self.x, self.y, marking.x, marking.y) +\
             normal(scale=self.angle_sigma / 2)  # to avoid over-confidence
         c = cos(observed_angle)
@@ -253,14 +289,14 @@ class Player:
             vstack((hstack((self.EKF.covariances, new_marking_xy_covariance_with_known_xy.T)),
                     hstack((new_marking_xy_covariance_with_known_xy, new_marking_xy_covariance_matrix))))
 
-    def observe(self, markings, min_distance_over_distance_sigma_ratio=3.):
+    def observe(self, markings, min_distance_over_distance_sigma_ratio=6.):
         observations___vector = array([[]]).T
         marking_indices = []
         for marking in markings:
             if marking.id in self.SLAM:
-                observed_distance = euclidean_distance(self.x, self.y, marking.x, marking.y) +\
-                    normal(scale=self.distance_sigma / 2)  # to avoid over-confidence
-                if observed_distance >= min_distance_over_distance_sigma_ratio * self.distance_sigma:
+                d = euclidean_distance(self.x, self.y, marking.x, marking.y)
+                if d >= min_distance_over_distance_sigma_ratio * self.distance_sigma:
+                    observed_distance = d + normal(scale=self.distance_sigma / 2)  # to avoid over-confidence
                     observed_angle = relative_angle(self.x, self.y, marking.x, marking.y) +\
                         normal(scale=self.angle_sigma / 2)   # to avoid over-confidence
                     observations___vector = vstack((observations___vector,
@@ -268,12 +304,17 @@ class Player:
                                                     observed_angle))
                     marking_indices += [self.SLAM[marking.id]]
         if marking_indices:
+            current_means = deepcopy(self.EKF.means)
             self.EKF.update(observations___vector, marking_indices=marking_indices)
+            if euclidean_distance(current_means[0, 0], current_means[1, 0],
+                                  self.EKF.means[0, 0], self.EKF.means[1, 0]) > self.inconsistency_threshold:
+                self.lost = True
+
         for marking in markings:
             if marking.id not in self.SLAM:
                 self.augment_map(marking)
 
-    def observe_marking_in_front(self, field, min_distance_over_distance_sigma_ratio=3.):
+    def observe_marking_in_front(self, field, min_distance_over_distance_sigma_ratio=6.):
         min_angle = pi
         marking_in_front = None
         for marking in field.markings:
@@ -298,24 +339,35 @@ class Player:
 
 
 class Game:
-    def __init__(self, num_players_per_team=11, velocity=6., motion_sigma=0.3, distance_sigma=1.,
-                 angle_sigma=3 * pi / 180, ball_kick_velocity=3., ball_slow_down=0.8):
+    def __init__(self, num_players=6, velocity=6., acceleration_sigma=3.,
+                 motion_sigma=0.3, distance_sigma=1., angle_sigma=3 * pi / 180, inconsistency_threshold=3.,
+                 ball_kick_velocity=3., ball_slow_down=0.8, team_names=('Chelsea', 'Arsenal')):
         self.field = Field()
         length = self.field.length
         width = self.field.width
-        self.num_players_per_team = num_players_per_team
+        self.num_players = num_players
         self.players = []
-        for i in range(num_players_per_team):
-            self.players += [Player(uniform(- length / 2, 0), uniform(- width / 2, width / 2),
-                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, angle_sigma, 'West'),
-                             Player(uniform(0, length / 2), uniform(- width / 2, width / 2),
-                                    velocity, uniform(-pi, pi), motion_sigma, distance_sigma, angle_sigma, 'East')]
+        for i in range(num_players):
+            if i % 2:
+                self.players += [Player(x=uniform(0, length / 2), y=uniform(- width / 2, width / 2),
+                                        velocity=velocity, angle=uniform(-pi, pi),
+                                        acceleration_sigma=acceleration_sigma, motion_sigma=motion_sigma,
+                                        distance_sigma=distance_sigma, angle_sigma=angle_sigma,
+                                        inconsistency_threshold=inconsistency_threshold, team='East')]
+            else:
+                self.players += [Player(x=uniform(- length / 2, 0), y=uniform(- width / 2, width / 2),
+                                        velocity=velocity, angle=uniform(-pi, pi),
+                                        acceleration_sigma=acceleration_sigma, motion_sigma=motion_sigma,
+                                        distance_sigma=distance_sigma, angle_sigma=angle_sigma,
+                                        inconsistency_threshold=inconsistency_threshold, team='West')]
 
         self.ball_kick_velocity = ball_kick_velocity
         self.ball_slow_down = ball_slow_down
         self.ball = Ball(slow_down=ball_slow_down)
 
         self.time = 0
+        self.west_team, self.east_team = team_names
+        self.score = {'West': 0, 'East': 0}
 
         self.figure = figure()
         gs = GridSpec(1, 2, width_ratios=[5, 1])
@@ -326,6 +378,8 @@ class Game:
         self.ball_plot = None
         self.west_team_plot = None
         self.east_team_plot = None
+        self.west_score_text_plot = None
+        self.east_score_text_plot = None
         self.markings_being_observed = None
         self.SLAM_confidence_plots = {}
         self.SLAM_arrow_plots = {}
@@ -351,36 +405,61 @@ class Game:
         west_y = []
         east_x = []
         east_y = []
-        for i in range(self.num_players_per_team):
-            k = 2 * i
-            west_x += [self.players[k].x]
-            west_y += [self.players[k].y]
-            east_x += [self.players[k + 1].x]
-            east_y += [self.players[k + 1].y]
+        for i in range(self.num_players):
+            if i % 2:
+                east_x += [self.players[i].x]
+                east_y += [self.players[i].y]
+            else:
+                west_x += [self.players[i].x]
+                west_y += [self.players[i].y]
         self.ball_plot = self.game_plot\
-            .scatter(self.ball.x, self.ball.y, s=36, color='magenta', marker='o', animated=True)
+            .scatter(self.ball.x, self.ball.y, s=81, color='magenta', marker='o', animated=True)
         self.west_team_plot = self.game_plot\
             .scatter(west_x, west_y, s=48, c='blue', marker='o', label='West', animated=True)
         self.east_team_plot = self.game_plot\
             .scatter(east_x, east_y, s=48, c='red', marker='o', label='East', animated=True)
+
+        left = - length / 4
+        right = length / 4
+        top = width / 2 + 1
+        self.west_score_text_plot = self.game_plot\
+            .text(left, top, self.west_team + ' ' + str(self.score['West']),
+                  fontsize=30, color='blue', horizontalalignment='center', animated=True)
+        self.east_score_text_plot = self.game_plot\
+            .text(right, top, str(self.score['East']) + ' ' + self.east_team,
+                  fontsize=30, color='red', horizontalalignment='center', animated=True)
+
         self.SLAM_plot
         self.cov_plot = imshow(self.players[0].EKF.covariances, interpolation='none', animated=True)
+
         return self.boundary_plot, self.markings_plot, self.ball_plot, self.west_team_plot, self.east_team_plot,\
-            self.cov_plot
+            self.west_score_text_plot, self.east_score_text_plot, self.cov_plot
 
     def play(self, t):
         self.play_per_second()
-        west_xy = zeros((2, self.num_players_per_team))
-        east_xy = zeros((2, self.num_players_per_team))
-        for i in range(self.num_players_per_team):
-            k = 2 * i
-            west_xy[0, i] = self.players[k].x
-            west_xy[1, i] = self.players[k].y
-            east_xy[0, i] = self.players[k + 1].x
-            east_xy[1, i] = self.players[k + 1].y
+        west_xy = zeros((ceil(self.num_players / 2), 2))
+        east_xy = zeros((floor(self.num_players / 2), 2))
+        for i in range(self.num_players):
+            if i % 2:
+                east_xy[i // 2, 0] = self.players[i].x
+                east_xy[i // 2, 1] = self.players[i].y
+            else:
+                west_xy[i // 2, 0] = self.players[i].x
+                west_xy[i // 2, 1] = self.players[i].y
         self.ball_plot.set_offsets(array([[self.ball.x], [self.ball.y]]))
         self.west_team_plot.set_offsets(west_xy)
         self.east_team_plot.set_offsets(east_xy)
+
+        for i in range(self.num_players):
+            if self.players[i].lost:
+                self.players[i] = Player(x=self.players[i].x, y=self.players[i].y,
+                                         velocity=self.players[i].velocity, angle=self.players[i].angle,
+                                         acceleration_sigma=self.players[i].acceleration_sigma,
+                                         motion_sigma=self.players[i].motion_sigma,
+                                         distance_sigma=self.players[i].distance_sigma,
+                                         angle_sigma=self.players[i].angle_sigma,
+                                         inconsistency_threshold=self.players[i].inconsistency_threshold,
+                                         team=self.players[i].team)
 
         for obj, i in self.players[0].SLAM.items():
             k = 2 * i
@@ -406,51 +485,104 @@ class Game:
                 self.SLAM_confidence_plots[obj] = self.game_plot.add_artist(
                     Ellipse(xy=xy, width=width, height=height, angle=angle, facecolor='green', edgecolor='green',
                             alpha=0.6, animated=True))
+
+        for obj in (set(self.SLAM_confidence_plots) - set(self.players[0].SLAM)):
+            self.SLAM_arrow_plots[obj].set_xdata([0., 0.])
+            self.SLAM_arrow_plots[obj].set_ydata([0., 0.])
+            self.SLAM_confidence_plots[obj].center = [0., 0.]
+            self.SLAM_confidence_plots[obj].width = 0.
+            self.SLAM_confidence_plots[obj].height = 0.
+            self.SLAM_confidence_plots[obj].angle = 0.
+
         #self.game_plot.relim()
         #self.game_plot.autoscale_view(True, True, True)
+
+        self.west_score_text_plot.set_text(self.west_team + ' ' + str(self.score['West']))
+        self.east_score_text_plot.set_text(str(self.score['East']) + ' ' + self.east_team)
+
         self.cov_plot.set_data(self.players[0].EKF.covariances)
         self.record_beliefs()
-        return [self.ball_plot, self.west_team_plot, self.east_team_plot, self.cov_plot] +\
-            list(self.SLAM_confidence_plots.values()) + list(self.SLAM_arrow_plots.values())
+
+        return [self.ball_plot, self.west_team_plot, self.east_team_plot, self.west_score_text_plot,
+                self.east_score_text_plot, self.cov_plot] + list(self.SLAM_confidence_plots.values()) +\
+            list(self.SLAM_arrow_plots.values())
 
     def out_of_play(self):
         return (self.ball.x < -self.field.length / 2) | (self.ball.x > self.field.length / 2) |\
             (self.ball.y < -self.field.width / 2) | (self.ball.y > self.field.width / 2)
 
-    def goal_scored(self):
-        return True
+    def goal_scored_for(self):
+        if self.out_of_play():
+            if self.ball.x > self.field.length / 2:
+                ball_angle_to_goal_post_se = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                                                            self.field.markings_xy.ix['GoalPostSE'].x,
+                                                            self.field.markings_xy.ix['GoalPostSE'].y)
+                ball_angle_to_goal_post_ne = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                                                            self.field.markings_xy.ix['GoalPostNE'].x,
+                                                            self.field.markings_xy.ix['GoalPostNE'].y)
+                ball_angle_between_goal_posts_e = angular_difference(ball_angle_to_goal_post_se,
+                                                                     ball_angle_to_goal_post_ne)
+                ball_angle_between_goal_post_se_and_direction = angular_difference(ball_angle_to_goal_post_se,
+                                                                                   self.ball.angle)
+                if in_range(ball_angle_between_goal_post_se_and_direction, 0., ball_angle_between_goal_posts_e):
+                    return 'West'
+            elif self.ball.x < - self.field.length / 2:
+                ball_angle_to_goal_post_nw = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                                                            self.field.markings_xy.ix['GoalPostNW'].x,
+                                                            self.field.markings_xy.ix['GoalPostNW'].y)
+                ball_angle_to_goal_post_sw = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                                                            self.field.markings_xy.ix['GoalPostSW'].x,
+                                                            self.field.markings_xy.ix['GoalPostSW'].y)
+                ball_angle_between_goal_posts_w = angular_difference(ball_angle_to_goal_post_nw,
+                                                                     ball_angle_to_goal_post_sw)
+                ball_angle_between_goal_post_nw_and_direction = angular_difference(ball_angle_to_goal_post_nw,
+                                                                                   self.ball.angle)
+                if in_range(ball_angle_between_goal_post_nw_and_direction, 0., ball_angle_between_goal_posts_w):
+                    return 'East'
 
     def play_per_second(self):
         self.time += 1
-        self.ball.roll()
-        player_having_ball_and_knowing_goal = None
+        index_player_having_ball = None
         min_distance_to_ball = inf
-        for i in range(0, 2 * self.num_players_per_team):
+        for i in range(self.num_players):
             self.players[i].orient_toward_ball(self.ball)
+            self.players[i].accelerate(normal(scale=self.players[i].acceleration_sigma))
             self.players[i].run()
             self.players[i].observe_marking_in_front(self.field)
             d = self.players[i].distance_to_ball(self.ball)
-            if d < min(min_distance_to_ball, self.players[i].velocity) and self.players[i].know_goal():
-                player_having_ball_and_knowing_goal = i
+            if d <= min(min_distance_to_ball, self.players[i].velocity):
+                index_player_having_ball = i
                 min_distance_to_ball = d
 
-        if player_having_ball_and_knowing_goal:
-            player = self.players[player_having_ball_and_knowing_goal]
-            estimated_goal_x = 0.
-            estimated_goal_y = 0.
-            known_goal_posts = set(player.target_goal) & set(player.SLAM)
-            num_known_goal_posts = len(known_goal_posts)
-            for goal_post in known_goal_posts:
-                k = 2 * player.SLAM[goal_post]
-                estimated_goal_x += player.EKF.means[k, 0]
-                estimated_goal_y += player.EKF.means[k + 1, 0]
-            estimated_goal_x /= num_known_goal_posts
-            estimated_goal_y /= num_known_goal_posts
-            estimated_goal_angle = relative_angle(self.ball.x, self.ball.y, estimated_goal_x, estimated_goal_y)
-            self.ball.kicked(self.ball_kick_velocity, estimated_goal_angle)
+        if index_player_having_ball is not None:
+            player = self.players[index_player_having_ball]
+            if player.know_goal():
+                estimated_goal_x = 0.
+                estimated_goal_y = 0.
+                known_goal_posts = set(player.target_goal) & set(player.SLAM)
+                num_known_goal_posts = len(known_goal_posts)
+                for goal_post in known_goal_posts:
+                    k = 2 * player.SLAM[goal_post]
+                    estimated_goal_x += player.EKF.means[k, 0]
+                    estimated_goal_y += player.EKF.means[k + 1, 0]
+                estimated_goal_x /= num_known_goal_posts
+                estimated_goal_y /= num_known_goal_posts
+                estimated_goal_angle = relative_angle(self.ball.x, self.ball.y, estimated_goal_x, estimated_goal_y) +\
+                    normal(scale=player.angle_sigma / 2)   # to avoid over-confidence
+                self.ball.kicked(self.ball_kick_velocity, estimated_goal_angle)
+            elif player.team == 'West':
+                self.ball.kicked(self.ball_kick_velocity, normal(scale=player.angle_sigma / 2))  # avoid over-confidence
+            elif player.team == 'East':
+                self.ball.kicked(self.ball_kick_velocity, pi + normal(scale=player.angle_sigma / 2))  # avoid over-confi
 
+        self.ball.roll()
         if self.out_of_play():
-            self.ball = Ball(slow_down=self.ball_slow_down)
+            goal_scored_for = self.goal_scored_for()
+            if goal_scored_for:
+                self.score[goal_scored_for] += 1
+            self.ball = Ball(x=uniform(-self.field.length / 2, self.field.length / 2),
+                             y=uniform(-self.field.width / 2, self.field.width / 2),
+                             slow_down=self.ball_slow_down)
 
     def record_beliefs(self):
         x = self.players[0].x
@@ -466,9 +598,13 @@ class Game:
             self.beliefs.ix[obj].bias_y = means[k + 1, 0] - self.beliefs.ix[obj].y
             self.beliefs.ix[obj].sd_x = standard_deviations[k, 0]
             self.beliefs.ix[obj].sd_y = standard_deviations[k + 1, 0]
-        print("\nTYPICAL PLAYER'S BELIEFS:")
+        print("TYPICAL PLAYER'S BELIEFS:")
         pprint(self.beliefs)
         print('\n')
+
+
+def in_range(x, a, b):
+    return (x >= min(a, b)) & (x <= max(a, b))
 
 
 def confidence_ellipse_parameters(cov, nstd=2):
