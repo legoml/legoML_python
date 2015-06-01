@@ -4,6 +4,7 @@ import math
 from numpy import *
 import matplotlib.pyplot as plt
 from GridWorldMDP import *
+from pprint import pprint
 
 if __name__ == '__main__':
 
@@ -19,11 +20,7 @@ if __name__ == '__main__':
     V, Pi, n = mdp.valueIteration(args.epsilon)
 
     print "Converged in %d iterations" % (n)
+    set_printoptions(precision=3)
+    pprint(V.reshape((5, 5))[list(reversed(range(5))), :])
 
     mdp.drawWorld(V,Pi)
-
-    
-
-
-
-

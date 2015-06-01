@@ -1,3 +1,4 @@
+from __future__ import division
 import numpy as np
 import Tkinter
 import matplotlib.pyplot as pyplot
@@ -371,10 +372,32 @@ class GridWorldMDP(object):
 
         # Your function should populate the following arrays
         V = np.zeros([self.numstates])  # Value function
+        V[0:5] = -10
+        V[12] = 1
+        V[14] = 10
+        non_terminal_state = np.ones([self.numstates])
+        non_terminal_state[0:5] = 0.
+        non_terminal_state[12] = 0.
+        non_terminal_state[14] = 0.
+
         Pi = np.zeros([self.numstates]) # Policy where Pi[i] is 0 (N), 1 (E), 2 (S), 3(W)
 
         n = 0 # Keep track of the number of iterations
 
-        # INSERT YOUR CODE HERE (DON'T FORGET TO INCREMENT THE NUMBER OF INTERATIONS) 
+        change = np.array(self.numstates * [np.inf])
+        while max(abs(change)) > epsilon:
+            n += 1
+            V_new = V.copy()
+            for s in (5, 6, 7, 8, 9, 10, 15, 17, 18, 19, 20, 21, 22, 23, 24):
+                V_array = self.gamma * np.sum(self.T[s, :, :] *
+                                              (self.R[s, :, :] + np.atleast_2d(non_terminal_state * V).T), axis=0)
+                m = -np.inf
+                for a in range(4):
+                    if V_array[a] > m:
+                        m = V_array[a]
+                        Pi[s] = a
+                        V_new[s] = m
+            change = V_new - V
+            V = V_new
 
         return (V,Pi,n)

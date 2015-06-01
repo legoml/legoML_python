@@ -77,6 +77,7 @@ class Field:
     def __init__(self, length=105., width=68., goal_width=7.32):
         self.length = length
         self.width = width
+        self.goal_width = goal_width
         self.markings = {Marking('SouthWest', - length / 2, - width / 2),
                          Marking('NorthWest', - length / 2, width / 2),
                          Marking('SouthEast', length / 2, - width / 2),
@@ -374,6 +375,8 @@ class Game:
         self.game_plot = subplot(gs[0])
         self.SLAM_plot = subplot(gs[1])
         self.boundary_plot = None
+        self.goal_box_w_plot = None
+        self.goal_box_e_plot = None
         self.markings_plot = None
         self.ball_plot = None
         self.west_team_plot = None
@@ -396,9 +399,17 @@ class Game:
     def init_plot(self):
         length = self.field.length
         width = self.field.width
+        goal_width = self.field.goal_width
+        goal_depth = 1
         self.boundary_plot, = self.game_plot.plot(
             (- length / 2, length / 2, length / 2, - length / 2, - length / 2),
             (- width / 2, - width / 2, width / 2, width / 2, - width / 2), color='gray', linewidth=1)
+        self.goal_box_w_plot, = self.game_plot.plot(
+            (- length / 2, - length / 2 - goal_depth, - length / 2 - goal_depth, - length / 2),
+            (goal_width / 2, goal_width / 2, - goal_width / 2, - goal_width / 2), color='blue', linewidth=1)
+        self.goal_box_e_plot, = self.game_plot.plot(
+            (length / 2, length / 2 + goal_depth, length / 2 + goal_depth, length / 2),
+            (- goal_width / 2, - goal_width / 2, goal_width / 2, goal_width / 2), color='red', linewidth=1)
         self.markings_plot = self.game_plot.scatter(
             self.field.markings_xy.x, self.field.markings_xy.y, color='black', s=24)
         west_x = []
@@ -432,8 +443,9 @@ class Game:
         self.SLAM_plot
         self.cov_plot = imshow(self.players[0].EKF.covariances, interpolation='none', animated=True)
 
-        return self.boundary_plot, self.markings_plot, self.ball_plot, self.west_team_plot, self.east_team_plot,\
-            self.west_score_text_plot, self.east_score_text_plot, self.cov_plot
+        return self.boundary_plot, self.goal_box_w_plot, self.goal_box_e_plot, self.markings_plot, self.ball_plot,\
+            self.west_team_plot, self.east_team_plot, self.west_score_text_plot, self.east_score_text_plot,\
+            self.cov_plot
 
     def play(self, t):
         self.play_per_second()
@@ -484,7 +496,7 @@ class Game:
                         color='lightgray', animated=True)
                 self.SLAM_confidence_plots[obj] = self.game_plot.add_artist(
                     Ellipse(xy=xy, width=width, height=height, angle=angle, facecolor='green', edgecolor='green',
-                            alpha=0.6, animated=True))
+                            alpha=0.3, animated=True))
 
         for obj in (set(self.SLAM_confidence_plots) - set(self.players[0].SLAM)):
             self.SLAM_arrow_plots[obj].set_xdata([0., 0.])
