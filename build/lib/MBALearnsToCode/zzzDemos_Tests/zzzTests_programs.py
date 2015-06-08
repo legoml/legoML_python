@@ -3,7 +3,7 @@ from copy import deepcopy
 from numpy import allclose, array, ones
 from numpy.random import rand, randint
 
-from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import approx_gradients
+from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import approx_gradients
 from MBALearnsToCode.Programs import PROGRAM___ffnn, PROGRAM___ffnn_unskewed_classification
 from MBALearnsToCode import Project
 

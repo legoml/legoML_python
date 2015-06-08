@@ -38,4 +38,5 @@ Thumbs.db
 
 # Workspace files
 # _______________
-.idea/workspace.xml
+*.iml
+*.xml

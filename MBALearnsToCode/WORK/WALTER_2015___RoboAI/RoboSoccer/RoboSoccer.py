@@ -1,65 +1,21 @@
 from __future__ import print_function, division
+from matplotlib import use
+use('TkAgg')
+
 from copy import deepcopy
 from pprint import pprint
-from numpy import abs, allclose, arctan2, array, atleast_2d, ceil, cos, degrees, eye, floor, hstack, inf, nan, pi, sin,\
-    sqrt, vstack, zeros
-from numpy.linalg import eigh
-from numpy.random import normal, uniform, random
+from numpy import abs, arctan2, array, atleast_2d, ceil, cos, eye, floor, hstack, inf, nan, pi, sin, vstack, zeros
+from numpy.random import normal, uniform
 from pandas import DataFrame
 from matplotlib.pyplot import figure, subplot, imshow
 from matplotlib.gridspec import GridSpec
 from matplotlib.patches import Ellipse
 from matplotlib.animation import FuncAnimation
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
-from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import approx_gradients
-
-
-def euclidean_distance(x0, y0, x1, y1):
-    """EUCLIDEAN DISTANCE
-
-    Euclidean distance between (x0, y0) and (x1, y1)
-    """
-    return ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
-
-
-def euclidean_distance_gradients(x0, y0, x1, y1):
-    """EUCLIDEAN DISTANCE GRADIENTS
-
-    Gradients of Euclidean distance between (x0, y0) and (x1, y1) w.r.t. x0, y0, x1 and y1
-    """
-    dx = x1 - x0
-    dy = y1 - y0
-    d = (dx ** 2 + dy ** 2) ** 0.5
-    return - dx / d, - dy / d, dx / d, dy / d
-
-
-def relative_angle(x0, y0, x1, y1):
-    """RELATIVE ANGLE
-
-    Angle from positive x-axis ("true East") to the ray from (x0, y0) to (x1, y1)
-    """
-    return arctan2(y1 - y0, x1 - x0)
-
-
-def relative_angle_gradients(x0, y0, x1, y1):
-    """RELATIVE ANGLE GRADIENTS
-
-    Gradients of the angle from positive x-axis ("true East") to the ray from (x0, y0) to (x1, y1),
-    w.r.t. x0, y0, x1 and y1
-    """
-    dx = x1 - x0
-    dy = y1 - y0
-    d_squared = dx ** 2 + dy ** 2
-    return dy / d_squared, - dx / d_squared, - dy / d_squared, dx / d_squared
-
-
-def angular_difference(from_angle, to_angle):
-    """ANGULAR DIFFERENCE
-
-    Angle between two rays at angle FROM_ANGLE and angle TO_ANGLE
-    """
-    a = to_angle - from_angle
-    return arctan2(sin(a), cos(a))
+from MBALearnsToCode.Functions.FUNCTIONS___Geometry2D import euclidean_distance, euclidean_distance_gradients,\
+    ray_angle, ray_angle_gradients, angular_difference
+from MBALearnsToCode.Functions.FUNCTIONS___Visualizations import gaussian_confidence_ellipse_parameters
+from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import within_range
 
 
 class Marking:
@@ -178,7 +134,7 @@ class Player:
             k_marking = 2 * marking_indices[i]
             marking_x, marking_y = xy___vector[k_marking:(k_marking + 2), 0]
             conditional_observation_means___vector[k, 0] = euclidean_distance(self_x, self_y, marking_x, marking_y)
-            conditional_observation_means___vector[k + 1, 0] = relative_angle(self_x, self_y, marking_x, marking_y)
+            conditional_observation_means___vector[k + 1, 0] = ray_angle(self_x, self_y, marking_x, marking_y)
         return conditional_observation_means___vector
 
     def observation_means_jacobi(self, xy___vector, marking_indices=tuple()):
@@ -192,7 +148,7 @@ class Player:
             conditional_observation_means_jacobi___matrix[k, (0, 1, k_marking, k_marking + 1)] =\
                 euclidean_distance_gradients(self_x, self_y, marking_x, marking_y)
             conditional_observation_means_jacobi___matrix[k + 1, (0, 1, k_marking, k_marking + 1)] =\
-                relative_angle_gradients(self_x, self_y, marking_x, marking_y)
+                ray_angle_gradients(self_x, self_y, marking_x, marking_y)
         return conditional_observation_means_jacobi___matrix
 
     def observation_covariances(self, observations___vector, marking_indices=tuple()):
@@ -228,7 +184,7 @@ class Player:
         distance_minus_1sd = observed_distance - self.distance_sigma
         distance_plus_1sd = observed_distance + self.distance_sigma
 
-        observed_angle = relative_angle(self.x, self.y, marking.x, marking.y) +\
+        observed_angle = ray_angle(self.x, self.y, marking.x, marking.y) +\
             normal(scale=self.angle_sigma / 2)  # to avoid over-confidence
         c = cos(observed_angle)
         s = sin(observed_angle)
@@ -298,7 +254,7 @@ class Player:
                 d = euclidean_distance(self.x, self.y, marking.x, marking.y)
                 if d >= min_distance_over_distance_sigma_ratio * self.distance_sigma:
                     observed_distance = d + normal(scale=self.distance_sigma / 2)  # to avoid over-confidence
-                    observed_angle = relative_angle(self.x, self.y, marking.x, marking.y) +\
+                    observed_angle = ray_angle(self.x, self.y, marking.x, marking.y) +\
                         normal(scale=self.angle_sigma / 2)   # to avoid over-confidence
                     observations___vector = vstack((observations___vector,
                                                     observed_distance,
@@ -319,7 +275,7 @@ class Player:
         min_angle = pi
         marking_in_front = None
         for marking in field.markings:
-            a = abs(angular_difference(self.angle, relative_angle(self.x, self.y, marking.x, marking.y)))
+            a = abs(angular_difference(self.angle, ray_angle(self.x, self.y, marking.x, marking.y)))
             d = euclidean_distance(self.x, self.y, marking.x, marking.y)
             if (a < min_angle) and (d >= min_distance_over_distance_sigma_ratio * self.distance_sigma):
                 min_angle = a
@@ -394,7 +350,7 @@ class Game:
         self.beliefs['sd_y'] = float(nan)
         self.beliefs.ix['self'] = float(nan)
         self.animation = FuncAnimation(self.figure, self.play, interval=500,
-                                       init_func=self.init_plot, blit=True)
+                                       init_func=self.init_plot, blit=True)  # blit=True or False???
 
     def init_plot(self):
         length = self.field.length
@@ -480,7 +436,7 @@ class Game:
                 marking_y = self.field.markings_xy.ix[obj].y
             xy = self.players[0].EKF.means[k:(k + 2), 0]
             width, height, angle =\
-                confidence_ellipse_parameters(self.players[0].EKF.covariances[k:(k + 2), k:(k + 2)])
+                gaussian_confidence_ellipse_parameters(self.players[0].EKF.covariances[k:(k + 2), k:(k + 2)])
             if obj in self.SLAM_confidence_plots:
                 if i:
                     self.SLAM_arrow_plots[obj].set_xdata([self.players[0].x, marking_x])
@@ -526,30 +482,30 @@ class Game:
     def goal_scored_for(self):
         if self.out_of_play():
             if self.ball.x > self.field.length / 2:
-                ball_angle_to_goal_post_se = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                ball_angle_to_goal_post_se = ray_angle(self.ball.x_just_now, self.ball.y_just_now,
                                                             self.field.markings_xy.ix['GoalPostSE'].x,
                                                             self.field.markings_xy.ix['GoalPostSE'].y)
-                ball_angle_to_goal_post_ne = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                ball_angle_to_goal_post_ne = ray_angle(self.ball.x_just_now, self.ball.y_just_now,
                                                             self.field.markings_xy.ix['GoalPostNE'].x,
                                                             self.field.markings_xy.ix['GoalPostNE'].y)
                 ball_angle_between_goal_posts_e = angular_difference(ball_angle_to_goal_post_se,
                                                                      ball_angle_to_goal_post_ne)
                 ball_angle_between_goal_post_se_and_direction = angular_difference(ball_angle_to_goal_post_se,
                                                                                    self.ball.angle)
-                if in_range(ball_angle_between_goal_post_se_and_direction, 0., ball_angle_between_goal_posts_e):
+                if within_range(ball_angle_between_goal_post_se_and_direction, 0., ball_angle_between_goal_posts_e):
                     return 'West'
             elif self.ball.x < - self.field.length / 2:
-                ball_angle_to_goal_post_nw = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                ball_angle_to_goal_post_nw = ray_angle(self.ball.x_just_now, self.ball.y_just_now,
                                                             self.field.markings_xy.ix['GoalPostNW'].x,
                                                             self.field.markings_xy.ix['GoalPostNW'].y)
-                ball_angle_to_goal_post_sw = relative_angle(self.ball.x_just_now, self.ball.y_just_now,
+                ball_angle_to_goal_post_sw = ray_angle(self.ball.x_just_now, self.ball.y_just_now,
                                                             self.field.markings_xy.ix['GoalPostSW'].x,
                                                             self.field.markings_xy.ix['GoalPostSW'].y)
                 ball_angle_between_goal_posts_w = angular_difference(ball_angle_to_goal_post_nw,
                                                                      ball_angle_to_goal_post_sw)
                 ball_angle_between_goal_post_nw_and_direction = angular_difference(ball_angle_to_goal_post_nw,
                                                                                    self.ball.angle)
-                if in_range(ball_angle_between_goal_post_nw_and_direction, 0., ball_angle_between_goal_posts_w):
+                if within_range(ball_angle_between_goal_post_nw_and_direction, 0., ball_angle_between_goal_posts_w):
                     return 'East'
 
     def play_per_second(self):
@@ -579,7 +535,7 @@ class Game:
                     estimated_goal_y += player.EKF.means[k + 1, 0]
                 estimated_goal_x /= num_known_goal_posts
                 estimated_goal_y /= num_known_goal_posts
-                estimated_goal_angle = relative_angle(self.ball.x, self.ball.y, estimated_goal_x, estimated_goal_y) +\
+                estimated_goal_angle = ray_angle(self.ball.x, self.ball.y, estimated_goal_x, estimated_goal_y) +\
                     normal(scale=player.angle_sigma / 2)   # to avoid over-confidence
                 self.ball.kicked(self.ball_kick_velocity, estimated_goal_angle)
             elif player.team == 'West':
@@ -613,58 +569,3 @@ class Game:
         print("TYPICAL PLAYER'S BELIEFS:")
         pprint(self.beliefs)
         print('\n')
-
-
-def in_range(x, a, b):
-    return (x >= min(a, b)) & (x <= max(a, b))
-
-
-def confidence_ellipse_parameters(cov, nstd=2):
-    """
-    Plots an `nstd` sigma error ellipse based on the specified covariance
-    matrix (`cov`). Additional keyword arguments are passed on to the
-    ellipse patch artist.
-    Parameters
-    ----------
-        cov : The 2x2 covariance matrix to base the ellipse on
-        pos : The location of the center of the ellipse. Expects a 2-element
-            sequence of [x0, y0].
-        nstd : The radius of the ellipse in numbers of standard deviations.
-            Defaults to 2 standard deviations.
-        ax : The axis that the ellipse will be plotted on. Defaults to the
-            current axis.
-        Additional keyword arguments are pass on to the ellipse patch.
-    Returns
-    -------
-        A matplotlib ellipse artist
-    """
-    def eigsorted(cov):
-        vals, vecs = eigh(cov)
-        order = vals.argsort()[::-1]
-        return vals[order], vecs[:,order]
-
-    vals, vecs = eigsorted(cov)
-    angle = degrees(arctan2(*vecs[:,0][::-1]))
-
-    # Width and height are "full" widths, not radius
-    width, height = 2 * nstd * sqrt(vals)
-
-    return width, height, angle
-
-
-def UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients(num_times=1000):
-    num_distance_successes = 0
-    num_angle_successes = 0
-    for t in range(num_times):
-        vector = 1000 * random(4)
-        distance_gradients___analytic = array(euclidean_distance_gradients(*vector))
-        distance_gradients___approx = approx_gradients(lambda v: euclidean_distance(*v), vector)
-        num_distance_successes += allclose(distance_gradients___approx, distance_gradients___analytic)
-        angle_gradients___analytic = array(relative_angle_gradients(*vector))
-        angle_gradients___approx = approx_gradients(lambda v: relative_angle(*v), vector)
-        num_angle_successes += allclose(angle_gradients___approx, angle_gradients___analytic)
-    print(distance_gradients___analytic)
-    print(distance_gradients___approx)
-    print(angle_gradients___analytic)
-    print(angle_gradients___approx)
-    return 100 * num_angle_successes / num_times, 100 * num_angle_successes / num_times

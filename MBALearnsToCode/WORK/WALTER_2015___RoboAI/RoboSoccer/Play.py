@@ -13,7 +13,7 @@ inconsistency_threshold = 6.
 ball_kick_velocity = 8.
 ball_slow_down = .68
 
-team_names = ('Juventus', 'Barcelona')
+team_names = ('Chelsea', 'Arsenal')
 
 Game(num_players=num_players,
      velocity=velocity,

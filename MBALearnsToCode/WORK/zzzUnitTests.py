@@ -1,6 +1,11 @@
-from pprint import pprint
+from __future__ import print_function
+
 
 unit_tests = dict()
+
+
+from MBALearnsToCode.Functions.FUNCTIONS___Geometry2D import UNIT_TEST___Distances_and_Angles
+unit_tests['Geometry2D___Distances_and_Angles'] = UNIT_TEST___Distances_and_Angles()
 
 from MBALearnsToCode.WORK.KOLLER_2012___ProbGraphModels.Factors import\
     UNIT_TEST___KOLLER_2012___ProbGraphModels___Factors
@@ -46,9 +51,5 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q3.MidTerm_Q3 import\
     UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3
 unit_tests['WALTER_2015___RoboAI___MidTerm_Q3'] = UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3()
 
-from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.RoboSoccer import\
-    UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients
-unit_tests['WALTER_2015___RoboAI___RoboSoccer___FunctionGradients'] =\
-    UNIT_TEST___WALTER_2015___RoboAI___RoboSoccer___FunctionGradients()
 
-pprint(unit_tests)
+print(unit_tests)

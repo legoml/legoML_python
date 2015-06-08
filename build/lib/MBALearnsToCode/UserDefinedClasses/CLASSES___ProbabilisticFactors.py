@@ -4,7 +4,7 @@ import itertools
 from sympy import Symbol
 from sympy.integrals import integrate
 from frozen_dict import FrozenDict
-from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import combine_dict_and_kwargs, sympy_string_args
+from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import combine_dict_and_kwargs, sympy_string_args
 from MBALearnsToCode import DiscreteFiniteDomainFunction
 
 

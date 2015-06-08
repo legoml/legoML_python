@@ -8,7 +8,7 @@ from sympy.matrices import BlockMatrix, det
 from frozen_dict import FrozenDict
 from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_xreplace,\
     sympy_xreplace_doit_explicit, sympy_xreplace_doit_explicit_evalf
-from MBALearnsToCode.Functions.FUNCTIONS___zzzMISC import combine_dict_and_kwargs, merge_dicts, dicts_all_close,\
+from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import combine_dict_and_kwargs, merge_dicts, dicts_all_close,\
     shift_time_subscripts
 
 
