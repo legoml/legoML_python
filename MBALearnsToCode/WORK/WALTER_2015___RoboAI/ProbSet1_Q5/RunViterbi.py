@@ -1,13 +1,13 @@
 from __future__ import print_function
-import sys
 import pickle
+import sys
 from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5.DataSet import DataSet
 from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5.TrainHMM import train_hmm
 from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM
 
 
 def UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q5():
-    folder_path = '../MBALearnsToCode_Data/WALTER_2015___RoboAI/1.5 (HMM Random Walk)/'
+    folder_path = '../../MBALearnsToCode_Data/WALTER_2015___RoboAI/1.5 (HMM Random Walk)/'
     training_data_file_name = folder_path + 'randomwalk.train.txt'
     testing_data_file_name = folder_path + 'randomwalk.test.txt'
     training_data_sequences = DataSet(training_data_file_name).data_sequences

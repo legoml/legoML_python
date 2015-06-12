@@ -1,14 +1,14 @@
 from __future__ import print_function
 from copy import deepcopy
+from frozen_dict import FrozenDict
 import itertools
 from pprint import pprint
 from scipy.stats import uniform, multivariate_normal
 from sympy import exp, log, pi, sympify
 from sympy.matrices import BlockMatrix, det
-from frozen_dict import FrozenDict
 from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_xreplace,\
     sympy_xreplace_doit_explicit, sympy_xreplace_doit_explicit_evalf
-from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import combine_dict_and_kwargs, merge_dicts, dicts_all_close,\
+from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import combine_dict_and_kwargs, dicts_all_close, merge_dicts,\
     shift_time_subscripts
 
 

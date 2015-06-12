@@ -1,7 +1,8 @@
 from copy import deepcopy
-from numpy import zeros
-from sympy.matrices import MatrixSymbol
 from frozen_dict import FrozenDict
+from numpy import zeros
+from pprint import pprint
+from sympy.matrices import MatrixSymbol
 from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_allclose
 
 
@@ -10,6 +11,14 @@ def within_range(x, a, b, strict=True):
         return (x > min(a, b)) & (x < max(a, b))
     else:
         return (x >= min(a, b)) & (x <= max(a, b))
+
+
+def pprint_ordered_dict(ordered_dict):
+    pprint(dict(ordered_dict))
+
+
+def eval_from_data_frame(expression, data_frame):
+    return eval(expression, dict(data_frame))
 
 
 def combine_dict_and_kwargs(dict_object, kwargs):

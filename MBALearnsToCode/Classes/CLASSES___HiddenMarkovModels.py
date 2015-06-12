@@ -1,6 +1,6 @@
 from copy import deepcopy
 from frozen_dict import FrozenDict
-from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import one_mass_function, one_density_function
+from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import one_density_function, one_mass_function
 
 
 class HiddenMarkovModel:

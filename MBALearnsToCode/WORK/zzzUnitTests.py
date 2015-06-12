@@ -1,4 +1,4 @@
-from __future__ import print_function
+from pprint import pprint
 
 
 unit_tests = dict()
@@ -29,7 +29,7 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5.RunViterbi import\
 unit_tests['WALTER_2015___RoboAI___ProbSet1_Q5'] = UNIT_TEST___WALTER_2015___RoboAI___ProbSet1_Q5()
 
 from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet2_Q3.RunEKF import UNIT_TEST___WALTER_2015___RoboAI___ProbSet2_Q3
-folder_path = '../MBALearnsToCode_Data/WALTER_2015___RoboAI/2.3 (EKF)/'
+folder_path = '../../MBALearnsToCode_Data/WALTER_2015___RoboAI/2.3 (EKF)/'
 control_data_file_path = folder_path + 'U.txt'
 measurement_data_file_path = folder_path + 'Z.txt'
 ground_truth_file_path = folder_path + 'XYT.txt'
@@ -52,4 +52,4 @@ from MBALearnsToCode.WORK.WALTER_2015___RoboAI.MidTerm_Q3.MidTerm_Q3 import\
 unit_tests['WALTER_2015___RoboAI___MidTerm_Q3'] = UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q3()
 
 
-print(unit_tests)
+pprint(unit_tests)

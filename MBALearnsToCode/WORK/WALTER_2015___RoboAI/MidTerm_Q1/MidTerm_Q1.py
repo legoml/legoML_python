@@ -1,6 +1,6 @@
-from __future__ import print_function, division
-from sympy import log
+from __future__ import division, print_function
 from frozen_dict import FrozenDict as fdict
+from sympy import log
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import\
     discrete_finite_mass_function as pmf, discrete_finite_mass_functions_all_close as pmf_allclose
 from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM

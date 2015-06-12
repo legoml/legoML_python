@@ -1,9 +1,9 @@
 from __future__ import print_function
-from numpy import allclose, array, cos, diag, sin, pi, radians, loadtxt, eye, concatenate, size, sqrt, degrees, unwrap,\
-    atleast_2d, zeros
 import matplotlib.pyplot as plt
-from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
+from numpy import allclose, array, atleast_2d, concatenate, cos, degrees, diag, loadtxt, pi, radians, sin, size, sqrt,\
+    unwrap, zeros
 import sys
+from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
 
 
 class RunEKF:

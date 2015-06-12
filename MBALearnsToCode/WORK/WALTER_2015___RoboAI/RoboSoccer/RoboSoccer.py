@@ -1,16 +1,16 @@
 from __future__ import print_function, division
-from matplotlib import use
-use('TkAgg')
+#from matplotlib import use
+#use('TkAgg')
 
 from copy import deepcopy
-from pprint import pprint
 from numpy import abs, arctan2, array, atleast_2d, ceil, cos, eye, floor, hstack, inf, nan, pi, sin, vstack, zeros
 from numpy.random import normal, uniform
 from pandas import DataFrame
-from matplotlib.pyplot import figure, subplot, imshow
+from pprint import pprint
+from matplotlib.animation import FuncAnimation
 from matplotlib.gridspec import GridSpec
 from matplotlib.patches import Ellipse
-from matplotlib.animation import FuncAnimation
+from matplotlib.pyplot import figure, imshow, subplot
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
 from MBALearnsToCode.Functions.FUNCTIONS___Geometry2D import euclidean_distance, euclidean_distance_gradients,\
     ray_angle, ray_angle_gradients, angular_difference

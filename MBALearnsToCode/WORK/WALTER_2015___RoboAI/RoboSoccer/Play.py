@@ -2,7 +2,7 @@ from numpy import pi
 from MBALearnsToCode.WORK.WALTER_2015___RoboAI.RoboSoccer.RoboSoccer import Game
 
 
-num_players = 6
+num_players = 2
 velocity = 6.
 acceleration_sigma = 1.
 motion_sigma = .1

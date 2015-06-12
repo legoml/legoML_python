@@ -1,7 +1,7 @@
 from __future__ import print_function
+from frozen_dict import FrozenDict as fdict
 from pprint import pprint
 from sympy import log
-from frozen_dict import FrozenDict as fdict
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import discrete_finite_mass_function as pmf,\
     discrete_finite_mass_functions_all_close as pmf_allclose
 from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM

@@ -1,6 +1,6 @@
-import sys
-from sympy import log
 from frozen_dict import FrozenDict as fdict
+from sympy import log
+import sys
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import discrete_finite_mass_function as pmf
 from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5 import DataSet
 

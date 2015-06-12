@@ -1,6 +1,6 @@
 from copy import deepcopy
 import itertools
-from numpy import allclose, ones, ndarray
+from numpy import allclose, ndarray, ones
 from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import approx_gradients
 
 

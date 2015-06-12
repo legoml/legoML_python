@@ -1,6 +1,6 @@
 from copy import copy, deepcopy
 from numpy import allclose, array
-from sympy import Atom, Integer, Float
+from sympy import Atom, Float, Integer
 from frozen_dict import FrozenDict
 
 

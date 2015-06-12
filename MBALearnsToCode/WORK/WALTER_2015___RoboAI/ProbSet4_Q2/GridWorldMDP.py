@@ -1,9 +1,9 @@
 from __future__ import division
+import matplotlib.patches as patches
+from matplotlib.path import Path
+import matplotlib.pyplot as pyplot
 import numpy as np
 import Tkinter
-import matplotlib.pyplot as pyplot
-from matplotlib.path import Path
-import matplotlib.patches as patches
 
 
 class GridWorldMDP(object):

@@ -1,6 +1,6 @@
 from __future__ import print_function
-from sympy import log
 from frozen_dict import FrozenDict as fdict
+from sympy import log
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import\
     discrete_finite_mass_function as pmf, discrete_finite_mass_functions_all_close as pmf_allclose
 
