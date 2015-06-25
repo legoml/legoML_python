@@ -1,0 +1,11 @@
+#!sh
+[global]
+device = gpu
+force_device = False
+floatX = float32
+
+[cuda]
+root = /usr/local/cuda/bin
+
+[blas]
+ldflags = -L/Applications/anaconda/lib/
