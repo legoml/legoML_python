@@ -22,5 +22,7 @@ pip uninstall PyParsing
 pip install -Iv https://pypi.python.org/packages/source/p/pyparsing/pyparsing-1.5.7.tar.gz#md5=9be0fcdcc595199c646ab317c1d9a709
 pip install PyDot
 
+pip install PyCUDA
+
 pip install Theano
 pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git
