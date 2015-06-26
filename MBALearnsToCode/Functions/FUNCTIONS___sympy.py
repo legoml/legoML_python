@@ -1,7 +1,8 @@
 from copy import copy, deepcopy
+from frozen_dict import FrozenDict
 from numpy import allclose, array
 from sympy import Atom, Float, Integer
-from frozen_dict import FrozenDict
+from sympy.printing.theanocode import theano_function
 
 
 def is_non_atomic_sympy_expression(obj):

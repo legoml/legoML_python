@@ -1,4 +1,4 @@
-from frozen_dict import FrozenDict as fdict
+from frozendict import frozendict as fdict
 from sympy import log, Symbol
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import\
     discrete_finite_mass_function as pmf, discrete_finite_mass_functions_all_close as pmf_allclose

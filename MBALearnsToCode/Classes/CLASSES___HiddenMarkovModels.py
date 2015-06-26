@@ -1,5 +1,5 @@
 from copy import deepcopy
-from frozen_dict import FrozenDict
+from frozendict import frozendict as fdict
 from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import one_density_function, one_mass_function
 
 
@@ -61,7 +61,7 @@ class HiddenMarkovModel:
                 if self.observation_pdf_template.is_discrete_finite():
                     var_values___frozen_dicts = self.observation_pdf(t).parameters['mappings'].keys()
                     state_var_domain =\
-                        set(FrozenDict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
+                        set(fdict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
                             for var_values___frozen_dict in var_values___frozen_dicts)
                     return one_mass_function(state_var_symbol, state_var_domain, {(self.state_var, t): None})
                 else:
@@ -80,7 +80,7 @@ class HiddenMarkovModel:
             if self.observation_pdf_template.is_discrete_finite():
                 var_values___frozen_dicts = self.observation_pdf(t).parameters['mappings'].keys()
                 state_var_domain =\
-                    set(FrozenDict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
+                    set(fdict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
                         for var_values___frozen_dict in var_values___frozen_dicts)
                 b = {t: one_mass_function(state_var_symbol, state_var_domain, {(self.state_var, t): None})}
             else:

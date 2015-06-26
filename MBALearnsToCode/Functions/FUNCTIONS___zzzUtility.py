@@ -1,5 +1,5 @@
 from copy import deepcopy
-from frozen_dict import FrozenDict
+from frozendict import frozendict as fdict
 from numpy import zeros
 from sympy.matrices import MatrixSymbol
 from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_allclose
@@ -64,8 +64,8 @@ def approx_gradients(function, argument_array, epsilon=1e-6):
 
 
 def shift_time_subscripts(obj, t, *matrix_symbols_to_shift):
-    if isinstance(obj, FrozenDict):
-        return FrozenDict({shift_time_subscripts(key, t): shift_time_subscripts(value, t)
+    if isinstance(obj, fdict):
+        return fdict({shift_time_subscripts(key, t): shift_time_subscripts(value, t)
                            for key, value in obj.items()})
     elif isinstance(obj, tuple):
         if len(obj) == 2 and not(isinstance(obj[0], (int, float))) and isinstance(obj[1], int):
