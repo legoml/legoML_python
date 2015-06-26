@@ -15,14 +15,18 @@ pip install GraphViz
 pip install LSHash
 pip install NearPy
 pip install NetworkX
+pip install NeuroLab
 pip install Py-Expression-Eval
+pip install PyBrain   # *** note that this package is no longer actively developed & maintained ***
+#pip install PyLearn2
 pip install Redis
 
 pip uninstall PyParsing
 pip install -Iv https://pypi.python.org/packages/source/p/pyparsing/pyparsing-1.5.7.tar.gz#md5=9be0fcdcc595199c646ab317c1d9a709
 pip install PyDot
 
-pip install PyCUDA
+#pip install PyCUDA
 
+pip install SciKit-NeuralNetwork
 pip install Theano
 pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git

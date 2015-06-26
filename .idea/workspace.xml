@@ -2,11 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3a9c646-e4e4-4995-86e9-82b08b569ff7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTutorial___BabySteps_Algebra.py" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\Theano\test.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\Theano\zzzTest.py" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/zzz___test___FactorOperations.py" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode.egg-info\PKG-INFO" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode.egg-info\SOURCES.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode.egg-info\dependency_links.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode.egg-info\top_level.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\KOLLER_2012___ProbGraphModels\Test___Factors.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\README.md" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\CORE\Classes.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\CORE\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Functions\FUNCTIONS___cost_functions.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Functions\FUNCTIONS___probability.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Functions\FUNCTIONS___zzz_misc.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Functions\FUNCTIONS___zzz_spark.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Functions\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Pieces\PIECES___cost_functions.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Pieces\PIECES___io.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Pieces\PIECES___probability.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Pieces\PIECES___regularization_functions.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Pieces\PIECES___zzz_common_functions.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Programs\PROGRAMS___ffnn.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Programs\PROGRAMS___optimization.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Programs\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Projects\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\UserDefinedClasses\CLASSES___DiscreteFunctions.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\UserDefinedClasses\CLASSES___HiddenMarkovModels.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\UserDefinedClasses\CLASSES___ProbabilisticFactors.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\UserDefinedClasses\CLASSES___statements.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\UserDefinedClasses\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\probset1_q4.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q4\test.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\DataSet.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\RunViterbi.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\TrainHMM.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\ProbSet1_Q5\test.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\WALTER_2015___RoboAI\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\zzzTests.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\zzzTests_pieces.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\zzzDemos_Tests\zzzTests_programs.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\dist\MBALearnsToCode-1.3-py3.4.egg" afterPath="" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\LegoProjects\__init__.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzMisc/__init__.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\MidTerm_Q1\MidTerm_Q1.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/zzz___test___MidTerm_Q1.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\MidTerm_Q2\MidTerm_Q2.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/zzz___test___MidTerm_Q2.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\MidTerm_Q3\MidTerm_Q3.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q3/zzz___test___MidTerm_Q3.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\ProbSet1_Q1\ProbSet1_Q1.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/zzz___test___ProbSet1_Q1.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\ProbSet1_Q2\ProbSet1_Q2.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/zzz___test___ProbSet1_Q2.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\MBALearnsToCode\WORK\WALTER_2015___RoboAI\ProbSet1_Q4\ProbSet1_Q4.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/zzz___test___ProbSet1_Q4.py" />
+      <change type="MOVED" beforePath="C:\Cloud\Dropbox\MBALearnsToCode_Python\build\lib\MBALearnsToCode\Pieces\__init__.py" afterPath="$PROJECT_DIR$/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Geometry2D.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Geometry2D.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.bash_profile" afterPath="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.bash_profile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.theanorc" afterPath="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.theanorc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/Theano/Windows.theanorc" afterPath="$PROJECT_DIR$/MBALearnsToCode/Theano/Windows.theanorc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/install_packages.sh" afterPath="$PROJECT_DIR$/install_packages.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" afterPath="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
     </list>
     <ignored path="legoML_python.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,23 +84,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FUNCTIONS___DataFrames.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___DataFrames.py">
+      <file leaf-file-name="zzzUnitTests.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CLASSES___LocalitySensitiveHashing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___LocalitySensitiveHashing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -53,41 +98,7 @@
         <entry file="file://$PROJECT_DIR$/install_packages.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zzzTutorial___BabySteps_Algebra.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTutorial___BabySteps_Algebra.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#47#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zzzTutorial___MoreExamples.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTutorial___MoreExamples.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="12" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#47#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CLASSES___KalmanFilters.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.92183906">
-              <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -108,21 +119,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/zzzUnitTestGradients.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/ConfidenceEllipses.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet4_Q2/RunMDP.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___2dGeometry.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Visualizations.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___MathExpressions.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___HiddenMarkovModels.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___Lego.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilisticRobotics.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___ProbabilityDensityFunctions.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___SymPy.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Spark/SPARK___init.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/MidTerm_Q1.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/ProbSet1_Q1.py" />
@@ -130,7 +127,6 @@
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/ProbSet1_Q4.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/TrainHMM.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet4_Q2/GridWorldMDP.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/RoboSoccer.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/RoboSoccer/Play.py" />
@@ -142,8 +138,6 @@
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/search/searchAgents.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___zzzUtility.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Dicts.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Geometry2D.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___DataFrames.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Spark/SparkExamples.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/test.py" />
         <option value="$PROJECT_DIR$/README.md" />
@@ -151,14 +145,31 @@
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTest.py" />
         <option value="C:/Programs/Anaconda2/Lib/distutils/msvc9compiler.py" />
         <option value="C:/Programs/Anaconda2/Lib/site-packages/pydot.py" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Theano/Windows.theanorc" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.theanorc" />
-        <option value="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.bash_profile" />
-        <option value="$PROJECT_DIR$/install_packages.sh" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/test.py" />
         <option value="$PROJECT_DIR$/test" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTutorial___BabySteps_Algebra.py" />
         <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTutorial___MoreExamples.py" />
+        <option value="$PROJECT_DIR$/install_packages.sh" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/Theano/Windows.theanorc" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.theanorc" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.bash_profile" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___DataFrames.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/test.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/zzz___Test___Factors.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Geometry2D.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzMisc/zzz___Test___Geometry2D_Distances_and_Angles.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/zzz___test___FactorOperations.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzMisc/zzz___test___Geometry2D_Distances_and_Angles.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/zzz___test___ProbSet1_Q1.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/zzz___test___ProbSet1_Q2.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/zzz___test___ProbSet1_Q4.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/zzz___test___ProbSet2_Q3.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/zzz___test___MidTerm_Q1.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/zzz___test___MidTerm_Q2.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py" />
+        <option value="$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q3/zzz___test___MidTerm_Q3.py" />
       </list>
     </option>
   </component>
@@ -216,6 +227,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -284,7 +296,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Theano" />
+              <option name="myItemId" value="zzzMisc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -306,7 +318,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Spark" />
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -328,7 +340,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Lego" />
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProbSet2_Q3" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -350,7 +366,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LAFFERTY_2015___MLLSDA" />
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProbSet1_Q5" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,7 +392,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Kaggle" />
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProbSet1_Q4" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -394,11 +418,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Kaggle" />
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="AXATelematics" />
+              <option name="myItemId" value="ProbSet1_Q2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -416,13 +440,138 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Spark" />
+              <option name="myItemId" value="WORK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ProbSet1_Q1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WORK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MidTerm_Q3" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WORK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MidTerm_Q2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WORK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WALTER_2015___RoboAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MidTerm_Q1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WORK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="KOLLER_2012___ProbGraphModels" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode_Python" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MBALearnsToCode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Functions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -591,27 +740,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1612" height="876" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19440915" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32337993" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45369127" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3252688" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3261745" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4510067" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32348993" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884097" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24968314" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37768817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5530201" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32884097" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286334" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884097" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32751676" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -759,48 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/Factors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9310345">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/MidTerm_Q1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="47" selection-start-line="0" selection-start-column="47" selection-end-line="0" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/MidTerm_Q2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06896552">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q3/MidTerm_Q3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0020283975">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/ProbSet1_Q1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06896552">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/ProbSet1_Q2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82758623">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/DataSet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.03448276">
@@ -812,13 +919,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.06896552">
           <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31034482">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -878,45 +978,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75757575">
-          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/ProbSet1_Q4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___CostFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.13893376">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Dicts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13661203">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Geometry2D.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.1311476">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -934,16 +999,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Spark/SparkExamples.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -951,77 +1006,213 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___LocalitySensitiveHashing.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___CostFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-          <folding />
+        <state vertical-scroll-proportion="-0.8073879">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___DataFrames.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Theano/Windows.theanorc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28451884">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.bash_profile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07112971">
-          <caret line="3" column="139" selection-start-line="3" selection-start-column="139" selection-end-line="3" selection-end-column="139" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.theanorc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2608089">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.121372">
+          <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/install_packages.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTutorial___BabySteps_Algebra.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___LocalitySensitiveHashing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17941953">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Theano/Windows.theanorc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.119521916">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.theanorc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.119521916">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Theano/Mac.bash_profile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.059760958">
+          <caret line="3" column="102" selection-start-line="3" selection-start-column="102" selection-end-line="3" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___DataFrames.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71391076">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="44" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Functions/FUNCTIONS___Geometry2D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7838983">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzMisc/zzz___test___Geometry2D_Distances_and_Angles.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16596931">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/KOLLER_2012___ProbGraphModels/zzz___test___FactorOperations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16596931">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q1/zzz___test___ProbSet1_Q1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2881356">
+          <caret line="8" column="109" selection-start-line="8" selection-start-column="109" selection-end-line="8" selection-end-column="109" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q2/zzz___test___ProbSet1_Q2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.006355932">
+          <caret line="7" column="109" selection-start-line="7" selection-start-column="109" selection-end-line="7" selection-end-column="109" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q4/zzz___test___ProbSet1_Q4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7923729">
+          <caret line="130" column="49" selection-start-line="130" selection-start-column="49" selection-end-line="130" selection-end-column="49" />
+          <caret line="129" column="20" selection-start-line="129" selection-start-column="20" selection-end-line="129" selection-end-column="20" />
+          <caret line="128" column="49" selection-start-line="128" selection-start-column="49" selection-end-line="128" selection-end-column="49" />
+          <caret line="127" column="49" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
+          <caret line="126" column="49" selection-start-line="126" selection-start-column="49" selection-end-line="126" selection-end-column="49" />
+          <caret line="125" column="49" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
+          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/zzz___test___ProbSet2_Q3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54025424">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet1_Q5/RunViterbi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0805085">
+          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/ProbSet2_Q3/RunEKF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74788135">
+          <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q1/zzz___test___MidTerm_Q1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.90677965">
+          <caret line="179" column="23" selection-start-line="179" selection-start-column="23" selection-end-line="179" selection-end-column="23" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/Theano/zzzTutorial___MoreExamples.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q2/zzz___test___MidTerm_Q2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="12" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
+        <state vertical-scroll-proportion="1.338983">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding>
-            <element signature="e#0#47#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/Classes/CLASSES___KalmanFilters.py">
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/WALTER_2015___RoboAI/MidTerm_Q3/zzz___test___MidTerm_Q3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.92183906">
-          <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
+        <state vertical-scroll-proportion="2.0721312">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MBALearnsToCode/WORK/zzzUnitTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

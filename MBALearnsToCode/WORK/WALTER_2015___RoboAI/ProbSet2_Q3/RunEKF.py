@@ -1,6 +1,6 @@
 from __future__ import print_function
 import matplotlib.pyplot as plt
-from numpy import allclose, array, atleast_2d, concatenate, cos, degrees, diag, loadtxt, pi, radians, sin, size, sqrt,\
+from numpy import array, atleast_2d, concatenate, cos, degrees, diag, loadtxt, pi, radians, sin, size, sqrt,\
     unwrap, zeros
 import sys
 from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
@@ -101,18 +101,6 @@ class RunEKF:
         axarr[2].set_xlabel('Time')
         
         plt.show()
-
-
-def UNIT_TEST___WALTER_2015___RoboAI___ProbSet2_Q3(control_data_file_path, measurement_data_file_path,
-                                                   ground_truth_data_file_path, means_answer_file_path,
-                                                   standard_deviations_answer_file_path):
-    ekf = RunEKF()
-    ekf.readData(control_data_file_path, measurement_data_file_path, ground_truth_data_file_path)
-    ekf.run()
-    ekf.plot()
-    means___answer = loadtxt(means_answer_file_path, delimiter=',')
-    standard_deviations___answer = loadtxt(standard_deviations_answer_file_path, delimiter=',')
-    return allclose(ekf.MU, means___answer) & allclose(sqrt(ekf.VAR), standard_deviations___answer)
 
 
 if __name__ == '__main__':

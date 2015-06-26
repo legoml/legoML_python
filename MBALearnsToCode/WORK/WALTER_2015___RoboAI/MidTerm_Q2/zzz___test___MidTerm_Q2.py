@@ -5,7 +5,8 @@ from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import\
     discrete_finite_mass_function as pmf, discrete_finite_mass_functions_all_close as pmf_allclose
 
 
-def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
+def test___WALTER_2015___RoboAI___MidTerm_Q2():
+    """test: WALTER (2015) "Planning, Learning & Estimation in Robotics & A.I.": Mid-Term Exam, Question 2"""
 
     p_B = pmf(dict.fromkeys(('B',)),
               dict(mappings={fdict(B=0): -log(.7),
@@ -97,5 +98,5 @@ def UNIT_TEST___WALTER_2015___RoboAI___MidTerm_Q2():
     p_B_equal_1_on_D_equal_1___check = pmf_allclose(p_B_equal_1_on_D_equal_1, p_B_equal_1_on_D_equal_1___answer,
                                                     atol=1e-3)
 
-    return p_C_equal_1_on_A_equal_1___check & p_A___check & p_C_on_B_equal_1___check &\
+    assert p_C_equal_1_on_A_equal_1___check & p_A___check & p_C_on_B_equal_1___check &\
         p_D_equal_1_on_B_equal_1___check & p_C___check & p_D_equal_1___check & p_B_equal_1_on_D_equal_1___check

@@ -1,7 +1,4 @@
 from math import atan2, cos, sin
-from numpy import allclose, array
-from numpy.random import random
-from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import approx_gradients
 
 
 def euclidean_distance(x0, y0, x1=0., y1=0., squared=False):
@@ -58,21 +55,3 @@ def angular_difference(from_angle, to_angle):
     """
     a = to_angle - from_angle
     return atan2(sin(a), cos(a))
-
-
-def UNIT_TEST___Distances_and_Angles(num_times=1000):
-    num_distance_successes = 0
-    num_angle_successes = 0
-    for t in range(num_times):
-        vector = 1000 * random(4)
-        distance_gradients___analytic = array(euclidean_distance_gradients(*vector))
-        distance_gradients___approx = approx_gradients(lambda v: euclidean_distance(*v), vector)
-        num_distance_successes += allclose(distance_gradients___approx, distance_gradients___analytic)
-        angle_gradients___analytic = array(ray_angle_gradients(*vector))
-        angle_gradients___approx = approx_gradients(lambda v: ray_angle(*v), vector)
-        num_angle_successes += allclose(angle_gradients___approx, angle_gradients___analytic)
-    print(distance_gradients___analytic)
-    print(distance_gradients___approx)
-    print(angle_gradients___analytic)
-    print(angle_gradients___approx)
-    return 100 * num_angle_successes / num_times, 100 * num_angle_successes / num_times

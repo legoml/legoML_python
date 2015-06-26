@@ -3,6 +3,7 @@
 device = gpu
 force_device = False
 floatX = float32
+reoptimize_unpickled_function = False
 
 [cuda]
 root = /usr/local/cuda/bin
