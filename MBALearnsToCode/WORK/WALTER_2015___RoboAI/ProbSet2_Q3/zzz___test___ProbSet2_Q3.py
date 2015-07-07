@@ -19,6 +19,6 @@ def test___WALTER_2015___RoboAI___ProbSet2_Q3(
         ekf.run()
         means___answer = loadtxt(means_answer_file_path, delimiter=',')
         standard_deviations___answer = loadtxt(standard_deviations_answer_file_path, delimiter=',')
-        assert allclose(ekf.MU, means___answer) & allclose(sqrt(ekf.VAR), standard_deviations___answer)
+        assert allclose(ekf.MU, means___answer) and allclose(sqrt(ekf.VAR), standard_deviations___answer)
     else:
         assert True

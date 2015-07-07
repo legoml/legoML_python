@@ -1,0 +1,13 @@
+#!sh
+[global]
+device = gpu
+force_device = False
+floatX = float32
+reoptimize_unpickled_function = False
+
+[nvcc]
+flags=-LC:/Programs/Anaconda/libs   # change the part after -L to <Your Anaconda Installation Folder>/libs
+compiler_bindir=C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin   # change to <Your Visual Studio Installation Folder>/VC/bin
+
+[blas]
+ldflags =

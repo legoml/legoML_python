@@ -1,6 +1,6 @@
 from copy import deepcopy
-from frozendict import frozendict as fdict
-from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import one_density_function, one_mass_function
+from frozendict import frozendict
+from ProbabPy import one_density_function, one_mass_function
 
 
 class HiddenMarkovModel:
@@ -29,7 +29,7 @@ class HiddenMarkovModel:
             else:
                 f = (self.forward_pdf(t - 1, observations___dict) *
                      self.transition_pdf(t))\
-                    .marginalize((self.state_var, t - 1))\
+                    .marg((self.state_var, t - 1))\
                     * self.observation_pdf(t)
                 if t in observations___dict:
                     f = f.at({(self.observation_var, t): observations___dict[t]})
@@ -44,7 +44,7 @@ class HiddenMarkovModel:
                 d[t] = f[t]
             for t in range(1, max(t___list) + 1):
                 f += [(f[t - 1] * self.transition_pdf(t))
-                      .marginalize((self.state_var, t - 1))
+                      .marg((self.state_var, t - 1))
                       * self.observation_pdf(t)]
                 if t in observations___dict:
                     f[t] = f[t].at({(self.observation_var, t): observations___dict[t]})
@@ -57,11 +57,11 @@ class HiddenMarkovModel:
         if isinstance(t___list, int):
             t = t___list
             if t == T:
-                state_var_symbol = {(self.state_var, t): self.observation_pdf(t).vars[(self.state_var, t)]}
+                state_var_symbol = {(self.state_var, t): self.observation_pdf(t).Vars[(self.state_var, t)]}
                 if self.observation_pdf_template.is_discrete_finite():
-                    var_values___frozen_dicts = self.observation_pdf(t).parameters['mappings'].keys()
+                    var_values___frozen_dicts = self.observation_pdf(t).Params['NegLogProb'].keys()
                     state_var_domain =\
-                        set(fdict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
+                        set(frozendict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
                             for var_values___frozen_dict in var_values___frozen_dicts)
                     return one_mass_function(state_var_symbol, state_var_domain, {(self.state_var, t): None})
                 else:
@@ -71,16 +71,16 @@ class HiddenMarkovModel:
                 if (t + 1) in observations___dict:
                     b = b.at({(self.observation_var, t + 1): observations___dict[t + 1]})
                 b = (b * self.backward_factor(t + 1, observations___dict))\
-                    .marginalize((self.state_var, t + 1))
+                    .marg((self.state_var, t + 1))
                 return b
         elif isinstance(t___list, (list, range, tuple)):
             d = {}
             t = T
-            state_var_symbol = {(self.state_var, t): self.observation_pdf(t).vars[(self.state_var, t)]}
+            state_var_symbol = {(self.state_var, t): self.observation_pdf(t).Vars[(self.state_var, t)]}
             if self.observation_pdf_template.is_discrete_finite():
-                var_values___frozen_dicts = self.observation_pdf(t).parameters['mappings'].keys()
+                var_values___frozen_dicts = self.observation_pdf(t).Params['NegLogProb'].keys()
                 state_var_domain =\
-                    set(fdict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
+                    set(frozendict({(self.state_var, t): var_values___frozen_dict[(self.state_var, t)]})
                         for var_values___frozen_dict in var_values___frozen_dicts)
                 b = {t: one_mass_function(state_var_symbol, state_var_domain, {(self.state_var, t): None})}
             else:
@@ -92,7 +92,7 @@ class HiddenMarkovModel:
                 if (t + 1) in observations___dict:
                     b[t] = b[t].at({(self.observation_var, t + 1): observations___dict[t + 1]})
                 b[t] = (b[t] * b[t + 1])\
-                    .marginalize((self.state_var, t + 1))
+                    .marg((self.state_var, t + 1))
                 if t in t___list:
                     d[t] = b[t]
             return d
@@ -105,16 +105,16 @@ class HiddenMarkovModel:
             t = t___list
             return (self.forward_pdf(t, observations___dict) *
                     self.backward_factor(t, observations___dict))\
-                .condition(conditions___dict)\
-                .normalize()
+                .cond(conditions___dict)\
+                .norm()
         elif isinstance(t___list, (list, range, tuple)):
             d = {}
             forward = self.forward_pdf(t___list, observations___dict)
             backward = self.backward_factor(t___list, observations___dict)
             for t in t___list:
                 d[t] = (forward[t] * backward[t])\
-                    .condition(conditions___dict)\
-                    .normalize()
+                    .cond(conditions___dict)\
+                    .norm()
             return d
 
     def max_a_posteriori_joint_distributions(self, observations___list, leave_last_state_unoptimized=False):
@@ -135,7 +135,7 @@ class HiddenMarkovModel:
     def max_a_posteriori_state_sequence(self, observations___list):
         m = self.max_a_posteriori_joint_distributions(observations___list)
         if m.is_discrete_finite():
-            d = set(m.parameters['mappings']).pop()
+            d = set(m.Params['NegLogProb']).pop()
         else:
             d = m.scope
         return [d[(self.state_var, t)] for t in range(len(observations___list))]

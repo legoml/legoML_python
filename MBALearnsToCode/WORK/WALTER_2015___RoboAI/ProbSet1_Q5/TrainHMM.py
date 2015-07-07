@@ -2,8 +2,8 @@ from frozendict import frozendict as fdict
 #from frozen_dict import FrozenDict as fdict
 from sympy import log
 import sys
-from MBALearnsToCode.Classes.CLASSES___ProbabilityDensityFunctions import discrete_finite_mass_function as pmf
-from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5 import DataSet
+from ProbabPy import DiscreteFinitePMF as PMF
+from MBALearnsToCode.WORK.WALTER_2015___RoboAI.ProbSet1_Q5.DataSet import DataSet
 
 
 def train_hmm(training_data_sequences):
@@ -40,14 +40,14 @@ def train_hmm(training_data_sequences):
     transition_minus_log_counts = {k: -log(v) for k, v in transition_counts.items()}
     observation_minus_log_counts = {k: -log(v) for k, v in observation_counts.items()}
 
-    state_prior = pmf(dict.fromkeys((('xy', 0), ('ob', 0))),
-                      dict(mappings=state_prior_minus_log_counts)).normalize()
-    transition_template = pmf(dict.fromkeys((('xy', -1), ('xy', 0))),
-                              dict(mappings=transition_minus_log_counts),
-                              conditions={('xy', -1): None}).normalize()
-    observation_template = pmf(dict.fromkeys((('xy', 0), ('ob', 0))),
-                               dict(mappings=observation_minus_log_counts),
-                               conditions={('xy', 0): None}).normalize()
+    state_prior = PMF(dict.fromkeys((('xy', 0), ('ob', 0))),
+                      state_prior_minus_log_counts).norm()
+    transition_template = PMF(dict.fromkeys((('xy', -1), ('xy', 0))),
+                              transition_minus_log_counts,
+                              conditions={('xy', -1): None}).norm()
+    observation_template = PMF(dict.fromkeys((('xy', 0), ('ob', 0))),
+                               observation_minus_log_counts,
+                               conditions={('xy', 0): None}).norm()
 
     return state_prior, transition_template, observation_template
 

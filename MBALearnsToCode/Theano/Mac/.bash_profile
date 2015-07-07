@@ -1,3 +1,5 @@
+# add the following to your .bash_profile, changing the paths as necessary
+
 export PATH="/usr/local/cuda/bin:$PATH"
 export CUDA_ROOT="/usr/local/cuda/bin"
 export LD_LIBRARY_PATH="/usr/local/cuda/lib"

@@ -1,8 +1,7 @@
+from Helpy.Geometry2D import euclidean_distance, euclidean_distance_gradients, ray_angle, ray_angle_gradients
+from Helpy.zzz import approx_gradients
 from numpy import allclose, array
 from numpy.random import random
-from MBALearnsToCode.Functions.FUNCTIONS___Geometry2D import euclidean_distance, euclidean_distance_gradients,\
-    ray_angle, ray_angle_gradients
-from MBALearnsToCode.Functions.FUNCTIONS___zzzUtility import approx_gradients
 
 
 def test___Geometry2D_Distances_and_Angles(num_times=1000):

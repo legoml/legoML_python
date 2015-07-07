@@ -1,6 +1,6 @@
 from __future__ import print_function
+from Kalman import ExtendedKalmanFilter as EKF
 from numpy import allclose, array
-from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
 
 
 def test___WALTER_2015___RoboAI___MidTerm_Q3():

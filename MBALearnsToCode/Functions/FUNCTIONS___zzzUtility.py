@@ -5,20 +5,6 @@ from sympy.matrices import MatrixSymbol
 from MBALearnsToCode.Functions.FUNCTIONS___SymPy import is_non_atomic_sympy_expression, sympy_allclose
 
 
-def within_range(x, a, b, strict=True):
-    if strict:
-        return (x > min(a, b)) & (x < max(a, b))
-    else:
-        return (x >= min(a, b)) & (x <= max(a, b))
-
-
-def combine_dict_and_kwargs(dict_object, kwargs):
-    d = kwargs
-    if dict_object:
-        d.update(dict_object)
-    return d
-
-
 def rename_dict_keys(dict_object, to_new_keys_from_old_keys___dict):
     d = deepcopy(dict_object)   # just to be careful #
     for new_key, old_key in to_new_keys_from_old_keys___dict.items():

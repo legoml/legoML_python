@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from numpy import array, atleast_2d, concatenate, cos, degrees, diag, loadtxt, pi, radians, sin, size, sqrt,\
     unwrap, zeros
 import sys
-from MBALearnsToCode.Classes.CLASSES___KalmanFilters import ExtendedKalmanFilter as EKF
+from Kalman import ExtendedKalmanFilter as EKF
 
 
 class RunEKF:
