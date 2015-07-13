@@ -36,6 +36,6 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q2(alpha=.6):   # Symbol('alpha')
     p_S1_on_S0_equal_1_and_S4_equal_0___answer = PMF(dict.fromkeys(('S0', 'S1', 'S4')),
                                                      {fdict(S1=0): lambda_0(alpha),
                                                       fdict(S1=1): lambda_1(alpha)},
-                                                     conditions=dict(S0=1, S4=0)).norm()
+                                                     cond=dict(S0=1, S4=0)).norm()
 
     assert p_S1_on_S0_equal_1_and_S4_equal_0.allclose(p_S1_on_S0_equal_1_and_S4_equal_0___answer)

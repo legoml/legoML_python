@@ -2,7 +2,7 @@ from __future__ import print_function
 from frozendict import frozendict as fdict
 from pprint import pprint
 from ProbabPy import DiscreteFinitePMF as PMF
-from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM
+from ProbabPyReason.HiddenMarkovModel import HiddenMarkovModel as HMM
 
 
 def test___WALTER_2015___RoboAI___ProbSet1_Q4():
@@ -19,13 +19,13 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q4():
                                      fdict({('X', -1): 0, ('X', 0): 1}): .4,
                                      fdict({('X', -1): 1, ('X', 0): 0}): .3,
                                      fdict({('X', -1): 1, ('X', 0): 1}): .7},
-                                    conditions={('X', -1): None})
+                                    cond={('X', -1): None})
     observation_template = PMF(dict.fromkeys((('X', 0), ('Z', 0))),
                                {fdict({('X', 0): 0, ('Z', 0): 0}): .8,
                                 fdict({('X', 0): 0, ('Z', 0): 1}): .2,
                                 fdict({('X', 0): 1, ('Z', 0): 0}): .2,
                                 fdict({('X', 0): 1, ('Z', 0): 1}): .8},
-                               conditions={('X', 0): None})
+                               cond={('X', 0): None})
     hmm = HMM('X', 'Z', state_prior, state_transition_template, observation_template)
 
     # Set up Probability Factors / Joint Probability Distributions
@@ -89,27 +89,27 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q4():
     beta_3 = PMF(dict.fromkeys((('X', 3),)),
                  {fdict({('X', 3): 0}): 1.,
                   fdict({('X', 3): 1}): 1.},
-                 conditions={('X', 3): None})
+                 cond={('X', 3): None})
     backward_3___check = backward[3].allclose(beta_3)
 
     beta_2 = PMF(dict.fromkeys((('X', 2), ('Z', 3))),
                  {fdict({('X', 2): 0, ('Z', 3): 0}): .56,
                   fdict({('X', 2): 1, ('Z', 3): 0}): .38},
-                 conditions={('X', 2): None},
+                 cond={('X', 2): None},
                  scope={('Z', 3): 0})
     backward_2___check = backward[2].allclose(beta_2)
 
     beta_1 = PMF(dict.fromkeys((('X', 1), ('Z', 2), ('Z', 3))),
                  {fdict({('X', 1): 0, ('Z', 2): 1, ('Z', 3): 0}): .1888,
                   fdict({('X', 1): 1, ('Z', 2): 1, ('Z', 3): 0}): .2464},
-                 conditions={('X', 1): None},
+                 cond={('X', 1): None},
                  scope={('Z', 2): 1, ('Z', 3): 0})
     backward_1___check = backward[1].allclose(beta_1)
 
     beta_0 = PMF(dict.fromkeys((('X', 0), ('Z', 1), ('Z', 2), ('Z', 3))),
                  {fdict({('X', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}): .1103,
                   fdict({('X', 0): 1, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}): .0798},
-                 conditions={('X', 0): None},
+                 cond={('X', 0): None},
                  scope={('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0})
     backward_0___check = backward[0].allclose(beta_0, atol=1e-3)
 
@@ -122,28 +122,28 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q4():
     infer_0 = PMF(dict.fromkeys((('X', 0), ('Z', 0), ('Z', 1), ('Z', 2), ('Z', 3))),
                   {fdict({('X', 0): 0}): .4 * .1103,
                    fdict({('X', 0): 1}): .1 * .0798},
-                  conditions={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
+                  cond={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
     infer_0.pprint()
     infer_0___check = infer_state[0].allclose(infer_0, atol=1e-3)
 
     infer_1 = PMF(dict.fromkeys((('X', 1), ('Z', 0), ('Z', 1), ('Z', 2), ('Z', 3))),
                   {fdict({('X', 1): 0}): .216 * .1888,
                    fdict({('X', 1): 1}): .046 * .2464},
-                  conditions={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
+                  cond={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
     infer_1.pprint()
     infer_1___check = infer_state[1].allclose(infer_1)
 
     infer_2 = PMF(dict.fromkeys((('X', 2), ('Z', 0), ('Z', 1), ('Z', 2), ('Z', 3))),
                   {fdict({('X', 2): 0}): .0287 * .56,
                    fdict({('X', 2): 1}): .0949 * .38},
-                  conditions={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
+                  cond={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
     infer_2.pprint()
     infer_2___check = infer_state[2].allclose(infer_2, atol=1e-3)
 
     infer_3 = PMF(dict.fromkeys((('X', 3), ('Z', 0), ('Z', 1), ('Z', 2), ('Z', 3))),
                   {fdict({('X', 3): 0}): .0365,
                    fdict({('X', 3): 1}): .0156},
-                  conditions={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
+                  cond={('Z', 0): 0, ('Z', 1): 0, ('Z', 2): 1, ('Z', 3): 0}).norm()
     infer_3.pprint()
     infer_3___check = infer_state[3].allclose(infer_3, atol=1e-2)
 

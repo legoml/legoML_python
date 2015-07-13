@@ -17,7 +17,7 @@ def test___KOLLER_2012___FactorOperations():
                fdict(b=1, c=2): .7,
                fdict(b=2, c=1): .1,
                fdict(b=2, c=2): .2})
-    f *= f_1
+    f = f * f_1
     f.pprint()
     f___answer = PMF(dict.fromkeys(('a', 'b', 'c')),
                      {fdict(a=1, b=1, c=1): .25,

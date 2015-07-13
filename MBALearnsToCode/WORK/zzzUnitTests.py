@@ -3,6 +3,19 @@ from timeit import timeit
 from sympy import symbols, sympify, det, log
 from sympy.matrices import BlockMatrix, MatrixSymbol
 from sympy.printing.theanocode import theano_function
+from numpy import array
+
+
+from sympy.matrices import MatrixSymbol, BlockMatrix, Matrix
+
+x = MatrixSymbol('x', 2, 2)
+b = BlockMatrix([[x, x]])
+
+from numpy import array
+a = array([[1, 2],
+           [3, 4]])
+
+m = BlockMatrix([i for i in range(5)])
 
 o = log(2) + log(3)
 f = theano_function([], o)
@@ -55,4 +68,21 @@ U = MatrixSymbol('U', 3, 3)
 h = theano_function([U], [det(U)])
 timeit(h([[1, 1, 1], [1, 1, 1], [1, 1, 1]]))
 
-z = sympify(1.) + sympify(1.)
+
+g_a = g.at(dict(w=Matrix(w_value)))
+g_a.pprint()
+
+g_max = g.max()
+g_max.pprint()
+
+g_a_max = g_a.max()
+g_a_max.pprint()
+
+g_m_wz = g.marginalize(('w', 'z'))
+g_m_wz.pprint()
+
+g_c = g.condition(dict(w=Matrix(w_value)))
+g_c.pprint()
+
+g_one = g_m = g.marginalize(('x', 'y', 'z', 'w'))
+g_one.pprint()

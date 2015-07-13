@@ -15,7 +15,7 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q1():
                      fdict(C='n', T1=1): .5,
                      fdict(C='l', T1=0): .8,
                      fdict(C='l', T1=1): .2},
-                    conditions=dict(C=None))
+                    cond=dict(C=None))
     p_T2_on_C = PMF(dict.fromkeys(('C', 'T2')),
                     {fdict(C='a', T2=0): .2,
                      fdict(C='a', T2=1): .8,
@@ -23,7 +23,7 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q1():
                      fdict(C='n', T2=1): .4,
                      fdict(C='l', T2=0): .9,
                      fdict(C='l', T2=1): .1},
-                    conditions=dict(C=None))
+                    cond=dict(C=None))
     p_D_on_T1_T2 = PMF(dict.fromkeys(('T1', 'T2', 'D')),
                        {fdict(T1=0, T2=0, D=0): 1.,
                         fdict(T1=0, T2=0, D=1): .0,
@@ -33,7 +33,7 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q1():
                         fdict(T1=1, T2=0, D=1): 1.,
                         fdict(T1=1, T2=1, D=0): .0,
                         fdict(T1=1, T2=1, D=1): 1.},
-                       conditions=dict(T1=None, T2=None))
+                       cond=dict(T1=None, T2=None))
 
     p_T1 = (p_C * p_T1_on_C).marg('C')
     p_T1.pprint()
@@ -68,7 +68,7 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q1():
                                          fdict(T1=0, T2=1): .2,
                                          fdict(T1=1, T2=0): .3,
                                          fdict(T1=1, T2=1): .2},
-                                        conditions=dict(C='n'))
+                                        cond=dict(C='n'))
     p_T1_T2_on_C_equal_n___check = p_T1_T2_on_C_equal_n.allclose(p_T1_T2_on_C_equal_n___answer)
 
     p_T1_on_C_equal_n = p_T1_on_C.at(C='n')
@@ -87,7 +87,7 @@ def test___WALTER_2015___RoboAI___ProbSet1_Q1():
                                                        fdict(T1=0, T2=1): .0,
                                                        fdict(T1=1, T2=0): .6,
                                                        fdict(T1=1, T2=1): .4},
-                                                      conditions=dict(C='n', D=1))
+                                                      cond=dict(C='n', D=1))
     p_T1_T2_on_C_equal_n_and_D_equal_1___answer.pprint()
     p_T1_T2_on_C_equal_n_and_D_equal_1___check =\
         p_T1_T2_on_C_equal_n_and_D_equal_1.allclose(p_T1_T2_on_C_equal_n_and_D_equal_1___alternative,

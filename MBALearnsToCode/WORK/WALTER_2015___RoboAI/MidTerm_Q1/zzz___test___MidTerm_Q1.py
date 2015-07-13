@@ -1,7 +1,7 @@
 from __future__ import division, print_function
 from frozendict import frozendict as fdict
 from ProbabPy import DiscreteFinitePMF as PMF
-from MBALearnsToCode.Classes.CLASSES___HiddenMarkovModels import HiddenMarkovModel as HMM
+from ProbabPyReason.HiddenMarkovModel import HiddenMarkovModel as HMM
 
 
 def test___WALTER_2015___RoboAI___MidTerm_Q1():
@@ -24,7 +24,7 @@ def test___WALTER_2015___RoboAI___MidTerm_Q1():
                                      fdict({('S', -1): 3, ('S', 0): 1}): .4,
                                      fdict({('S', -1): 3, ('S', 0): 2}): .2,
                                      fdict({('S', -1): 3, ('S', 0): 3}): .4},
-                                    conditions={('S', -1): None})
+                                    cond={('S', -1): None})
     observation_template = PMF(dict.fromkeys((('S', 0), ('Z', 0))),
                                {fdict({('S', 0): 1, ('Z', 0): 1}): .6,
                                 fdict({('S', 0): 1, ('Z', 0): 2}): .1,
@@ -35,7 +35,7 @@ def test___WALTER_2015___RoboAI___MidTerm_Q1():
                                 fdict({('S', 0): 3, ('Z', 0): 1}): .2,
                                 fdict({('S', 0): 3, ('Z', 0): 2}): .3,
                                 fdict({('S', 0): 3, ('Z', 0): 3}): .5},
-                               conditions={('S', 0): None})
+                               cond={('S', 0): None})
     hmm = HMM('S', 'Z', state_prior, state_transition_template, observation_template)
 
     # Set up Probability Factors / Joint Probability Distributions
@@ -96,14 +96,14 @@ def test___WALTER_2015___RoboAI___MidTerm_Q1():
                  {fdict({('S', 2): 1}): 1.,
                   fdict({('S', 2): 2}): 1.,
                   fdict({('S', 2): 3}): 1.},
-                 conditions={('S', 2): None})
+                 cond={('S', 2): None})
     backward_2___check = backward[2].allclose(beta_2)
 
     beta_1 = PMF(dict.fromkeys((('S', 1), ('Z', 2))),
                  {fdict({('S', 1): 1, ('Z', 2): 1}): .25,
                   fdict({('S', 1): 2, ('Z', 2): 1}): .21,
                   fdict({('S', 1): 3, ('Z', 2): 1}): .34},
-                 conditions={('S', 1): None},
+                 cond={('S', 1): None},
                  scope={('Z', 2): 1})
     backward_1___check = backward[1].allclose(beta_1)
 
@@ -111,7 +111,7 @@ def test___WALTER_2015___RoboAI___MidTerm_Q1():
                  {fdict({('S', 0): 1, ('Z', 1): 3, ('Z', 2): 1}): .1126,
                   fdict({('S', 0): 2, ('Z', 1): 3, ('Z', 2): 1}): .0614,
                   fdict({('S', 0): 3, ('Z', 1): 3, ('Z', 2): 1}): .1064},
-                 conditions={('S', 0): None},
+                 cond={('S', 0): None},
                  scope={('Z', 1): 3, ('Z', 2): 1})
     backward_0___check = backward[0].allclose(beta_0)
 
@@ -125,7 +125,7 @@ def test___WALTER_2015___RoboAI___MidTerm_Q1():
                   {fdict({('S', 0): 1}): .0038,
                    fdict({('S', 0): 2}): .0143,
                    fdict({('S', 0): 3}): .0106},
-                  conditions={('Z', 0): 2, ('Z', 1): 3, ('Z', 2): 1}).norm()
+                  cond={('Z', 0): 2, ('Z', 1): 3, ('Z', 2): 1}).norm()
     infer_0.pprint()
     infer_0___check = infer_state[0].allclose(infer_0, atol=1e-1)
 
@@ -133,7 +133,7 @@ def test___WALTER_2015___RoboAI___MidTerm_Q1():
                   {fdict({('S', 1): 1}): .007,
                    fdict({('S', 1): 2}): .0081,
                    fdict({('S', 1): 3}): .0136},
-                  conditions={('Z', 0): 2, ('Z', 1): 3, ('Z', 2): 1}).norm()
+                  cond={('Z', 0): 2, ('Z', 1): 3, ('Z', 2): 1}).norm()
     infer_1.pprint()
     infer_1___check = infer_state[1].allclose(infer_1, atol=1e-2)
 
@@ -141,7 +141,7 @@ def test___WALTER_2015___RoboAI___MidTerm_Q1():
                   {fdict({('S', 2): 1}): .0176,
                    fdict({('S', 2): 2}): .0043,
                    fdict({('S', 2): 3}): .0068},
-                  conditions={('Z', 0): 2, ('Z', 1): 3, ('Z', 2): 1}).norm()
+                  cond={('Z', 0): 2, ('Z', 1): 3, ('Z', 2): 1}).norm()
     infer_2.pprint()
     infer_2___check = infer_state[2].allclose(infer_2, atol=1e-1)
 

@@ -1,5 +1,5 @@
-from Helpy.Geometry2D import euclidean_distance, euclidean_distance_gradients, ray_angle, ray_angle_gradients
-from Helpy.zzz import approx_gradients
+from HelpyFuncs.Geometry2D import euclidean_distance, euclidean_distance_gradients, ray_angle, ray_angle_gradients
+from HelpyFuncs.zzz import approx_gradients
 from numpy import allclose, array
 from numpy.random import random
 

@@ -16,7 +16,7 @@ def test___WALTER_2015___RoboAI___MidTerm_Q2():
                     fdict(E=0, A=1): .1,
                     fdict(E=1, A=0): .1,
                     fdict(E=1, A=1): .9},
-                   conditions=dict(E=None))
+                   cond=dict(E=None))
     p_C_on_A_B = PMF(dict.fromkeys(('A', 'B', 'C')),
                      {fdict(A=0, B=0, C=0): .9,
                       fdict(A=0, B=0, C=1): .1,
@@ -26,19 +26,19 @@ def test___WALTER_2015___RoboAI___MidTerm_Q2():
                       fdict(A=1, B=0, C=1): .7,
                       fdict(A=1, B=1, C=0): .1,
                       fdict(A=1, B=1, C=1): .9},
-                     conditions=dict(A=None, B=None))
+                     cond=dict(A=None, B=None))
     p_D_on_C = PMF(dict.fromkeys(('C', 'D')),
                    {fdict(C=0, D=0): .6,
                     fdict(C=0, D=1): .4,
                     fdict(C=1, D=0): .4,
                     fdict(C=1, D=1): .6},
-                   conditions=dict(C=None))
+                   cond=dict(C=None))
 
     p_C_equal_1_on_A_equal_1 = (p_B * p_C_on_A_B.at(A=1, C=1)).marg('B')
     p_C_equal_1_on_A_equal_1.pprint()
     p_C_equal_1_on_A_equal_1___answer = PMF(dict.fromkeys(('A', 'C')),
                                             {fdict(C=1): .76},
-                                            conditions=dict(A=1),
+                                            cond=dict(A=1),
                                             scope=dict(C=1))
     p_C_equal_1_on_A_equal_1___check = p_C_equal_1_on_A_equal_1.allclose(p_C_equal_1_on_A_equal_1___answer)
 
@@ -54,14 +54,14 @@ def test___WALTER_2015___RoboAI___MidTerm_Q2():
     p_C_on_B_equal_1___answer = PMF(dict.fromkeys(('B', 'C')),
                                     {fdict(C=0): .15,
                                      fdict(C=1): .85},
-                                    conditions=dict(B=1))
+                                    cond=dict(B=1))
     p_C_on_B_equal_1___check = p_C_on_B_equal_1.allclose(p_C_on_B_equal_1___answer)
 
     p_D_equal_1_on_B_equal_1 = (p_C_on_B_equal_1 * p_D_on_C.at(D=1)).marg('C')
     p_D_equal_1_on_B_equal_1.pprint()
     p_D_equal_1_on_B_equal_1___answer = PMF(dict.fromkeys(('B', 'D')),
                                             {fdict(D=1): .57},
-                                            conditions=dict(B=1),
+                                            cond=dict(B=1),
                                             scope=dict(D=1))
     p_D_equal_1_on_B_equal_1___check = p_D_equal_1_on_B_equal_1.allclose(p_D_equal_1_on_B_equal_1___answer)
 
@@ -88,9 +88,13 @@ def test___WALTER_2015___RoboAI___MidTerm_Q2():
     p_B_equal_1_on_D_equal_1.pprint()
     p_B_equal_1_on_D_equal_1___answer = PMF(dict.fromkeys(('B', 'D')),
                                             {fdict(B=1): .337},
-                                            conditions=dict(D=1),
+                                            cond=dict(D=1),
                                             scope=dict(B=1))
     p_B_equal_1_on_D_equal_1___check = p_B_equal_1_on_D_equal_1.allclose(p_B_equal_1_on_D_equal_1___answer, atol=1e-3)
 
     assert p_C_equal_1_on_A_equal_1___check & p_A___check & p_C_on_B_equal_1___check &\
         p_D_equal_1_on_B_equal_1___check & p_C___check & p_D_equal_1___check & p_B_equal_1_on_D_equal_1___check
+
+
+if __name__ == '__main__':
+    test___WALTER_2015___RoboAI___MidTerm_Q2()
