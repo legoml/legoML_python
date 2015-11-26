@@ -18,17 +18,23 @@ pip install --upgrad ANNOY
 pip install --upgrade AppNope
 pip install --upgrade ArgParse
 pip install --upgrade AutoGrad
+<<<<<<< HEAD
 pip install --upgrade AutoSlugnstp
 pip install --upgrade AWSCLI
 pip install --upgrade AWSEBCLI
 conda install Basemap
 conda update basemap
+=======
+pip install --upgrade AutoSlug
+pip install --upgrade AWSEBCLI
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade BigML
 pip install --upgrade BigMLer
 conda install Bokeh
 conda update bokeh
 conda install Boto
 conda update boto
+<<<<<<< HEAD
 pip install --upgrade Cartopy
 pip install --upgrade Cement
 pip install --upgrade Click
@@ -44,6 +50,17 @@ pip install --upgrade Deap
 conda install Decorator
 conda update decorator
 pip install --upgrade Descartes
+=======
+pip install --upgrade Cement
+pip install --upgrade Click
+pip install --upgrade Climate
+conda install CUDAToolkit
+conda update cudatoolkit
+pip install --upgrade cypari
+pip install --upgrade Deap
+conda install Decorator
+conda update decorator
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade DistCan
 conda install Django
 conda update django
@@ -53,6 +70,10 @@ pip install --upgrade Django-Bootstrap-Markdown
 pip install --upgrade Django-Classy-Tags
 pip install --upgrade Django-DateTime-Widget
 pip install --upgrade Django-Easy-Maps
+<<<<<<< HEAD
+=======
+
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade Django-Easy-Timezones
 pip install --upgrade Django-Extra-Views
 pip install --upgrade Django-Generic-M2M
@@ -78,18 +99,27 @@ pip install --upgrade FrozenDict
 pip install --upgrade FrozenOrderedDict
 pip install --upgrade FXRays
 pip install --upgrade GeoPy
+<<<<<<< HEAD
 conda install Geos
 conda update geos
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade GGPlot
 pip install --upgrade GitDB
 pip install --upgrade GitPython
 pip install --upgrade GNumPy
+<<<<<<< HEAD
 pip install --upgrade GoogleMaps
 pip install --upgrade Graph-Tool
 pip install --upgrade H2O
 conda install H5Py
 conda update h5py
 pip install --upgrade HDF5
+=======
+pip install --upgrade Graph-Tool
+conda install H5Py
+conda update h5py
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade HTML2Text
 pip install --upgrade Ibis
 conda install IOPro
@@ -105,16 +135,22 @@ pip install --upgrade JobLib
 pip install --upgrade Jupyter
 pip install --upgrade Jupyter-Client
 pip install --upgrade Jupyter-Core
+<<<<<<< HEAD
 pip install --upgrade Kartograph
 pip install --upgrade KRB5
 pip install --upgrade LCMS
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade Lea
 pip install --upgrade LibGDAL
 pip install --upgrade LibNetCDF
 pip install --upgrade LibPGM
 # conda install LibPython
 # conda update LibPython
+<<<<<<< HEAD
 pip install --upgrade LineCache
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade LivereLoad
 pip install --upgrade LockFile
 pip install --upgrade LSHash
@@ -143,7 +179,10 @@ conda update mklfft
 # for virtualenv: http://stackoverflow.com/questions/12498317/install-mysql-python-in-virtualenv-on-windows-7
 # grab pre-compiled wheel: http//www.lfd.uci.edu/~gohlke/pythonlibs
 
+<<<<<<< HEAD
 pip install --upgrade MRJob
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade Naked
 pip install --upgrade NatSort
 pip install --upgrade NearPy
@@ -161,7 +200,10 @@ conda install NumExpr
 conda update numexpr
 conda install NumPy
 conda update numpy
+<<<<<<< HEAD
 pip install --upgrade OpenSSL
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade Optunity
 pip install --upgrade Orange
 pip install --upgrade PANNS
@@ -170,8 +212,11 @@ pip install --upgrade PathSpec
 pip install --upgrade PExpect
 pip install --upgrade PDRandom
 pip install --upgrade PickleShare
+<<<<<<< HEAD
 conda install PIL
 conda update pil
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade PilKit
 conda install Pillow
 conda update pillow
@@ -185,17 +230,24 @@ conda install Proj4
 conda update proj4
 pip install --upgrade ProtoBuf
 
+<<<<<<< HEAD
 conda install psycopg2
 #pip install git+https://github.com/nwcell/psycopg2-windows.git@win64-py27#egg=psycopg2   # install PostgreSQL first
 # or grab pre-compiled wheel: http//www.lfd.uci.edu/~gohlke/pythonlibs
 
 pip install --upgrade Py
+=======
+#pip install git+https://github.com/nwcell/psycopg2-windows.git@win64-py27#egg=psycopg2   # install PostgreSQL first
+# or grab pre-compiled wheel: http//www.lfd.uci.edu/~gohlke/pythonlibs
+
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade Py-Expression-Eval
 pip install --upgrade Py4J
 pip install --upgrade PyBrain   # *** note that this package is no longer actively developed & maintained ***
 pip install --upgrade PyDiscreteProbability
 pip install --upgrade PyOperators
 pip install --upgrade PyPNG
+<<<<<<< HEAD
 pip install --upgrade PyQT
 conda install PySAL
 conda update pysal
@@ -208,6 +260,14 @@ pip install --upgrade PyTools
 pip install --upgrade PyTZ
 pip install --upgrade PyYAML
 pip install --upgrade QT
+=======
+pip install --upgrade PySolr
+pip install --upgrade PyTest
+pip install --upgrade Python-Markdown-Math
+pip install --upgrade PyTools
+pip install --upgrade PyTZ
+pip install --upgrade PyYAML
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 conda install Redis
 conda update redis
 conda install Requests
@@ -218,39 +278,56 @@ conda install SciKit-Learn
 conda update scikit-learn
 conda install SciPy
 conda update scipy
+<<<<<<< HEAD
 conda install Shapely
 conda update shapely
 pip install --upgrade SimpleGeneric
 pip install --upgrade SimpleJSON
 pip install --upgrade SIP
+=======
+pip install --upgrade SimpleGeneric
+pip install --upgrade SimpleJSON
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 conda install Six
 conda update six
 pip install --upgrade SKData
 pip install --upgrade SMMap
 pip install --upgrade SNAPPy
+<<<<<<< HEAD
 pip install --upgrade Sparkit-Learn
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade Spherogram
 conda install Sphinx
 conda update sphinx
 pip install --upgrade South
 conda install SymPy
 conda update sympy
+<<<<<<< HEAD
 pip install --upgrade Tabulate
 pip install --upgrade Test_Helper
 pip install --upgrade Testify
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade TextTable
 pip install --upgrade Toolz
 conda install Tornado
 conda update tornado
 pip install --upgrade Tox
+<<<<<<< HEAD
 pip install --upgrade TraceBack
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade Traitlets
 pip install --upgrade Twine
 conda update tk
 pip install --upgrade Unicode
 conda install UniDecode
 conda update UniDecode
+<<<<<<< HEAD
 pip install --upgrade UnitTest
+=======
+>>>>>>> aa2a581e66e92def76389c5cba2b772819dc3f28
 pip install --upgrade URLLib3
 conda install VirtualEnv
 conda update virtualenv

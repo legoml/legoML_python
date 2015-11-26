@@ -61,5 +61,5 @@ target/
 .idea/
 
 # Icon files
-Icon\r\r
+Icon^M^M
 Icon?
