@@ -59,3 +59,7 @@ target/
 # JetBrains IntelliJ IDEA files
 *.iml
 .idea/
+
+# Icon files
+Icon\r\r
+Icon?
