@@ -63,3 +63,6 @@ target/
 # Icon files
 Icon^M^M
 Icon?
+
+# Jupyter Notebook files
+.ipynb_checkpoints/
